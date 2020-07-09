@@ -6,6 +6,6 @@
     <title>View All Events</title>
 </head>
 <body>
-    <h1>Events</h1>
+    <h1> View Events</h1>
 </body>
 </html>

@@ -6,6 +6,6 @@
     <title>View Events By Card</title>
 </head>
 <body>
-    <h1>View Events By Card</h1>
+    <h1>Events By Card</h1>
 </body>
 </html>

@@ -6,6 +6,6 @@
     <title>View All Category</title>
 </head>
 <body>
-    <h1>Category</h1>
+    <h1> View Category</h1>
 </body>
 </html>
