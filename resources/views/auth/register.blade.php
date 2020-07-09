@@ -36,7 +36,17 @@
                                     </span>
                                 @enderror
                         </div>
-
+                        <div class="form-group">
+                            <label for="">Gender</label>
+                            <br>
+                            <input type="radio" name="sex" value="Male"> Male
+                            <input type="radio" name="sex" value="Female"> Female
+                        </div>
+                        <div class="form-group">
+                            <label for="data of birth">Date of birth (Optional)</label>
+                            <br>
+                            <input class="form-control" type="date" name="dateOfBirth">
+                        </div>
                         <div class="form-group">
                            
                                 <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -51,6 +61,7 @@
                         <div class="form-group">
                                 <input id="password-confirm" placeholder="Confirm password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
+                       
 
                         <div class="form-group">
                             <div class="justify-content-center">
