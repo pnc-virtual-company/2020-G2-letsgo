@@ -1,7 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container mt-5">
+<div class="container" style="margin-top: 10%">
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card">
@@ -30,9 +29,10 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="float-right">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                            <div class="justify-content-center">
+                                <a style="text-decoration: underline;" class="mt-1" href=""><b>Create account</b></a>
+                                <button type="submit" class="btn btn-warning text-white float-right">
+                                    <b>{{ __('Next') }}</b>
                                 </button>
                             </div>
                         </div>
