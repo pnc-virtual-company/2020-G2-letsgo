@@ -15,8 +15,8 @@ class CreateJoinsTable extends Migration
     {
         Schema::create('joins', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('owner_id')->nullable();
-            $table->foreign('owner_id')
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')
                     ->references('id')
                     ->on('users');
             $table->unsignedBigInteger('event_id')->nullable();
