@@ -1,4 +1,4 @@
-@extends('layouts.frontend.manuTamplate')
+@extends('layouts.frontend.menuTamplate')
 
 @section('body')
 
