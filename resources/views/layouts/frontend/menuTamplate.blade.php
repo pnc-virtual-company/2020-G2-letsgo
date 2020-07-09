@@ -64,9 +64,10 @@
                                 <a class="dropdown-item" href="">
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="">
-                                    logout
+                            <a class="dropdown-item" href="{{route('login')}}">
+                                    Logout
                                 </a>
+                               
                             </div>
                         </li>
                 </ul>
