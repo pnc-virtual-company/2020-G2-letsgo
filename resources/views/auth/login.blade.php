@@ -27,10 +27,9 @@
                                     </span>
                                 @enderror
                         </div>
-
                         <div class="form-group">
                             <div class="justify-content-center">
-                                <a style="text-decoration: underline;" class="mt-1" href=""><b>Create account</b></a>
+                                <a style="text-decoration: underline;" class="mt-1" href="{{ route('register') }}"><b>Create account</b></a>
                                 <button type="submit" class="btn btn-warning text-white float-right">
                                     <b>{{ __('Next') }}</b>
                                 </button>
