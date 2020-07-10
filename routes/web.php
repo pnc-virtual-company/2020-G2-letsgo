@@ -22,4 +22,5 @@ Auth::routes();
 Route::resource('/category', 'CategoryController');
 Route::resource('/event', 'EventController');
 Route::resource('/exploreEvents', 'ExploreEventsController');
+Route::resource('/yourEvent', 'YourEventControll');
 

@@ -32,13 +32,14 @@
                             <a class="nav-link" href="{{route('exploreEvents.index')}}">Explore events</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Your events</a>
-                          </li>
+                        <a class="nav-link" href="{{route('yourEvent.index')}}">Your events</a>
+                        </li>
+                        {{-- Manage --}}
                         <li class="nav-item">
-                            <a class="nav-link" href="">Manage</a>
-                          </li>
-                          <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a class="nav-link">Manage</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <span class="caret"></span>
                             </a>
 
