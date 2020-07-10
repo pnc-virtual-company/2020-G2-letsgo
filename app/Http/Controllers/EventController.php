@@ -14,8 +14,19 @@ class EventController extends Controller
     public function index()
     {
         return view('manage.viewEvents');
+        
     }
 
+    // explore events
+    public function exploreEvents(){
+
+        return view('exploreEvents.exploreEvents');
+    }
+
+    // your events
+    public function yourEvents(){
+        return view('yourEvents.yourEvents');
+    }
     /**
      * Show the form for creating a new resource.
      *
