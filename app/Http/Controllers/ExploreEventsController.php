@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class EventController extends Controller
+class ExploreEventsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,17 +13,10 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('manage.viewEvents');
-        
+        return view('exploreEvents.exploreEvents');
+       
     }
 
-    // explore events
-   
-
-    // your events
-    public function yourEvents(){
-        return view('yourEvents.yourEvents');
-    }
     /**
      * Show the form for creating a new resource.
      *
