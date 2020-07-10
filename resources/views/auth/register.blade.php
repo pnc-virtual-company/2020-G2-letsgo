@@ -20,7 +20,7 @@
                                 @enderror
                         </div>
                         <div class="form-group">
-                            <input id="lastname" placeholder="First Name" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" required autocomplete="off" autofocus>
+                            <input id="lastname" placeholder="Last Name" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" required autocomplete="off" autofocus>
                             @error('lastname')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
