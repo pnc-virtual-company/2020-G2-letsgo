@@ -28,8 +28,12 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Explore events</a>
+                        <li class="nav-item {{(request()->segment(1) == 'student') ? 'active' : '',ucfirst(request()->segment(1))}}">
+                            <a href="{{url('student')}}">
+                               
+                            </a>
+                        </li>
+                            <a class="nav-link" href="">Explore events</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Your events</a>
@@ -70,6 +74,7 @@
                                 </form>
                             </div>
                         </li>
+                       
                 </ul>
             </div>
         </div>
