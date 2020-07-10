@@ -19,9 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/category', 'CategoryController');
 Route::resource('/event', 'EventController');
-Route::get('/exploreEvent', 'EventController@exploreEvents')->name('exploreEvents');
-Route::get('/yourEvent', 'EventController@yourEvents')->name('yourEvents');
+Route::resource('/exploreEvents', 'ExploreEventsController');
 
