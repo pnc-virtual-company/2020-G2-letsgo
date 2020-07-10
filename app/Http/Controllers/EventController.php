@@ -14,6 +14,12 @@ class EventController extends Controller
     public function index()
     {
         return view('manage.viewEvents');
+        
+    }
+
+    public function exploreEvents(){
+
+        return view('exploreEvents.viewEvents');
     }
 
     /**
