@@ -23,7 +23,10 @@ class EventController extends Controller
         return view('exploreEvents.exploreEvents');
     }
 
-  
+    // your events
+    public function yourEvents(){
+        return view('yourEvents.yourEvents');
+    }
     /**
      * Show the form for creating a new resource.
      *

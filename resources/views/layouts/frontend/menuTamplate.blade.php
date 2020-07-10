@@ -32,7 +32,7 @@
                             <a class="nav-link" href="{{route('exploreEvents')}}">Explore events</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Your events</a>
+                            <a class="nav-link" href="{{route('yourEvents')}}">Your events</a>
                           </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">Manage</a>
