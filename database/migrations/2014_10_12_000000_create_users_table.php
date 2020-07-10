@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('lastname');
             $table->string('sex');
             $table->string('birth')->nullable();
-            $table->string('picture');
+            $table->string('picture')->nullable();
             $table->BigInteger('role');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
