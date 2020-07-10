@@ -8,6 +8,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <style>
+      .active{
+          text-decoration:underline;
+      }
+  </style>
 </head>
 <body>
        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -28,29 +33,26 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     
-                        <li class="nav-item {{(request()->segment(1) == 'student') ? 'active' : '',ucfirst(request()->segment(1))}}">
-                            <a href="{{url('student')}}">
-                               
-                            </a>
+                        <li class="nav-item {{(request()->segment(1) == 'exploreEvents') ? 'active' : '',ucfirst(request()->segment(1))}} ">
+                            <a class="nav-link" href="{{route('exploreEvents.index')}}">Explore events</a>
                         </li>
-                            <a class="nav-link" href="">Explore events</a>
+                        <li class="nav-item {{(request()->segment(1) == 'yourEvent') ? 'active' : '',ucfirst(request()->segment(1))}}">
+                        <a class="nav-link" href="{{route('yourEvent.index')}}">Your events</a>
                         </li>
+                        {{-- Manage --}}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Your events</a>
-                          </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Manage</a>
-                          </li>
-                          <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a class="nav-link">Manage</a>
+                        </li>
+                        <li class="nav-item dropdown {{(request()->segment(1) == 'category') ? 'active' : '',ucfirst(request()->segment(1))}}">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item {{(request()->segment(1) == 'event') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('event.index')}}">
                                     Events
                                 </a>
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item {{(request()->segment(1) == 'category') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('category.index')}}">
                                     Categories
                                 </a>
                             </div>
@@ -74,7 +76,7 @@
                                 </form>
                             </div>
                         </li>
-                       
+                        
                 </ul>
             </div>
         </div>
