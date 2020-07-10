@@ -11,7 +11,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h3 class="text-center text-info mt-5">Views Of Category</h3>
+    <h3 class="text-center text-info mt-5">Views Of Events</h3>
 </body>
 </html>
 @endsection
