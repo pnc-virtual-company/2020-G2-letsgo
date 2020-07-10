@@ -17,11 +17,13 @@ class EventController extends Controller
         
     }
 
+    // explore events
     public function exploreEvents(){
 
-        return view('exploreEvents.viewEvents');
+        return view('exploreEvents.exploreEvents');
     }
 
+  
     /**
      * Show the form for creating a new resource.
      *
