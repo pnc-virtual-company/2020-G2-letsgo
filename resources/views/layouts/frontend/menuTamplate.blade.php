@@ -52,7 +52,7 @@
                             </div>
                         </li>
                             <li class="nav-item">
-                                <a class="nav-link">Lisa</a>
+                            <a class="nav-link">{{Auth::user()->firstname}}</a>
                             </li>
                         
                         <li class="nav-item dropdown">
@@ -64,9 +64,10 @@
                                 <a class="dropdown-item" href="">
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="">
-                                    logout
-                                </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </div>
                         </li>
                 </ul>

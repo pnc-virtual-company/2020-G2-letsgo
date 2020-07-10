@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <label for="data of birth">Date of birth (Optional)</label>
                             <br>
-                            <input class="form-control" type="date" name="dateOfBirth">
+                            <input class="form-control" type="date" min="2030" max="1950" name="birth">
                         </div>
                         <div class="form-group">
                            
