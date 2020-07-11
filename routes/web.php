@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Routing\Loader\Configurator\Traits\PrefixTrait;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +21,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('/category', 'CategoryController');
-Route::resource('/event', 'EventController');
 Route::resource('/exploreEvents', 'ExploreEventsController');
 Route::resource('/yourEvent', 'YourEventControll');
+
+Route::group(['prefix' => 'manage'],function(){
+    Route::resource('/event', 'EventController');
+    Route::resource('/category', 'CategoryController');
+});
+
 
