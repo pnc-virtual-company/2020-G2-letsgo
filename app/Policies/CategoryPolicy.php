@@ -51,9 +51,9 @@ class CategoryPolicy
      * @param  \App\Category  $category
      * @return mixed
      */
-    public function update(User $user, Category $category)
+    public function update(User $user)
     {
-        //
+        return $user->role==1;
     }
 
     /**
@@ -63,9 +63,9 @@ class CategoryPolicy
      * @param  \App\Category  $category
      * @return mixed
      */
-    public function delete(User $user, Category $category)
+    public function delete(User $user)
     {
-        //
+        return $user->role==1;
     }
 
     /**

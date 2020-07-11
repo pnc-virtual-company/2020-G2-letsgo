@@ -76,6 +76,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update', Category::class);
         $category = Category::find($id);
         $category->category = $request->get('category');
         $category->save();
@@ -91,6 +92,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Category::class);
         $category = Category::find($id);
         $category->delete();
         return back();
