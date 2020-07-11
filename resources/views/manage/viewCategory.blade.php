@@ -25,6 +25,7 @@
     <td>
       {{-- <a href="#" class="float-right">delete</a> --}}
      <form action="{{route('category.destroy', $item->id)}}" method="POST">
+      
        @csrf
        @method('delete')
        <button id="btndeletecategory" type="submit" class="float-right" onclick="return confirm('Are you sure?')" >delete</button>
@@ -37,7 +38,6 @@
   @endforeach
 </table>
 
-  
 </div>
 
 @endsection
