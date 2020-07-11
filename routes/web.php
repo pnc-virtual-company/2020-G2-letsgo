@@ -27,6 +27,7 @@ Route::resource('/yourEvent', 'YourEventControll');
 Route::group(['prefix' => 'manage'],function(){
     Route::resource('/event', 'EventController');
     Route::resource('/category', 'CategoryController');
+    Route::delete('/category/destroy/{id}','CategoryController@destroy');
 });
 
 

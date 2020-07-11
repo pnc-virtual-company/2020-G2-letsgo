@@ -1,6 +1,7 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')
+@include('manage.deleteCategory')
 
 <div class="container mt-3">
   {{-- Search form --}}
@@ -35,16 +36,11 @@
            
             {{-- action --}}
             <td>
-              <br>
-              {{-- delete form --}}
-              <a href="#" class="float-right" style="margin-top: 7px" onclick="document.getElementById('delete{{$item->id}}').submit()"><span class="material-icons" id="show">delete</span></a>
 
-                <form id="delete{{$item->id}}" action="{{route('category.destroy', $item->id)}}" method="post">
-                  @csrf
-                  @method('delete')
-                </form>
-
-              {{-- end delete form --}}
+              {{-- delete button --}}
+              <a href="#!" class="delete float-right" style="margin-top: 7px"  data-id="{{ $item->id }}" data-toggle="modal" data-target="#deleteCategory"> <span class="material-icons">delete</span></a>
+              
+              {{-- end delete button --}}
 
               {{-- edit form --}}
 
@@ -115,5 +111,8 @@
     </div>
 
 </div>
+{{----------------------------------------modal delete category--------------------------------- --}}
+
+
 
 @endsection
