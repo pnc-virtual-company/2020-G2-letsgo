@@ -28,3 +28,5 @@ Route::group(['prefix' => 'manage'],function(){
     Route::resource('/event', 'EventController');
     Route::resource('/category', 'CategoryController');
 });
+
+
