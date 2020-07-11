@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
-class CategoryController extends Controller
+
+class userProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,10 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', Category::class);
-        $category = Category::all(); 
-        return view('manage.viewCategory', compact('category'));
-        
+        //
     }
 
     /**
@@ -37,16 +34,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-     
-        $this->authorize('create', Category::class);
-        $category = new Category;
-        $request -> validate([
-            'category' => 'required|unique:categories,category',
-        ]);
-        $category->category = $request->get('category');
-        $category->save();
-        
-        return back();
+        //
     }
 
     /**
@@ -80,16 +68,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('update', Category::class);
-        $request -> validate([
-            'category' => 'required|',
-        ]);
-        
-        $category = Category::find($id);
-        $category->category = $request->get('category');
-        $category->save();
-        return back();
-        // dd($category);
+        //
     }
 
     /**
@@ -100,14 +79,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('delete', Category::class);
-        $category = Category::find($id);
-        $category->delete();
-        return back();
+        //
     }
-
 }
-
-
-
-
