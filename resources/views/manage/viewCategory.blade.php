@@ -27,6 +27,7 @@
       </div>
     <form action="{{route('category.store')}}" method="POST">
       @csrf
+      
       <div class="modal-body">
         <input type="text" name="category" class="form-control" placeholder="Your category....">
       </div>
