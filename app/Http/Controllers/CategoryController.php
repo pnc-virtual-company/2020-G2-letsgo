@@ -15,7 +15,8 @@ class CategoryController extends Controller
     public function index()
     {
         $this->authorize('view', Category::class);
-        return view('manage.viewCategory');
+        $category = Category::all();
+        return view('manage.viewCategory',compact('category'));
         
     }
 
