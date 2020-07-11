@@ -42,20 +42,24 @@
                         <a class="nav-link" href="{{route('yourEvent.index')}}">Your events</a>
                         </li>
                         {{-- Manage --}}
-                        <li class="nav-item dropdown">  
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle {{request()->is('manage/*') ? 'active' : ''}}" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <span class="caret">Manage</span>
-                            </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item {{(request()->segment(2) == 'event') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('event.index')}}">
-                                    Events
+                        @can('view', 'App\Event')
+                        <li class="nav-item dropdown">  
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle {{request()->is('manage/*') ? 'active' : ''}}" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <span class="caret">Manage</span>
                                 </a>
-                                <a class="dropdown-item {{(request()->segment(2) == 'category') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('category.index')}}">
-                                    Categories
-                                </a>
-                            </div>
-                        </li>
+    
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item {{(request()->segment(2) == 'event') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('event.index')}}">
+                                        Events
+                                    </a>
+                                    <a class="dropdown-item {{(request()->segment(2) == 'category') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('category.index')}}">
+                                        Categories
+                                    </a>
+                                </div>
+                            </li>
+                        @endcan
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <span class="caret">{{Auth::user()->firstname}}</span>
@@ -70,7 +74,6 @@
                                 </form>
                             </div>
                         </li>
-                        
                 </ul>
             </div>
         </div>
