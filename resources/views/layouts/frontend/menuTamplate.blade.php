@@ -11,6 +11,7 @@
   <style>
       .active{
           text-decoration:underline;
+          
       }
       
   </style>
@@ -42,7 +43,7 @@
                         </li>
                         {{-- Manage --}}
 
-                        {{-- @can('view', 'App\Event') --}}
+                        @can('view', 'App\Event')
                         <li class="nav-item dropdown">  
                             <a id="navbarDropdown" class="nav-link dropdown-toggle {{request()->is('manage/*') ? 'active' : ''}}" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <span class="caret">Manage</span>
@@ -57,7 +58,7 @@
                                     </a>
                                 </div>
                             </li>
-                        {{-- @endcan --}}
+                        @endcan
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -73,7 +74,6 @@
                                 </form>
                             </div>
                         </li>
-                        
                 </ul>
             </div>
         </div>
