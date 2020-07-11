@@ -16,7 +16,7 @@ class CategoryController extends Controller
     {
         $this->authorize('view', Category::class);
         $category = Category::all(); 
-        return view('manage.viewCategory',compact('category'));
+        return view('manage.viewCategory', compact('category'));
         
     }
 
