@@ -2,14 +2,6 @@
 
 @section('body')
 
-<<<<<<< HEAD
-<link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-=======
->>>>>>> 40a65345dac43922d89522be5d87c0cf8b64c55b
 <div class="container mt-3">
   {{-- Search form --}}
     <form action="" method="post">
@@ -105,67 +97,15 @@
       <div class="modal-header">
         <h4 class="modal-title">Create Category</h4>
       </div>
-<<<<<<< HEAD
-      
-    <form action="{{route('category.store')}}" method="POST">
-      @csrf
-      
-      <div class="modal-body">
-        <input type="text" name="category" class="form-control" placeholder="Your category....">
-        @foreach($errors->get('catogories') as $error)
-          <span class="help-block">{{ $error }}</span>
-        @endforeach
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-        <button type="submit" class="btn text-warning">CREATE</button>
-      </div>
-    </form>
-    </div>
-
-  </div>
-</div>
-</div>
-<br>
-<table class="table table-hover">
-  
-  @foreach ($category as $item )
-<tr>
-    <td>{{ $item->category }}</td>
-    <td>
-    
-      <form action="{{route('category.destroy', $item->id)}}" method="post">
-=======
     {{-- end model content --}}
     {{-- form create --}}
       <form id="create_category" action="{{route('category.store')}}" method="POST">
->>>>>>> 40a65345dac43922d89522be5d87c0cf8b64c55b
         @csrf
         <div class="modal-body">
-<<<<<<< HEAD
-           {{-- delete category --}}
-     <form action="{{route('category.destroy', $item->id)}}" method="POST">
-      @csrf
-      @method('delete')
-      <button id="btndeletecategory" type="submit" class="float-right" onclick="return confirm('Are you sure?')" >delete</button>
-    </form>
-
-    <form action="{{route('category.update',$item->id)}}" method="POST">
-            @csrf
-            @method('PUT')
-        <div class="form-group">
-            <label for="category">Category</label>
-            <input type="text" class="form-control" name="category" value="{{$item->category}}">
-        </div>
-            <button type="submit" class="btn btn-default text-warning float-right" >UPDATE</button>
-            <button type="submit" class="btn btn-default  float-right" >DISCARD</button>
-    </form>
-=======
           <input id="category" type="text" name="category" class="form-control" placeholder="Your category...." >
           @error('category')
             <small class="text-danger">&nbsp;&nbsp;&nbsp;{{$message}}</small>           
           @enderror
->>>>>>> 40a65345dac43922d89522be5d87c0cf8b64c55b
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
@@ -173,28 +113,7 @@
       </form>
       {{-- end form create --}}
     </div>
-<<<<<<< HEAD
-  </div>
-    </td>
-  </tr>
 
-  @endforeach
-
-</table>
-
-</div>
-</div>
-@endsection
-<script>
-  var msg = '{{Session::get('alert')}}';
-  var exist = '{{Session::has('alert')}}';
-  if(exist){
-    alert(msg);
-  }
-</script>
-
-=======
 </div>
 
 @endsection
->>>>>>> 40a65345dac43922d89522be5d87c0cf8b64c55b
