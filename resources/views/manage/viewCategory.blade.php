@@ -70,17 +70,23 @@
           <h4 class="modal-title">Edit Category</h4>
         </div>
         <div class="modal-body">
-
-<form action="{{route('category.update',$item->id)}}" method="POST">
-        @csrf
-        @method('PUT')
-    <div class="form-group">
-        <label for="category">Category</label>
-        <input type="text" class="form-control" name="category" value="{{$item->category}}">
-    </div>
-        <button type="submit" class="btn btn-default text-warning float-right" >UPDATE</button>
-        <button type="submit" class="btn btn-default  float-right" >DISCARD</button>
-</form>
+           {{-- delete category --}}
+     <form action="{{route('category.destroy', $item->id)}}" method="POST">
+      @csrf
+      @method('delete')
+      <button id="btndeletecategory" type="submit" class="float-right" onclick="return confirm('Are you sure?')" >delete</button>
+    </form>
+    
+    <form action="{{route('category.update',$item->id)}}" method="POST">
+            @csrf
+            @method('PUT')
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" name="category" value="{{$item->category}}">
+        </div>
+            <button type="submit" class="btn btn-default text-warning float-right" >UPDATE</button>
+            <button type="submit" class="btn btn-default  float-right" >DISCARD</button>
+    </form>
         </div>
       </div>
       
