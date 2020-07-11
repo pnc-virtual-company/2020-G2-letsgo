@@ -1,4 +1,7 @@
 #btndeletecategory{
     border: none;
     color: blue;
-   }
+}
+.active{
+    text-decoration:underline;   
+}

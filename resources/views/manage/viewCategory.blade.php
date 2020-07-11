@@ -1,7 +1,7 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')
-<link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
+
 <div class="container mt-3">
         
   <div class="input-group mb-3">
