@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $category = new Category;
         $category->category = $request->get('category');
         $category->save();
-        dd($category);
+        return back();
     }
 
     /**
