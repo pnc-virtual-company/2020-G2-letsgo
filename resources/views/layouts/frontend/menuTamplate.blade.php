@@ -107,7 +107,7 @@
                 </div>
                 <div class="form-group">
                     <label for="firstname"></label>
-                    <input type="text" name="firstname" value="{{$decrypt=decrypt(Auth::user()->password)}}"  class="form-control">
+                    <input type="text" name="firstname" value="{{Auth::user()->password}}"  class="form-control">
                 </div>
             </form>
             </div>
