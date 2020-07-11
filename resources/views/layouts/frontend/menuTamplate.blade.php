@@ -69,7 +69,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                                 {{-- profile --}}
-                                <a class="dropdown-item {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}" href="">Profile</a>
+                                <a class="dropdown-item {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}"  data-toggle="modal" data-target="#profile" href="#">Profile</a>
                                 {{-- end profile --}}
 
                                 {{-- logout --}}
@@ -86,7 +86,7 @@
             </div>
         </div>
     </nav>
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="profile" role="dialog">
         <div class="modal-dialog">
         
         <!-- Modal content-->

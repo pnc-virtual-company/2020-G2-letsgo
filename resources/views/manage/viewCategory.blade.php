@@ -48,11 +48,11 @@
               {{-- edit form --}}
 
                   {{-- button edit fomm --}}
-                  <a href="" class="btn-lg float-right" data-toggle="modal" data-target="#myModal{{$item->id}}"><span class="material-icons">edit</span></a>
+                  <a href="" class="btn-lg float-right" data-toggle="modal" data-target="#edit{{$item->id}}"><span class="material-icons">edit</span></a>
                   {{-- end button edit form --}}
 
                   {{-- edit from model pop up --}}
-                  <div class="modal fade" id="myModal{{$item->id}}" role="dialog">
+                  <div class="modal fade" id="edit{{$item->id}}" role="dialog">
                     <div class="modal-dialog">
                     <!-- Modal content-->
                       <div class="modal-content">
