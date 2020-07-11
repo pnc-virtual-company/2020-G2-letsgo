@@ -23,7 +23,7 @@
     <td>{{$item->category}}</td>
     <td>
       <a href="#" class="float-right">delete</a>
-      <a href="#" class="float-right  mr-3">edit</a>
+      <a href="#" class="float-right mr-3">edit</a>
     </td>
   </tr>
 
