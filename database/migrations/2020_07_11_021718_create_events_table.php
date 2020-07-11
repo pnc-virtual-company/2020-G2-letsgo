@@ -25,7 +25,7 @@ class CreateEventsTable extends Migration
             $table->unsignedBigInteger('cate_id');
             $table->foreign('cate_id')
                     ->references('id')
-                    ->on('categorys');
+                    ->on('categories');
             $table->timestamps();
         });
     }
