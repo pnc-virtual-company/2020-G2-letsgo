@@ -8,8 +8,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
   <style>
       .active{
           text-decoration:underline;
@@ -67,9 +65,14 @@
                                 <span class="caret">{{Auth::user()->firstname}}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}" href="">
+                                {{-- User PopUp --}}
+                                <a class=" btn btn-info dropdown-item {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}" href="" data-toggle="modal" data-target="#myModal">
                                     Profile
                                 </a>
+                                {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> --}}
+                             
+  
+                                {{-- User PopUp --}}
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
@@ -80,6 +83,42 @@
             </div>
         </div>
     </nav>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Edit Profile</h4>
+            </div>
+            <div class="modal-body">
+            <form action="#">
+                <div class="form-group">
+                    <label for="firstname"></label>
+                <input type="text" name="firstname" value="{{Auth::user()->firstname}}"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="firstname"></label>
+                    <input type="text" name="firstname" value="{{Auth::user()->lastname}}"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="firstname"></label>
+                    <input type="text" name="firstname" value="{{Auth::user()->email}}"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="firstname"></label>
+                    <input type="text" name="firstname" value="{{$decrypt=decrypt(Auth::user()->password)}}"  class="form-control">
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        
+        </div>
+    </div>                                 <!-- Modal -->
+                                
     @yield('body')
 </body>
 </html>
