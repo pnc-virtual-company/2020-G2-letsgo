@@ -23,7 +23,7 @@
   <tr>
     <td>{{ $item->category }}</td>
     <td>
-      {{-- <a href="#" class="float-right">delete</a> --}}
+    {{-- delete category --}}
      <form action="{{route('category.destroy', $item->id)}}" method="POST">
        @csrf
        @method('delete')
