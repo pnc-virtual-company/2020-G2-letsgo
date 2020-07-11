@@ -1,7 +1,7 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')
-
+<link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
 <div class="container mt-3">
         
   <div class="input-group mb-3">
@@ -25,6 +25,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Create Category</h4>
       </div>
+      
     <form action="{{route('category.store')}}" method="POST">
       @csrf
       
@@ -48,7 +49,12 @@
   <tr>
     <td>{{ $item->category }}</td>
     <td>
-      <a href="#" class="float-right">delete</a>
+    
+      <form action="{{route('category.destroy', $item->id)}}" method="post">
+        @csrf
+        @method('delete')
+          <button id="btndeletecategory" class="float-right mr-3" type="submit" onclick="return confirm('Are you sure?')">delete</button>
+      </form>
 
       {{-- Edit Category --}}
   <a href="" class=" btn-lg float-right" data-toggle="modal" data-target="#myModal{{$item->id}}"><span class="material-icons">
@@ -64,17 +70,23 @@
           <h4 class="modal-title">Edit Category</h4>
         </div>
         <div class="modal-body">
-
-<form action="{{route('category.update',$item->id)}}" method="POST">
-        @csrf
-        @method('PUT')
-    <div class="form-group">
-        <label for="category">Category</label>
-        <input type="text" class="form-control" name="category" value="{{$item->category}}">
-    </div>
-        <button type="submit" class="btn btn-default text-warning float-right" >UPDATE</button>
-        <button type="submit" class="btn btn-default  float-right" >DISCARD</button>
-</form>
+           {{-- delete category --}}
+     <form action="{{route('category.destroy', $item->id)}}" method="POST">
+      @csrf
+      @method('delete')
+      <button id="btndeletecategory" type="submit" class="float-right" onclick="return confirm('Are you sure?')" >delete</button>
+    </form>
+    
+    <form action="{{route('category.update',$item->id)}}" method="POST">
+            @csrf
+            @method('PUT')
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" name="category" value="{{$item->category}}">
+        </div>
+            <button type="submit" class="btn btn-default text-warning float-right" >UPDATE</button>
+            <button type="submit" class="btn btn-default  float-right" >DISCARD</button>
+    </form>
         </div>
       </div>
       
