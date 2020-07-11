@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
 
-class CategoryController extends Controller
+class YourEventsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', Category::class);
-        $category = Category::all(); 
-        return view('manage.viewCategory', compact('category'));
-        
+        return view('yourEvents.yourEvents');
     }
 
     /**
@@ -38,11 +34,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category;
-        $category->category = $request->get('category');
-        $category->save();
-        
-        return back();
+        //
     }
 
     /**
@@ -76,11 +68,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        $category->category = $request->get('category');
-        $category->save();
-        return back();
-        // dd($category);
+        //
     }
 
     /**
@@ -91,6 +79,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-       
+        //
     }
 }
