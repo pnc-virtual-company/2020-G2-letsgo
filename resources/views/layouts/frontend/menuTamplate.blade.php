@@ -11,13 +11,15 @@
   <style>
       .active{
           text-decoration:underline;
+          
       }
+      
   </style>
 </head>
 <body>
-       <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+       <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
         <div class="container ">
-            <a class="navbar-brand" href="">
+        <a class="navbar-brand" href="{{route('exploreEvents.index')}}">
                 logo
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -40,34 +42,26 @@
                         <a class="nav-link" href="{{route('yourEvent.index')}}">Your events</a>
                         </li>
                         {{-- Manage --}}
-                        <li class="nav-item">
-                            <a class="nav-link">Manage</a>
-                        </li>
-                        <li class="nav-item dropdown {{(request()->segment(1) == 'category') ? 'active' : '',ucfirst(request()->segment(1))}}">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <span class="caret"></span>
+                        <li class="nav-item dropdown">  
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle {{request()->is('manage/*') ? 'active' : ''}}" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <span class="caret">Manage</span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item {{(request()->segment(1) == 'event') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('event.index')}}">
+                                <a class="dropdown-item {{(request()->segment(2) == 'event') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('event.index')}}">
                                     Events
                                 </a>
-                                <a class="dropdown-item {{(request()->segment(1) == 'category') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('category.index')}}">
+                                <a class="dropdown-item {{(request()->segment(2) == 'category') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('category.index')}}">
                                     Categories
                                 </a>
                             </div>
                         </li>
-                            <li class="nav-item">
-                            <a class="nav-link">{{Auth::user()->firstname}}</a>
-                            </li>
-                        
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <span class="caret"></span>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <span class="caret">{{Auth::user()->firstname}}</span>
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}" href="">
                                     Profile
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
