@@ -22,11 +22,7 @@
   <tr>
     <td>{{ $item->category }}</td>
     <td>
-     <form action="{{route('category.destroy', $item->id)}}" method="post">
-      @csrf
-      @method('delete')
-        <button id="btndeletecategory" class="float-right mr-3" type="submit" onclick="return confirm('Are you sure?')">delete</button>
-    </form>
+    
       <a href="#" class="float-right mr-3">edit</a>
     </td>
   </tr>
