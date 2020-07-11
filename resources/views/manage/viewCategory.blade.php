@@ -2,6 +2,7 @@
 
 @section('body')
 
+<link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
 <div class="container mt-3">
         
   <div class="input-group mb-3">
@@ -22,7 +23,13 @@
   <tr>
     <td>{{ $item->category }}</td>
     <td>
-      <a href="#" class="float-right">delete</a>
+      {{-- <a href="#" class="float-right">delete</a> --}}
+     <form action="{{route('category.destroy', $item->id)}}" method="POST">
+       @csrf
+       @method('delete')
+       <button id="btndeletecategory" type="submit" class="float-right" onclick="return confirm('Are you sure?')" >delete</button>
+     </form>
+
       <a href="#" class="float-right mr-3">edit</a>
     </td>
   </tr>
