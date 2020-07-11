@@ -1,7 +1,12 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')
+
 <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <div class="container mt-3">
         
   <div class="input-group mb-3">
@@ -31,6 +36,9 @@
       
       <div class="modal-body">
         <input type="text" name="category" class="form-control" placeholder="Your category....">
+        @foreach($errors->get('catogories') as $error)
+          <span class="help-block">{{ $error }}</span>
+        @endforeach
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
@@ -46,7 +54,7 @@
 <table class="table table-hover">
   
   @foreach ($category as $item )
-  <tr>
+<tr>
     <td>{{ $item->category }}</td>
     <td>
     
@@ -76,7 +84,7 @@
       @method('delete')
       <button id="btndeletecategory" type="submit" class="float-right" onclick="return confirm('Are you sure?')" >delete</button>
     </form>
-    
+
     <form action="{{route('category.update',$item->id)}}" method="POST">
             @csrf
             @method('PUT')
@@ -96,7 +104,17 @@
   </tr>
 
   @endforeach
+
 </table>
+
 </div>
 </div>
 @endsection
+<script>
+  var msg = '{{Session::get('alert')}}';
+  var exist = '{{Session::has('alert')}}';
+  if(exist){
+    alert(msg);
+  }
+</script>
+

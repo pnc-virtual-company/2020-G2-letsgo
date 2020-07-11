@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
-
 class CategoryController extends Controller
 {
     /**
@@ -38,11 +37,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category;
-        $category->category = $request->get('category');
-        $category->save();
-        
-        return back();
+      $categoryunigqe =  $this->validate($request, [
+           $test= 'category'=>'required|unique:categories|',
+        ]);
+               
+            $category = new Category;
+            $category->category = $request->get('category');
+            $category->save();
+           
+    //      
+      if(!is_null($test)){
+          return "aa";
+        }else{
+         return "bb";
+      }
+     
     }
 
     /**
@@ -96,3 +105,7 @@ class CategoryController extends Controller
         return back();
     }
 }
+
+
+
+
