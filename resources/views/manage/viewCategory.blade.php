@@ -1,104 +1,118 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')
-<link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
+
 <div class="container mt-3">
-        
-  <div class="input-group mb-3">
-      <div class="input-group-append">
-          <i class="fas fa-search"></i>
+  {{-- Search form --}}
+    <form action="" method="post">
+      <div class="row">
+        <div class="input-icons col-md-8" style="margin: 0 auto"> 
+          <span class="material-icons">search</span> 
+          <input class="form-control" type="text"> 
+        </div> 
+      </div> 
+    </form>
+    {{-- end search form --}}
+    <br>
+    {{-- create new category --}}
+    <div class="form-group">
+      <div class=" row">
+          <div class="col-md-8" style="margin:0 auto">
+            <a class="h5">Category</a>
+            <button type="button" class="btn btn-warning btn-sm text-white float-right" data-toggle="modal" data-target="#myModal"><span class="material-icons float-left">add</span><b>Create</b></button> 
+          </div>
       </div>
-      <input type="text" class="form-control" placeholder="Search">
-  </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8" style="margin:0 auto">
+        <table class="table-hover fl-table">
+          @foreach ($category as $item)
+          <tr>
 
-  <div class="container  mb-5">
-      <h3>Category</h3>
-      <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-warning float-right btn-lg" data-toggle="modal" data-target="#myModal">Create</button>
+            {{-- category name --}}
+            <td> &nbsp;<b>{{ $item->category }}</b></td>
+            {{-- end category name --}}
+           
+            {{-- action --}}
+            <td>
+              <br>
+              {{-- delete form --}}
+              <a href="#" class="float-right" style="margin-top: 7px" onclick="document.getElementById('delete{{$item->id}}').submit()"><span class="material-icons" id="show">delete</span></a>
 
-<!-- Modal -->
+                <form id="delete{{$item->id}}" action="{{route('category.destroy', $item->id)}}" method="post">
+                  @csrf
+                  @method('delete')
+                </form>
+
+              {{-- end delete form --}}
+
+              {{-- edit form --}}
+
+                  {{-- button edit fomm --}}
+                  <a href="" class="btn-lg float-right" data-toggle="modal" data-target="#edit{{$item->id}}"><span class="material-icons" id="show">edit</span></a>
+                  {{-- end button edit form --}}
+
+                  {{-- edit from model pop up --}}
+                  <div class="modal fade" id="edit{{$item->id}}" role="dialog">
+                    <div class="modal-dialog">
+                    <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Edit Category</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form action="{{route('category.update',$item->id)}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <input type="text" class="form-control" name="category" value="{{$item->category}}">
+                            </div>
+                            <button type="submit" class="btn btn-default text-warning float-right" >UPDATE</button>
+                            <button type="button" class="btn btn-default float-right" data-dismiss="modal" >DISCARD</button>
+                        </form>
+                        </div>
+                      </div>
+                  </div>
+                  {{-- end edit form model pop up --}}
+
+              {{-- end edit form --}}
+            </td>
+            {{-- end action --}}
+ 
+          </tr>
+          @endforeach
+        </table>
+      </div>
+      {{-- end create new category --}}
+    </div>
+</div>
+
+{{-- --------------------------------------Model create new category------------------------------ --}}
+
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
-    <!-- Modal content-->
+    {{-- Modal content --}}
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Create Category</h4>
       </div>
-      
-    <form action="{{route('category.store')}}" method="POST">
-      @csrf
-      
-      <div class="modal-body">
-        <input type="text" name="category" class="form-control" placeholder="Your category....">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-        <button type="submit" class="btn text-warning">CREATE</button>
-      </div>
-    </form>
-    </div>
-
-  </div>
-</div>
-</div>
-<br>
-<table class="table table-hover">
-  
-  @foreach ($category as $item )
-  <tr>
-    <td>{{ $item->category }}</td>
-    <td>
-    
-      <form action="{{route('category.destroy', $item->id)}}" method="post">
+    {{-- end model content --}}
+    {{-- form create --}}
+      <form id="create_category" action="{{route('category.store')}}" method="POST">
         @csrf
-        @method('delete')
-          <a id="btndeletecategory" class="float-right mr-3" type="submit" onclick="return confirm('Are you sure?')">
-              <span class="material-icons" id="show">delete</span>
-          </a>
-      </form>
-
-      {{-- Edit Category --}}
-  <a href="" class=" btn-lg float-right" id="show" data-toggle="modal" data-target="#myModal{{$item->id}}"><span class="material-icons">
-    edit
-    </span></a>
-
-  <!-- Modal -->
-<div class="modal fade" id="myModal{{$item->id}}" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Edit Category</h4>
-        </div>
         <div class="modal-body">
-           {{-- delete category --}}
-     <form action="{{route('category.destroy', $item->id)}}" method="POST">
-      @csrf
-      @method('delete')
-      <button id="btndeletecategory" type="submit" class="float-right" onclick="return confirm('Are you sure?')" >delete</button>
-    </form>
-    
-    <form action="{{route('category.update',$item->id)}}" method="POST">
-            @csrf
-            @method('PUT')
-        <div class="form-group">
-            <label for="category">Category</label>
-            <input type="text" class="form-control" name="category" value="{{$item->category}}">
+          <input id="category" type="text" name="category" class="form-control" placeholder="Your category...." >
+          @error('category')
+            <small class="text-danger">&nbsp;&nbsp;&nbsp;{{$message}}</small>           
+          @enderror
         </div>
-            <button type="submit" class="btn btn-default text-warning float-right" >UPDATE</button>
-            <button type="submit" class="btn btn-default  float-right" >DISCARD</button>
-    </form>
-        </div>
-      </div>
-      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
+          <button type="submit" class="btn text-warning">CREATE</button>
+      </form>
+      {{-- end form create --}}
     </div>
-  </div>
-    </td>
-  </tr>
+</div>
 
-  @endforeach
-</table>
-</div>
-</div>
 @endsection
