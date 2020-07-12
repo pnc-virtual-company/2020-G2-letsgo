@@ -1,6 +1,7 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')
+@include('manage.deleteCategory')
 
 <div class="container mt-3">
   {{-- Search form --}}
@@ -32,24 +33,19 @@
             {{-- category name --}}
             <td> &nbsp;<b>{{ $item->category }}</b></td>
             {{-- end category name --}}
-
+           
             {{-- action --}}
             <td>
 
-              {{-- delete form --}}
-              <a href="#" class="float-right" style="margin-top: 7px" onclick="document.getElementById('delete{{$item->id}}').submit()"><span class="material-icons">delete</span></a>
-
-                <form id="delete{{$item->id}}" action="{{route('category.destroy', $item->id)}}" method="post">
-                  @csrf
-                  @method('delete')
-                </form>
-
-              {{-- end delete form --}}
+              {{-- delete button --}}
+              <a href="#!" class="delete float-right" style="margin-top: 7px"  data-id="{{ $item->id }}" data-toggle="modal" data-target="#deleteCategory"> <span class="material-icons" id="show">delete</span></a>
+              
+              {{-- end delete button --}}
 
               {{-- edit form --}}
 
                   {{-- button edit fomm --}}
-                  <a href="" class="btn-lg float-right" data-toggle="modal" data-target="#edit{{$item->id}}"><span class="material-icons">edit</span></a>
+                  <a href="" class="btn-lg float-right" data-toggle="modal" data-target="#edit{{$item->id}}"><span class="material-icons" id="show">edit</span></a>
                   {{-- end button edit form --}}
 
                   {{-- edit from model pop up --}}
@@ -114,5 +110,8 @@
       {{-- end form create --}}
     </div>
 </div>
+{{----------------------------------------modal delete category--------------------------------- --}}
+
+
 
 @endsection

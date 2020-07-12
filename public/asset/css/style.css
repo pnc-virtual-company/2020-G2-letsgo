@@ -28,3 +28,9 @@
     background-color: white;
 }
 
+#show {
+    display: none;
+}
+  tr:hover #show {
+    display: inline;
+  }

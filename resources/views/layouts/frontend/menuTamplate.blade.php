@@ -142,8 +142,13 @@
             </div>
         </div>
         </div>
+<<<<<<< HEAD
     </div>          
                                 
+=======
+    </div>                      
+                        
+>>>>>>> 64e7b1cbe5d8aeb35b4b70a43c5de29714e8ecea
     @yield('body')
 </body>
 </html>
