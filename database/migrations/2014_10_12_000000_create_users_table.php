@@ -31,9 +31,9 @@ class CreateUsersTable extends Migration
             array(
                 'firstname'=>'admin',
                 'lastname'=>'user',
-                'sex'=> 'male',
+                'sex'=> 'Male',
                 'birth'=> null,
-                'picture'=> 'https://image.freepik.com/free-vector/businessman-profile-cartoon_18591-58479.jpg',
+                'picture'=> 'user.png',
                 'email' => 'admin@example.com',
                 'role' =>1,
                 'password' => bcrypt('password'),
@@ -44,9 +44,9 @@ class CreateUsersTable extends Migration
                 array(
                     'firstname'=>'normal',
                     'lastname'=>'user',
-                    'sex'=> 'female',
+                    'sex'=> 'Female',
                     'birth'=> null,
-                    'picture'=> 'https://cdn5.vectorstock.com/i/1000x1000/51/79/colorful-cartoon-human-female-happy-face-vector-13895179.jpg',
+                    'picture'=> 'user.png',
                     'email' => 'normal@example.com',
                     'role' => 0,
                     'password' => bcrypt('password'),

@@ -9,6 +9,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
 </head>
 <body>
@@ -95,27 +97,48 @@
             <h4 class="modal-title">Edit Profile</h4>
             </div>
             <div class="modal-body">
-            <form action="#">
-                <div class="form-group">
-                    <label for="firstname"></label>
-                <input type="text" name="firstname" value="{{Auth::user()->firstname}}"  class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="firstname"></label>
-                    <input type="text" name="firstname" value="{{Auth::user()->lastname}}"  class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="firstname"></label>
-                    <input type="text" name="firstname" value="{{Auth::user()->email}}"  class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="firstname"></label>
-                    <input type="text" name="firstname" value="{{Auth::user()->password}}"  class="form-control">
+            <form action="#" autocomplete="off">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="form-group">
+                        <input type="text" name="firstname" value="{{Auth::user()->firstname}}"  class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="firstname" value="{{Auth::user()->lastname}}"  class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="firstname" value="{{Auth::user()->email}}"  class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="firstname" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="sex">Sex</label>
+                            <br>
+                            @if (Auth::user()->sex == 'Male')
+                                <input checked name="sex" value="Male" type="radio"> Male
+                                <input name="sex" value="Female" type="radio"> Female
+                            @else
+                                <input name="sex" value="Male" type="radio"> Male
+                                <input checked name="sex" value="Female" type="radio"> Female
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px" alt="Not found">
+                        <br>
+                        <div class="row justify-content-center">
+                            <a href=""><i class="fa fa-plus text-dark"></i></a>&nbsp;&nbsp;&nbsp;
+                            <a href=""><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
+                            <a href=""><i class="far fa-trash-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </div>
                 </div>
             </form>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
+            <button type="submit" class="btn btn-default text-warning">UPDATE</button>
             </div>
         </div>
         

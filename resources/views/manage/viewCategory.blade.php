@@ -37,12 +37,13 @@
             <td>
 
               {{-- delete form --}}
+              <a href="#" class="float-right" style="margin-top: 7px" onclick="document.getElementById('delete{{$item->id}}').submit()"><span class="material-icons">delete</span></a>
+
                 <form id="delete{{$item->id}}" action="{{route('category.destroy', $item->id)}}" method="post">
                   @csrf
                   @method('delete')
-                  {{-- <button id="btndeletecategory" class="float-right mr-3" type="submit" >delete</button> --}}
-                  <a href="#" class="float-right" style="margin-top: 7px" onclick="return confirm('Are you sure?')"><span class="material-icons">delete</span></a>
                 </form>
+
               {{-- end delete form --}}
 
               {{-- edit form --}}
@@ -87,7 +88,6 @@
     </div>
 </div>
 
-
 {{-- --------------------------------------Model create new category------------------------------ --}}
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -99,10 +99,13 @@
       </div>
     {{-- end model content --}}
     {{-- form create --}}
-      <form action="{{route('category.store')}}" method="POST">
+      <form id="create_category" action="{{route('category.store')}}" method="POST">
         @csrf
         <div class="modal-body">
-          <input type="text" name="category" class="form-control" placeholder="Your category....">
+          <input id="category" type="text" name="category" class="form-control" placeholder="Your category...." >
+          @error('category')
+            <small class="text-danger">&nbsp;&nbsp;&nbsp;{{$message}}</small>           
+          @enderror
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
@@ -111,4 +114,5 @@
       {{-- end form create --}}
     </div>
 </div>
+
 @endsection
