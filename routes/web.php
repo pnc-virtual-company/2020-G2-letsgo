@@ -27,8 +27,13 @@ Route::resource('/userProfile', 'userProfileController');
 
 Route::group(['prefix' => 'manage'],function(){
     Route::resource('/event', 'EventController');
-    Route::resource('/category', 'CategoryController');
+    
+    //category
+    Route::get('/category/index','CategoryController@index')->name('category.index');
     Route::delete('/category/destroy/{id}','CategoryController@destroy');
+    Route::put('/category/update/{id}','CategoryController@update');
+    Route::post('/category/store/','CategoryController@store')->name('category.store');
+    Route::get('/search','CategoryController@search')->name('category.search');
 });
 
 
