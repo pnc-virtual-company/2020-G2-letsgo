@@ -38,7 +38,7 @@
             <td>
 
               {{-- delete button --}}
-              <a href="#!" class="delete float-right" style="margin-top: 7px"  data-id="{{ $item->id }}" data-toggle="modal" data-target="#deleteCategory"> <span class="material-icons">delete</span></a>
+              <a href="#!" class="delete float-right" style="margin-top: 7px"  data-id="{{ $item->id }}" data-toggle="modal" data-target="#deleteCategory"> <span class="material-icons" id="show">delete</span></a>
               
               {{-- end delete button --}}
 
