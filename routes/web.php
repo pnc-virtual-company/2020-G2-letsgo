@@ -23,6 +23,7 @@ Auth::routes();
 
 Route::resource('/exploreEvents', 'ExploreEventsController');
 Route::resource('/yourEvent', 'YourEventControll');
+Route::resource('/userProfile', 'userProfileController');
 
 Route::group(['prefix' => 'manage'],function(){
     Route::resource('/event', 'EventController');
