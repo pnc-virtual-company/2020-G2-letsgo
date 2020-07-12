@@ -70,8 +70,6 @@
                                     Profile
                                 </a>
                                 {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> --}}
-                             
-  
                                 {{-- User PopUp --}}
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -115,9 +113,8 @@
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-        
         </div>
-    </div>                                 <!-- Modal -->
+    </div>          
                                 
     @yield('body')
 </body>
