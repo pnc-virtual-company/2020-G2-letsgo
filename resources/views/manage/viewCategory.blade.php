@@ -33,7 +33,7 @@
             {{-- category name --}}
             <td> &nbsp;<b>{{ $item->category }}</b></td>
             {{-- end category name --}}
-
+           
             {{-- action --}}
             <td>
 
@@ -45,7 +45,7 @@
               {{-- edit form --}}
 
                   {{-- button edit fomm --}}
-                  <a href="" class="btn-lg float-right" data-toggle="modal" data-target="#edit{{$item->id}}"><span class="material-icons">edit</span></a>
+                  <a href="" class="btn-lg float-right" data-toggle="modal" data-target="#edit{{$item->id}}"><span class="material-icons" id="show">edit</span></a>
                   {{-- end button edit form --}}
 
                   {{-- edit from model pop up --}}

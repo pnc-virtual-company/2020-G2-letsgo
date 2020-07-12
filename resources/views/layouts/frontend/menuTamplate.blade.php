@@ -136,6 +136,15 @@
                 </div>
             </form>
             </div>
+                <div class="col-4">
+                    <img class="mx-auto d-block" src="{{asset('images/'.Auth::user()->picture)}}" style="width: 100px;, height:100px;">
+                    <a href="#"><span class="material-icons">add</span></a>
+                    <a href="#"><span class="material-icons">edit</span></a>
+                    <a href="#"><span class="material-icons">delete</span></a>
+                </div>
+            </div>
+
+            </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
             <button type="submit" class="btn btn-default text-warning">UPDATE</button>
@@ -143,8 +152,8 @@
         </div>
         
         </div>
-    </div>                                 <!-- Modal -->
-                                
+    </div>                      
+                        
     @yield('body')
 </body>
 </html>
