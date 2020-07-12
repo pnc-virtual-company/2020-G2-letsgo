@@ -9,7 +9,7 @@
       <div class="row">
         <div class="input-icons col-md-8" style="margin: 0 auto"> 
           <span class="material-icons">search</span> 
-          <input class="form-control" type="text"> 
+          <input class="form-control" id="searchField"  type="text"> 
         </div> 
       </div> 
     </form>
