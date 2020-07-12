@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class userProfileController extends Controller
 {
@@ -68,7 +69,15 @@ class userProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          
+        $user = User::find($id);
+        $user->firstname = $request->get('firstname');
+        $user->lastname = $request->get('lastname');
+        $user->email = $request->get('email');
+        $user->birth = $request->get('birth');
+        $user->sex = $request->get('sex');
+        $user->save();
+        return back();
     }
 
     /**
