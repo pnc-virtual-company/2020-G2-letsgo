@@ -53,11 +53,13 @@
       <form action="{{route('category.destroy', $item->id)}}" method="post">
         @csrf
         @method('delete')
-          <button id="btndeletecategory" class="float-right mr-3" type="submit" onclick="return confirm('Are you sure?')">delete</button>
+          <a id="btndeletecategory" class="float-right mr-3" type="submit" onclick="return confirm('Are you sure?')">
+              <span class="material-icons" id="show">delete</span>
+          </a>
       </form>
 
       {{-- Edit Category --}}
-  <a href="" class=" btn-lg float-right" data-toggle="modal" data-target="#myModal{{$item->id}}"><span class="material-icons">
+  <a href="" class=" btn-lg float-right" id="show" data-toggle="modal" data-target="#myModal{{$item->id}}"><span class="material-icons">
     edit
     </span></a>
 

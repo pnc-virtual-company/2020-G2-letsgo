@@ -2,3 +2,11 @@
     border: none;
     color: blue;
    }
+
+#show {
+    display: none;
+}
+  
+tr:hover #show {
+    display: inline;
+  }

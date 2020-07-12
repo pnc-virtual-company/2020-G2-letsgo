@@ -8,6 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
       .active{
           text-decoration:underline;
@@ -83,6 +84,7 @@
             </div>
         </div>
     </nav>
+    
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
         
@@ -92,7 +94,9 @@
             <h4 class="modal-title">Edit Profile</h4>
             </div>
             <div class="modal-body">
-            <form action="#">
+                <div class="row">
+                    <div class="col-8">
+                        <form action="#">
                 <div class="form-group">
                     <label for="firstname"></label>
                 <input type="text" name="firstname" value="{{Auth::user()->firstname}}"  class="form-control">
@@ -111,14 +115,23 @@
                 </div>
             </form>
             </div>
+                <div class="col-4">
+                    <img class="mx-auto d-block" src="{{asset('images/'.Auth::user()->picture)}}" style="width: 100px;, height:100px;">
+                    <a href="#"><span class="material-icons">add</span></a>
+                    <a href="#"><span class="material-icons">edit</span></a>
+                    <a href="#"><span class="material-icons">delete</span></a>
+                </div>
+            </div>
+
+            </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
         
         </div>
-    </div>                                 <!-- Modal -->
-                                
+    </div>                      
+                        
     @yield('body')
 </body>
 </html>
