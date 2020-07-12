@@ -32,12 +32,12 @@
             {{-- category name --}}
             <td> &nbsp;<b>{{ $item->category }}</b></td>
             {{-- end category name --}}
-
+           
             {{-- action --}}
             <td>
-
+              <br>
               {{-- delete form --}}
-              <a href="#" class="float-right" style="margin-top: 7px" onclick="document.getElementById('delete{{$item->id}}').submit()"><span class="material-icons">delete</span></a>
+              <a href="#" class="float-right" style="margin-top: 7px" onclick="document.getElementById('delete{{$item->id}}').submit()"><span class="material-icons" id="show">delete</span></a>
 
                 <form id="delete{{$item->id}}" action="{{route('category.destroy', $item->id)}}" method="post">
                   @csrf
@@ -49,7 +49,7 @@
               {{-- edit form --}}
 
                   {{-- button edit fomm --}}
-                  <a href="" class="btn-lg float-right" data-toggle="modal" data-target="#edit{{$item->id}}"><span class="material-icons">edit</span></a>
+                  <a href="" class="btn-lg float-right" data-toggle="modal" data-target="#edit{{$item->id}}"><span class="material-icons" id="show">edit</span></a>
                   {{-- end button edit form --}}
 
                   {{-- edit from model pop up --}}
