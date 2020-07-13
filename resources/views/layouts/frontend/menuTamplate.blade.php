@@ -17,7 +17,7 @@
        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
         <div class="container">
             <a class="navbar-brand" href="{{route('exploreEvents.index')}}">
-            <img style="width: 70px;height: 70px;"  src="../asset/logo/logo1.png"/>
+            <img style="width: 70px;height: 70px;"  src="{{asset('asset/logo/logo1.png')}}"/>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -88,30 +88,42 @@
             </div>
         </div>
     </nav>
+    {{-- -------------------------------------------------------Display user profile------------------------------------------------ --}}
     <div class="modal fade" id="profile" role="dialog">
         <div class="modal-dialog">
-        
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
             <h4 class="modal-title">Edit Profile</h4>
             </div>
             <div class="modal-body">
-            <form action="#" autocomplete="off">
+                {{-- ----------form to display user Info------------------- --}}
+            <form action="{{route('userProfile.update', Auth::user()->id)}}" autocomplete="off" method="POST">
+                @csrf
+                @method("PUT")
                 <div class="row">
                     <div class="col-8">
+                        {{-- -------- Show user First Name-------------- --}}
                         <div class="form-group">
                         <input type="text" name="firstname" value="{{Auth::user()->firstname}}"  class="form-control">
                         </div>
+                        {{-- -------- Show user Last Name-------------- --}}
+                        
                         <div class="form-group">
-                            <input type="text" name="firstname" value="{{Auth::user()->lastname}}"  class="form-control">
+                            <input type="text" name="lastname" value="{{Auth::user()->lastname}}"  class="form-control">
                         </div>
+                        {{-- -------- Show user Email-------------- --}}
+
                         <div class="form-group">
-                            <input type="text" name="firstname" value="{{Auth::user()->email}}"  class="form-control">
+                            <input type="text" name="email" value="{{Auth::user()->email}}"  class="form-control">
                         </div>
+                        {{-- -------- Show user Birth-------------- --}}
+
                         <div class="form-group">
-                            <input type="text" name="firstname" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
+                            <input type="text" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
                         </div>
+                        {{-- -------- Show user Gender-------------- --}}
+
                         <div class="form-group">
                             <label for="sex">Sex</label>
                             <br>
@@ -123,9 +135,10 @@
                                 <input checked name="sex" value="Female" type="radio"> Female
                             @endif
                         </div>
+                        {{-- ----------end-------------- --}}
                     </div>
                     <div class="col-4">
-                        <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px" alt="Not found">
+                        <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px">
                         <br>
                         <div class="row justify-content-center">
                             <a href=""><i class="fa fa-plus text-dark"></i></a>&nbsp;&nbsp;&nbsp;
@@ -134,26 +147,16 @@
                         </div>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-default text-warning float-right">UPDATE</button>
+                <button type="button" class="btn btn-default float-right" data-dismiss="modal">DISCARD</button>
             </form>
-            </div>
-                <div class="col-4">
-                    <img class="mx-auto d-block" src="{{asset('images/'.Auth::user()->picture)}}" style="width: 100px;, height:100px;">
-                    <a href="#"><span class="material-icons">add</span></a>
-                    <a href="#"><span class="material-icons">edit</span></a>
-                    <a href="#"><span class="material-icons">delete</span></a>
-                </div>
-            </div>
-
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-            <button type="submit" class="btn btn-default text-warning">UPDATE</button>
+            {{-- ---------------------End Form---------------------- --}}
             </div>
         </div>
-        
         </div>
-    </div>                      
-                        
+    </div>          
+                                
+    </div>                                  
     @yield('body')
 </body>
 </html>

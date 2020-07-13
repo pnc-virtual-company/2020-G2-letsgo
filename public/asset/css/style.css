@@ -11,6 +11,10 @@
     margin-top: 10px;
     margin-left: 10px;
 } 
+
+#search{
+    padding-left: 40px;
+}
   
 .input-icons { 
     width: 100%; 

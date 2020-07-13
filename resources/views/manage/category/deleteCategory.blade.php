@@ -17,17 +17,20 @@
             <button type="button" class="btn btn-default" data-dismiss="modal">DON'T REMOVE</button>
             <a onclick="document.getElementById('deleteCategoryForm').submit()" class="btn btn-default text-warning">REMOVE</a>
         </div>
+
       </div>
     </div>
   </div>
+</div>
   <form id="deleteCategoryForm" action="" method="post">
     @csrf
     @method('delete')
 </form>
   <script type="text/javascript">
-    $(document).on('click', '.delete', function(e) {
+    
+  $(document).on('click', '.delete', function(e) {
     e.preventDefault();
     var id = $(this).data('id');
     $('#deleteCategoryForm').attr("action", "{{ url('/manage/category/destroy') }}" + "/" + id);
-    })
+  })
   </script>

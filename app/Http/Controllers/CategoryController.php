@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use DB;
+
 class CategoryController extends Controller
 {
     /**
@@ -13,9 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', Category::class);
-        $category = Category::all(); 
-        return view('manage.viewCategory', compact('category'));
+        $this->authorize('view', Category::class); 
+        return view('manage.category.viewCategory');
         
     }
 
@@ -105,7 +106,14 @@ class CategoryController extends Controller
         $category->delete();
         return back();
     }
-
+    public function search(Request $request){
+        $this->authorize('view', Category::class); 
+        $dataSearch = $request->get('query');
+        if($request->ajax()){
+            $query = DB::table('categories')->where('category', 'LIKE', '%' . $dataSearch . '%')->get();
+            return $query;
+        }
+    }
 }
 
 
