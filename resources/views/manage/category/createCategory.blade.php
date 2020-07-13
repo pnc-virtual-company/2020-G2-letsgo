@@ -11,9 +11,9 @@
           @csrf
           <div class="modal-body">
             <input id="category" type="text" name="category" class="form-control" placeholder="Your category...." autocomplete="off">
-            @error('category')
+            {{-- @error('category')
               <small class="text-danger">&nbsp;&nbsp;&nbsp;{{$message}}</small>           
-            @enderror
+            @enderror --}}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
