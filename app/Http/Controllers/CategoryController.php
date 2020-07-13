@@ -104,6 +104,14 @@ class CategoryController extends Controller
         return back();
     }
 
+    public function search(Request $request){
+        $this->authorize('view', Category::class); 
+        $dataSearch = $request->get('query');
+        if($request->ajax()){
+            $query = DB::table('categories')->where('category', 'LIKE', '%' . $dataSearch . '%')->get();
+            return $query;
+        }
+    }
 }
 
 
