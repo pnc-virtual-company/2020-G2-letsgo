@@ -11,9 +11,8 @@
           @csrf
           <div class="modal-body">
             <input id="category" type="text" name="category" class="form-control" placeholder="Your category...." autocomplete="off">
-            {{-- @error('category')
-              <small class="text-danger">&nbsp;&nbsp;&nbsp;{{$message}}</small>           
-            @enderror --}}
+          
+            <small class="text-danger" id="alertmessage"></small>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
@@ -23,3 +22,29 @@
       </div>
   </div>   
 </div> 
+
+<script type="text/javaScript">
+  $(document).ready(function(){
+    $(document).on('keyup','#category', function(){
+      var value = $(this).val();
+      existCategory(value);
+    });
+    existCategory();
+     function existCategory(value){
+      $.ajax({
+     url:"{{route('category.existCategory')}}",
+     method:'get',
+     data:{value:value},
+     dataType:'json',
+     success:function(inputdata)
+     {
+       if(inputdata !=''){
+         $('#alertmessage').html('This category is already exist.');
+       }else{
+        $('#alertmessage').html('');
+       }
+     }
+      });
+    }
+  })
+</script>

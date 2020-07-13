@@ -113,6 +113,15 @@ class CategoryController extends Controller
             return $query;
         }
     }
+
+    public function existCategory(Request $request){
+        $this->authorize('view', Category::class); 
+        $existData = $request->get('value');
+        if($request->ajax()){
+            $value = DB::table('categories')->where('category', $existData)->get();
+            return $value;
+        }
+    }
 }
 
 
