@@ -160,3 +160,4 @@
     @yield('body')
 </body>
 </html>
+
