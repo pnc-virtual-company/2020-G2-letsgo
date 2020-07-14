@@ -40,11 +40,10 @@
 
 <script type="text/javaScript">
   $(document).ready(function(){
-      $(document).on('keyup', '#search', function(){
-      var query = $(this).val();
-      fetch_customer_data(query);
-  });
-
+    $(document).on('keyup', '#search', function(){
+        var query = $(this).val();
+        fetch_customer_data(query);
+    });
    fetch_customer_data();
    function fetch_customer_data(query)
    {
@@ -89,8 +88,5 @@
     })
    }
   });
-
-</script>
-
-
+  </script>
 @endsection
