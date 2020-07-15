@@ -14,7 +14,6 @@
     {{-- </form> --}}
     {{-- end search form --}}
     <br>
-    {{-- create new category --}}
     <div class="form-group">
       <div class=" row">
           <div class="col-md-8" style="margin:0 auto">
