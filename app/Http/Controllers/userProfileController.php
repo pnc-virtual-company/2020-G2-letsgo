@@ -104,6 +104,5 @@ class userProfileController extends Controller
         $filename = public_path('asset/userImage/'.$file);
         File::delete($filename);
         return back();
-        
     }
 }

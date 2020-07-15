@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
   <script src="{{ asset('asset/js/awaresome.js') }}"></script>
+  <script src="{{ asset('asset/js/readCityList.js') }}"></script>
 </head>
 <body>
        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
@@ -140,7 +141,6 @@
                     <div class="col-4">
                         <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px">
                         <div class="row justify-content-center">
-
                             <input id="files" style="display:none;" type="file" name="picture">
                             <label for="files" class="btn" style="margin-top:-7px"><i class="fa fa-plus text-dark"></i></label>
                             <a href="#"><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
