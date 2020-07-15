@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
+use Image;
+use DB;
+use File;
 
 class userProfileController extends Controller
 {
@@ -35,7 +39,7 @@ class userProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 
     }
 
     /**
@@ -69,13 +73,20 @@ class userProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-          
         $user = User::find($id);
         $user->firstname = $request->get('firstname');
         $user->lastname = $request->get('lastname');
         $user->email = $request->get('email');
         $user->birth = $request->get('birth');
         $user->sex = $request->get('sex');
+        if($request->picture != null){ 
+            request()->validate([
+                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.request()->picture->getClientOriginalExtension();
+            request()->picture->move(public_path('asset/userImage/'), $imageName);
+            $user ->picture = $imageName;
+        }
         $user->save();
         return back();
     }
@@ -88,6 +99,11 @@ class userProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = User::where('id', $id)->first();
+        $file= $image->picture;
+        $filename = public_path('asset/userImage/'.$file);
+        File::delete($filename);
+        return back();
+        
     }
 }
