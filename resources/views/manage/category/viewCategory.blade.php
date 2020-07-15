@@ -14,7 +14,6 @@
     {{-- </form> --}}
     {{-- end search form --}}
     <br>
-    {{-- create new category --}}
     <div class="form-group">
       <div class=" row">
           <div class="col-md-8" style="margin:0 auto">
@@ -40,10 +39,10 @@
 
 <script type="text/javaScript">
   $(document).ready(function(){
-      $(document).on('keyup', '#search', function(){
-      var query = $(this).val();
-      fetch_customer_data(query);
-  });
+    $(document).on('keyup', '#search', function(){
+        var query = $(this).val();
+        fetch_customer_data(query);
+    });
    fetch_customer_data();
    function fetch_customer_data(query)
    {
@@ -64,20 +63,21 @@
                     <a 
                       href="#!" 
                       class="delete float-right" 
-                      style="margin-top: 7px"  
+                      style="margin-top: 4px"  
                       data-id="${element.id}" 
                       data-toggle="modal" 
                       data-target="#deleteCategory"> 
-                      <span class="material-icons" id="show">delete</span>
+                      <i class="far fa-trash-alt text-dark" id="show"></i>
                     </a>
                     <a 
                       href="#!" 
                       class="btn-lg edit float-right"
+                      style="margin-top:-10px"
                       data-toggle="modal" 
                       data-id="${element.id}"
                       data-category = "${element.category}"
                       data-target="#editCategory">
-                      <span class="material-icons" id="show">edit</span></a>
+                      <i class="fas fa-pencil-alt text-dark" style="font-size:16px;" id="show"></i></a>
                 </td>
                 </tr>
         </table>
@@ -89,6 +89,4 @@
    }
   });
   </script>
-
-
 @endsection

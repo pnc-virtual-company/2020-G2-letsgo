@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Storage;
 
 class YourEventControll extends Controller
 {
@@ -80,5 +81,9 @@ class YourEventControll extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function read(Request $request){
+        $data = Storage::disk('local')->get('country.json');
+        return response()->json($data);
     }
 }

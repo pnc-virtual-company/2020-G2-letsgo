@@ -32,18 +32,18 @@
     existCategory();
      function existCategory(value){
       $.ajax({
-     url:"{{route('category.existCategory')}}",
-     method:'get',
-     data:{value:value},
-     dataType:'json',
-     success:function(inputdata)
-     {
-       if(inputdata !=''){
-         $('#alertmessage').html('This category is already exist.');
-       }else{
-        $('#alertmessage').html('');
-       }
-     }
+        url:"{{route('category.existCategory')}}",
+        method:'get',
+        data:{value:value},
+        dataType:'json',
+        success:function(inputdata)
+        {
+          if(inputdata !=''){
+            $('#alertmessage').html('This category is already exist.');
+          }else{
+            $('#alertmessage').html('');
+          }
+        }
       });
     }
   })
