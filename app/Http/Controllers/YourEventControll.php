@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Storage;
+use App\Event;
 
 class YourEventControll extends Controller
 {
@@ -14,7 +15,9 @@ class YourEventControll extends Controller
      */
     public function index()
     {
-        return view('yourEvent.yourEvent');
+        $yourevent = Event::all();
+        // $category = Category::find($id);
+        return view('yourEvent.yourEvent',compact('yourevent'));
     }
 
     /**
@@ -86,4 +89,5 @@ class YourEventControll extends Controller
         $data = Storage::disk('local')->get('country.json');
         return response()->json($data);
     }
+    
 }
