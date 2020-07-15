@@ -64,20 +64,21 @@
                     <a 
                       href="#!" 
                       class="delete float-right" 
-                      style="margin-top: 7px"  
+                      style="margin-top: 4px"  
                       data-id="${element.id}" 
                       data-toggle="modal" 
                       data-target="#deleteCategory"> 
-                      <span class="material-icons" id="show">delete</span>
+                      <i class="far fa-trash-alt text-dark" id="show"></i>
                     </a>
                     <a 
                       href="#!" 
                       class="btn-lg edit float-right"
+                      style="margin-top:-10px"
                       data-toggle="modal" 
                       data-id="${element.id}"
                       data-category = "${element.category}"
                       data-target="#editCategory">
-                      <span class="material-icons" id="show">edit</span></a>
+                      <i class="fas fa-pencil-alt text-dark" style="font-size:16px;" id="show"></i></a>
                 </td>
                 </tr>
         </table>

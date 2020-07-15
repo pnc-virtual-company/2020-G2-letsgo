@@ -9,9 +9,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
+  <script src="{{ asset('asset/js/awaresome.js') }}"></script>
 </head>
 <body>
        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
@@ -120,7 +120,7 @@
                         {{-- -------- Show user Birth-------------- --}}
 
                         <div class="form-group">
-                            <input type="text" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
+                            <input type="date" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
                         </div>
                         {{-- -------- Show user Gender-------------- --}}
 
