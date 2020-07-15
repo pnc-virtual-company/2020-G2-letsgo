@@ -22,11 +22,24 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/exploreEvents', 'ExploreEventsController');
-Route::resource('/yourEvent', 'YourEventControll');
+// yourEvent
+Route::get('/yourEvent','YourEventControll@index')->name('yourEvent.index');
+Route::get('/read','YourEventControll@read')->name('event.read');
+
+Route::resource('/userProfile', 'userProfileController');
 
 Route::group(['prefix' => 'manage'],function(){
-    Route::resource('/event', 'EventController');
-    Route::resource('/category', 'CategoryController');
+    //event
+    Route::get('event/index','EventController@index')->name('event.index');
+    
+    //category
+    Route::get('/category/index','CategoryController@index')->name('category.index');
+    Route::delete('/category/destroy/{id}','CategoryController@destroy');
+    Route::put('/category/update/{id}','CategoryController@update');
+    Route::post('/category/store/','CategoryController@store')->name('category.store');
+    Route::get('/search','CategoryController@search')->name('category.search');
+    Route::get('/existCategory','CategoryController@existCategory')->name('category.existCategory');
+
 });
 
 
