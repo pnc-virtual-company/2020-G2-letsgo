@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('sex');
+            $table->string('city');
             $table->string('birth')->nullable();
             $table->string('picture')->nullable();
             $table->integer('role')->default(0);
@@ -32,6 +33,7 @@ class CreateUsersTable extends Migration
                 'firstname'=>'admin',
                 'lastname'=>'user',
                 'sex'=> 'male',
+                'city'=> 'Battambong',
                 'birth'=> null,
                 'picture'=> 'https://image.freepik.com/free-vector/businessman-profile-cartoon_18591-58479.jpg',
                 'email' => 'admin@example.com',
@@ -45,6 +47,7 @@ class CreateUsersTable extends Migration
                     'firstname'=>'normal',
                     'lastname'=>'user',
                     'sex'=> 'female',
+                    'city'=>'Banteaymeanchey',
                     'birth'=> null,
                     'picture'=> 'https://cdn5.vectorstock.com/i/1000x1000/51/79/colorful-cartoon-human-female-happy-face-vector-13895179.jpg',
                     'email' => 'normal@example.com',
