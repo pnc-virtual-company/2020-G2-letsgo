@@ -98,9 +98,10 @@
             </div>
             <div class="modal-body">
                 {{-- ----------form to display user Info------------------- --}}
-            <form action="{{route('userProfile.update', Auth::user()->id)}}" autocomplete="off" method="POST">
+            <form action="{{route('userProfile.update',Auth::user()->id)}}" autocomplete="off" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method("PUT")
+               
                 <div class="row">
                     <div class="col-8">
                         {{-- -------- Show user First Name-------------- --}}
@@ -139,11 +140,14 @@
                     </div>
                     <div class="col-4">
                         <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px">
-                        <br>
                         <div class="row justify-content-center">
-                            <a href=""><i class="fa fa-plus text-dark"></i></a>&nbsp;&nbsp;&nbsp;
-                            <a href=""><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
-                            <a href=""><i class="far fa-trash-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
+
+                            <input id="files" style="display:none;" type="file" name="picture">
+                            <label for="files" class="btn"><i class="fa fa-plus text-dark"></i></label>
+
+                            <a href="#"><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
+                            <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
+                            
                         </div>
                     </div>
                 </div>
@@ -151,6 +155,12 @@
                 <button type="button" class="btn btn-default float-right" data-dismiss="modal">DISCARD</button>
             </form>
             {{-- ---------------------End Form---------------------- --}}
+
+            <form action="{{route('userProfile.destroy',Auth::user()->id)}}" method="POST" id="deleteProfile">
+                @csrf
+                @method('delete')
+            </form> 
+
             </div>
         </div>
         </div>
