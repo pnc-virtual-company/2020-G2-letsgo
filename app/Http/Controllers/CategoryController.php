@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use DB;
-
 class CategoryController extends Controller
 {
     /**
@@ -15,11 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', Category::class); 
+        $this->authorize('view', Category::class);
         return view('manage.category.viewCategory');
-        
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -38,6 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+     
         $this->authorize('create', Category::class);
         $category = new Category;
         $request -> validate([
@@ -105,6 +104,7 @@ class CategoryController extends Controller
         $category->delete();
         return back();
     }
+
     public function search(Request $request){
         $this->authorize('view', Category::class); 
         $dataSearch = $request->get('query');
@@ -113,4 +113,17 @@ class CategoryController extends Controller
             return $query;
         }
     }
+
+    public function existCategory(Request $request){
+        $this->authorize('view', Category::class); 
+        $existData = $request->get('value');
+        if($request->ajax()){
+            $value = DB::table('categories')->where('category', $existData)->get();
+            return $value;
+        }
+    }
 }
+
+
+
+
