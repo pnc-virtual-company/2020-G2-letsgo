@@ -82,8 +82,4 @@ class YourEventController extends Controller
     {
         //
     }
-    public function read(Request $request){
-        $data = Storage::disk('local')->get('countries.json');
-        return response()->json($data);
-    }
 }
