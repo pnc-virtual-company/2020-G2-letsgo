@@ -187,7 +187,7 @@
                    {{-- @foreach (Auth::user() as $item) --}}
                         {{-- Old password --}}
                    <label for="">Old Pasword</label>
-                   <input type="text" name="oldPassword" class="form-control" value="{{Auth::user()->password}}">
+                   <input type="text" name="oldPassword" class="form-control">
                    
                    {{-- New password --}}
                    <label for="">New Pasword</label>
