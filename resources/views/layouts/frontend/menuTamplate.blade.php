@@ -129,6 +129,15 @@
                         </div>
                         {{-- -------- Show user Gender-------------- --}}
 
+                        {{-- -------- Show user city-------------- --}}
+
+                        <div class="form-group">
+                            <select class="form-control" name="city" id="select">
+                                <option value="{{Auth::user()->city}}" selected>{{Auth::user()->city}}</option>
+                            </select>
+                        </div>
+                        {{-- -------- Show user Gender-------------- --}}
+                        
                         <div class="form-group">
                             <label for="sex">Sex</label>
                             <br>

@@ -80,6 +80,7 @@ class userProfileController extends Controller
         $user->lastname = $request->get('lastname');
         $user->email = $request->get('email');
         $user->birth = $request->get('birth');
+        $user->city = $request->get('city');
         $user->sex = $request->get('sex');
         if($request->picture != null){ 
             request()->validate([
