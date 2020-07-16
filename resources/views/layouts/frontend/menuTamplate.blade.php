@@ -191,30 +191,54 @@
             <div class="modal-header">
               <h4 class="modal-title text-center">Change Password</h4>
             </div>
-                <form action="#">
+                <form action="{{route('changePasswords')}}" method="POST" autocomplete="off">
+                    @csrf
+                    @method('PUT')
                 <div class="modal-body">
-                   {{-- @foreach (Auth::user() as $item) --}}
-                        {{-- Old password --}}
+                   
+                    {{-- Old password --}}
                    <label for="">Old Pasword</label>
-                   <input type="text" name="oldPassword" class="form-control">
+                   <div class="form-group">      
+                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="old-password" required autocomplete="current-password">
+
+                   @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+                    {{--End Old password --}}
                    
                    {{-- New password --}}
                    <label for="">New Pasword</label>
-                   <input type="text" name="newPassword" class="form-control">
+                   <div class="form-group">      
+                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" required autocomplete="new-password" >
+
+                   @error('new-password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+                    {{--End New password --}}
                    
                    {{-- Confirm password --}}
                    <label for="">Confirm Pasword</label>
-                   <input type="text" name="confirmPassword" class="form-control">
-                   {{-- @endforeach --}}
+                   <div class="form-group">
+                    <input id="password-confirm"  type="password" class="form-control @error('password') is-invalid @enderror "  name="password-confirmation" required autocomplete="new-password">
+                    </div>
+                    {{--End Confirm password --}}
+
                </div>
                <div class="modal-footer">
                  <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-                 <button type="submit" class="btn text-warning float-right" data-dismiss="modal">UPDATE</button>
+                 <button type="submit" class="btn text-warning float-right">UPDATE</button>
                </div>
             </form>
           </div>
         </div>
       </div>
+    
     @yield('body')
 </body>
 </html>
