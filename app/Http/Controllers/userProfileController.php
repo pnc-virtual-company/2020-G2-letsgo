@@ -9,6 +9,7 @@ use Image;
 use DB;
 use File;
 use Crypt;
+use Input;
 
 class userProfileController extends Controller
 {
@@ -19,9 +20,7 @@ class userProfileController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        $user->password = Crypt::descrypt($user['password']);
-        $user->save();
+        
     }
 
     /**
@@ -42,7 +41,7 @@ class userProfileController extends Controller
      */
     public function store(Request $request)
     {
-        // 
+        
     }
 
     /**
