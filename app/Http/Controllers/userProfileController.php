@@ -9,6 +9,9 @@ use Image;
 use DB;
 use File;
 
+use Hash;
+
+
 class userProfileController extends Controller
 {
     /**
@@ -107,4 +110,5 @@ class userProfileController extends Controller
         ]);
         return back();
     }
+
 }

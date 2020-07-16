@@ -80,14 +80,17 @@
                                     @csrf
                                 </form>
                                 {{-- end logout --}}
+
                             </div>
                             {{-- end dropdown --}}
+
                         </li>
                         {{-- end dropdown user information --}}
                 </ul>
             </div>
         </div>
     </nav>
+
     {{-- -------------------------------------------------------Display user profile------------------------------------------------ --}}
     <div class="modal fade" id="profile" role="dialog">
         <div class="modal-dialog">
