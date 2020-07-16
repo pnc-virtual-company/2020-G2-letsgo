@@ -42,7 +42,7 @@
            function read(){
              if (sessionStorage.getItem('country')===null) {
                 $.ajax({
-                  url:"{{route('event.read')}}",
+                  url:"{{route('read')}}",
                   method:'GET',
                   dataType:'json',
                   success:function(respone)
