@@ -23,8 +23,8 @@ Auth::routes();
 
 Route::resource('/exploreEvents', 'ExploreEventsController');
 // yourEvent
-Route::get('/yourEvent','YourEventControll@index')->name('yourEvent.index');
-Route::get('/read','YourEventControll@read')->name('event.read');
+Route::get('/yourEvent','YourEventController@index')->name('yourEvent.index');
+Route::get('/read','YourEventController@read')->name('read');
 
 Route::resource('/userProfile', 'userProfileController');
 
