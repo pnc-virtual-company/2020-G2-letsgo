@@ -139,7 +139,11 @@
                         {{-- ----------end-------------- --}}
                     </div>
                     <div class="col-4">
-                        <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px">
+                        @if(Auth::user()->picture)
+                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px">
+                        @else
+                            <img src="asset/userImage/user.png" width="120px" height="120px"/>
+                        @endif
                         <div class="row justify-content-center">
                             <input id="files" style="display:none;" type="file" name="picture">
                             <label for="files" class="btn" style="margin-top:-7px"><i class="fa fa-plus text-dark"></i></label>

@@ -99,10 +99,12 @@ class userProfileController extends Controller
      */
     public function destroy($id)
     {
-        $image = User::where('id', $id)->first();
-        $file= $image->picture;
-        $filename = public_path('asset/userImage/'.$file);
-        File::delete($filename);
+
+        DB::table('users')
+        ->where('id', Auth::user()->id)
+        ->update([
+            'picture' => '', 
+        ]);
         return back();
     }
 }
