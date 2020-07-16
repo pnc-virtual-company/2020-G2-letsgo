@@ -15,9 +15,7 @@ class YourEventController extends Controller
      */
     public function index()
     {
-        $yourevent = Event::all();
-        // $category = Category::find($id);
-        return view('yourEvent.yourEvent',compact('yourevent'));
+        return view('yourEvent.yourEvent');
     }
 
     /**

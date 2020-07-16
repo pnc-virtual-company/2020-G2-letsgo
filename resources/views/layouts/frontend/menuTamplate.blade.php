@@ -74,6 +74,10 @@
                                 <a class="dropdown-item {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}"  data-toggle="modal" data-target="#profile" href="#">Profile</a>
                                 {{-- end profile --}}
 
+                                {{-- Change password of user --}}
+                                <a class="dropdown-item {{(request()->segment(2) == 'changePassword') ? 'active' : '',ucfirst(request()->segment(1))}}"  data-toggle="modal" data-target="#changePassword" href="#">Change Password</a>
+                                {{-- end Change password of user --}}
+
                                 {{-- logout --}}
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -167,8 +171,41 @@
         </div>
         </div>
     </div>          
-                                
-    </div>                                  
+         
+     {{-- -------------------------------------------------------Display Change Passowrd of User------------------------------------------------ --}}
+     <!-- Modal -->
+     <div id="changePassword" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-center">Change Password</h4>
+            </div>
+                <form action="#">
+                <div class="modal-body">
+                   {{-- @foreach (Auth::user() as $item) --}}
+                        {{-- Old password --}}
+                   <label for="">Old Pasword</label>
+                   <input type="text" name="oldPassword" class="form-control" value="{{Auth::user()->password}}">
+                   
+                   {{-- New password --}}
+                   <label for="">New Pasword</label>
+                   <input type="text" name="newPassword" class="form-control">
+                   
+                   {{-- Confirm password --}}
+                   <label for="">Confirm Pasword</label>
+                   <input type="text" name="confirmPassword" class="form-control">
+                   {{-- @endforeach --}}
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
+                 <button type="submit" class="btn text-warning float-right" data-dismiss="modal">UPDATE</button>
+               </div>
+            </form>
+          </div>
+        </div>
+      </div>
     @yield('body')
 </body>
 </html>

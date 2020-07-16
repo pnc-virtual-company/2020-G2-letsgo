@@ -27,6 +27,7 @@ Route::get('/yourEvent','YourEventController@index')->name('yourEvent.index');
 Route::get('/read','YourEventController@read')->name('read');
 
 Route::resource('/userProfile', 'userProfileController');
+// Route::resource('/changePassword/{id}', 'userProfileController@changePassword')->name('changePasswords');
 
 Route::group(['prefix' => 'manage'],function(){
     //event

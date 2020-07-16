@@ -8,6 +8,7 @@ use Auth;
 use Image;
 use DB;
 use File;
+use Crypt;
 
 class userProfileController extends Controller
 {
@@ -18,7 +19,9 @@ class userProfileController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::all();
+        $user->password = Crypt::descrypt($user['password']);
+        $user->save();
     }
 
     /**
@@ -90,6 +93,14 @@ class userProfileController extends Controller
         $user->save();
         return back();
     }
+
+    // //// Change Password of user
+    // public function changePassword(Request $request, $id){
+    //     $user = User::find($id);
+    //     $decrypt= Crypt::decrypt($user->password)->$request->get('oldPassword'); 
+        
+    // //     // dd($decrypt);
+    // }
 
     /**
      * Remove the specified resource from storage.

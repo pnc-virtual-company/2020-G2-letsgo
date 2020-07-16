@@ -5,35 +5,6 @@
       <option disabled selected>City</option>
     </select>
 
-    {{---------- view all event ----------}}
-    <div class="container mt-5">
-        {{-- <div class="row"> --}}
-          {{-- <div class="col-12"> --}}
-            @foreach ($yourevent as $item)
-            <div class="card">
-              <div class="card-body">
-              <div class="row">
-                {{$item->cate_id}}<br>
-                <div class="col-4">
-                  {{$item->startDate}}
-                </div>
-                <div class="col-4">
-                  <h3 class="text-center">{{$item->title}}</h3>
-              </div>
-                <div class="col-4">
-                  <button class="btn float-right">Cancel</button>
-                </div>
-              </div>
-              </div>
-            </div>
-        @endforeach
-          {{-- </div> --}}
-        {{-- </div> --}}
-    </div>
-
-
-
-
 
        {{-- read city from json file --}}
     <script type="text/javaScript">
