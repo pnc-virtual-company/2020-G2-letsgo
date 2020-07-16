@@ -106,6 +106,5 @@ class userProfileController extends Controller
             'picture' => '', 
         ]);
         return back();
-        
     }
 }

@@ -55,7 +55,7 @@ class CreateUsersTable extends Migration
                     'password' => bcrypt('password'),
                     'remember_token' => Str::random(10)
                 )
-                ); 
+            ); 
     
     }
 
