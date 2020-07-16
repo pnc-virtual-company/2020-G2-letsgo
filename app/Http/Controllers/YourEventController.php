@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Storage;
 
-class YourEventControll extends Controller
+class YourEventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -83,7 +83,8 @@ class YourEventControll extends Controller
         //
     }
     public function read(Request $request){
-        $data = Storage::disk('local')->get('country.json');
-        return response()->json($data);
+        file_get_contents(base_path('resources/lang/en.json'));
+        // return $data;
+        // return response()->json($data);
     }
 }

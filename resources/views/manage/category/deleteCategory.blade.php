@@ -27,7 +27,6 @@
     @method('delete')
 </form>
   <script type="text/javascript">
-    
   $(document).on('click', '.delete', function(e) {
     e.preventDefault();
     var id = $(this).data('id');
