@@ -91,6 +91,7 @@ class userProfileController extends Controller
             request()->picture->move(public_path('asset/userImage/'), $imageName);
             $user ->picture = $imageName;
         }
+
         $user->save();
         return back();
     }

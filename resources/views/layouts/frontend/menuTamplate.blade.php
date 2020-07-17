@@ -101,7 +101,7 @@
             </div>
             <div class="modal-body">
                 {{-- ----------form to display user Info------------------- --}}
-            <form action="{{route('userProfile.update',Auth::user()->id)}}" autocomplete="off" method="POST" enctype="multipart/form-data">
+            <form action="{{route('userProfile.update',Auth::user()->id)}}" autocomplete="off" id="saveimage" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method("PUT")
                
@@ -152,14 +152,17 @@
                     </div>
                     <div class="col-4">
                         @if(Auth::user()->picture)
-                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px">
+                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" id="img_prv" width="120px" height="120px">
                         @else
-                            <img src="asset/userImage/user.png" width="120px" height="120px"/>
+                            <img src="asset/userImage/user.png" width="120px" id="img_prv" height="120px"/>
                         @endif
                         <div class="row justify-content-center">
-                            <input id="files" style="display:none;" type="file" name="picture">
-                            <label for="files" class="btn" style="margin-top:-7px"><i class="fa fa-plus text-dark"></i></label>
-                            <a href="#"><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
+
+                            <label for="file" class="btn" style="margin-top:-7px"><i class="fa fa-plus text-dark"></i></label>
+                            <input id="file"  style="display:none;" type="file" name="picture">
+                            <span id="mgs_ta">
+
+                            <a href="#" id="upload"><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
                             <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
                             
                         </div>
@@ -182,6 +185,65 @@
                                 
     </div>                                  
     @yield('body')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+     
+    <script type="text/javascript">
+      $('#file').on('change',function(ev){
+        console.log("here inside");
+     
+        var filedata=this.files[0];
+        var imgtype=filedata.type;
+     
+     
+        var match=['image/jpeg','image/jpg'];
+     
+        if(!(imgtype==match[0])||(imgtype==match[1])){
+            $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
+     
+        }else{
+     
+          $('#mgs_ta').empty();
+        
+     
+        //---image preview
+     
+        var reader=new FileReader();
+     
+        reader.onload=function(ev){
+          $('#img_prv').attr('src',ev.target.result).css('width','150px').css('height','150px');
+        }
+        reader.readAsDataURL(this.files[0]);
+     
+        /// preview end
+     
+            //upload
+     
+            var postData=new FormData();
+            postData.append('file',this.files[0]);
+     
+            var url="{{url('userImage.update')}}";
+     
+            $.ajax({
+            headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
+            async:true,
+            type:"post",
+            contentType:false,
+            url:url,
+            data:postData,
+            processData:false,
+            success:function(){
+              console.log("success");
+            }
+     
+     
+            });
+     
+        }
+     
+      });
+     
+    </script>
 </body>
 </html>
 
