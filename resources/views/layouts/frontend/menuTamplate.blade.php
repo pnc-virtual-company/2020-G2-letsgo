@@ -160,7 +160,7 @@
                         <div class="row justify-content-center">
                             <input id="files" style="display:none;" type="file" name="picture">
                             <label for="files" class="btn" style="margin-top:-7px"><i class="fa fa-plus text-dark"></i></label>
-                            <a href="#"><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
+                            
                             <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
                             
                         </div>
