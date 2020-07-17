@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Storage;
+use App\Event;
 
-class YourEventsController extends Controller
+class YourEventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,7 @@ class YourEventsController extends Controller
      */
     public function index()
     {
-        return view('yourEvents.yourEvents');
+        return view('yourEvent.yourEvent');
     }
 
     /**
@@ -81,4 +83,10 @@ class YourEventsController extends Controller
     {
         //
     }
+    public function read(Request $request){
+        file_get_contents(base_path('resources/lang/en.json'));
+        // return $data;
+        // return response()->json($data);
+    }
+    
 }

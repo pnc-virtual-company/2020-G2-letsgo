@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('sex');
+            $table->string('city');
             $table->string('birth')->nullable();
             $table->string('picture')->nullable();
             $table->integer('role')->default(0);
@@ -31,6 +32,7 @@ class CreateUsersTable extends Migration
             array(
                 'firstname'=>'admin',
                 'lastname'=>'user',
+                'city'=> 'Battambong',
                 'sex'=> 'Male',
                 'birth'=> null,
                 'picture'=> 'user.png',
@@ -44,6 +46,7 @@ class CreateUsersTable extends Migration
                 array(
                     'firstname'=>'normal',
                     'lastname'=>'user',
+                    'city'=>'Banteaymeanchey',
                     'sex'=> 'Female',
                     'birth'=> null,
                     'picture'=> 'user.png',
@@ -52,7 +55,7 @@ class CreateUsersTable extends Migration
                     'password' => bcrypt('password'),
                     'remember_token' => Str::random(10)
                 )
-                ); 
+            ); 
     
     }
 

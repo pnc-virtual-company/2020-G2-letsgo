@@ -9,9 +9,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css" rel="stylesheet"></link>
+    <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
+  <script src="{{ asset('asset/js/awaresome.js') }}"></script>
+  <script src="{{ asset('asset/js/readCityList.js') }}"></script>
 </head>
 <body>
        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
@@ -74,6 +76,10 @@
                                 <a class="dropdown-item {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}"  data-toggle="modal" data-target="#profile" href="#">Profile</a>
                                 {{-- end profile --}}
 
+                                {{-- Change password of user --}}
+                                <a class="dropdown-item {{(request()->segment(2) == 'changePassword') ? 'active' : '',ucfirst(request()->segment(1))}}"  data-toggle="modal" data-target="#changePassword" href="#">Change Password</a>
+                                {{-- end Change password of user --}}
+
                                 {{-- logout --}}
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -98,7 +104,7 @@
             </div>
             <div class="modal-body">
                 {{-- ----------form to display user Info------------------- --}}
-            <form action="{{route('userProfile.update',Auth::user()->id)}}" autocomplete="off" method="POST" enctype="multipart/form-data">
+            <form action="{{route('userProfile.update',Auth::user()->id)}}" autocomplete="off" method="POST" enctype="multipart/form-data" >
                 @csrf
                 @method("PUT")
                
@@ -121,10 +127,48 @@
                         {{-- -------- Show user Birth-------------- --}}
 
                         <div class="form-group">
-                            <input type="text" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
+                            <input type="date" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
                         </div>
                         {{-- -------- Show user Gender-------------- --}}
 
+                        {{-- -------- Show user city-------------- --}}
+
+                        <div class="form-group">
+                            <br>
+                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                            <datalist id="result">
+                            </datalist>
+                        </div>
+
+                        {{-- ------------------------change password only one form with user info ---------------------------------------------}}
+                     
+                        {{---------- old password------ --}}
+           
+                   
+                   {{-- New password --}}
+                   <label for="">New Pasword</label>
+                   <div class="form-group">      
+                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" required autocomplete="new-password" >
+
+                   @error('new-password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+                    {{--End New password --}}
+                   
+                   {{-- Confirm password --}}
+                   <label for="">Confirm Pasword</label>
+                   <div class="form-group">
+                    <input id="password-confirm"  type="password" class="form-control @error('password') is-invalid @enderror "  name="password-confirmation" required autocomplete="new-password">
+                    </div>
+                    {{--End Confirm password --}}
+
+                        {{-- end change password  with only one form--}}
+
+                        {{-- -------- Show user Gender-------------- --}}
+                        
                         <div class="form-group">
                             <label for="sex">Sex</label>
                             <br>
@@ -139,11 +183,13 @@
                         {{-- ----------end-------------- --}}
                     </div>
                     <div class="col-4">
+
                         @if(Auth::user()->picture)
                             <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px" id="img_prv">
                         @else
                             <img src="asset/userImage/user.png" width="120px" height="120px" id="img_prv"/>
                         @endif
+                        
                         <div class="row justify-content-center">
 
                             <input id="file" style="display:none;" type="file" name="picture">
@@ -169,8 +215,65 @@
         </div>
         </div>
     </div>          
-                                
-    </div>                                  
+         
+     {{-- -------------------------------------------------------Display Change Passowrd of User------------------------------------------------ --}}
+     <!-- Modal -->
+     <div id="changePassword" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-center">Change Password</h4>
+            </div>
+                <form action="{{route('changePasswords')}}" method="POST" autocomplete="off">
+                    @csrf
+                    @method('PUT')
+                <div class="modal-body">
+                   
+                    {{-- Old password --}}
+                   <label for="">Old Pasword</label>
+                   <div class="form-group">      
+                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="old-password" required autocomplete="current-password">
+
+                   @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+                    {{--End Old password --}}
+                   
+                   {{-- New password --}}
+                   <label for="">New Pasword</label>
+                   <div class="form-group">      
+                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" required autocomplete="new-password" >
+
+                   @error('new-password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+                    {{--End New password --}}
+                   
+                   {{-- Confirm password --}}
+                   <label for="">Confirm Pasword</label>
+                   <div class="form-group">
+                    <input id="password-confirm"  type="password" class="form-control @error('password') is-invalid @enderror "  name="password-confirmation" required autocomplete="new-password">
+                    </div>
+                    {{--End Confirm password --}}
+
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
+                 <button type="submit" class="btn text-warning float-right">UPDATE</button>
+               </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    
     @yield('body')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>

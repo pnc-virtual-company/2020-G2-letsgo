@@ -36,11 +36,19 @@
                                     </span>
                                 @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="">Gender</label>
-                            <br>
-                            <input type="radio" name="sex" value="Male"> Male
-                            <input type="radio" name="sex" value="Female"> Female
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">Gender</label>
+                                <br>
+                                <input type="radio" name="sex" value="Male"> Male
+                                <input type="radio" name="sex" value="Female"> Female
+                            </div>
+                            <div class="form-group col-md-6">
+                                <br>
+                                <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                                <datalist id="result">
+                                </datalist>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="data of birth">Date of birth (Optional)</label>
@@ -61,8 +69,6 @@
                         <div class="form-group">
                                 <input id="password-confirm" placeholder="Confirm password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
-                       
-
                         <div class="form-group">
                             <div class="justify-content-center">
                                 <a style="text-decoration: underline;" class="mt-1" href="{{ route('login') }}"><b>Or back to sing in</b></a>
@@ -78,3 +84,4 @@
     </div>
 </div>
 @endsection
+

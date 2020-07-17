@@ -1,7 +1,8 @@
 <?php
 
 namespace App;
-
+use App\Event;
+use App\Join;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname','lastname','birth','sex', 'email', 'password',
+        'firstname','lastname','birth','city','sex', 'email', 'password',
     ];
 
     /**
@@ -36,5 +37,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
+
+    public function joins(){
+        return $this->hasMany(Join::class);
+    }
        
 }
