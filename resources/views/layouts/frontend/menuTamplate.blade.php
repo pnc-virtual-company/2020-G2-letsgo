@@ -148,17 +148,24 @@
                         {{-- ----------end-------------- --}}
                     </div>
                     <div class="col-4">
+                        
                         @if(Auth::user()->picture)
-                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px">
+                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" id="img_prv" width="120px" height="120px">
                         @else
-                            <img src="asset/userImage/user.png" width="120px" height="120px"/>
+                            <img src="asset/userImage/user.png" width="120px" height="120px" id="img_prv"/>
                         @endif
+
                         <div class="row justify-content-center">
-                            <input id="files" style="display:none;" type="file" name="picture">
-                            <label for="files" class="btn" style="margin-top:-7px"><i class="fa fa-plus text-dark"></i></label>
+                            {{-- button add profile  --}}
+                            <label for="file" class="btn" style="margin-top:-7px"><i class="fa fa-plus text-dark"></i></label>
+                            <input id="file" style="display:none;" type="file" name="picture">
+                            {{-- end button --}}
+
+                            {{-- button delete profile --}}
                             <a href="#"><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
                             <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
-                            
+                            {{-- end button --}}
+                            <span id="mgs_ta"></span>
                         </div>
                     </div>
                 </div>
@@ -179,6 +186,60 @@
                                 
     </div>                                  
     @yield('body')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+     
+    <script type="text/javascript">
+      $('#file').on('change',function(ev){
+        console.log("here inside");
+        
+        var filedata=this.files[0];
+        var imgtype=filedata.type;
+     
+        var match=['image/png','image/jpg','image/jpeg','image/gif'];
+     
+        if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3])||(imgtype==match[4]))){
+            $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only png jpg jpeg gif allowed</p>');
+     
+        }else{
+     
+          $('#mgs_ta').empty();
+     
+        //---image preview
+     
+        var reader=new FileReader();
+     
+        reader.onload=function(ev){
+          $('#img_prv').attr('src',ev.target.result).css('width','120px').css('height','120px');
+        }
+        reader.readAsDataURL(this.files[0]);
+     
+        /// preview end
+
+            //upload
+     
+            var postData=new FormData();
+            postData.append('file',this.files[0]);
+     
+            var url="{{url('userImage.update')}}";
+     
+            $.ajax({
+            headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
+            async:true,
+            type:"post",
+            contentType:false,
+            url:url,
+            data:postData,
+            processData:false,
+            success:function(){
+              console.log("success");
+            }
+     
+            });
+        }
+      });
+     
+    </script>
 </body>
 </html>
 

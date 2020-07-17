@@ -7,7 +7,6 @@ use App\User;
 use Auth;
 use Image;
 use DB;
-use File;
 
 class userProfileController extends Controller
 {
@@ -39,7 +38,7 @@ class userProfileController extends Controller
      */
     public function store(Request $request)
     {
-        // 
+        //
     }
 
     /**
@@ -104,7 +103,7 @@ class userProfileController extends Controller
         DB::table('users')
         ->where('id', Auth::user()->id)
         ->update([
-            'picture' => '', 
+            'picture' => 'user.png', 
         ]);
         return back();
     }
