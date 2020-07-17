@@ -142,13 +142,12 @@
 
                         {{-- ------------------------change password only one form with user info ---------------------------------------------}}
                      
-                        {{---------- old password------ --}}
            
                    
                    {{-- New password --}}
                    <label for="">New Pasword</label>
                    <div class="form-group">      
-                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" required autocomplete="new-password" >
+                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" autocomplete="new-password" >
 
                    @error('new-password')
                         <span class="invalid-feedback" role="alert">
@@ -161,7 +160,7 @@
                    {{-- Confirm password --}}
                    <label for="">Confirm Pasword</label>
                    <div class="form-group">
-                    <input id="password-confirm"  type="password" class="form-control @error('password') is-invalid @enderror "  name="password-confirmation" required autocomplete="new-password">
+                    <input id="password-confirm"  type="password" class="form-control @error('password') is-invalid @enderror "  name="password-confirmation" autocomplete="new-password">
                     </div>
                     {{--End Confirm password --}}
 
