@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Storage;
+use App\Event;
 
 class YourEventController extends Controller
 {
@@ -87,4 +88,5 @@ class YourEventController extends Controller
         // return $data;
         // return response()->json($data);
     }
+    
 }
