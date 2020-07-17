@@ -146,7 +146,7 @@ class userProfileController extends Controller
         DB::table('users')
         ->where('id', Auth::user()->id)
         ->update([
-            'picture' => '', 
+            'picture' => '',
         ]);
         return back();
     }

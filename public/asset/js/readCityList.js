@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     read();
 
@@ -26,22 +27,29 @@ function listCounty(data) {
 }
 // display result
 function getResult(data) {
-    var option = "";
-    const ONLY_COUNTRIES = ['Cambodia', 'Thailand', 'France', 'Canada', 'Vietnam', 'Japan'];
-    if (sessionStorage.getItem('output') === null) {
-        for (let indexOfCountriies = 0; indexOfCountriies < ONLY_COUNTRIES.length; indexOfCountriies++) {
-            for (var countreis in data) {
-                if (ONLY_COUNTRIES[indexOfCountriies] === countreis) {
-                    var innerArray = data[countreis];
-                    innerArray.forEach(province => {
-                        option += "<option value=" + countreis + "," + province + ">" + countreis + "," + province + "</option>";
-                    });
-                }
-            }
-        }
-        sessionStorage.setItem('output', option)
-        $('#select').append(option);
-      } else {
-        $('#select').append(sessionStorage.getItem('output'));
-    }
+    $(document).on('keyup', '#autoSuggestion', function(){
+        var search = $(this).val();
+        if(search == ""){
+            return "fail";
+        }else {
+            var regex = new RegExp(search, 'i');
+            var result ='';    
+            for (var key in data) {
+                var val = data[key];
+                if(key.search(regex) != -1){
+                    result += `<option value="${key}">${key}</option>`; 
+                    if (search == key) {
+                            val.forEach((element,i) => {
+                                if(i < 120){
+                                    result += `<option value="${key},${element}">${key},${element}</option>`;
+                                }
+                                i++;
+                            });
+                    }
+                } 
+            }      
+            $('#result').html(result);
+        }      
+    });
+    
 }
