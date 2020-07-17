@@ -45,9 +45,9 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <br>
-                                <select class="form-control" name="city" id="select">
-                                    <option disabled selected>City</option>
-                                </select>
+                                <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                                <datalist id="result">
+                                </datalist>
                             </div>
                         </div>
                         <div class="form-group">

@@ -1,7 +1,7 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')
-  <select class="form-control" name="" id="select">
-      <option disabled selected>City</option>
-  </select>
+    <input list="result" id="autoSuggestion"  name="country"/>
+    <datalist id="result">
+    </datalist>
 @endsection
