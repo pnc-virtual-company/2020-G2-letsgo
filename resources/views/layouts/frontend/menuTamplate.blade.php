@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
   <script src="{{ asset('asset/js/awaresome.js') }}"></script>
   <script src="{{ asset('asset/js/readCityList.js') }}"></script>
+ 
 </head>
 <body>
        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
@@ -32,18 +33,18 @@
 
                         {{-- event explore --}}
                         <li class="nav-item {{(request()->segment(1) == 'exploreEvents') ? 'active' : '',ucfirst(request()->segment(1))}} ">
-                            <a class="nav-link" href="{{route('exploreEvents.index')}}">Explore events</a>
+                            <a class="nav-link" href="{{route('exploreEvents.index')}}"> <span>Explore events</span></a>
                         </li>
 
                         {{-- you event --}}
                         <li class="nav-item {{(request()->segment(1) == 'yourEvent') ? 'active' : '',ucfirst(request()->segment(1))}}">
-                        <a class="nav-link" href="{{route('yourEvent.index')}}">Your events</a>
+                        <a class="nav-link" href="{{route('yourEvent.index')}}">   <span>Your events</span></a>
                         </li>
 
                         {{-- Manage --}}
                         @can('view', 'App\Event')
                             <li class="nav-item dropdown">  
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle {{request()->is('manage/*') ? 'active' : ''}}" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><span class="caret">Manage</span></a>
+                                <a id="navbarDropdown" class=" dropdtn  nav-link dropdown-toggle {{request()->is('manage/*') ? 'active' : ''}}" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><span class="caret">Manage</span></a>
                                 {{-- dropdown manage--}}
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
@@ -52,7 +53,7 @@
                                     {{-- end event --}}
 
                                     {{-- category --}}
-                                    <a class="dropdown-item {{(request()->segment(2) == 'category') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('category.index')}}">Categories</a>
+                                    <a class="dropdown-item {{(request()->segment(2) == 'category') ?  : '',ucfirst(request()->segment(1))}}" href="{{route('category.index')}}">Categories</a>
                                     {{-- end category --}}
 
                                 </div>
@@ -119,56 +120,10 @@
                         <div class="form-group">
                             <input type="text" name="lastname" value="{{Auth::user()->lastname}}"  class="form-control">
                         </div>
-                        {{-- -------- Show user Email-------------- --}}
 
-                        <div class="form-group">
-                            <input type="text" name="email" value="{{Auth::user()->email}}"  class="form-control">
-                        </div>
-                        {{-- -------- Show user Birth-------------- --}}
-
-                        <div class="form-group">
-                            <input type="date" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
-                        </div>
-                        {{-- -------- Show user Gender-------------- --}}
-
-                        {{-- -------- Show user city-------------- --}}
-
-                        <div class="form-group">
-                            <br>
-                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
-                            <datalist id="result">
-                            </datalist>
-                        </div>
-
-                        {{-- ------------------------change password only one form with user info ---------------------------------------------}}
-                     
-           
-                   
-                   {{-- New password --}}
-                   <label for="">New Pasword</label>
-                   <div class="form-group">      
-                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" autocomplete="new-password" >
-
-                   @error('new-password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    </div>
-                    {{--End New password --}}
-                   
-                   {{-- Confirm password --}}
-                   <label for="">Confirm Pasword</label>
-                   <div class="form-group">
-                    <input id="password-confirm"  type="password" class="form-control @error('password') is-invalid @enderror "  name="password-confirmation" autocomplete="new-password">
-                    </div>
-                    {{--End Confirm password --}}
-
-                        {{-- end change password  with only one form--}}
-
-                        {{-- -------- Show user Gender-------------- --}}
+                         {{-- -------- Show user Gender-------------- --}}
                         
-                        <div class="form-group">
+                         <div class="form-group">
                             <label for="sex">Sex</label>
                             <br>
                             @if (Auth::user()->sex == 'Male')
@@ -180,6 +135,29 @@
                             @endif
                         </div>
                         {{-- ----------end-------------- --}}
+
+                        {{-- -------- Show user Birth-------------- --}}
+                        <div class="form-group">
+                            <input type="date" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
+                        </div>
+                        {{-- ----------end-------------- --}}
+
+
+                        {{-- -------- Show user Email-------------- --}}
+
+                        <div class="form-group">
+                            <input type="text" name="email" value="{{Auth::user()->email}}"  class="form-control">
+                        </div>
+                        {{-- ----------end-------------- --}}
+                        
+                        {{-- -------- Show user city-------------- --}}
+
+                        <div class="form-group">
+                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                            <datalist id="result">
+                            </datalist>
+                        </div>
+                        {{-- ----------end city-------------- --}}
                     </div>
                     <div class="col-4">
 
