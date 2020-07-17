@@ -9,6 +9,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css" rel="stylesheet"></link>
+    <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
   <script src="{{ asset('asset/js/awaresome.js') }}"></script>
   <script src="{{ asset('asset/js/readCityList.js') }}"></script>
@@ -73,6 +75,10 @@
                                 {{-- profile --}}
                                 <a class="dropdown-item {{(request()->segment(2) == 'profile') ? 'active' : '',ucfirst(request()->segment(1))}}"  data-toggle="modal" data-target="#profile" href="#">Profile</a>
                                 {{-- end profile --}}
+
+                                {{-- Change password of user --}}
+                                <a class="dropdown-item {{(request()->segment(2) == 'changePassword') ? 'active' : '',ucfirst(request()->segment(1))}}"  data-toggle="modal" data-target="#changePassword" href="#">Change Password</a>
+                                {{-- end Change password of user --}}
 
                                 {{-- logout --}}
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -182,8 +188,65 @@
         </div>
         </div>
     </div>          
-                                
-    </div>                                  
+         
+     {{-- -------------------------------------------------------Display Change Passowrd of User------------------------------------------------ --}}
+     <!-- Modal -->
+     <div id="changePassword" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-center">Change Password</h4>
+            </div>
+                <form action="{{route('changePasswords')}}" method="POST" autocomplete="off">
+                    @csrf
+                    @method('PUT')
+                <div class="modal-body">
+                   
+                    {{-- Old password --}}
+                   <label for="">Old Pasword</label>
+                   <div class="form-group">      
+                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="old-password" required autocomplete="current-password">
+
+                   @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+                    {{--End Old password --}}
+                   
+                   {{-- New password --}}
+                   <label for="">New Pasword</label>
+                   <div class="form-group">      
+                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" required autocomplete="new-password" >
+
+                   @error('new-password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+                    {{--End New password --}}
+                   
+                   {{-- Confirm password --}}
+                   <label for="">Confirm Pasword</label>
+                   <div class="form-group">
+                    <input id="password-confirm"  type="password" class="form-control @error('password') is-invalid @enderror "  name="password-confirmation" required autocomplete="new-password">
+                    </div>
+                    {{--End Confirm password --}}
+
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
+                 <button type="submit" class="btn text-warning float-right">UPDATE</button>
+               </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    
     @yield('body')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>

@@ -26,6 +26,7 @@ Route::resource('/exploreEvents', 'ExploreEventsController');
 Route::get('/yourEvent','YourEventController@index')->name('yourEvent.index');
 
 Route::resource('/userProfile', 'userProfileController');
+Route::put('/changePasswords', 'userProfileController@changePassword')->name('changePasswords');
 
 Route::group(['prefix' => 'manage'],function(){
     //event
@@ -40,5 +41,7 @@ Route::group(['prefix' => 'manage'],function(){
     Route::get('/existCategory','CategoryController@existCategory')->name('category.existCategory');
 
 });
+
+
 
 
