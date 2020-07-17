@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Storage;
+use App\Event;
 
 class YourEventController extends Controller
 {
@@ -82,4 +83,10 @@ class YourEventController extends Controller
     {
         //
     }
+    public function read(Request $request){
+        file_get_contents(base_path('resources/lang/en.json'));
+        // return $data;
+        // return response()->json($data);
+    }
+    
 }

@@ -7,6 +7,10 @@ use App\User;
 use Auth;
 use Image;
 use DB;
+use File;
+use Crypt;
+use Input;
+use Illuminate\Support\Facades\Hash;
 
 class userProfileController extends Controller
 {
@@ -17,7 +21,7 @@ class userProfileController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -39,6 +43,7 @@ class userProfileController extends Controller
     public function store(Request $request)
     {
         //
+        
     }
 
     /**
@@ -89,6 +94,27 @@ class userProfileController extends Controller
         }
         $user->save();
         return back();
+    }
+
+    //// Change Password of user
+    public function changePassword(Request $request){
+            $old_password = $request->get('old-password');
+            $value = Auth::user()->password;
+            $verify_password = Hash::check($old_password,$value);
+            if($verify_password){
+                $new_password = $request->get('new-password');
+                $confirm_password = $request->get('password-confirmation');
+                if($new_password == $confirm_password){
+                    $user = User::find(Auth::id());
+                    $user->password = Hash::make($new_password);
+                    $user->save();
+                    return back();    
+                }else{
+                    return back(); 
+                }
+            }else{
+                return back(); 
+            }   
     }
 
     /**
