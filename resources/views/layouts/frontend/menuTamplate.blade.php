@@ -134,25 +134,16 @@
                         {{-- -------- Show user city-------------- --}}
 
                         <div class="form-group">
-                            <select class="form-control" name="city" id="select">
-                                <option value="{{Auth::user()->city}}" selected>{{Auth::user()->city}}</option>
-                            </select>
+                            <br>
+                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                            <datalist id="result">
+                            </datalist>
                         </div>
 
                         {{-- ------------------------change password only one form with user info ---------------------------------------------}}
                      
                         {{---------- old password------ --}}
-                         <label for="">Old Pasword</label>
-                        <div class="form-group">      
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="old-password" required >
-         
-                            @error('password')
-                                 <span class="invalid-feedback" role="alert">
-                                     <strong>{{ $message }}</strong>
-                                 </span>
-                             @enderror
-                             </div>
-                    {{--End Old password --}}
+           
                    
                    {{-- New password --}}
                    <label for="">New Pasword</label>
