@@ -39,4 +39,16 @@
     display: inline;
   }
 
-  
+  /* make the hove on menu */
+  span:hover{
+    color: orange;
+}
+/* end */
+
+/* display the dropdown menu when hove on menu */
+.dropdown-menu a:hover {background-color: orange;}
+
+.dropdown:hover .dropdown-menu {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+/* end */
