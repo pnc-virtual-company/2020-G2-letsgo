@@ -83,10 +83,7 @@ class userProfileController extends Controller
         $user->birth = $request->get('birth');
         $user->city = $request->get('city');
         $new_password = $request->get('new-password');
-        $confirm_password = $request->get('password-confirmation');
-            // $value = Auth::user()->password;
-            // $verify_password = Hash::check($user,$value);
-            
+        $confirm_password = $request->get('password-confirmation');       
                 if($new_password == $confirm_password){
                     $users = User::find(Auth::id());
                     $users->password = Hash::make($new_password);
@@ -96,8 +93,6 @@ class userProfileController extends Controller
                     return back(); 
                 }
          
-
-
         $user->sex = $request->get('sex');
         if($request->picture != null){ 
             request()->validate([
@@ -125,7 +120,7 @@ class userProfileController extends Controller
                     $user->save();
                     return back();    
                 }else{
-                    return back(); 
+                    return back();
                 }
             }else{
                 return back(); 
