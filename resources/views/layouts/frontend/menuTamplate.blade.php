@@ -162,18 +162,21 @@
                     <div class="col-4">
 
                         @if(Auth::user()->picture)
+                                {{-- get profile from user insert --}}
                             <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px" id="img_prv">
                         @else
+                                {{-- default profile --}}
                             <img src="asset/userImage/user.png" width="120px" height="120px" id="img_prv"/>
                         @endif
                         
                         <div class="row justify-content-center">
-
+                            {{-- button add profile --}}
                             <input id="file" style="display:none;" type="file" name="picture">
                             <label for="file" class="btn"><i class="fa fa-plus text-dark"></i></label>
-
-                            <a href="#"><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
-                            <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
+                                {{-- end button --}}
+                            {{-- button delete profile --}}
+                            <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark mt-2"></i></a>&nbsp;&nbsp;&nbsp;
+                                {{-- end button --}}
                             <span id="mgs_ta"></span>
                         </div>
                     </div>
@@ -254,7 +257,8 @@
     @yield('body')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-     
+
+     {{--use javascript to add profile  --}}
     <script type="text/javascript">
       $('#file').on('change',function(ev){
         console.log("here inside");
