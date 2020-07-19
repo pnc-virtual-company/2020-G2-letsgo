@@ -44,6 +44,7 @@ class userProfileController extends Controller
      */
     public function store(Request $request)
     {
+        //
         
     }
 

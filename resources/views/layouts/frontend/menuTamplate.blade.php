@@ -245,6 +245,9 @@
       </div>
     
     @yield('body')
+<<<<<<< HEAD
+    
+=======
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -300,6 +303,7 @@
       });
      
     </script>
+<<<<<<< HEAD
     
 {{-- error password if new password and confirm password don't match--}}
 
@@ -318,6 +322,9 @@
         }) 
     });
   </script>
+=======
+>>>>>>> 4d04dccb49e5e19516f796052bbb51547d9d686b
+>>>>>>> c748f73d8a92fd266414407203371d5c0e75ad4c
 </body>
 </html>
 
