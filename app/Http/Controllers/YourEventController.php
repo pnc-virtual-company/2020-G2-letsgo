@@ -36,7 +36,16 @@ class YourEventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user =  User::find(Auth::id());
+        $yourevent = new Event;
+        $yourevent-> $cat_id = $request->get('category');
+        $yourevent->title = $request->get('title');
+        $yourevent->startDate = $request->get('startDate');
+        $yourevent->startTime = $request->get('startTime');
+        $yourevent->endDate = $request->get('endDate');
+        $yourevent->endTime = $request->get('endTime');
+        $yourevent->city = $request->get('city');
+        $yourevent->description = $request->get('drescription');
     }
 
     /**
@@ -47,7 +56,7 @@ class YourEventController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

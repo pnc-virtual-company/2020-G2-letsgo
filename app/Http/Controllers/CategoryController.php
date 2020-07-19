@@ -45,7 +45,6 @@ class CategoryController extends Controller
         ]);
         $category->category = $request->get('category');
         $category->save();
-        
         return back();
     }
 
