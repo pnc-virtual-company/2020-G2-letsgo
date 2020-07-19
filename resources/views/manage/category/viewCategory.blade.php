@@ -17,7 +17,7 @@
     <div class="form-group">
       <div class=" row">
           <div class="col-md-8" style="margin:0 auto">
-            <a class="h5">Category</a>
+            <a class="h5">Categories</a>
             <button type="button" class="btn btn-warning btn-sm text-white float-right" data-toggle="modal" data-target="#myModal"><span class="material-icons float-left">add</span><b>Create</b></button>
           </div>
         </div>

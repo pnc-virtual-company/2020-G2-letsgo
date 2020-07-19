@@ -11,6 +11,7 @@ use File;
 use Crypt;
 use Input;
 use Illuminate\Support\Facades\Hash;
+use Storage;
 
 class userProfileController extends Controller
 {
@@ -85,28 +86,21 @@ class userProfileController extends Controller
         $user->city = $request->get('city');
         $new_password = $request->get('new-password');
         $confirm_password = $request->get('password-confirmation');
-            // $value = Auth::user()->password;
-            // $verify_password = Hash::check($user,$value);
-            
+
                 if($new_password == $confirm_password){
-                    $users = User::find(Auth::id());
-                    $users->password = Hash::make($new_password);
-                    $users->save();
-                    return back();    
-                }else{
-                    return back(); 
+                    $user->password = Hash::make($new_password);
+                        
                 }
          
-
-
         $user->sex = $request->get('sex');
+
         if($request->picture != null){ 
             request()->validate([
                 'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
             $imageName = time().'.'.request()->picture->getClientOriginalExtension();
             request()->picture->move(public_path('asset/userImage/'), $imageName);
-            $user ->picture = $imageName;
+            $user->picture = $imageName;
         }
         $user->save();
         return back();
@@ -141,12 +135,24 @@ class userProfileController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
 
         DB::table('users')
         ->where('id', Auth::user()->id)
         ->update([
             'picture' => 'user.png', 
+=======
+    
+        $image = User::findOrFail($id);
+        
+        if(\File::exists(public_path("asset/userImage/{$image->picture}"))){
+            \File::delete(public_path("asset/userImage/{$image->picture}"));
+        }
+        $image = User::findOrFail($id)->where('id', Auth::user()->id)->update([
+            'picture' => 'user.png',
+>>>>>>> 4d04dccb49e5e19516f796052bbb51547d9d686b
         ]);
+   
         return back();
     }
 }
