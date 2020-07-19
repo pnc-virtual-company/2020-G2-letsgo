@@ -12,6 +12,7 @@ use Crypt;
 use Input;
 use Illuminate\Support\Facades\Hash;
 use Storage;
+use Illuminate\Support\Facades\Validator;
 
 class userProfileController extends Controller
 {
@@ -82,17 +83,8 @@ class userProfileController extends Controller
         $user->lastname = $request->get('lastname');
         $user->email = $request->get('email');
         $user->birth = $request->get('birth');
-        $user->city = $request->get('city');
-        $new_password = $request->get('new-password');
-        $confirm_password = $request->get('password-confirmation');
-
-                if($new_password == $confirm_password){
-                    $user->password = Hash::make($new_password);
-                        
-                }
-         
+        $user->city = $request->get('city');  
         $user->sex = $request->get('sex');
-
         if($request->picture != null){ 
             request()->validate([
                 'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -105,16 +97,9 @@ class userProfileController extends Controller
         return back();
     }
 
-    //// Change Password of user
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'old-password' => ['required', 'string', 'min:8', 'failed'],
-    //         'new-password' => ['required', 'string', 'min:8', 'confirmed'],
-    //         'password-confirmation' => ['required', 'string', 'min:8', 'confirmed'],
-           
-    //     ]);
-    // }
+
+
+    //// Change Password of user/////////
 
     public function changePassword(Request $request){
             $old_password = $request->get('old-password');
@@ -127,17 +112,14 @@ class userProfileController extends Controller
                     $user = User::find(Auth::id());
                     $user->password = Hash::make($new_password);
                     $user->save();
-                    return back();    
-                }else{
-                    return redirect()->back() ->with('alert', 'Attribute confirmation does not match. Please try again!!');
-                    // return back()->with('error', 'These credentials do not match our records.');
-                }
-            }else{
-                return redirect()->back() ->with('alert', 'Your old password incorrect. Please try again!!');
-            }   
+                    return back();   
+                 }
+             }else{
+                return back(); 
+             }
+            
     }
 
-   
 
     /**
      * Remove the specified resource from storage.
