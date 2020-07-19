@@ -43,6 +43,7 @@ class userProfileController extends Controller
      */
     public function store(Request $request)
     {
+        //
         
     }
 
@@ -134,6 +135,13 @@ class userProfileController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
+
+        DB::table('users')
+        ->where('id', Auth::user()->id)
+        ->update([
+            'picture' => 'user.png', 
+=======
     
         $image = User::findOrFail($id);
         
@@ -142,6 +150,7 @@ class userProfileController extends Controller
         }
         $image = User::findOrFail($id)->where('id', Auth::user()->id)->update([
             'picture' => 'user.png',
+>>>>>>> 4d04dccb49e5e19516f796052bbb51547d9d686b
         ]);
    
         return back();
