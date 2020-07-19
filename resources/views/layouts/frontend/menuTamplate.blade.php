@@ -153,7 +153,7 @@
                         {{-- -------- Show user city-------------- --}}
 
                         <div class="form-group">
-                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .." value="{{Auth::user()->city}}"  name="city"/>
                             <datalist id="result">
                             </datalist>
                         </div>
@@ -209,20 +209,19 @@
                     {{-- Old password --}}
                    <label for="">Old Pasword</label>
                    <div class="form-group">      
-                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="old-password" required autocomplete="current-password">
-
-                   @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input id="password" placeholder="Password" type="password" class="form-control @error('old-password') is-invalid @enderror" name="old-password" required autocomplete="old-password">
+                                @error('old-password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                     </div>
                     {{--End Old password --}}
                    
                    {{-- New password --}}
                    <label for="">New Pasword</label>
                    <div class="form-group">      
-                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" required autocomplete="new-password" >
+                   <input id="new-password"  type="password" class="form-control @error('new-password') is-invalid @enderror " name="new-password" required autocomplete="new-password" >
 
                    @error('new-password')
                         <span class="invalid-feedback" role="alert">
@@ -304,6 +303,15 @@
       });
      
     </script>
+
+{{-------------- error message of change password  ---------}}
+<script>
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+  </script>
 </body>
 </html>
 
