@@ -153,32 +153,13 @@
                         {{-- -------- Show user city-------------- --}}
 
                         <div class="form-group">
-                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .." value="{{Auth::user()->city}}"  name="city"/>
                             <datalist id="result">
                             </datalist>
                         </div>
                         {{-- ----------end city-------------- --}}
                     </div>
                     <div class="col-4">
-<<<<<<< HEAD
-                        
-                        @if(Auth::user()->picture)
-                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" id="img_prv" width="120px" height="120px">
-                        @else
-                            <img src="asset/userImage/user.png" width="120px" height="120px" id="img_prv"/>
-                        @endif
-
-                        <div class="row justify-content-center">
-                            {{-- button add profile  --}}
-                            <label for="file" class="btn" style="margin-top:-7px"><i class="fa fa-plus text-dark"></i></label>
-                            <input id="file" style="display:none;" type="file" name="picture">
-                            {{-- end button --}}
-
-                            {{-- button delete profile --}}
-                            <a href="#"><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
-                            <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
-                            {{-- end button --}}
-=======
 
                         @if(Auth::user()->picture)
                                 {{-- get profile from user insert --}}
@@ -196,7 +177,6 @@
                             {{-- button delete profile --}}
                             <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark mt-2"></i></a>&nbsp;&nbsp;&nbsp;
                                 {{-- end button --}}
->>>>>>> 4d04dccb49e5e19516f796052bbb51547d9d686b
                             <span id="mgs_ta"></span>
                         </div>
                     </div>
@@ -226,7 +206,7 @@
             <div class="modal-header">
               <h4 class="modal-title text-center">Change Password</h4>
             </div>
-                <form action="{{route('changePasswords')}}" method="POST" autocomplete="off">
+                <form action="{{route('changePasswords')}}" method="POST">
                     @csrf
                     @method('PUT')
                 <div class="modal-body">
@@ -234,40 +214,30 @@
                     {{-- Old password --}}
                    <label for="">Old Pasword</label>
                    <div class="form-group">      
-                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="old-password" required autocomplete="current-password">
-
-                   @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input id="old-password" placeholder="Password" type="password" class="form-control" name="old-password" required >
+                        
                     </div>
                     {{--End Old password --}}
                    
                    {{-- New password --}}
                    <label for="">New Pasword</label>
                    <div class="form-group">      
-                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" required autocomplete="new-password" >
-
-                   @error('new-password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                   <input id="new-password"  type="password" class="form-control " name="new-password" required  >
                     </div>
                     {{--End New password --}}
                    
                    {{-- Confirm password --}}
                    <label for="">Confirm Pasword</label>
                    <div class="form-group">
-                    <input id="password-confirm"  type="password" class="form-control @error('password') is-invalid @enderror "  name="password-confirmation" required autocomplete="new-password">
+                    <input id="password-confirm"  type="password" class="form-control "  name="password-confirmation" required >
+                    <span id="msg-error" class="text-danger"></span>
                     </div>
                     {{--End Confirm password --}}
 
                </div>
                <div class="modal-footer">
                  <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-                 <button type="submit" class="btn text-warning float-right">UPDATE</button>
+                 <button type="submit" id="change-password" class="btn text-warning float-right">UPDATE</button>
                </div>
             </form>
           </div>
@@ -333,7 +303,28 @@
       });
      
     </script>
+<<<<<<< HEAD
+    
+{{-- error password if new password and confirm password don't match--}}
+
+  <script type="text/javaScript">
+    $(document).ready(function () {
+        $(document).on('keyup', function () {
+            var newpwd = $('#new-password').val();
+            var confirm = $('#password-confirm').val();
+            if(confirm == newpwd){
+                $('#msg-error').html('');
+            }else if(confirm == ''){
+                $('#msg-error').html('');
+            }else{
+                $('#msg-error').html('Attribute confirmation does not match.');
+            }
+        }) 
+    });
+  </script>
+=======
 >>>>>>> 4d04dccb49e5e19516f796052bbb51547d9d686b
+>>>>>>> c748f73d8a92fd266414407203371d5c0e75ad4c
 </body>
 </html>
 
