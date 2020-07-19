@@ -12,7 +12,6 @@ use Crypt;
 use Input;
 use Illuminate\Support\Facades\Hash;
 
-use Hash;
 
 
 class userProfileController extends Controller
