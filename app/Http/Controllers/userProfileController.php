@@ -125,7 +125,6 @@ class userProfileController extends Controller
              }else{
                   return redirect()->back() ->with('alert', 'Updated Not Successfully!!. Your old password incorrect');
              }
-
     }
             
     
