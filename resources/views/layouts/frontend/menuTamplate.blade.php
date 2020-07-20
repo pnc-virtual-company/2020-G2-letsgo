@@ -260,7 +260,6 @@
       </div>
     
     @yield('body')
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -281,19 +280,13 @@
      
           $('#mgs_ta').empty();
      
-        //---image preview
-     
         var reader=new FileReader();
      
         reader.onload=function(ev){
           $('#img_prv').attr('src',ev.target.result).css('width','120px').css('height','120px');
         }
         reader.readAsDataURL(this.files[0]);
-     
-        /// preview end
-
-            //upload
-     
+    
             var postData=new FormData();
             postData.append('file',this.files[0]);
      
@@ -318,7 +311,6 @@
     </script>
     
 {{-- error password if new password and confirm password don't match--}}
-
   <script type="text/javaScript">
     $(document).ready(function () {
         $(document).on('keyup', function () {
