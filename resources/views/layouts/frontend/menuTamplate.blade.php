@@ -245,7 +245,7 @@
                            <small>{{ $message }}</small>
                         </span>
                     @enderror
-                    <span id="msg-error" class="text-danger"></span>
+                    <small id="msg-error" class="text-danger"></small>
                     </div>
                     {{--End Confirm password --}}
 
