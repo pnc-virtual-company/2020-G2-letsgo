@@ -49888,8 +49888,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\2020-G2-letsgo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\2020-G2-letsgo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\virak.ran\Desktop\2020-G2-letsgo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\virak.ran\Desktop\2020-G2-letsgo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

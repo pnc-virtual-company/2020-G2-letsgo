@@ -97,7 +97,21 @@
             </div>
         </div>
     </nav>
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+                @if(session()->has('success'))
+                <div class="alert alert-success" id="success-alert">
+                    {{ session()->get('success') }}
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
     {{-- -------------------------------------------------------Display user profile------------------------------------------------ --}}
     <div class="modal fade" id="profile" role="dialog">
         <div class="modal-dialog">
@@ -225,14 +239,14 @@
                    {{-- New password --}}
                    <label for="">New Pasword</label>
                    <div class="form-group">      
-                   <input id="new-password"  type="password" class="form-control " name="new-password" required  >
+                   <input id="new-password"  type="password" class="form-control " name="new-password" placeholder="new password" required  >
                     </div>
                     {{--End New password --}}
                    
                    {{-- Confirm password --}}
                    <label for="">Confirm Pasword</label>
                    <div class="form-group">
-                    <input id="password-confirm"  type="password" class="form-control "  name="password-confirmation" required >
+                    <input id="password-confirm"  type="password" class="form-control " placeholder="confirm password"  name="password-confirmation" required >
                     <span id="msg-error" class="text-danger"></span>
                     </div>
                     {{--End Confirm password --}}
@@ -248,7 +262,6 @@
       </div>
     
     @yield('body')
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -269,18 +282,13 @@
      
           $('#mgs_ta').empty();
      
-        //---image preview
-     
         var reader=new FileReader();
      
         reader.onload=function(ev){
           $('#img_prv').attr('src',ev.target.result).css('width','120px').css('height','120px');
         }
         reader.readAsDataURL(this.files[0]);
-     
-        /// preview end
-            //upload
-     
+    
             var postData=new FormData();
             postData.append('file',this.files[0]);
      
@@ -303,8 +311,6 @@
       });
      
     </script>
-    
-{{-- error password if new password and confirm password don't match--}}
 
   <script type="text/javaScript">
     $(document).ready(function () {
@@ -320,8 +326,12 @@
             }
         }) 
     });
-  </script>
 
+    $("#success-alert").fadeTo(6000, 1000).slideUp(1000, function(){
+    $("#success-alert").slideUp(1000);
+
+});
+  </script>
 </body>
 </html>
 
