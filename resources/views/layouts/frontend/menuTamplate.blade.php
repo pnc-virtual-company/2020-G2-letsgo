@@ -38,7 +38,7 @@
 
                         {{-- you event --}}
                         <li class="nav-item {{(request()->segment(1) == 'yourEvent') ? 'active' : '',ucfirst(request()->segment(1))}}">
-                        <a class="nav-link" href="{{route('event.yourEvent')}}">   <span>Your events</span></a>
+                        <a class="nav-link" href="{{route('yourEvent.index')}}">   <span>Your events</span></a>
                         </li>
 
                         {{-- Manage --}}

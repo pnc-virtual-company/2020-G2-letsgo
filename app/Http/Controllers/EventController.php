@@ -25,10 +25,7 @@ class EventController extends Controller
    
 
     // your events
-    public function yourEvents(){
-        $events = Event::all();
-        return view('yourEvent.yourEvent', compact('events'));
-    }
+   
 
     /**
      * Show the form for creating a new resource.
