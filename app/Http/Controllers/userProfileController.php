@@ -12,6 +12,9 @@ use Crypt;
 use Input;
 use Illuminate\Support\Facades\Hash;
 use Storage;
+use Illuminate\Support\Facades\Validator;
+
+
 
 class userProfileController extends Controller
 {
@@ -83,17 +86,8 @@ class userProfileController extends Controller
         $user->lastname = $request->get('lastname');
         $user->email = $request->get('email');
         $user->birth = $request->get('birth');
-        $user->city = $request->get('city');
-        $new_password = $request->get('new-password');
-        $confirm_password = $request->get('password-confirmation');
-
-                if($new_password == $confirm_password){
-                    $user->password = Hash::make($new_password);
-                        
-                }
-         
+        $user->city = $request->get('city');  
         $user->sex = $request->get('sex');
-
         if($request->picture != null){ 
             request()->validate([
                 'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -102,12 +96,21 @@ class userProfileController extends Controller
             request()->picture->move(public_path('asset/userImage/'), $imageName);
             $user->picture = $imageName;
         }
+
         $user->save();
         return back();
     }
 
-    //// Change Password of user
+
+
+    //// Change Password of user/////////
+
     public function changePassword(Request $request){
+        request()->validate([
+            'old-password' => 'required|min:8',
+            'new-password' => 'required|min:8',
+            'password-confirmation' => 'required|min:8',
+        ]);
             $old_password = $request->get('old-password');
             $value = Auth::user()->password;
             $verify_password = Hash::check($old_password,$value);
@@ -118,14 +121,17 @@ class userProfileController extends Controller
                     $user = User::find(Auth::id());
                     $user->password = Hash::make($new_password);
                     $user->save();
-                    return back();    
-                }else{
-                    return back(); 
-                }
-            }else{
-                return back(); 
-            }   
+                    return redirect()->back() ->with('success', 'Updated Successfully!'); 
+                 }else{
+                    return redirect()->back() ->with('alert', 'Updated Not Successfully!'); 
+                 }
+             }else{
+                  return redirect()->back() ->with('alert', 'Updated Not Successfully!!. Your old password incorrect');
+             }
     }
+            
+    
+
 
     /**
      * Remove the specified resource from storage.
@@ -135,6 +141,7 @@ class userProfileController extends Controller
      */
     public function destroy($id)
     {
+    
         $image = User::findOrFail($id);
         
         if(\File::exists(public_path("asset/userImage/{$image->picture}"))){
@@ -146,4 +153,5 @@ class userProfileController extends Controller
    
         return back();
     }
+
 }

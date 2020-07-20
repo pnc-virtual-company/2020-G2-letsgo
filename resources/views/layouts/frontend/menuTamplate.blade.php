@@ -87,14 +87,31 @@
                                     @csrf
                                 </form>
                                 {{-- end logout --}}
+
                             </div>
                             {{-- end dropdown --}}
+
                         </li>
                         {{-- end dropdown user information --}}
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+                @if(session()->has('success'))
+                <div class="alert alert-success" id="success-alert">
+                    {{ session()->get('success') }}
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
     {{-- -------------------------------------------------------Display user profile------------------------------------------------ --}}
     <div class="modal fade" id="profile" role="dialog">
         <div class="modal-dialog">
@@ -153,7 +170,7 @@
                         {{-- -------- Show user city-------------- --}}
 
                         <div class="form-group">
-                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .." value="{{Auth::user()->city}}"  name="city"/>
                             <datalist id="result">
                             </datalist>
                         </div>
@@ -206,7 +223,7 @@
             <div class="modal-header">
               <h4 class="modal-title text-center">Change Password</h4>
             </div>
-                <form action="{{route('changePasswords')}}" method="POST" autocomplete="off">
+                <form action="{{route('changePasswords')}}" method="POST">
                     @csrf
                     @method('PUT')
                 <div class="modal-body">
@@ -214,40 +231,30 @@
                     {{-- Old password --}}
                    <label for="">Old Pasword</label>
                    <div class="form-group">      
-                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="old-password" required autocomplete="current-password">
-
-                   @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input id="old-password" placeholder="Password" type="password" class="form-control" name="old-password" required >
+                        
                     </div>
                     {{--End Old password --}}
                    
                    {{-- New password --}}
                    <label for="">New Pasword</label>
                    <div class="form-group">      
-                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" required autocomplete="new-password" >
-
-                   @error('new-password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                   <input id="new-password"  type="password" class="form-control " name="new-password" placeholder="new password" required  >
                     </div>
                     {{--End New password --}}
                    
                    {{-- Confirm password --}}
                    <label for="">Confirm Pasword</label>
                    <div class="form-group">
-                    <input id="password-confirm"  type="password" class="form-control @error('password') is-invalid @enderror "  name="password-confirmation" required autocomplete="new-password">
+                    <input id="password-confirm"  type="password" class="form-control " placeholder="confirm password"  name="password-confirmation" required >
+                    <span id="msg-error" class="text-danger"></span>
                     </div>
                     {{--End Confirm password --}}
 
                </div>
                <div class="modal-footer">
                  <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-                 <button type="submit" class="btn text-warning float-right">UPDATE</button>
+                 <button type="submit" id="change-password" class="btn text-warning float-right">UPDATE</button>
                </div>
             </form>
           </div>
@@ -274,19 +281,14 @@
         }else{
      
           $('#mgs_ta').empty();
-    
-        //---image preview
+     
         var reader=new FileReader();
     
         reader.onload=function(ev){
           $('#img_prv').attr('src',ev.target.result).css('width','120px').css('height','120px');
         }
         reader.readAsDataURL(this.files[0]);
-     
-        /// preview end
-
-            //upload
-     
+    
             var postData=new FormData();
             postData.append('file',this.files[0]);
     
@@ -309,6 +311,27 @@
       });
      
     </script>
+
+  <script type="text/javaScript">
+    $(document).ready(function () {
+        $(document).on('keyup', function () {
+            var newpwd = $('#new-password').val();
+            var confirm = $('#password-confirm').val();
+            if(confirm == newpwd){
+                $('#msg-error').html('');
+            }else if(confirm == ''){
+                $('#msg-error').html('');
+            }else{
+                $('#msg-error').html('Attribute confirmation does not match.');
+            }
+        }) 
+    });
+
+    $("#success-alert").fadeTo(6000, 1000).slideUp(1000, function(){
+    $("#success-alert").slideUp(1000);
+
+});
+  </script>
 </body>
 </html>
 

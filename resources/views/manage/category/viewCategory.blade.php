@@ -41,10 +41,10 @@
   $(document).ready(function(){
     $(document).on('keyup', '#search', function(){
         var query = $(this).val();
-        fetch_category_data(query);
+        fetch_categories_data(query);
     });
-   fetch_category_data();
-   function fetch_category_data(query)
+   fetch_categories_data();
+   function fetch_categories_data(query)
    {
     $.ajax({
      url:"{{ route('category.search')}}",
