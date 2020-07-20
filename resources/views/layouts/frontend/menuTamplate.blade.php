@@ -237,14 +237,14 @@
                    {{-- New password --}}
                    <label for="">New Pasword</label>
                    <div class="form-group">      
-                   <input id="new-password"  type="password" class="form-control " name="new-password" required  >
+                   <input id="new-password"  type="password" class="form-control " name="new-password" placeholder="new password" required  >
                     </div>
                     {{--End New password --}}
                    
                    {{-- Confirm password --}}
                    <label for="">Confirm Pasword</label>
                    <div class="form-group">
-                    <input id="password-confirm"  type="password" class="form-control "  name="password-confirmation" required >
+                    <input id="password-confirm"  type="password" class="form-control " placeholder="confirm password"  name="password-confirmation" required >
                     <span id="msg-error" class="text-danger"></span>
                     </div>
                     {{--End Confirm password --}}
@@ -324,11 +324,12 @@
                 $('#msg-error').html('Attribute confirmation does not match.');
             }
         }) 
-
-        $("#success-alert").fadeTo(6000, 1000).slideUp(1000, function(){
-            $("#success-alert").slideUp(1000);
-        });
     });
+
+    $("#success-alert").fadeTo(6000, 1000).slideUp(1000, function(){
+    $("#success-alert").slideUp(1000);
+
+});
   </script>
 </body>
 </html>
