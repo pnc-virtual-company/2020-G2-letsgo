@@ -18,7 +18,7 @@ class CategoryController extends Controller
         $this->authorize('view', Category::class);
         return view('manage.category.viewCategory');
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *

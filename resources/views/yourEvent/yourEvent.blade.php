@@ -14,13 +14,17 @@
           
             <!-- Modal content-->
             <div class="modal-content">
-                <form action="{{route('yourevents.store')}}" autocomplete="off" method="POST" enctype="multipart/form-data" >
-                    @csrf                   
+                <form action="{{route('yourEvent.store')}}"  method="POST" enctype="multipart/form-data" >
+                    @csrf       
                     <div class="row">
                         <div class="col-8">
                             <h5>Create an event</h5>
                             <div class="form-group">
-                                <select class="form-control" id="sel1">
+                                <select name="department" id="department" class="form-control">
+                                    <option value=""> Event Category</option>
+                                    @foreach ($categorys as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                    @endforeach 
                                 </select>
                               </div>
                             {{-- -------- Show user Last Name-------------- --}}
@@ -33,7 +37,7 @@
                             {{-- -------- Show start date-------------- --}}
                             <div class="form-group">
                                 <input type="date" name="startDate" placeholder="Staet date" value=""  class="form-control">
-                                <input type="text" name="startTime" placeholder="At" value=""  class="form-control">
+                                <input type="text" name="startTime" placeholder="At"  class="form-control">
                             </div>
                             {{-- ----------end-------------- --}}
                             {{-- -------- Show end date-------------- --}}
@@ -80,8 +84,8 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-default text-warning float-right">UPDATE</button>
-                    <button type="button" class="btn btn-default float-right" data-dismiss="modal">SUBMIT</button>
+                    <button type="submit" class="btn btn-default float-right text-warning" data-dismiss="modal">SUBMIT</button>
+                    <button type="button" class="btn btn-default  float-right">DISCARD</button>
                 </form>
           </div>
         </div>
@@ -89,5 +93,60 @@
       </div>
       </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+     {{--use javascript to add profile  --}}
+    <script type="text/javascript">
+      $('#file').on('change',function(ev){
+        console.log("here inside");
+        
+        var filedata=this.files[0];
+        var imgtype=filedata.type;
+     
+        var match=['image/png','image/jpg','image/jpeg','image/gif'];
+     
+        if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3])||(imgtype==match[4]))){
+            $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only png jpg jpeg gif allowed</p>');
+     
+        }else{
+     
+          $('#mgs_ta').empty();
+     
+        //---image preview
+     
+        var reader=new FileReader();
+     
+        reader.onload=function(ev){
+          $('#img_prv').attr('src',ev.target.result).css('width','120px').css('height','120px');
+        }
+        reader.readAsDataURL(this.files[0]);
+     
+        /// preview end
+
+            //upload
+     
+            var postData=new FormData();
+            postData.append('file',this.files[0]);
+     
+            var url="{{url('userImage.store')}}";
+     
+            $.ajax({
+            headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
+            async:true,
+            type:"post",
+            contentType:false,
+            url:url,
+            data:postData,
+            processData:false,
+            success:function(){
+              console.log("success");
+            }
+     
+            });
+        }
+      });
+     
+    </script>
 
 @endsection

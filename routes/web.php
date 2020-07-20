@@ -23,7 +23,7 @@ Auth::routes();
 
 Route::resource('/exploreEvents', 'ExploreEventsController');
 // yourEvent
-Route::get('/yourEvent','YourEventController@index')->name('yourEvent.index');
+Route::resource('/yourEvent','YourEventController');
 
 Route::resource('/userProfile', 'userProfileController');
 Route::put('/changePasswords', 'userProfileController@changePassword')->name('changePasswords');

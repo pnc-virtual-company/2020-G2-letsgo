@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Storage;
 use App\Event;
+use App\Category;
 
 class YourEventController extends Controller
 {
@@ -15,7 +16,8 @@ class YourEventController extends Controller
      */
     public function index()
     {
-        return view('yourEvent.yourEvent');
+        $categorys = Category::all();
+        return view('yourEvent.yourEvent',compact('categorys'));
     }
 
     /**
@@ -46,6 +48,18 @@ class YourEventController extends Controller
         $yourevent->endTime = $request->get('endTime');
         $yourevent->city = $request->get('city');
         $yourevent->description = $request->get('drescription');
+
+        if($request->picture != null){ 
+            request()->validate([
+                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.request()->picture->getClientOriginalExtension();
+            request()->picture->move(public_path('asset/userImage/'), $imageName);
+            $user->picture = $imageName;
+        }
+        $yourevent->save();
+        return back();
+        // dd($yourevent);
     }
 
     /**

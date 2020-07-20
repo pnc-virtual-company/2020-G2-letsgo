@@ -14,4 +14,5 @@ class Event extends Model
     public function joins(){
         return $this->hasMany(Join::class);
     }
+
 }
