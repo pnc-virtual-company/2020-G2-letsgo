@@ -118,14 +118,13 @@ class userProfileController extends Controller
                     $user = User::find(Auth::id());
                     $user->password = Hash::make($new_password);
                     $user->save();
-                    return redirect()->back() ->with('alert', 'Updated Successfully!'); 
+                    return redirect()->back() ->with('success', 'Updated Successfully!'); 
                  }else{
                     return redirect()->back() ->with('alert', 'Updated Not Successfully!'); 
                  }
              }else{
                   return redirect()->back() ->with('alert', 'Updated Not Successfully!!. Your old password incorrect');
              }
-
     }
             
     
