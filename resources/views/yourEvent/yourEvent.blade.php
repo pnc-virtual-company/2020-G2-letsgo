@@ -21,7 +21,7 @@
                    </div>
                    <div class="col-3">
                        <a href="#">cancel</a>
-                       <a href="#">edit</a>
+                       <a href="#">delete</a>
                    </div>
                </div>
                @endforeach
