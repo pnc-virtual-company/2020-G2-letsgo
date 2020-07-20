@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Storage;
 use App\Event;
+use App\User;
 
 class YourEventController extends Controller
 {
@@ -15,7 +16,8 @@ class YourEventController extends Controller
      */
     public function index()
     {
-      //
+        $events = Event::all();
+        return view('yourEvent.yourEvent', compact('events'));
     }
 
     /**
