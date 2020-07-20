@@ -103,32 +103,23 @@ class userProfileController extends Controller
     //// Change Password of user/////////
 
     public function changePassword(Request $request){
-        request()->validate([
-            'old-password' => 'required|min:8',
-            'new-password' => 'required|min:8',
-            'password-confirmation' => 'required|min:8',
-        ]);
             $old_password = $request->get('old-password');
             $value = Auth::user()->password;
             $verify_password = Hash::check($old_password,$value);
             if($verify_password){
-                $new_password = $request->new-password;
-                $confirm_password = $request->password-confirmation;
+                $new_password = $request->get('new-password');
+                $confirm_password = $request->get('password-confirmation');
                 if($new_password == $confirm_password){
                     $user = User::find(Auth::id());
                     $user->password = Hash::make($new_password);
                     $user->save();
-                    return redirect()->back() ->with('alert', 'Updated Successfully!'); 
-                 }else{
-                    return redirect()->back() ->with('alert', 'Updated Not Successfully!'); 
+                    return back();   
                  }
              }else{
-                  return redirect()->back() ->with('alert', 'Updated Not Successfully!!. Your old password incorrect');
+                return back(); 
              }
-
-    }
             
-    
+    }
 
 
     /**
