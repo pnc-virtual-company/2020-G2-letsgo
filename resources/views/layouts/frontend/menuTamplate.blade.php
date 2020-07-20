@@ -160,25 +160,6 @@
                         {{-- ----------end city-------------- --}}
                     </div>
                     <div class="col-4">
-<<<<<<< HEAD
-                        
-                        @if(Auth::user()->picture)
-                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" id="img_prv" width="120px" height="120px">
-                        @else
-                            <img src="asset/userImage/user.png" width="120px" height="120px" id="img_prv"/>
-                        @endif
-
-                        <div class="row justify-content-center">
-                            {{-- button add profile  --}}
-                            <label for="file" class="btn" style="margin-top:-7px"><i class="fa fa-plus text-dark"></i></label>
-                            <input id="file" style="display:none;" type="file" name="picture">
-                            {{-- end button --}}
-
-                            {{-- button delete profile --}}
-                            <a href="#"><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
-                            <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
-                            {{-- end button --}}
-=======
 
                         @if(Auth::user()->picture)
                                 {{-- get profile from user insert --}}
@@ -196,7 +177,6 @@
                             {{-- button delete profile --}}
                             <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark mt-2"></i></a>&nbsp;&nbsp;&nbsp;
                                 {{-- end button --}}
->>>>>>> 4d04dccb49e5e19516f796052bbb51547d9d686b
                             <span id="mgs_ta"></span>
                         </div>
                     </div>
@@ -275,9 +255,6 @@
       </div>
     
     @yield('body')
-<<<<<<< HEAD
-    
-=======
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -291,17 +268,16 @@
      
         var match=['image/png','image/jpg','image/jpeg','image/gif'];
      
-        if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3])||(imgtype==match[4]))){
+        if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3]))){
             $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only png jpg jpeg gif allowed</p>');
-     
+    
         }else{
      
           $('#mgs_ta').empty();
-     
+    
         //---image preview
-     
         var reader=new FileReader();
-     
+    
         reader.onload=function(ev){
           $('#img_prv').attr('src',ev.target.result).css('width','120px').css('height','120px');
         }
@@ -313,7 +289,7 @@
      
             var postData=new FormData();
             postData.append('file',this.files[0]);
-     
+    
             var url="{{url('userImage.update')}}";
      
             $.ajax({
@@ -333,7 +309,6 @@
       });
      
     </script>
->>>>>>> 4d04dccb49e5e19516f796052bbb51547d9d686b
 </body>
 </html>
 
