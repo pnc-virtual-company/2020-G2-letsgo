@@ -214,7 +214,12 @@
                     {{-- Old password --}}
                    <label for="">Old Pasword</label>
                    <div class="form-group">      
-                    <input id="old-password" placeholder="Password" type="password" class="form-control" name="old-password" required >
+                    <input id="old-password" placeholder="Old Password" type="password" class="form-control" name="old-password" required >
+                    @error('old-password')
+                            <span class="text-danger">
+                                <small>{{ $message }}</small>
+                            </span>
+                    @enderror
                         
                     </div>
                     {{--End Old password --}}
@@ -222,15 +227,25 @@
                    {{-- New password --}}
                    <label for="">New Pasword</label>
                    <div class="form-group">      
-                   <input id="new-password"  type="password" class="form-control " name="new-password" required  >
+                   <input id="new-password"  type="password" placeholder="New Password" class="form-control " name="new-password" required >
+                   @error('new-password')
+                        <span class="text-danger" >
+                            <small>{{ $message }}</small>
+                        </span>
+                    @enderror
                     </div>
                     {{--End New password --}}
                    
                    {{-- Confirm password --}}
                    <label for="">Confirm Pasword</label>
                    <div class="form-group">
-                    <input id="password-confirm"  type="password" class="form-control "  name="password-confirmation" required >
-                    <span id="msg-error" class="text-danger"></span>
+                    <input id="password-confirm"  type="password" class="form-control " placeholder="Confirm Password" name="password-confirmation" required >
+                    @error('password-confirmation')
+                        <span class="text-danger" >
+                           <small>{{ $message }}</small>
+                        </span>
+                    @enderror
+                    <small id="msg-error" class="text-danger"></small>
                     </div>
                     {{--End Confirm password --}}
 
@@ -294,8 +309,8 @@
       });
      
     </script>
-
-
+    
+{{-- error password if new password and confirm password don't match--}}
   <script type="text/javaScript">
     $(document).ready(function () {
         $(document).on('keyup', function () {
@@ -310,6 +325,15 @@
             }
         }) 
     });
+  </script>
+
+  {{-- message succesfully and not successfully --}}
+  <script>
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
   </script>
 </body>
 </html>
