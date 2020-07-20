@@ -113,7 +113,7 @@ class userProfileController extends Controller
                     $user = User::find(Auth::id());
                     $user->password = Hash::make($new_password);
                     $user->save();
-                    return back();   
+                    return back();
                  }
              }else{
                 return back(); 

@@ -27,15 +27,6 @@
                                 </span>
                             @enderror
                         </div>
-                        
-                        <div class="form-group">
-                                <input id="email" type="email" placeholder="Mail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                        </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="">Gender</label>
@@ -44,16 +35,23 @@
                                 <input type="radio" name="sex" value="Female"> Female
                             </div>
                             <div class="form-group col-md-6">
+                                <label for="data of birth">Date of birth (Optional)</label>
                                 <br>
-                                <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
-                                <datalist id="result">
-                                </datalist>
+                                <input class="form-control" type="date" min="2030" max="1950" name="birth">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="data of birth">Date of birth (Optional)</label>
-                            <br>
-                            <input class="form-control" type="date" min="2030" max="1950" name="birth">
+                                <input id="email" type="email" placeholder="Mail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div>
+                        <div class="form-group">
+                                <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                                <datalist id="result">
+                                </datalist>
                         </div>
                         <div class="form-group">
                            

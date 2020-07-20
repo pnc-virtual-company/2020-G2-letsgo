@@ -1,7 +1,6 @@
 
 $(document).ready(function () {
     read();
-
     function read() {
         if (sessionStorage.getItem('country') === null) {
             $.ajax({
