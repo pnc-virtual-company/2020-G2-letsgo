@@ -40,7 +40,7 @@ function getResult(data) {
                     result += `<option value="${key}">${key}</option>`; 
                     if (search == key) {
                             val.forEach((element,i) => {
-                                if(i < 120){
+                                if(i < 80){
                                     result += `<option value="${key},${element}">${key},${element}</option>`;
                                 }
                                 i++;
