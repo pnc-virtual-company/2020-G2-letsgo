@@ -103,20 +103,21 @@ class userProfileController extends Controller
     //// Change Password of user/////////
 
     public function changePassword(Request $request){
-            $old_password = $request->get('old-password');
+            $old_password = $request->old-password;
             $value = Auth::user()->password;
             $verify_password = Hash::check($old_password,$value);
             if($verify_password){
-                $new_password = $request->get('new-password');
-                $confirm_password = $request->get('password-confirmation');
+                $new_password = $request->new-password;
+                $confirm_password = $request->password-confirmation;
                 if($new_password == $confirm_password){
                     $user = User::find(Auth::id());
                     $user->password = Hash::make($new_password);
                     $user->save();
-                    return back();
+                    return Response->$user;
+                    // return redirect()->back()->with('success', 'Change password success.');
                  }
              }else{
-                return back(); 
+                return redirect()->back()->with('fail', 'Old password is not correct!!!');
              }
             
     }

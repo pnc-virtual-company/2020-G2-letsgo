@@ -95,6 +95,21 @@
             </div>
         </div>
     </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+                @if(session()->has('success'))
+                <div class="alert alert-success" id="success-alert">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    {{ session()->get('success') }}
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
     {{-- -------------------------------------------------------Display user profile------------------------------------------------ --}}
     <div class="modal fade" id="profile" role="dialog">
         <div class="modal-dialog">
@@ -206,7 +221,7 @@
             <div class="modal-header">
               <h4 class="modal-title text-center">Change Password</h4>
             </div>
-                <form action="{{route('changePasswords')}}" method="POST">
+                <form id="changePasswords" action="{{route('changePasswords')}}" method="POST">
                     @csrf
                     @method('PUT')
                 <div class="modal-body">
@@ -237,7 +252,7 @@
                </div>
                <div class="modal-footer">
                  <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-                 <button type="submit" id="change-password" class="btn text-warning float-right">UPDATE</button>
+                 <button type="" id="change-password" class="btn text-warning float-right">UPDATE</button>
                </div>
             </form>
           </div>
@@ -309,6 +324,16 @@
                 $('#msg-error').html('Attribute confirmation does not match.');
             }
         }) 
+
+        $("#success-alert").fadeTo(6000, 1000).slideUp(1000, function(){
+            $("#success-alert").slideUp(1000);
+        });
+    });
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
   </script>
 </body>
