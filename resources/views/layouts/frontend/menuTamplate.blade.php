@@ -38,7 +38,7 @@
 
                         {{-- you event --}}
                         <li class="nav-item {{(request()->segment(1) == 'yourEvent') ? 'active' : '',ucfirst(request()->segment(1))}}">
-                        <a class="nav-link" href="{{route('yourEvent.index')}}">   <span>Your events</span></a>
+                        <a class="nav-link" href="{{route('event.yourEvent')}}">   <span>Your events</span></a>
                         </li>
 
                         {{-- Manage --}}
@@ -87,8 +87,10 @@
                                     @csrf
                                 </form>
                                 {{-- end logout --}}
+
                             </div>
                             {{-- end dropdown --}}
+
                         </li>
                         {{-- end dropdown user information --}}
                 </ul>
@@ -309,7 +311,6 @@
       });
      
     </script>
-
 
   <script type="text/javaScript">
     $(document).ready(function () {

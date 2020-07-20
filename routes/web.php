@@ -23,15 +23,15 @@ Auth::routes();
 
 Route::resource('/exploreEvents', 'ExploreEventsController');
 // yourEvent
-Route::get('/yourEvent','YourEventController@index')->name('yourEvent.index');
+// Route::resource('/yourEvent','YourEventController');
 
 Route::resource('/userProfile', 'userProfileController');
 Route::put('/changePasswords', 'userProfileController@changePassword')->name('changePasswords');
-
+Route::resource('event','EventController');
+Route::get('event','EventController@yourEvents')->name('event.yourEvent');
 Route::group(['prefix' => 'manage'],function(){
     //event
-    Route::get('event/index','EventController@index')->name('event.index');
-    
+    Route::resource('event','EventController');
     //category
     Route::get('/category/index','CategoryController@index')->name('category.index');
     Route::delete('/category/destroy/{id}','CategoryController@destroy');

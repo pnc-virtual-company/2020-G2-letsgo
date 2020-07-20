@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Hash;
 use Storage;
 use Illuminate\Support\Facades\Validator;
 
+
+
 class userProfileController extends Controller
 {
     /**
@@ -94,6 +96,7 @@ class userProfileController extends Controller
             request()->picture->move(public_path('asset/userImage/'), $imageName);
             $user->picture = $imageName;
         }
+
         $user->save();
         return back();
     }
@@ -150,4 +153,5 @@ class userProfileController extends Controller
    
         return back();
     }
+
 }

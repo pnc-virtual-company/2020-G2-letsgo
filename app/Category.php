@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
 use App\Event;
+namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    
+   
     public function events(){
         return $this->hasMany(Event::class);
     }

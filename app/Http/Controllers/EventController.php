@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\Category;
 
 class EventController extends Controller
 {
@@ -15,6 +16,7 @@ class EventController extends Controller
     public function index()
     {
         $this->authorize('view', Event::class);
+        
         return view('manage.viewEvents');
         
     }
@@ -24,8 +26,10 @@ class EventController extends Controller
 
     // your events
     public function yourEvents(){
-        return view('yourEvents.yourEvents');
+        $events = Event::all();
+        return view('yourEvent.yourEvent', compact('events'));
     }
+
     /**
      * Show the form for creating a new resource.
      *

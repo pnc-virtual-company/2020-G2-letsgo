@@ -15,7 +15,7 @@ class YourEventController extends Controller
      */
     public function index()
     {
-        return view('yourEvent.yourEvent');
+      //
     }
 
     /**
