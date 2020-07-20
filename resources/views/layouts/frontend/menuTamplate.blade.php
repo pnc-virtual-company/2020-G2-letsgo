@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
   <script src="{{ asset('asset/js/awaresome.js') }}"></script>
   <script src="{{ asset('asset/js/readCityList.js') }}"></script>
+ 
 </head>
 <body>
        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
@@ -32,18 +33,18 @@
 
                         {{-- event explore --}}
                         <li class="nav-item {{(request()->segment(1) == 'exploreEvents') ? 'active' : '',ucfirst(request()->segment(1))}} ">
-                            <a class="nav-link" href="{{route('exploreEvents.index')}}">Explore events</a>
+                            <a class="nav-link" href="{{route('exploreEvents.index')}}"> <span>Explore events</span></a>
                         </li>
 
                         {{-- you event --}}
                         <li class="nav-item {{(request()->segment(1) == 'yourEvent') ? 'active' : '',ucfirst(request()->segment(1))}}">
-                        <a class="nav-link" href="{{route('yourEvent.index')}}">Your events</a>
+                        <a class="nav-link" href="{{route('event.yourEvent')}}">   <span>Your events</span></a>
                         </li>
 
                         {{-- Manage --}}
                         @can('view', 'App\Event')
                             <li class="nav-item dropdown">  
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle {{request()->is('manage/*') ? 'active' : ''}}" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><span class="caret">Manage</span></a>
+                                <a id="navbarDropdown" class=" dropdtn  nav-link dropdown-toggle {{request()->is('manage/*') ? 'active' : ''}}" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><span class="caret">Manage</span></a>
                                 {{-- dropdown manage--}}
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
@@ -52,7 +53,7 @@
                                     {{-- end event --}}
 
                                     {{-- category --}}
-                                    <a class="dropdown-item {{(request()->segment(2) == 'category') ? 'active' : '',ucfirst(request()->segment(1))}}" href="{{route('category.index')}}">Categories</a>
+                                    <a class="dropdown-item {{(request()->segment(2) == 'category') ?  : '',ucfirst(request()->segment(1))}}" href="{{route('category.index')}}">Categories</a>
                                     {{-- end category --}}
 
                                 </div>
@@ -107,7 +108,7 @@
             </div>
             <div class="modal-body">
                 {{-- ----------form to display user Info------------------- --}}
-            <form action="{{route('userProfile.update',Auth::user()->id)}}" autocomplete="off" id="saveimage" method="POST" enctype="multipart/form-data">
+            <form action="{{route('userProfile.update',Auth::user()->id)}}" autocomplete="off" method="POST" enctype="multipart/form-data" >
                 @csrf
                 @method("PUT")
                
@@ -122,28 +123,10 @@
                         <div class="form-group">
                             <input type="text" name="lastname" value="{{Auth::user()->lastname}}"  class="form-control">
                         </div>
-                        {{-- -------- Show user Email-------------- --}}
 
-                        <div class="form-group">
-                            <input type="text" name="email" value="{{Auth::user()->email}}"  class="form-control">
-                        </div>
-                        {{-- -------- Show user Birth-------------- --}}
-
-                        <div class="form-group">
-                            <input type="date" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
-                        </div>
-                        {{-- -------- Show user Gender-------------- --}}
-
-                        {{-- -------- Show user city-------------- --}}
-
-                        <div class="form-group">
-                            <select class="form-control" name="city" id="select">
-                                <option value="{{Auth::user()->city}}" selected>{{Auth::user()->city}}</option>
-                            </select>
-                        </div>
-                        {{-- -------- Show user Gender-------------- --}}
+                         {{-- -------- Show user Gender-------------- --}}
                         
-                        <div class="form-group">
+                         <div class="form-group">
                             <label for="sex">Sex</label>
                             <br>
                             @if (Auth::user()->sex == 'Male')
@@ -155,22 +138,49 @@
                             @endif
                         </div>
                         {{-- ----------end-------------- --}}
+
+                        {{-- -------- Show user Birth-------------- --}}
+                        <div class="form-group">
+                            <input type="date" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
+                        </div>
+                        {{-- ----------end-------------- --}}
+
+
+                        {{-- -------- Show user Email-------------- --}}
+
+                        <div class="form-group">
+                            <input type="text" name="email" value="{{Auth::user()->email}}"  class="form-control">
+                        </div>
+                        {{-- ----------end-------------- --}}
+                        
+                        {{-- -------- Show user city-------------- --}}
+
+                        <div class="form-group">
+                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                            <datalist id="result">
+                            </datalist>
+                        </div>
+                        {{-- ----------end city-------------- --}}
                     </div>
                     <div class="col-4">
+
                         @if(Auth::user()->picture)
-                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" id="img_prv" width="120px" height="120px">
+                                {{-- get profile from user insert --}}
+                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px" id="img_prv">
                         @else
-                            <img src="asset/userImage/user.png" width="120px" id="img_prv" height="120px"/>
+                                {{-- default profile --}}
+                            <img src="asset/userImage/user.png" width="120px" height="120px" id="img_prv"/>
                         @endif
+                        
                         <div class="row justify-content-center">
-
-                            <label for="file" class="btn" style="margin-top:-7px"><i class="fa fa-plus text-dark"></i></label>
-                            <input id="file"  style="display:none;" type="file" name="picture">
-                            <span id="mgs_ta">
-
-                            <a href="#" id="upload"><i class="fas fa-pencil-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
-                            <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark"></i></a>&nbsp;&nbsp;&nbsp;
-                            
+                            {{-- button add profile --}}
+                            <input id="file" style="display:none;" type="file" name="picture">
+                            <label for="file" class="btn"><i class="fa fa-plus text-dark"></i></label>
+                                {{-- end button --}}
+                            {{-- button delete profile --}}
+                            <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark mt-2"></i></a>&nbsp;&nbsp;&nbsp;
+                                {{-- end button --}}
+                            <span id="mgs_ta"></span>
                         </div>
                     </div>
                 </div>
@@ -250,36 +260,34 @@
     @yield('body')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-     
+
+     {{--use javascript to add profile  --}}
     <script type="text/javascript">
       $('#file').on('change',function(ev){
         console.log("here inside");
-     
+        
         var filedata=this.files[0];
         var imgtype=filedata.type;
      
+        var match=['image/png','image/jpg','image/jpeg','image/gif'];
      
-        var match=['image/jpeg','image/jpg'];
-     
-        if(!(imgtype==match[0])||(imgtype==match[1])){
-            $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only jpg jpeg allowed</p>');
+        if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3])||(imgtype==match[4]))){
+            $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only png jpg jpeg gif allowed</p>');
      
         }else{
      
           $('#mgs_ta').empty();
-        
      
         //---image preview
      
         var reader=new FileReader();
      
         reader.onload=function(ev){
-          $('#img_prv').attr('src',ev.target.result).css('width','150px').css('height','150px');
+          $('#img_prv').attr('src',ev.target.result).css('width','120px').css('height','120px');
         }
         reader.readAsDataURL(this.files[0]);
      
         /// preview end
-     
             //upload
      
             var postData=new FormData();
@@ -299,11 +307,8 @@
               console.log("success");
             }
      
-     
             });
-     
         }
-     
       });
      
     </script>
