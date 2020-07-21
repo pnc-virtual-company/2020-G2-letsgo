@@ -22,8 +22,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/exploreEvents', 'ExploreEventsController');
+<<<<<<< HEAD
 // yourEvent
 Route::resource('/yourEvent','YourEventController');
+=======
+Route::resource('/yourEvent', 'YourEventController');
+>>>>>>> 19b92c7af970a1acbe71caa2ea21c30fbe3a61ff
 
 
 Route::resource('/userProfile', 'userProfileController');
@@ -38,8 +42,7 @@ route::get('yourEvent','EventController@viewyourevent')->name('yourEvent.youreve
 
 Route::group(['prefix' => 'manage'],function(){
     //event
-    Route::get('event/index','EventController@index')->name('event.index');
-    
+    Route::resource('event','EventController');
     //category
     Route::get('/category/index','CategoryController@index')->name('category.index');
     Route::delete('/category/destroy/{id}','CategoryController@destroy');

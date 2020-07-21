@@ -8,7 +8,7 @@
       <div class="row">
         <div class="input-icons col-md-8" style="margin: 0 auto"> 
           <span class="material-icons">search</span> 
-          <input class="form-control" id="search"  type="text" autocomplete="off"> 
+          <input class="form-control" id="search"  type="text" autocomplete="off" placeholder="Search"> 
         </div> 
       </div> 
     {{-- </form> --}}
@@ -18,7 +18,7 @@
       <div class=" row">
           <div class="col-md-8" style="margin:0 auto">
             <a class="h5">Categories</a>
-            <button type="button" class="btn btn-warning btn-sm text-white float-right" data-toggle="modal" data-target="#myModal"><span class="material-icons float-left">add</span><b>Create</b></button>
+          <button type="button" class="btn btn-warning btn-sm text-white float-right button-create" data-toggle="modal" data-target="#myModal"><span class="material-icons float-left">add</span><b>Create</b></button>
           </div>
         </div>
       </div>
@@ -26,6 +26,8 @@
       <div class="col-md-8" style="margin:0 auto">
         <table class="table-hover fl-table">
         </table>
+        <ul class="list-group list-group-flush">
+        </ul>
       </div>
     </div>
 </div>
@@ -41,10 +43,10 @@
   $(document).ready(function(){
     $(document).on('keyup', '#search', function(){
         var query = $(this).val();
-        fetch_category_data(query);
+        fetch_categories_data(query);
     });
-   fetch_category_data();
-   function fetch_category_data(query)
+   fetch_categories_data();
+   function fetch_categories_data(query)
    {
     $.ajax({
      url:"{{ route('category.search')}}",
@@ -56,18 +58,17 @@
       var result = "";
         data.forEach(element => {
         result += `
-        <table class="fl-table">
-                <tr>
-                <td><b>${element.category}</b></td>
-                <td>
-                    <a 
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            ${element.category}
+            <span class="badge">
+              <a 
                       href="#!" 
                       class="delete float-right" 
                       style="margin-top: 4px"  
                       data-id="${element.id}" 
                       data-toggle="modal" 
                       data-target="#deleteCategory"> 
-                      <i class="far fa-trash-alt text-dark" id="show"></i>
+                      <i class="far fa-trash-alt text-dark" style="font-size:16px;" id="show"></i>
                     </a>
                     <a 
                       href="#!" 
@@ -78,12 +79,11 @@
                       data-category = "${element.category}"
                       data-target="#editCategory">
                       <i class="fas fa-pencil-alt text-dark" style="font-size:16px;" id="show"></i></a>
-                </td>
-                </tr>
-        </table>
+            </span>
+          </li>
         `;
       });
-        $('.table-hover').html(result);
+        $('.list-group').html(result);
      }
     })
    }

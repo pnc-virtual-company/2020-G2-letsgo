@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Storage;
 use App\Event;
-use App\Category;
 use App\User;
-use Auth;
 
 class YourEventController extends Controller
 {
@@ -18,8 +16,8 @@ class YourEventController extends Controller
      */
     public function index()
     {
-        $categorys = Category::all();
-        return view('yourEvent.yourEvent',compact('categorys'));
+            $events = Event::all();
+        return view('yourEvent.yourEvent', compact('events'));
     }
 
     /**
