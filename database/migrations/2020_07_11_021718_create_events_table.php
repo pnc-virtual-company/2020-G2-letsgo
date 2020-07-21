@@ -20,8 +20,9 @@ class CreateEventsTable extends Migration
             $table->string('endDate');
             $table->string('startTime');
             $table->string('endTime');
-            $table->string('picture');
+            $table->string('picture')->nullable();
             $table->string('description');
+            $table->string('city');
             $table->unsignedBigInteger('owner_id')->nullable();
             $table->foreign('owner_id')
                     ->references('id')
