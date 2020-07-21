@@ -20,12 +20,21 @@
 
                    </div>
                    <div class="col-3">
-                       <a href="#">cancel</a>
-                       <a href="#">delete</a>
+                            {{-- buuton delete event --}}
+                            @if (Auth::user() && (Auth::user()->id == $event->owner_id))
+                            <form action="{{route('yourEvent.destroy',$event->id)}}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" onclick="return confirm('Are you sure to remove this event?')">cancel</button>
+                            </form> 
+                        @endif
+                            {{-- end button --}}
+
+                       <a href="#">edit</a>
                    </div>
                </div>
                @endforeach
-
+               
            </div>
        </div>
     </div>

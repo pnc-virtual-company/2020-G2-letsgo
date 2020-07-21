@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Storage;
+use DB;
+use File;
 use App\Event;
 
 class YourEventController extends Controller
@@ -82,8 +84,16 @@ class YourEventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $events = Event::findOrFail($id);
+        
+        // if(\File::exists(public_path("asset/eventimage/{$events->picture}"))){
+        //     \File::delete(public_path("asset/eventimage/{$events->picture}"));
+        // }
+        DB::table('events')->where('owner_id', $id);
+        $events->delete();
+        return back();
     }
+
     public function read(Request $request){
         file_get_contents(base_path('resources/lang/en.json'));
         // return $data;
