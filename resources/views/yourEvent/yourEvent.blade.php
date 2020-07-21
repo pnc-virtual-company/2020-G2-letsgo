@@ -1,32 +1,43 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')
-    <input list="result" id="autoSuggestion"  name="country"/>
-    <datalist id="result">
-    </datalist>
     <div class="container">
-       <div class="card">
-           <div class="card-body">
-               @foreach ($events as $event)
-               <div class="row">
-                   <div class="col-3">{{$event->startTime}}</div>
-                   <div class="col-3">
-                    {{$event->category->category}}
-                    <h4> {{$event->title}}</h4>
-                    <p>Counter</p>
-                   </div>
-                   <div class="col-3">
-                    <img src="{{asset('asset/eventimage/'.$event->picture)}}" width="120px" height="120px" id="img_prv">
+       <div class="row">
+           <div class="col-sm-12 col-md-1 col-lg-1"></div>
+           <div class="col-sm-12 col-md-10 col-lg-9">
+            @foreach ($events as $event)
+            <div class="card p-2 card-event">
+                <div class="row">
+                    <div class="col-12 col-sm-2 col-md-4 col-lg-2 startTime">
+                        {{$event->startTime}}
+                    </div>
+                    <div class="col-8 col-sm-6 col-md-4 col-lg-5">
+                        <b>{{$event->category->category}}</b>
+                        <br>
+                        <strong class="h5">{{$event->title}}</strong>
+                        <br>
+                        <p>5 members going</p>
+                    </div>
+                    <div class="col-4 col-sm-3 col-md-4 col-lg-2">
+                        <img class="mx-auto" src="{{asset('asset/eventimage/'.$event->picture)}}" width="100px" id="img_prv">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="btn btn-sm mt-4 float-right" style="background: rgb(182, 182, 182)" href=""><b>Cancel</b></a>
+                            </div>
+                            <div class="col-6">
+                                <a class="btn btn-sm mt-4 float-right" style="background: rgb(182, 182, 182)" href=""><b>Edit</b></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
 
-                   </div>
-                   <div class="col-3">
-                       <a href="#">cancel</a>
-                       <a href="#">delete</a>
-                   </div>
-               </div>
-               @endforeach
-
+        @endforeach
            </div>
+           <div class="col-sm-12 col-md-1 col-lg-2"></div>
        </div>
     </div>
 @endsection
