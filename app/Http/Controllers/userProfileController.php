@@ -12,6 +12,7 @@ use Crypt;
 use Input;
 use Illuminate\Support\Facades\Hash;
 use Storage;
+use Illuminate\Support\Facades\Validator;
 
 class userProfileController extends Controller
 {
@@ -83,17 +84,8 @@ class userProfileController extends Controller
         $user->lastname = $request->get('lastname');
         $user->email = $request->get('email');
         $user->birth = $request->get('birth');
-        $user->city = $request->get('city');
-        $new_password = $request->get('new-password');
-        $confirm_password = $request->get('password-confirmation');
-
-                if($new_password == $confirm_password){
-                    $user->password = Hash::make($new_password);
-                        
-                }
-         
+        $user->city = $request->get('city');  
         $user->sex = $request->get('sex');
-
         if($request->picture != null){ 
             request()->validate([
                 'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -106,7 +98,10 @@ class userProfileController extends Controller
         return back();
     }
 
-    //// Change Password of user
+
+
+    //// Change Password of user/////////
+
     public function changePassword(Request $request){
             $old_password = $request->get('old-password');
             $value = Auth::user()->password;
@@ -118,14 +113,14 @@ class userProfileController extends Controller
                     $user = User::find(Auth::id());
                     $user->password = Hash::make($new_password);
                     $user->save();
-                    return back();    
-                }else{
-                    return back(); 
-                }
-            }else{
+                    return back();   
+                 }
+             }else{
                 return back(); 
-            }   
+             }
+            
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -148,3 +143,4 @@ class userProfileController extends Controller
         return back();
     }
 }
+

@@ -25,8 +25,16 @@ Route::resource('/exploreEvents', 'ExploreEventsController');
 // yourEvent
 Route::resource('/yourEvent','YourEventController');
 
+
 Route::resource('/userProfile', 'userProfileController');
 Route::put('/changePasswords', 'userProfileController@changePassword')->name('changePasswords');
+
+route::resource('event','EventController');
+// view your event
+route::get('yourEvent','EventController@viewyourevent')->name('yourEvent.yourevent');
+// create your event
+// Route::post('/yourEvent/{id}','EventController@createevent')->name('createEvent');
+
 
 Route::group(['prefix' => 'manage'],function(){
     //event

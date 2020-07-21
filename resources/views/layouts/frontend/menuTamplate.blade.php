@@ -38,7 +38,7 @@
 
                         {{-- you event --}}
                         <li class="nav-item {{(request()->segment(1) == 'yourEvent') ? 'active' : '',ucfirst(request()->segment(1))}}">
-                        <a class="nav-link" href="{{route('yourEvent.index')}}">   <span>Your events</span></a>
+                        <a class="nav-link" href="{{route('event.yourevent')}}">   <span>Your events</span></a>
                         </li>
 
                         {{-- Manage --}}
@@ -153,7 +153,7 @@
                         {{-- -------- Show user city-------------- --}}
 
                         <div class="form-group">
-                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .."  name="city"/>
+                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .." value="{{Auth::user()->city}}"  name="city"/>
                             <datalist id="result">
                             </datalist>
                         </div>
@@ -206,7 +206,7 @@
             <div class="modal-header">
               <h4 class="modal-title text-center">Change Password</h4>
             </div>
-                <form action="{{route('changePasswords')}}" method="POST" autocomplete="off">
+                <form action="{{route('changePasswords')}}" method="POST">
                     @csrf
                     @method('PUT')
                 <div class="modal-body">
@@ -214,40 +214,30 @@
                     {{-- Old password --}}
                    <label for="">Old Pasword</label>
                    <div class="form-group">      
-                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="old-password" required autocomplete="current-password">
-
-                   @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <input id="old-password" placeholder="Password" type="password" class="form-control" name="old-password" required >
+                        
                     </div>
                     {{--End Old password --}}
                    
                    {{-- New password --}}
                    <label for="">New Pasword</label>
                    <div class="form-group">      
-                   <input id="new-password"  type="password" class="form-control @error('password') is-invalid @enderror " name="new-password" required autocomplete="new-password" >
-
-                   @error('new-password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                   <input id="new-password"  type="password" class="form-control " name="new-password" required  >
                     </div>
                     {{--End New password --}}
                    
                    {{-- Confirm password --}}
                    <label for="">Confirm Pasword</label>
                    <div class="form-group">
-                    <input id="password-confirm"  type="password" class="form-control @error('password') is-invalid @enderror "  name="password-confirmation" required autocomplete="new-password">
+                    <input id="password-confirm"  type="password" class="form-control "  name="password-confirmation" required >
+                    <span id="msg-error" class="text-danger"></span>
                     </div>
                     {{--End Confirm password --}}
 
                </div>
                <div class="modal-footer">
                  <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-                 <button type="submit" class="btn text-warning float-right">UPDATE</button>
+                 <button type="submit" id="change-password" class="btn text-warning float-right">UPDATE</button>
                </div>
             </form>
           </div>
@@ -310,6 +300,25 @@
       });
      
     </script>
+
+    
+{{-- error password if new password and confirm password don't match--}}
+
+  <script type="text/javaScript">
+    $(document).ready(function () {
+        $(document).on('keyup', function () {
+            var newpwd = $('#new-password').val();
+            var confirm = $('#password-confirm').val();
+            if(confirm == newpwd){
+                $('#msg-error').html('');
+            }else if(confirm == ''){
+                $('#msg-error').html('');
+            }else{
+                $('#msg-error').html('Attribute confirmation does not match.');
+            }
+        }) 
+    });
+  </script>
 </body>
 </html>
 
