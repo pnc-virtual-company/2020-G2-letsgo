@@ -22,22 +22,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/exploreEvents', 'ExploreEventsController');
-<<<<<<< HEAD
-// yourEvent
-Route::resource('/yourEvent','YourEventController');
-=======
+
 Route::resource('/yourEvent', 'YourEventController');
->>>>>>> 19b92c7af970a1acbe71caa2ea21c30fbe3a61ff
 
 
 Route::resource('/userProfile', 'userProfileController');
 Route::put('/changePasswords', 'userProfileController@changePassword')->name('changePasswords');
 
-route::resource('event','EventController');
-// view your event
-route::get('yourEvent','EventController@viewyourevent')->name('yourEvent.yourevent');
-// create your event
-// Route::post('/yourEvent/{id}','EventController@createevent')->name('createEvent');
 
 
 Route::group(['prefix' => 'manage'],function(){

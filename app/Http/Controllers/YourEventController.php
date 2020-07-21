@@ -30,11 +30,7 @@ class YourEventController extends Controller
         //
     }
 
-    public function viewyourevent(){
-        $events = Event::all();
-      return view('yourEvent.yourEvent', compact('events'));
-    }
-    
+   
 
 
     /**

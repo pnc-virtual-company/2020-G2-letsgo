@@ -38,7 +38,7 @@
 
                         {{-- you event --}}
                         <li class="nav-item {{(request()->segment(1) == 'yourEvent') ? 'active' : '',ucfirst(request()->segment(1))}}">
-                        <a class="nav-link" href="{{route('event.yourevent')}}">   <span>Your events</span></a>
+                        <a class="nav-link" href="{{route('yourEvent.index')}}">   <span>Your events</span></a>
                         </li>
 
                         {{-- Manage --}}
@@ -311,12 +311,6 @@
       });
      
     </script>
-<<<<<<< HEAD
-
-    
-{{-- error password if new password and confirm password don't match--}}
-=======
->>>>>>> 19b92c7af970a1acbe71caa2ea21c30fbe3a61ff
 
   <script type="text/javaScript">
     $(document).ready(function () {
