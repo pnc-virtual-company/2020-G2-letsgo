@@ -2,6 +2,20 @@
 
 @section('body')
     <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-1 col-lg-1"></div>
+            <div class="col-sm-12 col-md-10 col-lg-9">
+                <div class="form-group">
+                    <div class=" row">
+                       <div class="col-12" style="margin:0 auto">
+                         <a class="h5">Your events</a>
+                         <button type="button" class="btn btn-warning btn-sm text-white float-right button-create" data-toggle="modal" data-target=""><span class="material-icons float-left">add</span><b>Create</b></button>
+                       </div>
+                     </div>
+                   </div>
+            </div>
+            <div class="col-sm-12 col-md-1 col-lg-2"></div>
+        </div>
        <div class="row">
            <div class="col-sm-12 col-md-1 col-lg-1"></div>
            <div class="col-sm-12 col-md-10 col-lg-9">
