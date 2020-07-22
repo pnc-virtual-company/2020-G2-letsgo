@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Storage;
 use DB;
 use File;
+use Auth;
 use App\Event;
 use App\User;
 
@@ -18,7 +19,7 @@ class YourEventController extends Controller
      */
     public function index()
     {
-            $events = Event::all();
+        $events = Event::all();
         return view('yourEvent.yourEvent', compact('events'));
     }
 
@@ -85,9 +86,13 @@ class YourEventController extends Controller
      */
     public function destroy($id)
     {
-        $events = Event::findOrFail($id);
-        $events->delete();
+        $user = Auth::id();
+        $events = Event::where('id', $id)->where('owner_id',$user)->first();
+        if(!is_null($events)){
+            $events->delete();
+        }
         return back();
+    
     }
 
     public function read(Request $request){

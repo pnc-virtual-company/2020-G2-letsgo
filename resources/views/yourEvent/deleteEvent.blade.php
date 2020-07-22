@@ -15,21 +15,23 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">DON'T REMOVE</button>
-                <a onclick="document.getElementById('deleteEventForm').submit()" class="btn btn-default text-warning">REMOVE</a>
+                <a onclick="document.getElementById('deleteeventform').submit()" class="btn btn-default text-warning">REMOVE</a>
             </div>
     
           </div>
         </div>
       </div>
     </div>
-      <form id="deleteEventForm" action="" method="post">
+    
+      <form id="deleteeventform" action="" method="post">
         @csrf
         @method('delete')
     </form>
+
     <script type="text/javascript">
-      $(document).on('click', '.delete', function(e) {
+      $(document).on('click','.delete', function(e) {
         e.preventDefault();
         var id = $(this).data('id');
-        $('#deleteEventForm').attr("action", "{{ url('/yourEvent/destroy') }}" + "/" + id);
+        $('#deleteeventform').attr("action", "{{ url('/yourEvent') }}" + "/" +id);
       });
     </script>
