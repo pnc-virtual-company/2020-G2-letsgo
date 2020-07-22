@@ -2,27 +2,31 @@
 
 @section('body')
     <div class="container">
-        <br>
+     <br>
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
-            <div class="col-sm-12 col-md-10 col-lg-9">
-                <div class="form-group">
-                    <div class=" row">
+               <div class="col-sm-12 col-md-10 col-lg-9">
+                   <div class="form-group">
+                       <div class=" row">
                        <div class="col-12" style="margin:0 auto">
                          <a class="h5">Your events</a>
-                         <button type="button" class="btn btn-warning btn-sm text-white float-right button-create" data-toggle="modal" data-target=""><span class="material-icons float-left">add</span><b>Create</b></button>
-                       </div>
-                     </div>
-                   </div>
-            </div>
-            <div class="col-sm-12 col-md-1 col-lg-2"></div>
+                        {{-- --------------Create New Event---------------- --}}
+                          <button type="button" class="btn btn-warning  btn-sm text-white float-right button-create" data-toggle="modal" data-target="#myModal"><span class="material-icons float-left">add</span><b>Create</b></button>
+             {{-- ----- Model Create Your Event ----------- --}}
+                          @include('yourEvent.addYourevent')
+             {{-- ----- End Model Create Your Event ----------- --}}
+                        </div>
+                    </div>
+                 </div>
+               </div>
+           <div class="col-sm-12 col-md-1 col-lg-2"></div>
         </div>
        <div class="row">
            <div class="col-sm-12 col-md-1 col-lg-1"></div>
            <div class="col-sm-12 col-md-10 col-lg-9">
             
             @foreach ($events as $event)
-        @if (Auth::user()->id==$event->owner_id)
+        {{-- @if (Auth::user()->id==$event->owner_id) --}}
 
             <div class="card p-2 card-event">
                 <div class="row">
@@ -36,8 +40,14 @@
                         <br>
                         <p>5 members going</p>
                     </div>
-                    <div class="col-4 col-sm-3 col-md-4 col-lg-2">
-                        <img class="mx-auto" src="{{asset('asset/eventimage/'.$event->picture)}}" width="100px" id="img_prv">
+                    <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
+                                @if($event->picture)
+                                {{-- get profile from user insert --}}
+                            <img src="{{asset('asset/eventimage/'.$event->picture)}}" width="120px" height="120px" id="img">
+                        @else
+                                {{-- default profile --}}
+                            <img src="asset/eventimage/user.png" width="120px" height="120px" id="img"/>
+                        @endif
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-3">
                         <div class="row">
@@ -52,7 +62,7 @@
                 </div>
             </div>
             <br>
-                @endif
+                {{-- @endif --}}
         @endforeach
 
            </div>

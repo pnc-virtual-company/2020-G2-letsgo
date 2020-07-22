@@ -16,9 +16,10 @@ class CategoryController extends Controller
     public function index()
     {
         $this->authorize('view', Category::class);
+        // $category = Category::all();
         return view('manage.category.viewCategory');
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -45,7 +46,6 @@ class CategoryController extends Controller
         ]);
         $category->category = $request->get('category');
         $category->save();
-        
         return back();
     }
 
