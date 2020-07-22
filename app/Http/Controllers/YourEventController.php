@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Storage;
+use DB;
+use File;
+use Auth;
 use App\Event;
 use App\User;
 
@@ -16,8 +19,8 @@ class YourEventController extends Controller
      */
     public function index()
     {
-            $events = Event::all();
-            return view('yourEvent.yourEvent', compact('events'));
+        $events = Event::all();
+        return view('yourEvent.yourEvent', compact('events'));
     }
 
     /**
@@ -83,8 +86,15 @@ class YourEventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Auth::id();
+        $events = Event::where('id', $id)->where('owner_id',$user)->first();
+        if(!is_null($events)){
+            $events->delete();
+        }
+        return back();
+    
     }
+
     public function read(Request $request){
         file_get_contents(base_path('resources/lang/en.json'));
         // return $data;
