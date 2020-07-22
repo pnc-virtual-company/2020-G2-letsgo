@@ -65,7 +65,7 @@ class EventPolicy
      */
     public function delete(User $user, Event $event)
     {
-        //
+        return $event->owner_id == $user->id;
     }
 
     /**

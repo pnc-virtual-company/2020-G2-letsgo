@@ -9,6 +9,7 @@ use File;
 use Auth;
 use App\Event;
 use App\User;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class YourEventController extends Controller
 {
@@ -19,7 +20,7 @@ class YourEventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        $events = Event::where('owner_id', Auth::id())->get();
         return view('yourEvent.yourEvent', compact('events'));
     }
 

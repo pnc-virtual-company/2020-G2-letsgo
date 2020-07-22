@@ -5,6 +5,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use App\Event;
 use App\Policies\EventPolicy;
 use App\Category;
+use App\Policies\YourEventPolicy;
 use App\Policies\CategoryPolicy;
 use Illuminate\Support\Facades\Gate;
 
