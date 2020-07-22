@@ -21,11 +21,13 @@
                </div>
            <div class="col-sm-12 col-md-1 col-lg-2"></div>
         </div>
-    </div>
-<div class="row">
-    <div class="col-sm-12 col-md-1 col-lg-1"></div>
-        <div class="col-sm-12 col-md-10 col-lg-9">
+       <div class="row">
+           <div class="col-sm-12 col-md-1 col-lg-1"></div>
+           <div class="col-sm-12 col-md-10 col-lg-9">
+            
             @foreach ($events as $event)
+        {{-- @if (Auth::user()->id==$event->owner_id) --}}
+
             <div class="card p-2 card-event">
                 <div class="row">
                     <div class="col-12 col-sm-2 col-md-4 col-lg-2 startTime">
@@ -50,7 +52,7 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-3">
                         <div class="row">
                             <div class="col-6">
-                                <a class="btn btn-sm mt-4 float-right" style="background: rgb(182, 182, 182)" href=""><b>Cancel</b></a>
+                                <a class="btn btn-sm mt-4 float-right delete" style="background: rgb(182, 182, 182)" data-id="{{$event->id}}" data-toggle="modal" data-target="#deleteEvent" href="#!"><b>Cancel</b></a>
                             </div>
                             <div class="col-6">
                                 <a class="btn btn-sm mt-4 float-right" style="background: rgb(182, 182, 182)" href=""><b>Edit</b></a>
@@ -60,10 +62,15 @@
                 </div>
             </div>
             <br>
-@endforeach
-</div>
-<div class="col-sm-12 col-md-1 col-lg-2"></div>
-</div>
+                {{-- @endif --}}
+        @endforeach
+
+           </div>
+           <div class="col-sm-12 col-md-1 col-lg-2"></div>
+       </div>
+
+    </div>
+    {{-- delete --}}
+@include('yourEvent.deleteEvent')
+
 @endsection
-
-

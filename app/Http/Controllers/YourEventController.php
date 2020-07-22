@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use File;
+use Auth;
 use App\Event;
 use App\User;
-use Auth;
 use App\Category;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 class YourEventController extends Controller
 {
     /**
@@ -119,8 +120,15 @@ class YourEventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Auth::id();
+        $events = Event::where('id', $id)->where('owner_id',$user)->first();
+        if(!is_null($events)){
+            $events->delete();
+        }
+        return back();
+    
     }
+
     public function read(Request $request){
         file_get_contents(base_path('resources/lang/en.json'));
         // return $data;
