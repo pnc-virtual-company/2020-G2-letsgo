@@ -20,7 +20,10 @@
        <div class="row">
            <div class="col-sm-12 col-md-1 col-lg-1"></div>
            <div class="col-sm-12 col-md-10 col-lg-9">
+            
             @foreach ($events as $event)
+        @if (Auth::user()->id==$event->owner_id)
+
             <div class="card p-2 card-event">
                 <div class="row">
                     <div class="col-12 col-sm-2 col-md-4 col-lg-2 startTime">
@@ -49,8 +52,9 @@
                 </div>
             </div>
             <br>
-                
+                @endif
         @endforeach
+
            </div>
            <div class="col-sm-12 col-md-1 col-lg-2"></div>
        </div>
