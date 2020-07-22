@@ -15,8 +15,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        // $this->authorize('view', Event::class);
-        // return view('manage.viewEvents');
+        $this->authorize('view', Event::class);
+        return view('manage.viewEvents');
         
     }
 

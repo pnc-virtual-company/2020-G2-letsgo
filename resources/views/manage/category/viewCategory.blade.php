@@ -61,7 +61,7 @@
           <li class="list-group-item d-flex justify-content-between align-items-center">
             ${element.category}
             <span class="badge">
-              <a 
+                     <a 
                       href="#!" 
                       class="delete float-right" 
                       style="margin-top: 4px"  

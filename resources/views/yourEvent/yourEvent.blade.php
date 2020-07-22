@@ -1,7 +1,6 @@
 @extends('layouts.frontend.menuTamplate')
 
-@section('body')
-    <div class="container">
+@section('body')    <div class="container">
         <br>
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
@@ -23,10 +22,10 @@
             @foreach ($events as $event)
             <div class="card p-2 card-event">
                 <div class="row">
-                    <div class="col-12 col-sm-2 col-md-4 col-lg-2 startTime">
+                    <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
                         {{$event->startTime}}
                     </div>
-                    <div class="col-8 col-sm-6 col-md-4 col-lg-5">
+                    <div class="col-8 col-sm-6 col-md-5 col-lg-5">
                         <b>{{$event->category->category}}</b>
                         <br>
                         <strong class="h5">{{$event->title}}</strong>
@@ -49,8 +48,7 @@
                 </div>
             </div>
             <br>
-
-        @endforeach
+            @endforeach
            </div>
            <div class="col-sm-12 col-md-1 col-lg-2"></div>
        </div>
