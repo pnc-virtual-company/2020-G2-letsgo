@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use File;
 use Auth;
 use App\Event;
-use App\User;
 use App\Category;
-use Illuminate\Support\Facades\Storage;
 class YourEventController extends Controller
 {
     /**
@@ -54,6 +50,7 @@ class YourEventController extends Controller
             'description' => 'required',
             'city' => 'required',
         ]);
+        $user = Auth::id();
         $yourevent = new Event;
         $yourevent->cate_id = $request->get('category');
         $yourevent->title = $request->get('title');
@@ -63,15 +60,17 @@ class YourEventController extends Controller
         $yourevent->endTime = $request->get('endTime');
         $yourevent->description = $request->get('description');
         $yourevent->city = $request->get('city');
+        $yourevent->owner_id =   $user;
         if($request->picture != null){ 
             request()->validate([
                 'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-            $imageName = time().'.'.request()->picture->getClientOriginalExtension();
-            request()->picture->move(public_path('asset/eventimage/'), $imageName);
-            $yourevent->picture = $imageName;
-
-        }
+                ]);
+                $imageName = time().'.'.request()->picture->getClientOriginalExtension();
+                request()->picture->move(public_path('asset/eventimage/'), $imageName);
+                $yourevent->picture = $imageName;
+                
+            }
+    
     
         $yourevent->save();
         return back();
