@@ -275,15 +275,15 @@
      
         var match=['image/png','image/jpg','image/jpeg','image/gif'];
      
-        if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3])||(imgtype==match[4]))){
+        if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3]))){
             $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only png jpg jpeg gif allowed</p>');
-     
+    
         }else{
      
           $('#mgs_ta').empty();
      
         var reader=new FileReader();
-     
+    
         reader.onload=function(ev){
           $('#img_prv').attr('src',ev.target.result).css('width','120px').css('height','120px');
         }
@@ -291,7 +291,7 @@
     
             var postData=new FormData();
             postData.append('file',this.files[0]);
-     
+    
             var url="{{url('userImage.update')}}";
      
             $.ajax({
