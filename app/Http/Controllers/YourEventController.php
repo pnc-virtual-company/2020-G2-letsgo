@@ -7,6 +7,7 @@ use Storage;
 use DB;
 use File;
 use App\Event;
+use App\User;
 
 class YourEventController extends Controller
 {
@@ -18,7 +19,7 @@ class YourEventController extends Controller
     public function index()
     {
             $events = Event::all();
-            return view('yourEvent.yourEvent', compact('events'));
+        return view('yourEvent.yourEvent', compact('events'));
     }
 
     /**
@@ -85,11 +86,6 @@ class YourEventController extends Controller
     public function destroy($id)
     {
         $events = Event::findOrFail($id);
-        
-        // if(\File::exists(public_path("asset/eventimage/{$events->picture}"))){
-        //     \File::delete(public_path("asset/eventimage/{$events->picture}"));
-        // }
-        DB::table('events')->where('owner_id', $id);
         $events->delete();
         return back();
     }

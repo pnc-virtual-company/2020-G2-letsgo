@@ -3,7 +3,7 @@
     color: blue;
 }
 .active{
-    text-decoration:underline; 
+    text-decoration:underline;   
 }
 
 .input-icons span { 
@@ -14,30 +14,26 @@
 
 #search{
     padding-left: 40px;
+    border-radius: 30px;
 }
   
+
 .input-icons { 
     width: 100%; 
     margin-bottom: 10px; 
 } 
 
-.fl-table {
-    font-size: 16px;
-    font-weight: normal;
-    border: none;
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 100%;
-    white-space: nowrap;
-}
-
-
+/* group list */
 #show {
     display: none;
 }
-  tr:hover #show {
+.list-group-item:hover #show {
     display: inline;
-  }
+}
+.list-group-item:hover {
+    background-color: rgb(238, 238, 238);
+    height: 50px;
+}
 
   /* make the hove on menu */
   span:hover{
@@ -52,15 +48,19 @@
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 /* end */
-/* button create event */
-.btn-warning{
-    border: 1px solid rgb(170, 168, 168);
-    border-radius: 25px;
-    font-size: 20px;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
+
+/* button create */
+.button-create{
+    border-radius: 20px;
+    text-transform: uppercase;
 }
-/* .card{
-    width: 100%;    
-    height: 150px;
-} */
+
+.startTime{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+.card-event {
+    border-radius: 20px;
+}
