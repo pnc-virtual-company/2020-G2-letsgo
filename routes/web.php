@@ -25,9 +25,6 @@ Route::resource('/exploreEvents', 'ExploreEventsController');
 
 Route::resource('/yourEvent', 'YourEventController');
 
-// Route::POST('/createevent', 'YourEventController@createevent')->name('createevents');
-
-
 Route::resource('/userProfile', 'userProfileController');
 Route::put('/changePasswords', 'userProfileController@changePassword')->name('changePasswords');
 
