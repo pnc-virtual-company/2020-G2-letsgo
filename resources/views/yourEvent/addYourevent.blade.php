@@ -34,29 +34,30 @@
                         {{-- -------- Show start date-------------- --}}
                         <div class="form-row">
                             {{-- -----------start date and start time-------- --}}
-                            <div class="form-group col-md-6">
-                              <input type="date" name="startDate" placeholder="Staet date" class="form-control">
+                            <div class="form-group col-6">
+                              {{-- <input type="date" name="startDate" placeholder="Staet date" class="form-control"> --}}
+                              <input type="text" name="startDate" placeholder="Start date" class="form-control dpicker" id="beginDate" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-6">
-                              <input type="text" name="startTime" placeholder="At"  class="form-control">
+                            <div class="form-group col-6">
+                              <input type="time" name="startTime" placeholder="At"  class="form-control" autocomplete="off">
                             </div>
                         </div>
                         {{-- ----------end-------------- --}}
   
                         {{-- -------- Show end date and end time-------------- --}}
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                              <input type="date" name="endDate" placeholder="End date"  class="form-control">
+                            <div class="form-group col-6">
+                              <input type='text' name="endDate" placeholder="End date"  class="form-control dpicker" id="endDate" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-6">
-                              <input type="text" name="endTime" placeholder="At"  class="form-control">
+                            <div class="form-group col-6">
+                              <input type="time" name="endTime" placeholder="At"  class="form-control" autocomplete="off">
                             </div>
                         </div>
                         {{-- ----------end-------------- --}}
                         
                         {{-- -------- Show event city-------------- --}}
                         <div class="form-group">
-                            <input name="city" class="form-control" list="result" id="autoSuggestion" placeholder="Choose Your Country ..." />
+                            <input name="city" class="form-control autoSuggestion" list="result" placeholder="City" />
                             <datalist id="result">
                             </datalist>
                         </div>
@@ -65,7 +66,7 @@
                         {{-- Description --}}
                         <div class="form-group">
                             <label for="comment">Description</label>
-                            <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                            <textarea class="form-control" rows="3" id="description" name="description"></textarea>
                         </div>
                         {{-- end --}}
                     </div>
@@ -87,7 +88,7 @@
                     </div>
                 </div>
                 <button type="submit"  class="btn btn-default float-right text-warning" >SUBMIT</button>
-                <button type="button" class="btn btn-default  float-right">DISCARD</button>
+                <button type="button" data-dismiss="modal" class="btn btn-default  float-right">DISCARD</button>
           </form>
             </div>
           </div>
@@ -135,4 +136,33 @@
           });
       }
     });
+
+
+    $("#beginDate").datepicker({
+    minDate: 1,
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'yy-mm-dd',
+    onClose: function (selectedDate, instance) {
+        if (selectedDate != '') {
+            $("#endDate").datepicker("option", "minDate", selectedDate);
+            var date = $.datepicker.parseDate(instance.settings.dateFormat, selectedDate, instance.settings);
+            date.setMonth(date.getMonth() + 3);
+           var minDate2 = new Date(selectedDate);
+            minDate2.setDate(minDate2.getDate());
+            
+            $("#endDate").datepicker("option", "minDate", minDate2);
+            $("#endDate").datepicker("option", "maxDate", date);
+        }
+    }
+});
+$("#endDate").datepicker({
+    minDate: 1,
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'yy-mm-dd',
+    onClose: function (selectedDate) {
+        $("#beginDate").datepicker("option", "maxDate", selectedDate);
+    }
+});
   </script>

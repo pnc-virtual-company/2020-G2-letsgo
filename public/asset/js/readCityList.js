@@ -26,7 +26,7 @@ function listCounty(data) {
 }
 // display result
 function getResult(data) {
-    $(document).on('keyup', '#autoSuggestion', function(){
+    $(document).on('keyup', '.autoSuggestion', function(){
         var search = $(this).val();
         if(search == ""){
             return "fail";

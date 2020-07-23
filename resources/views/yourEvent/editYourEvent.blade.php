@@ -1,13 +1,13 @@
 {{-------------- Form of edit your event ----------}}
     <!-- Modal -->
-    <div class="modal fade" id="editYourEvent{{$event->id}}" role="dialog">
+    <div class="modal fade" id="editYourEvent" role="dialog">
         <div class="modal-dialog">                           
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Edit Your Events</h4>
             </div>
-            <form action="{{route('yourEvent.update',$event->id)}}"  method="POST" autocomplete="off" enctype="multipart/form-data" >
+            <form id="form-edit-event"  method="POST" autocomplete="off" enctype="multipart/form-data" >
             @csrf
             @method('PUT')                             
             <div class="modal-body">
@@ -15,7 +15,6 @@
                 <div class="col-8">
                 {{-- -------- Show category-------------- --}}
                 <div class="form-group">
-                    <label for="">Category:</label>
                     <select name="category"  class="form-control">
                     @foreach ($categories as $category )                       
                         <option value="{{$category->id}}" {{($category->id == $event->category->id) ? 'selected' : ''}}>{{$category->category}}</option>
@@ -26,49 +25,49 @@
                 {{-- -------- Show event Name-------------- --}}
                                                         
                 <div class="form-group">
-                    <label for="">Title:</label>
-                    <input type="text" name="title"  placeholder="Title" value="{{$event->title}}" class="form-control">
+                    <input type="text" name="title" id="title"  placeholder="Title" class="form-control">
                 </div>
                 {{-- -------- end Show event Name-------------- --}}
                 {{-- -------- Show start date-------------- --}}
-                <div class="form-group">
-                    <label for="">Start Date:</label>
-                    <input type="date" name="startDate" placeholder="Staet date" value="{{$event->startDate}}" class="form-control">
-                    <label for="">Start Time:</label>
-                    <input type="text" name="startTime" placeholder="At" value="{{$event->startTime}}"  class="form-control">
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <input type="text" name="startDate" placeholder="Start date"  class="form-control dpicker startdate" id="start-date" autocomplete="off">
+                    </div>
+                    <div class="form-group col-6">
+                        <input type="time" name="startTime"  placeholder="At"  class="form-control" id="startTime">
+                    </div>
                 </div>
                 {{-- ----------end-------------- --}}
                 {{-- -------- Show end date-------------- --}}
-                <div class="form-group">
-                    <label for="">End Date:</label>
-                    <input type="date" name="endDate" placeholder="End date" value="{{$event->endDate}}"  class="form-control">
-                   <label for="">End Time:</label>
-                    <input type="text" name="endTime" placeholder="At" value="{{$event->endTime}}"  class="form-control">
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <input type='text' name="endDate" placeholder="End date"  class="form-control enddate dpicker" id="end-date" autocomplete="off">
+                    </div>
+                    <div class="form-group col-6">
+                        <input type="time" name="endTime" placeholder="At" id="endTime"  class="form-control">
+                    </div>
                 </div>
                 {{-- ----------end-------------- --}}
                                                         
                 {{-- -------- Show user city-------------- --}}     
                 <div class="form-group">
-                    <label for="">City:</label>
-                    <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .." value="{{$event->city}}"  name="city"/>
+                    <input class="form-control autoSuggestion" list="result" id="city" placeholder="Country name here .."  name="city"/>
                     <datalist id="result">
                     </datalist>
                 </div>
                 {{-- ----------end city-------------- --}}
                 {{-- Description --}}
                 <div class="form-group">
-                    <label for="">Description:</label>
-                     <textarea class="form-control" rows="5" id="description" name="description">{{$event->description}}</textarea>
+                     <textarea class="form-control" rows="5" id="description-edit" name="description"></textarea>
                 </div>
                 {{-- end --}}
                 </div>
                 <div class="col-4">                                       
                  {{-- edit picture from event  --}}
-                    <img src="{{asset('asset/eventimage/'.$event->picture)}}" width="120px" id="image" height="120px" >
+                    <img src="" width="120px" id="image" height="120px"  onchange="readURL(this)">
                     <div class="row justify-content-center">
-                        <label for="edit_image"><i class="fa fa-pencil-alt text-dark"></i></label>
-                        <input type="file"  name="picture" id="edit_image">
-                        <span id="message"></span>
+                        <label for="picture" ><i class="fa fa-pencil-alt text-dark"></i></label>
+                        <input type='file' id="picture" name="picture" style="display: none"  onchange="readURL(this);" />
                      
                     {{-- edit picture from event  --}} 
                 </div>
@@ -85,42 +84,72 @@
     </div>
 {{-------------- Form of edit your event ----------}}
 <script type="text/javaScript">
-    $('#edit_image').on('change',function(ev){
-      
-      var filedata=this.files[0];
-      var imgtype=filedata.type;
-   
-      var match=['image/png','image/jpg','image/jpeg','image/gif'];
-   
-      if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3])||(imgtype==match[4]))){
-          $('#message').html('<p style="color:red">Plz select a valid type image..only png jpg jpeg gif allowed</p>');
-   
-      }else{
-   
-        $('#message').empty();
-   
-      var reader=new FileReader();
-   
-      reader.onload=function(ev){
-        $('#image').attr('src',ev.target.result).css('width','120px').css('height','120px');
-      }
-      reader.readAsDataURL(this.files[0]);
-  
-          var postData=new FormData();
-          postData.append('edit_image',this.files[0]);
-        var url="{{url('eventimage.update')}}";
-        $.ajax({
-        headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
-        async:true,
-        type:"post",
-        contentType:false,
-        url:url,
-        data:postData,
-        processData:false,
-        success:function(){
-          console.log("success");
+    $(".startdate").datepicker({
+    minDate: 1,
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'yy-mm-dd',
+    onClose: function (selectedDate, instance) {
+        if (selectedDate != '') {
+            $(".enddate").datepicker("option", "minDate", selectedDate);
+            var date = $.datepicker.parseDate(instance.settings.dateFormat, selectedDate, instance.settings);
+            date.setMonth(date.getMonth() + 3);
+           var minDate2 = new Date(selectedDate);
+            minDate2.setDate(minDate2.getDate());
+            
+            $(".enddate").datepicker("option", "minDate", minDate2);
+            $(".enddate").datepicker("option", "maxDate", date);
         }
-          });
-      }
-    });
+    }
+});
+
+$(".enddate").datepicker({
+    minDate: 1,
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'yy-mm-dd',
+    onClose: function (selectedDate) {
+        $(".startdate").datepicker("option", "maxDate", selectedDate);
+    }
+});
+
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#image')
+                        .attr('src', e.target.result)
+                        .width(120)
+                        .height(120);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+}
+
+$(document).on('click','.edit-event', function(e) {
+        e.preventDefault();
+
+        var id = $(this).data('id');
+        var title = $(this).data('title');
+        var city = $(this).data('city');
+        var description = $(this).data('description');
+        var startdate = $(this).data('startdate');
+        var starttime = $(this).data('starttime');
+        var enddate = $(this).data('enddate');
+        var endtime = $(this).data('endtime');
+        var picture = $(this).data('picture');
+        
+        $('#title').val(title);
+        $('#description-edit').val(description);
+        $('#city').val(city);
+        $('#start-date').val(startdate);
+        $('#end-date').val(enddate);
+        $('#startTime').val(starttime);
+        $('#endTime').val(endtime);
+        $('#image').attr("src", "asset/eventimage/"+picture);
+
+        $('#form-edit-event').attr("action", "{{ url('yourEvent/update') }}" + "/" + id);
+});
   </script>

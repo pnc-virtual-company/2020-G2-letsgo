@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <br>
-                                <input name="city" class="form-control" list="result" id="autoSuggestion" placeholder="Choose Your Country ..." />
+                                <input name="city" class="form-control autoSuggestion" list="result" placeholder="Choose Your Country ..." />
                                 <datalist id="result">
                                 </datalist>
                             </div>
