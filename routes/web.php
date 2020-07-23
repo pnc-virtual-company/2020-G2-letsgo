@@ -24,6 +24,7 @@ Auth::routes();
 Route::resource('/exploreEvents', 'ExploreEventsController');
 
 Route::resource('/yourEvent', 'YourEventController');
+Route::put('yourEvent/update/{id}','YourEventController@update');
 
 Route::resource('/userProfile', 'userProfileController');
 Route::put('/changePasswords', 'userProfileController@changePassword')->name('changePasswords');

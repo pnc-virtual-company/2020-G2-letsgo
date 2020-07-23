@@ -15,6 +15,7 @@
   <script src="{{ asset('asset/js/awaresome.js') }}"></script>
   <script src="{{ asset('asset/js/readCityList.js') }}"></script>
  
+ 
 </head>
 <body>
        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
