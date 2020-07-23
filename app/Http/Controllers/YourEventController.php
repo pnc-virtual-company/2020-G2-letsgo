@@ -44,7 +44,7 @@ class YourEventController extends Controller
             'title' => 'required',
             'startDate' => 'required|date|date_format:Y-m-d|after:yesterday',
             'startTime' => 'required',
-            'endDate' => 'required|date|date_format:Y-m-d|after:startDate',
+            'endDate' => 'required|date|date_format:Y-m-d|after:yesterday',
             'endTime' => 'required',
             'description' => 'required',
             'city' => 'required',
