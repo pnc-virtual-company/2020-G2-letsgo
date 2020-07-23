@@ -67,7 +67,7 @@
                     <img src="{{asset('asset/eventimage/'.$event->picture)}}" width="120px" id="image" height="120px" >
                     <div class="row justify-content-center">
                         <label for="edit_image"><i class="fa fa-pencil-alt text-dark"></i></label>
-                        <input type="file" style="display: none" name="picture" id="edit_image">
+                        <input type="file"  name="picture" id="edit_image">
                         <span id="message"></span>
                      
                     {{-- edit picture from event  --}} 
@@ -108,7 +108,7 @@
   
           var postData=new FormData();
           postData.append('edit_image',this.files[0]);
-        var url="{{url('eventimage.store')}}";
+        var url="{{url('eventimage.update')}}";
         $.ajax({
         headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
         async:true,
