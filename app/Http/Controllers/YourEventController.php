@@ -3,14 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Storage;
-use DB;
-use File;
 use Auth;
 use App\Event;
-use App\User;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
-
+use App\Category;
 class YourEventController extends Controller
 {
     /**
@@ -20,12 +15,13 @@ class YourEventController extends Controller
      */
     public function index()
     {
-        $events = Event::where('owner_id', Auth::id())->get();
-        return view('yourEvent.yourEvent', compact('events'));
+        $events = Event::where('owner_id', Auth::id())->get();   
+        $categories = Category::all();
+        return view('yourEvent.yourEvent', compact(['events','categories']));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a nw resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -40,10 +36,45 @@ class YourEventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    public function store( Request $request)
     {
-        //
+        $request -> validate([
+            'category' => 'required|unique:categories,category',
+            'title' => 'required',
+            'startDate' => 'required|date|date_format:Y-m-d|after:yesterday',
+            'startTime' => 'required',
+            'endDate' => 'required|date|date_format:Y-m-d|after:startDate',
+            'endTime' => 'required',
+            'description' => 'required',
+            'city' => 'required',
+        ]);
+        $user = Auth::id();
+        $yourevent = new Event;
+        $yourevent->cate_id = $request->get('category');
+        $yourevent->title = $request->get('title');
+        $yourevent->startDate = $request->get('startDate');
+        $yourevent->startTime = $request->get('startTime');
+        $yourevent->endDate = $request->get('endDate');
+        $yourevent->endTime = $request->get('endTime');
+        $yourevent->description = $request->get('description');
+        $yourevent->city = $request->get('city');
+        $yourevent->owner_id =   $user;
+        if($request->picture != null){ 
+            request()->validate([
+                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+                $imageName = time().'.'.request()->picture->getClientOriginalExtension();
+                request()->picture->move(public_path('asset/eventimage/'), $imageName);
+                $yourevent->picture = $imageName;
+                
+        }else {
+            $yourevent->picture = "event.png";
+        }
+        $yourevent->save();
+        return back();
     }
+    
 
     /**
      * Display the specified resource.
@@ -53,7 +84,7 @@ class YourEventController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
