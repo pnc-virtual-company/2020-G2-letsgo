@@ -52,7 +52,10 @@
                                 <a class="btn btn-sm mt-4 float-right delete" style="background: rgb(182, 182, 182)" data-id="{{$event->id}}" data-toggle="modal" data-target="#deleteEvent" href="#!"><b>Cancel</b></a>
                             </div>
                             <div class="col-6">
-                                <a class="btn btn-sm mt-4 float-right" style="background: rgb(182, 182, 182)" href=""><b>Edit</b></a>
+                                <a class="btn btn-sm mt-4 float-right" style="background: rgb(182, 182, 182)" data-toggle="modal" data-target="#editYourEvent{{$event->id}}" href=""><b>Edit</b></a>
+                                   {{-- modal edit --}}
+                                    @include('yourEvent.editYourEvent')
+                                    {{--end modal edit --}}
                             </div>
                         </div>
                     </div>
@@ -70,3 +73,4 @@
 @include('yourEvent.deleteEvent')
 
 @endsection
+
