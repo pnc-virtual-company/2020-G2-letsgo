@@ -15,11 +15,12 @@
                 <div class="col-8">
                 {{-- -------- Show category-------------- --}}
                 <div class="form-group">
-                    <select name="category"  class="form-control">
+                    <select name="category" id="category" class="form-control">
                     @foreach ($categories as $category )                       
-                        <option value="{{$category->id}}" {{($category->id == $event->category->id) ? 'selected' : ''}}>{{$category->category}}</option>
+                        <option value="{{$category->id}}" {{($category->id==$event->cate_id) ? 'selected' : ''}} >{{$category->category}}</option>
                     @endforeach  
                     </select>
+                    
                 </div>
                 {{-- --------end Show category-------------- --}}
                 {{-- -------- Show event Name-------------- --}}
