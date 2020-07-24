@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Event;
 use App\Category;
+use App\User;
 class YourEventController extends Controller
 {
 
@@ -40,7 +41,6 @@ class YourEventController extends Controller
 
     public function store( Request $request)
     {
-        // dd($request);
         $request -> validate([
             'category' => 'required',
             'title' => 'required',
@@ -51,6 +51,7 @@ class YourEventController extends Controller
             'description' => 'required',
             'city' => 'required',
         ]);
+
         $user = Auth::id();
         $yourevent = new Event;
         $yourevent->cate_id = $request->get('category');
@@ -109,38 +110,38 @@ class YourEventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user_id =   Auth::id();
-        $yourevent = Event::where('id', $id)->where('owner_id',$user_id)->first();
-        if(!is_null($yourevent)){
-            request()->validate([
-                'category' => 'required|unique:categories,category',
-                'title' => 'required',
-                'startDate' => 'required|date|date_format:Y-m-d|after:yesterday',
-                'startTime' => 'required',
-                'endDate' => 'required|date|date_format:Y-m-d|after:startDate',
-                'endTime' => 'required',
-                'description' => 'required',
-                'city' => 'required',
-            ]);
-            $yourevent->title = $request->get('title');
-            $yourevent->cate_id  = $request->get('category');
-            $yourevent->startDate = $request->get('startDate');
-            $yourevent->startTime = $request->get('startTime');
-            $yourevent->endDate = $request->get('endDate');
-            $yourevent->endTime = $request->get('endTime');
-            $yourevent->description = $request->get('description');
-            $yourevent->city = $request->get('city');
-            if($request->picture != null){ 
-                request()->validate([
-                    'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                    ]);
-                    $imageName = time().'.'.request()->picture->getClientOriginalExtension();
-                    request()->picture->move(public_path('asset/eventimage/'), $imageName);
-                    $yourevent->picture = $imageName;
-                    
+        $yourevent = Event::find($id);
+        $this->authorize('update',$yourevent);
+        request()->validate([
+            'category' => 'required',
+            'title' => 'required',
+            'startDate' => 'required|date|date_format:Y-m-d|after:yesterday',
+            'startTime' => 'required',
+            'endDate' => 'required|date|date_format:Y-m-d|after:yesterday',
+            'endTime' => 'required',
+            'description' => 'required',
+            'city' => 'required',
+        ]);
+        $yourevent->title = $request->get('title');
+        $yourevent->cate_id  = $request->get('category');
+        $yourevent->startDate = $request->get('startDate');
+        $yourevent->startTime = $request->get('startTime');
+        $yourevent->endDate = $request->get('endDate');
+        $yourevent->endTime = $request->get('endTime');
+        $yourevent->description = $request->get('description');
+        $yourevent->city = $request->get('city');
+        if($request->picture != null){ 
+            if(\File::exists(public_path("asset/eventimage/{$yourevent->picture}"))){
+                \File::delete(public_path("asset/eventimage/{$yourevent->picture}"));
             }
-            $yourevent->save();
+            request()->validate([
+                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.request()->picture->getClientOriginalExtension();
+            request()->picture->move(public_path('asset/eventimage/'), $imageName);
+            $yourevent->picture = $imageName;  
         }
+        $yourevent -> save();
         return back();
     }
 
@@ -152,19 +153,14 @@ class YourEventController extends Controller
      */
     public function destroy($id)
     {
-        $user = Auth::id();
-        $events = Event::where('id', $id)->where('owner_id',$user)->first();
-        if(!is_null($events)){
-            $events->delete();
+        $yourevent = Event::find($id);
+        $this->authorize('update',$yourevent);
+        if(\File::exists(public_path("asset/eventimage/{$yourevent->picture}"))){
+            \File::delete(public_path("asset/eventimage/{$yourevent->picture}"));
         }
+        $yourevent->delete();
         return back();
     
-    }
-
-    public function read(Request $request){
-        file_get_contents(base_path('resources/lang/en.json'));
-        // return $data;
-        // return response()->json($data);
     }
     
 }

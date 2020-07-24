@@ -181,10 +181,10 @@
 
                         @if(Auth::user()->picture)
                                 {{-- get profile from user insert --}}
-                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" width="120px" height="120px" id="img_prv">
+                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" style="border-radius:50%" width="120px" height="120px"  id="img_prv">
                         @else
                                 {{-- default profile --}}
-                            <img src="asset/userImage/user.png" width="120px" height="120px" id="img_prv"/>
+                            <img src="asset/userImage/user.png" style="border-radius:50%" width="120px" height="120px"  id="img_prv"/>
                         @endif
                         
                         <div class="row justify-content-center">
