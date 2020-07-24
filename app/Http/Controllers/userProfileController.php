@@ -142,15 +142,17 @@ class userProfileController extends Controller
     {
     
         $image = User::findOrFail($id);
-        
-        if(\File::exists(public_path("asset/userImage/{$image->picture}"))){
-            \File::delete(public_path("asset/userImage/{$image->picture}"));
+        if($image->picture != 'user.png'){
+            if(\File::exists(public_path("asset/userImage/{$image->picture}"))){
+                \File::delete(public_path("asset/userImage/{$image->picture}"));
+            }
+            $image = User::findOrFail($id)->where('id', Auth::user()->id)->update([
+                'picture' => 'user.png',
+            ]);
+            return back();
+        }else {
+            return back();
         }
-        $image = User::findOrFail($id)->where('id', Auth::user()->id)->update([
-            'picture' => 'user.png',
-        ]);
-   
-        return back();
     }
 
 }

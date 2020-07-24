@@ -53,7 +53,7 @@ class EventPolicy
      */
     public function update(User $user, Event $event)
     {
-        //
+        return $user->id == $event->owner_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class EventPolicy
      */
     public function delete(User $user, Event $event)
     {
-        return $event->owner_id == $user->id;
+        return $user->id == $event->owner_id;
     }
 
     /**
@@ -77,7 +77,7 @@ class EventPolicy
      */
     public function restore(User $user, Event $event)
     {
-        //
+        
     }
 
     /**
