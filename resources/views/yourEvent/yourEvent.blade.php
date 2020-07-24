@@ -58,6 +58,7 @@
                                  data-id = "{{$event->id}}"
                                  data-target="#editYourEvent" 
                                  data-title = "{{$event->title}}"
+                                 data-cate_id = "{{$event->cate_id}}"
                                  data-description = "{{$event->description}}"
                                  data-city = "{{$event->city}}"
                                  data-startdate = "{{$event->startDate}}"

@@ -15,10 +15,8 @@
                 <div class="col-8">
                 {{-- -------- Show category-------------- --}}
                 <div class="form-group">
-                    <select name="category" id="category" class="form-control">
-                    @foreach ($categories as $category )                       
-                        <option value="{{$category->id}}" {{($category->id==$event->cate_id) ? 'selected' : ''}} >{{$category->category}}</option>
-                    @endforeach  
+                    <select name="category" id="category"  class="form-control cateogry-option">
+                    
                     </select>
                     
                 </div>
@@ -59,7 +57,7 @@
                 {{-- ----------end city-------------- --}}
                 {{-- Description --}}
                 <div class="form-group">
-                     <textarea class="form-control" rows="5" id="description-edit" name="description"></textarea>
+                     <textarea class="form-control" rows="3" id="description-edit" name="description"></textarea>
                 </div>
                 {{-- end --}}
                 </div>
@@ -141,7 +139,18 @@ $(document).on('click','.edit-event', function(e) {
         var enddate = $(this).data('enddate');
         var endtime = $(this).data('endtime');
         var picture = $(this).data('picture');
-        
+        var cate_id = $(this).data('cate_id');
+        var categories = {!! json_encode($categories->toArray(), JSON_HEX_TAG) !!};
+        var option;
+        categories.forEach(category => {
+            if(cate_id == category.id){
+                option += `<option value = '${category.id}' selected>${category.category}</option>`;
+            }else {
+                option += `<option value = '${category.id}'>${category.category}</option>`;
+            }
+        });
+        $('#category').html(option);
+
         $('#title').val(title);
         $('#description-edit').val(description);
         $('#city').val(city);
@@ -149,8 +158,9 @@ $(document).on('click','.edit-event', function(e) {
         $('#end-date').val(enddate);
         $('#startTime').val(starttime);
         $('#endTime').val(endtime);
-        $('#image').attr("src", "asset/eventimage/"+picture);
-
+        
+        // $('#image').attr("src", "asset/eventimage/"+picture);    
+        $('#image').attr("src", "{{ url('asset/eventimage')}}" + "/" + picture);    
         $('#form-edit-event').attr("action", "{{ url('yourEvent/update') }}" + "/" + id);
 });
   </script>
