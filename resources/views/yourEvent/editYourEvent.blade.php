@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <select name="category"  class="form-control">
                     @foreach ($categories as $category )                       
-                        <option value="{{$category->id}}" {{($category->id == $event->category->id) ? 'selected' : ''}}>{{$category->category}}</option>
+                        <option value="{{$category->id}}" {{($category->id == $event->cate_id) ? 'selected' : ''}}>{{$category->category}}</option>
                     @endforeach  
                     </select>
                 </div>
