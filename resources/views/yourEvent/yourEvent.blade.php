@@ -25,6 +25,7 @@
            <div class="col-sm-12 col-md-1 col-lg-1"></div>
            <div class="col-sm-12 col-md-10 col-lg-9">
             @foreach ($events as $event)
+            <p>{{$event->startDate}}</p>
             <div class="card p-2 card-event">
                 <div class="row">
                     <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
