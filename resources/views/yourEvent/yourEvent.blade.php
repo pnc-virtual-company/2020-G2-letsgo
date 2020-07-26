@@ -1,6 +1,7 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')    
+                    
 <div class="container">
         <br>
         <div class="row">
@@ -24,11 +25,32 @@
        <div class="row">
            <div class="col-sm-12 col-md-1 col-lg-1"></div>
            <div class="col-sm-12 col-md-10 col-lg-9">
+              
+                
+               <?php $data = $events;?>
+               @foreach ($data as $item => $events)
+              
             @foreach ($events as $event)
+            {{-- condition to get thire own event --}}
+            @if (Auth::user()->id == $event->owner_id)
+            <h6>
+                {{-- get data to group by --}}
+                <?php
+               
+                    $startDate =(new DateTime($item));
+                    echo date_format($startDate, "l, F j");
+                ?>  
+                </h6>
+                {{--  --}}
             <div class="card p-2 card-event">
                 <div class="row">
                     <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
-                        {{$event->startTime}}
+                        {{-- get current time and convert to AM or PM --}}
+                        <?php
+                        $currentDateTime = $event['startTime'];
+                         echo $newDateTime = date(' h:i A', strtotime($currentDateTime));
+                         ?>
+                         {{--  --}}
                     </div>
                     <div class="col-8 col-sm-6 col-md-5 col-lg-4">
                         <b>{{$event->category->category}}</b>
@@ -48,10 +70,11 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-3"></div>
+                            <div class="col-3">
                                 <a class="btn btn-sm mt-4 float-right delete" style="background: rgb(182, 182, 182)" data-id="{{$event->id}}" data-toggle="modal" data-target="#deleteEvent" href="#!"><b>Cancel</b></a>
                             </div>
-                            <div class="col-6">
+                            <div class="col-3">
                                 <a class="btn btn-sm mt-4 edit-event float-right"
                                  style="background: rgb(182, 182, 182)" 
                                  data-toggle="modal" 
@@ -68,12 +91,15 @@
                                  data-picture = "{{$event->picture}}"
                                  href="!#"><b>Edit</b></a>
                             </div>
+                            <div class="col-3"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <br>
                 
+            @endif
+        @endforeach
         @endforeach
            </div>
            <div class="col-sm-12 col-md-1 col-lg-2"></div>
