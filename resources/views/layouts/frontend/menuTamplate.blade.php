@@ -21,7 +21,7 @@
        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
         <div class="container">
             <a class="navbar-brand" href="{{route('exploreEvents.index')}}">
-            <img style="width: 70px;height: 70px;"  src="{{asset('asset/logo/logo1.png')}}"/>
+            <img style="width: 70px;height: 70px;"  src="{{asset('asset/logo/logo.png')}}"/>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -181,10 +181,10 @@
 
                         @if(Auth::user()->picture)
                                 {{-- get profile from user insert --}}
-                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" style="border-radius:50%" width="120px" height="120px"  id="img_prv">
+                            <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" style="border-radius:50%" width="120px" height="120px"  id="img_aupload">
                         @else
                                 {{-- default profile --}}
-                            <img src="asset/userImage/user.png" style="border-radius:50%" width="120px" height="120px"  id="img_prv"/>
+                            <img src="asset/userImage/user.png" style="border-radius:50%" width="120px" height="120px"  id="img_aupload"/>
                         @endif
                         
                         <div class="row justify-content-center">
@@ -195,7 +195,7 @@
                             {{-- button delete profile --}}
                             <a href="#" onclick="document.getElementById('deleteProfile').submit()"><i class="far fa-trash-alt text-dark mt-2"></i></a>&nbsp;&nbsp;&nbsp;
                                 {{-- end button --}}
-                            <span id="mgs_ta"></span>
+                            <span id="msg_img_error"></span>
                         </div>
                     </div>
                 </div>
@@ -277,16 +277,16 @@
         var match=['image/png','image/jpg','image/jpeg','image/gif'];
      
         if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3]))){
-            $('#mgs_ta').html('<p style="color:red">Plz select a valid type image..only png jpg jpeg gif allowed</p>');
+            $('#msg_img_error').html('<p style="color:red">Plz select a valid type image..only png jpg jpeg gif allowed</p>');
     
         }else{
      
-          $('#mgs_ta').empty();
+          $('#msg_img_error').empty();
      
         var reader=new FileReader();
     
         reader.onload=function(ev){
-          $('#img_prv').attr('src',ev.target.result).css('width','120px').css('height','120px');
+          $('#img_aupload').attr('src',ev.target.result).css('width','120px').css('height','120px');
         }
         reader.readAsDataURL(this.files[0]);
     
