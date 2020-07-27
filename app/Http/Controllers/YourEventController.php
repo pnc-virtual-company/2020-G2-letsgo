@@ -11,6 +11,10 @@ use DB;
 class YourEventController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +24,7 @@ class YourEventController extends Controller
     {
         $events = Event::all()->groupBy('startDate');
       
-                $categories = Category::all();
+                 $categories = Category::all();
       
         return view('yourEvent.yourEvent', compact(['events','categories']));
     }

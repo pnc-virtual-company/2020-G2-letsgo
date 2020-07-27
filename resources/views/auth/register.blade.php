@@ -35,6 +35,9 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                @if(session()->has('fail'))
+                                    <small class="text-danger"><strong>{{ session()->get('fail') }}</strong></small>
+                                @endif
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
