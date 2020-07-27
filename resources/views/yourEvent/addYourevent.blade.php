@@ -143,7 +143,7 @@
 
 
     $("#beginDate").datepicker({
-    minDate: 1,
+    minDate: 0,
     changeMonth: true,
     changeYear: true,
     dateFormat: 'yy-mm-dd',
@@ -161,7 +161,7 @@
     }
 });
 $("#endDate").datepicker({
-    minDate: 1,
+    minDate: 0,
     changeMonth: true,
     changeYear: true,
     dateFormat: 'yy-mm-dd',
