@@ -158,7 +158,7 @@ $(document).on('click','.edit-event', function(e) {
         $('#startTime').val(starttime);
         $('#endTime').val(endtime);
         
-        // $('#image').attr("src", "asset/eventimage/"+picture);    
+         
         $('#image').attr("src", "{{ url('asset/eventimage')}}" + "/" + picture);    
         $('#form-edit-event').attr("action", "{{ url('yourEvent/update') }}" + "/" + id);
 });

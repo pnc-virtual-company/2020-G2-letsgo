@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Event;
 class ExploreEventsController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class ExploreEventsController extends Controller
      */
     public function index()
     {
-        return view('exploreEvents.exploreEvents');
+        $exploreEvents = Event::all();
+        return view('exploreEvents.exploreEvents',compact('exploreEvents'));
        
     }
 
@@ -82,4 +83,6 @@ class ExploreEventsController extends Controller
     {
         //
     }
+
+    
 }

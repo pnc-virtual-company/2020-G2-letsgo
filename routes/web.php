@@ -23,6 +23,7 @@ Auth::routes();
 
 Route::resource('/exploreEvents', 'ExploreEventsController');
 
+
 Route::resource('/yourEvent', 'YourEventController');
 Route::put('yourEvent/update/{id}','YourEventController@update');
 
