@@ -4,68 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49d60ae420286a4070cb23f5f54bb9fb",
+    "content-hash": "5a993688a4552c644071256b6b56c39a",
     "packages": [
-        {
-            "name": "aman00323/emailchecker",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aman00323/email-checker.git",
-                "reference": "78bdcb62a774ac850da1be7d1c2c5f4f01f2f940"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aman00323/email-checker/zipball/78bdcb62a774ac850da1be7d1c2c5f4f01f2f940",
-                "reference": "78bdcb62a774ac850da1be7d1c2c5f4f01f2f940",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.6.0|~3.7.0|~3.8.0",
-                "phpunit/phpunit": "^7.0|^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Aman\\EmailVerifier\\EmailCheckerServiceProvider"
-                    ],
-                    "aliases": {
-                        "EmailChecker": "Aman\\EmailVerifier\\EmailCheckerFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aman\\EmailVerifier\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Aman Nurani",
-                    "email": "work.amannurani@gmail.com",
-                    "role": "Software Engineer"
-                }
-            ],
-            "description": "Laravel package for checking email address is exist or not in real world",
-            "homepage": "https://github.com/aman00323/email-checker",
-            "keywords": [
-                "disposable email checker",
-                "disposable emails",
-                "email exist or not",
-                "email validation",
-                "email verification",
-                "php email verifier"
-            ],
-            "time": "2020-04-28T13:20:34+00:00"
-        },
         {
             "name": "asm89/stack-cors",
             "version": "1.3.0",
