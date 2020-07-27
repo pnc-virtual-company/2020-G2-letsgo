@@ -76,7 +76,7 @@
 
                      <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
                             {{-- get profile from user insert --}}
-                         <li> <a href="#"><img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img"></a></li>
+                         <li><a href="#"><img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img"></a></li>
                      </div>
 
                      <div class="col-12 col-sm-12 col-md-12 col-lg-4">
@@ -95,15 +95,14 @@
             </div>
             <div class="col-sm-12 col-md-1 col-lg-2"></div>
         </div>
-   
         {{--==================end view all explore event ==============================--}}
     </div>
 
     <script>
         function myFunction() {
             var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById("myInput");
-            filter = input;
+            input = document.getElementById("search");
+            filter = input.value.toUpperCase();
             ul = document.getElementById("myData");
             li = ul.getElementsByTagName("li");
             for (i = 0; i < li.length; i++) {
@@ -117,4 +116,5 @@
             }
         }
         </script>
+        
 @endsection
