@@ -82,7 +82,7 @@
 {{-------------- Form of edit your event ----------}}
 <script type="text/javaScript">
     $(".startdate").datepicker({
-    minDate: 1,
+    minDate: 0,
     changeMonth: true,
     changeYear: true,
     dateFormat: 'yy-mm-dd',
@@ -101,7 +101,7 @@
 });
 
 $(".enddate").datepicker({
-    minDate: 1,
+    minDate: 0,
     changeMonth: true,
     changeYear: true,
     dateFormat: 'yy-mm-dd',
@@ -156,7 +156,6 @@ $(document).on('click','.edit-event', function(e) {
         $('#startTime').val(starttime);
         $('#endTime').val(endtime);
         
-        // $('#image').attr("src", "asset/eventimage/"+picture);    
         $('#image').attr("src", "{{ url('asset/eventimage')}}" + "/" + picture);    
         $('#form-edit-event').attr("action", "{{ url('yourEvent/update') }}" + "/" + id);
 });
