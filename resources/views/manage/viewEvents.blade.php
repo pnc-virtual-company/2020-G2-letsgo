@@ -33,102 +33,31 @@
 
                   </tr>
                   <br>
-                  <tr id="result">
-
-                  </tr>
-                  {{-- @foreach ($event as $events)
-                  <tr>
+              
+                  @foreach ($event as $events)
+                    <tr class="event">
                         <td>{{$events->owner_id}}</td>
                         <td>{{$events->city}}</td>
                         <td>{{$events->title}}</td>
                         <td>{{$events->category->category}}</td>
                         <td>{{$events->startDate}}</td>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                   
               </table>
-              {{-- <ul class="list-group list-group-flush"> --}}
-              {{-- </ul> --}}
+              
             </div>
           </div>
       </div>
-      <script type="text/javaScript">
+      
+      <script>
         $(document).ready(function(){
-          $(document).on('keyup', '#search', function(){
-              var query = $(this).val();
-              fetch_events_data(query);
-          });
-          fetch_events_data();
-         function fetch_events_data(query)
-         {
-          $.ajax({
-           url:"{{ route('event.searches')}}",
-           method:'get',
-           data:{query:query},
-           dataType:'json',
-           success:function(data)
-           {
-            var result = "";
-            
-              data.forEach(element => {
-              result += `
-                
-                    <td>${element.owner_id}</td>
-                    <td>${element.city}</td>
-                    <td>${element.title}</td>
-                    <td>${element.category}</td>
-                    <td>${element.startDate}</td>
-                 `;
-            });
-              $('#result').html(result);
-           }
-          })
-         }
+        $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".event").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        });
         });
         </script>
-
-        {{-- <script>
-            function myFunction() {
-              var input, filter, table, tr, td, i, txtValue;
-              input = document.getElementById("myInput");
-              filter = input.value.toUpperCase();
-              console.log(filter);
-              table = document.getElementById("myTable");
-              tr = table.getElementsByTagName("tr");
-              for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                  txtValue = td.textContent || td.innerText;
-                  console.log(txtValue);
-                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                  } else {
-                    tr[i].style.display = "none";
-                  }
-                }       
-              }
-            }
-            </script> --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection

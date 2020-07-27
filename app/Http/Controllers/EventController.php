@@ -98,12 +98,4 @@ class EventController extends Controller
     }
 
 
-    public function searches(Request $request){
-        $this->authorize('view', Event::class); 
-        $dataSearch = $request->get('query');
-        if($request->ajax()){
-            $query = DB::table('events')->where('title', 'LIKE', '%' . $dataSearch . '%')->get();
-            return $query;
-        }
-    }
 }
