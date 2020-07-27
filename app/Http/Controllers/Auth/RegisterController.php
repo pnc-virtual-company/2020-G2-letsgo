@@ -8,6 +8,9 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Aman\EmailVerifier\EmailChecker;
+use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -65,16 +68,28 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    public function register(Request $request)
     {
-        return User::create([
-            'firstname' => $data['firstname'],
-            'lastname' => $data['lastname'],
-            'sex' => $data['sex'],
-            'birth' => $data['birth'],
-            'email' => $data['email'],
-            'city' => $data['city'],
-            'password' => Hash::make($data['password']),
+        $emails = app(EmailChecker::class)->checkEmail($request->get('email'),'boolean');
+        if(!$emails['success']){
+            return redirect()->back() ->with('fail', 'Your google could not be found.');  
+        }
+        $user = New User([
+            'firstname' => $request->get('firstname'),
+            'lastname' => $request->get('lastname'),
+            'sex' => $request->get('sex'),
+            'city' => $request->get('city'),
+            'email' => $request->get('email'),
+            'password' => Hash::make($request->get('password'))
         ]);
+        $user->save();
+        $credentials = array(
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
+        );
+        
+        if (Auth::attempt($credentials)) {
+            return redirect('/exploreEvents');
+        }
     }
 }
