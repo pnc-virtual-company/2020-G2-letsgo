@@ -32,31 +32,15 @@ class CreateUsersTable extends Migration
             array(
                 'firstname'=>'admin',
                 'lastname'=>'user',
-                'city'=> 'Battambong',
+                'city'=> 'Cambodia,Phnom Penh',
                 'sex'=> 'Male',
                 'birth'=> null,
                 'picture'=> 'user.png',
-                'email' => 'admin@example.com',
+                'email' => 'virakcambodia44@gmail.com',
                 'role' =>1,
                 'password' => bcrypt('password'),
                 'remember_token' => Str::random(10)
-            )
-            );
-            DB::table('users')->insert(
-                array(
-                    'firstname'=>'normal',
-                    'lastname'=>'user',
-                    'city'=>'Banteaymeanchey',
-                    'sex'=> 'Female',
-                    'birth'=> null,
-                    'picture'=> 'user.png',
-                    'email' => 'normal@example.com',
-                    'role' => 0,
-                    'password' => bcrypt('password'),
-                    'remember_token' => Str::random(10)
-                )
-            ); 
-    
+            ));
     }
 
     /**

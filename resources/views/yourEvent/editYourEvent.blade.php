@@ -15,7 +15,7 @@
                 <div class="col-8">
                 {{-- -------- Show category-------------- --}}
                 <div class="form-group">
-                    <select name="category" id="category"  class="form-control cateogry-option">
+                    <select name="category" id="category"  class="form-control cateogry-option" required>
                     
                     </select>
                 </div>
@@ -23,7 +23,7 @@
                 {{-- -------- Show event Name-------------- --}}
                                                         
                 <div class="form-group">
-                    <input type="text" name="title" id="title"  placeholder="Title" class="form-control">
+                    <input type="text" name="title" id="title"  placeholder="Title" class="form-control" required>
                 </div>
                 {{-- -------- end Show event Name-------------- --}}
                 {{-- -------- Show start date-------------- --}}
@@ -39,24 +39,24 @@
                 {{-- -------- Show end date-------------- --}}
                 <div class="form-row">
                     <div class="form-group col-6">
-                        <input type='text' name="endDate" placeholder="End date"  class="form-control enddate dpicker" id="end-date" autocomplete="off">
+                        <input type='text' name="endDate" placeholder="End date"  class="form-control enddate dpicker" id="end-date" autocomplete="off" required>
                     </div>
                     <div class="form-group col-6">
-                        <input type="time" name="endTime" placeholder="At" id="endTime"  class="form-control">
+                        <input type="time" name="endTime" placeholder="At" id="endTime"  class="form-control" required>
                     </div>
                 </div>
                 {{-- ----------end-------------- --}}
                                                         
                 {{-- -------- Show user city-------------- --}}     
                 <div class="form-group">
-                    <input class="form-control autoSuggestion" list="result" id="city" placeholder="Country name here .."  name="city"/>
+                    <input class="form-control autoSuggestion" list="result" id="city" placeholder="Country name here .."  name="city"/ required>
                     <datalist id="result">
                     </datalist>
                 </div>
                 {{-- ----------end city-------------- --}}
                 {{-- Description --}}
                 <div class="form-group">
-                     <textarea class="form-control" rows="3" id="description-edit" name="description"></textarea>
+                     <textarea class="form-control" rows="3" id="description-edit" name="description" required></textarea>
                 </div>
                 {{-- end --}}
                 </div>
@@ -66,7 +66,6 @@
                     <div class="row justify-content-center">
                         <label for="picture" ><i class="fa fa-pencil-alt text-dark"></i></label>
                         <input type='file' id="picture" name="picture" style="display: none"  onchange="readURL(this);" />
-                     
                     {{-- edit picture from event  --}} 
                 </div>
                 </div>
@@ -83,7 +82,7 @@
 {{-------------- Form of edit your event ----------}}
 <script type="text/javaScript">
     $(".startdate").datepicker({
-    minDate: 1,
+    minDate: 0,
     changeMonth: true,
     changeYear: true,
     dateFormat: 'yy-mm-dd',
@@ -102,7 +101,7 @@
 });
 
 $(".enddate").datepicker({
-    minDate: 1,
+    minDate: 0,
     changeMonth: true,
     changeYear: true,
     dateFormat: 'yy-mm-dd',
@@ -121,7 +120,6 @@ function readURL(input) {
                         .width(120)
                         .height(120);
                 };
-
                 reader.readAsDataURL(input.files[0]);
             }
 }
@@ -158,7 +156,6 @@ $(document).on('click','.edit-event', function(e) {
         $('#startTime').val(starttime);
         $('#endTime').val(endtime);
         
-        // $('#image').attr("src", "asset/eventimage/"+picture);    
         $('#image').attr("src", "{{ url('asset/eventimage')}}" + "/" + picture);    
         $('#form-edit-event').attr("action", "{{ url('yourEvent/update') }}" + "/" + id);
 });

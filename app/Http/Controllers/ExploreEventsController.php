@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Event;
 class ExploreEventsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+    }
     /**
      * Display a listing of the resource.
      *

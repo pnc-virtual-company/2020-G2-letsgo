@@ -18,16 +18,20 @@
                           </div>
                         </div>
                         <div class="form-group">
-                            <select name="category"  class="form-control">
-                                <option  disabled selected >Event Category</option>
-                                @foreach ( $categories as $category)
-                            <option value="{{$category->id}}" >{{$category->category}}</option>
-                                @endforeach 
+                            <select name="category"  class="form-control" required>
+                                @if (!$categories->isEmpty())
+                                    <option value=""  disabled selected >Event Category</option>
+                                    @foreach ( $categories as $category)
+                                       <option value="{{$category->id}}" >{{$category->category}}</option>
+                                    @endforeach 
+                                @else
+                                    <option value="" disabled selected>Don't have any category</option>
+                                @endif
                             </select>
                           </div>
                         {{-- -------- Show event title-------------- --}}
                         <div class="form-group">
-                            <input type="text" name="title"  placeholder="Title"  class="form-control">
+                            <input type="text" name="title"  placeholder="Title"  class="form-control" required>
                         </div>   
                         {{-- ----------end-------------- --}}
   
@@ -36,10 +40,10 @@
                             {{-- -----------start date and start time-------- --}}
                             <div class="form-group col-6">
                               {{-- <input type="date" name="startDate" placeholder="Staet date" class="form-control"> --}}
-                              <input type="text" name="startDate" placeholder="Start date" class="form-control dpicker" id="beginDate" autocomplete="off">
+                              <input type="text" name="startDate" placeholder="Start date" class="form-control dpicker" id="beginDate" autocomplete="off" required>
                             </div>
                             <div class="form-group col-6">
-                              <input type="time" name="startTime" placeholder="At"  class="form-control" autocomplete="off">
+                              <input type="time" name="startTime" placeholder="At"  class="form-control" autocomplete="off" required>
                             </div>
                         </div>
                         {{-- ----------end-------------- --}}
@@ -47,17 +51,17 @@
                         {{-- -------- Show end date and end time-------------- --}}
                         <div class="form-row">
                             <div class="form-group col-6">
-                              <input type='text' name="endDate" placeholder="End date"  class="form-control dpicker" id="endDate" autocomplete="off">
+                              <input type='text' name="endDate" placeholder="End date"  class="form-control dpicker" id="endDate" autocomplete="off" required>
                             </div>
                             <div class="form-group col-6">
-                              <input type="time" name="endTime" placeholder="At"  class="form-control" autocomplete="off">
+                              <input type="time" name="endTime" placeholder="At"  class="form-control" autocomplete="off" required>
                             </div>
                         </div>
                         {{-- ----------end-------------- --}}
                         
                         {{-- -------- Show event city-------------- --}}
                         <div class="form-group">
-                            <input name="city" class="form-control autoSuggestion" list="result" placeholder="City" />
+                            <input name="city" class="form-control autoSuggestion" list="result" placeholder="City" required>
                             <datalist id="result">
                             </datalist>
                         </div>
@@ -66,7 +70,7 @@
                         {{-- Description --}}
                         <div class="form-group">
                             <label for="comment">Description</label>
-                            <textarea class="form-control" rows="3" id="description" name="description"></textarea>
+                            <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
                         </div>
                         {{-- end --}}
                     </div>
@@ -139,7 +143,7 @@
 
 
     $("#beginDate").datepicker({
-    minDate: 1,
+    minDate: 0,
     changeMonth: true,
     changeYear: true,
     dateFormat: 'yy-mm-dd',
@@ -157,7 +161,7 @@
     }
 });
 $("#endDate").datepicker({
-    minDate: 1,
+    minDate: 0,
     changeMonth: true,
     changeYear: true,
     dateFormat: 'yy-mm-dd',
