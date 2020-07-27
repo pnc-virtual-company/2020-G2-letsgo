@@ -1,3 +1,6 @@
+body{
+    background-color: lightblue; 
+}
 #btndeletecategory{
     border: none;
     color: blue;

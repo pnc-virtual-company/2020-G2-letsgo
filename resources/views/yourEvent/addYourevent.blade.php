@@ -18,11 +18,15 @@
                           </div>
                         </div>
                         <div class="form-group">
-                            <select name="category"  class="form-control">
-                                <option  disabled selected >Event Category</option>
-                                @foreach ( $categories as $category)
-                                  <option value="{{$category->id}}" >{{$category->category}}</option>
-                                @endforeach 
+                            <select name="category"  class="form-control" required>
+                                @if (!$categories->isEmpty())
+                                    <option value=""  disabled selected >Event Category</option>
+                                    @foreach ( $categories as $category)
+                                       <option value="{{$category->id}}" >{{$category->category}}</option>
+                                    @endforeach 
+                                @else
+                                    <option value="" disabled selected>Don't have any category</option>
+                                @endif
                             </select>
                           </div>
                         {{-- -------- Show event title-------------- --}}

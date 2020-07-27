@@ -121,7 +121,6 @@ function readURL(input) {
                         .width(120)
                         .height(120);
                 };
-
                 reader.readAsDataURL(input.files[0]);
             }
 }

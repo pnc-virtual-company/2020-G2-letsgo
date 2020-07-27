@@ -48,12 +48,13 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                         <div class="row">
-                            <div class="col-6">
-                                <a class="btn btn-sm mt-4 float-right delete" style="background: rgb(182, 182, 182)" data-id="{{$event->id}}" data-toggle="modal" data-target="#deleteEvent" href="#!"><b>Cancel</b></a>
+                            <div class="col-3"></div>
+                            <div class="col-3">
+                                <a class="btn btn-sm  float-right delete" style="background: rgb(182, 182, 182); margin-top: 35px;" data-id="{{$event->id}}" data-toggle="modal" data-target="#deleteEvent" href="#!"><b>Cancel</b></a>
                             </div>
-                            <div class="col-6">
-                                <a class="btn btn-sm mt-4 edit-event float-right"
-                                 style="background: rgb(182, 182, 182)" 
+                            <div class="col-3">
+                                <a class="btn btn-sm edit-event float-right"
+                                 style="background: rgb(182, 182, 182); margin-top: 35px;" 
                                  data-toggle="modal" 
                                  data-id = "{{$event->id}}"
                                  data-target="#editYourEvent" 
@@ -68,6 +69,8 @@
                                  data-picture = "{{$event->picture}}"
                                  href="!#"><b>Edit</b></a>
                             </div>
+                            <div class="col-3"></div>
+
                         </div>
                     </div>
                 </div>
