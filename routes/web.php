@@ -32,6 +32,7 @@ Route::put('/changePasswords', 'userProfileController@changePassword')->name('ch
 
 
 Route::group(['prefix' => 'manage'],function(){
+    Route::get('/searches','EventController@searches')->name('event.searches');
     //event
     Route::resource('event','EventController');
     //category
@@ -43,7 +44,6 @@ Route::group(['prefix' => 'manage'],function(){
     Route::get('/existCategory','CategoryController@existCategory')->name('category.existCategory');
 
 });
-
 
 
 

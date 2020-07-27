@@ -16,7 +16,8 @@ class EventController extends Controller
     public function index()
     {
         $this->authorize('view', Event::class);
-        return view('manage.viewEvents');
+        $event = Event::all();
+        return view('manage.viewEvents',compact('event'));
         
     }
 
@@ -90,5 +91,15 @@ class EventController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function searches(Request $request){
+        $this->authorize('view', Event::class); 
+        $dataSearch = $request->get('query');
+        if($request->ajax()){
+            $query = DB::table('events')->where('title', 'LIKE', '%' . $dataSearch . '%')->get();
+            return $query;
+        }
     }
 }
