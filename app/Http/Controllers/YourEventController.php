@@ -23,7 +23,8 @@ class YourEventController extends Controller
     {
         $events = Event::where('owner_id', Auth::id())->get();   
         $categories = Category::all();
-        return view('yourEvent.yourEvent', compact(['events','categories']));
+        $user = User::all();
+        return view('yourEvent.yourEvent', compact(['events','categories','user']));
     }
 
     /**
