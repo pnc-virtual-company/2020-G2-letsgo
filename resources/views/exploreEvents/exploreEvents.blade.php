@@ -92,7 +92,7 @@
 
         {{--==================end view all explore event ==============================--}}
     </div>
-
+  
     <script type="text/javaScript">
         $(document).ready(function(){
           $("#search").on("keyup", function() {
