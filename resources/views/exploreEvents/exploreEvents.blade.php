@@ -55,9 +55,11 @@
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-9">
-             @foreach ($exploreEvents as $exploreEvent)
-             <div class="card p-2 card-event" id="exploreEvent">
-                 <div class="row" >
+                @foreach ($exploreEvents as $exploreEvent)
+                <a href="#" data-toggle="modal" data-target="#myModal">
+                       
+                <div class="card p-2 card-event" id="exploreEvent">
+                    <div class="row" >
                     <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
                         {{$exploreEvent->startTime}}
                     </div>
@@ -74,24 +76,56 @@
                             {{-- get profile from user insert --}}
                           <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
                      </div>
-
+                   
+                     
                      <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-                        <div class="row">
-                            <div class="col-6">
-                                <a class="btn btn-sm mt-4 float-right delete" style="background: rgb(182, 182, 182)" href="#!"><b>Join</b></a>
+                         <div class="row">
+                             <div class="col-6">
+                                 <a class="btn btn-sm mt-4 float-right delete" style="background: rgb(182, 182, 182)" href="#!"><b>Join</b></a>
+                                </div>
                             </div>
-                        </div>
-                    </div> 
-                 </div>
-             </div>
-             <br>      
+                        </div> 
+                    </div>
+                </div>
+             <br>    
+            </a>  
          @endforeach
+        
             </div>
             <div class="col-sm-12 col-md-1 col-lg-2"></div>
         </div>
 
         {{--==================end view all explore event ==============================--}}
     </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Modal Heading</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="row">
+                  .col
+              </div>
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer"> 
+                <div class="container ml-5">
+                    {{$exploreEvent->description}}
+                </div>
+            </div>
+      
+          </div>
+        </div>
+      </div>
   
     <script type="text/javaScript">
         $(document).ready(function(){
