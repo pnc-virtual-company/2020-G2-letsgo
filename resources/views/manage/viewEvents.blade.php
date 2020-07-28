@@ -36,7 +36,7 @@
               
                   @foreach ($event as $events)
                     <tr class="event">
-                        <td>{{$events->owner_id}}</td>
+                        <td>{{$events->user->firstname}}</td>
                         <td>{{$events->city}}</td>
                         <td>{{$events->title}}</td>
                         <td>{{$events->category->category}}</td>
