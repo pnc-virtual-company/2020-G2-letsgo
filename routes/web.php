@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+
 Route::resource('/exploreEvents', 'ExploreEventsController');
 
 Route::resource('/yourEvent', 'YourEventController');
@@ -43,7 +44,6 @@ Route::group(['prefix' => 'manage'],function(){
     Route::get('/existCategory','CategoryController@existCategory')->name('category.existCategory');
 
 });
-
 
 
 
