@@ -110,6 +110,18 @@
                     <button type="button" class="close" data-dismiss="alert">x</button>
                 </div>
                 @endif
+                @if(session()->has('fail'))
+                <div class="alert alert-danger" id="success-alert">
+                    {{ session()->get('fail') }}
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                </div>
+                @endif
+                @if(session()->has('confirm'))
+                <div class="alert alert-danger" id="success-alert">
+                    {{ session()->get('confirm') }}
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                </div>
+                @endif
             </div>
         </div>
     </div>

@@ -24,9 +24,35 @@
       </div>
     <div class="row">
       <div class="col-md-8" style="margin:0 auto">
-        <table class="table-hover fl-table">
-        </table>
-        <ul class="list-group list-group-flush">
+        <ul id="myUL"  class="list-group data-search list-group-flush" id="categories-search">
+          @foreach ($categories as $category)
+          <li class="list-group-item" id="list-category">
+            <a class="cat-search">
+              {{$category->category}}
+              <span class="badge">
+                <a 
+                href="#!" 
+                class="delete float-right" 
+                style="margin-top: 4px"  
+                data-id="{{$category->id}}" 
+                data-toggle="modal" 
+                data-target="#deleteCategory"> 
+                <i class="far fa-trash-alt text-dark" style="font-size:16px;" id="show"></i>
+              </a>
+              <a 
+                href="#!" 
+                class="btn-lg edit float-right"
+                style="margin-top:-10px"
+                data-toggle="modal" 
+                data-id="{{$category->id}}"
+                data-category = "{{$category->category}}"
+                data-target="#editCategory">
+                <i class="fas fa-pencil-alt text-dark" style="font-size:16px;" id="show"></i>
+                </a>
+              </span>
+            </a>
+          </li>
+          @endforeach
         </ul>
       </div>
     </div>
@@ -39,55 +65,21 @@
 {{-- create --}}
 @include('manage.category.createCategory') 
 
-<script type="text/javaScript">
-  $(document).ready(function(){
-    $(document).on('keyup', '#search', function(){
-        var query = $(this).val();
-        fetch_categories_data(query);
-    });
-   fetch_categories_data();
-   function fetch_categories_data(query)
-   {
-    $.ajax({
-     url:"{{ route('category.search')}}",
-     method:'get',
-     data:{query:query},
-     dataType:'json',
-     success:function(data)
-     {
-       
-      var result = "";
-        data.forEach(element => {
-        result += `
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            ${element.category}
-            <span class="badge">
-                     <a 
-                      href="#!" 
-                      class="delete float-right" 
-                      style="margin-top: 4px"  
-                      data-id="${element.id}" 
-                      data-toggle="modal" 
-                      data-target="#deleteCategory"> 
-                      <i class="far fa-trash-alt text-dark" style="font-size:16px;" id="show"></i>
-                    </a>
-                    <a 
-                      href="#!" 
-                      class="btn-lg edit float-right"
-                      style="margin-top:-10px"
-                      data-toggle="modal" 
-                      data-id="${element.id}"
-                      data-category = "${element.category}"
-                      data-target="#editCategory">
-                      <i class="fas fa-pencil-alt text-dark" style="font-size:16px;" id="show"></i></a>
-            </span>
-          </li>
-        `;
-      });
-        $('.list-group').html(result);
-     }
-    })
-   }
-  });
-  </script>
+   <script type="text/javaScript">
+        $(document).ready(function(){
+          $("#search").on("keyup", function() {
+            var value = $(this).val().toUpperCase();
+            li = $('#myUL #list-category');
+              for (i = 0; i < li.length; i++) {
+                  a = li[i].getElementsByTagName("a")[0];
+                  txtValue = a.textContent || a.innerText;
+                  if (txtValue.toUpperCase().indexOf(value) > -1) {
+                      li[i].style.display = "";
+                  } else {
+                      li[i].style.display = "none";
+                  }
+              }
+          });
+        });
+      </script>
 @endsection
