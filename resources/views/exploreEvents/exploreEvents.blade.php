@@ -53,52 +53,103 @@
         
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
-                <div class="col-sm-12 col-md-10 col-lg-9">
-                    @foreach ($exploreEvents as $exploreEvent)
-                        @if (Auth::id() != $exploreEvent->owner_id)
-                            <div class="card p-2 card-event" id="exploreEvent" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
-                                <div class="row" >
-                                    <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
-                                        {{$exploreEvent->startTime}}
-                                    </div>
+            <div class="col-sm-12 col-md-10 col-lg-9">
+                <?php $data = $exploreEvents;?>
+                @foreach ($data as $item => $exploreEvents)
+               
+             @foreach ($exploreEvents as $exploreEvent)
+             @if (Auth::id() != $exploreEvent->owner_id)
+             <h6>
+                {{-- get data to group by --}}
+                <?php
+               
+                    $startDate =(new DateTime($item));
+                    echo date_format($startDate, "l, F j");
+                ?>  
+                </h6>
+             <div class="card p-2 card-event" id="exploreEvent">
+                 <div class="row" >
+                    <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
+                         {{-- get current time and convert to AM or PM --}}
+                         <?php
+                         $startTime = $exploreEvent['startTime'];
+                          echo $newDateTime = date(' h:i A', strtotime($startTime));
+                          ?>
+                          {{--  --}}
+                    </div>
 
-                                <div class="col-8 col-sm-6 col-md-5 col-lg-4">
-                                    <b>{{$exploreEvent->category->category}}</b>
-                                    <br>
+                    <div class="col-8 col-sm-6 col-md-5 col-lg-4">
+                         <b>{{$exploreEvent->category->category}}</b>
+                         <br> 
                          <strong class="h5">{{$exploreEvent->title}}</strong>
                          <br>
-                         <p>5 members going</p>
-                     </div>
+                         {{--  counter member --}}
+                         @if ($exploreEvent->joins->count("user_id")> 1)
+                          {{$exploreEvent->joins->count("user_id")}}
+                          members going.
+                          @else
 
+                          {{$exploreEvent->joins->count("user_id")}}
+                          member going.
+                          @endif
+                          
+
+                        
+                     </div>
+                      
                      <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
                             {{-- get profile from user insert --}}
                           <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
                      </div>
-
+                   
+               
                      <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                         <div class="row">
-                            <div class="col-6">
-                                <a class="btn btn-sm mt-4 float-right delete" style="background: rgb(182, 182, 182)" href="#!"><b>Join</b></a>
-                            </div>
+                            {{-- // --}}
+      
+                            <div class="col-4">
+                                <form action="{{route('join', $exploreEvent->id)}}" method="post">
+                                   @csrf
+                                    <button class="btn btn-sm btn btn-success mt-4 float-right" >
+                                       <i class="fa fa-check-circle"></i>
+                                        <b>Join</b> 
+                                   </button>
+                                   </form>
+                               </div>
+                               <div class="col-4">
+                                   <a href="#" class="btn btn-sm btn btn-danger mt-4 ">
+                                       <i class="fa fa-times-circle"></i>
+                                       <b>Quit</b>
+                                   </a>
+                               </div>
+                               <div class="col-4">
+                                    <button class="btn btn-sm btn btn-success mt-4 float-right" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}" >
+                                            <i class="fa fa-eye"></i>
+                                             <b>view</b> 
+                                        </button>
+                                  
+                               </div>
+                             
                         </div>
-                    </div>
-                   
-                </div>
-            </div> 
-            @endif  
-        <br>   
+                        {{--  --}}
+                    </div> 
+                 </div>
+             </div>
+             <br>   
+             @endif   
         {{-- modal of view detail explore event --}}
         @include('exploreEvents.viewDetail')
-          {{-- end modal of view detail explore event --}}
+        {{-- end modal of view detail explore event --}}
+         @endforeach
+         @endforeach
 
-            @endforeach
-                <div class="col-sm-12 col-md-1 col-lg-2"></div>
             </div>
         </div>
         {{--==================end view all explore event ==============================--}}
     </div>
     
     <script type="text/javaScript">
+    // for search
         $(document).ready(function(){
           $("#search").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -106,6 +157,8 @@
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
           });
+          // end search
+         
         });
     </script>
 
