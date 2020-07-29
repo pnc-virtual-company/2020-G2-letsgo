@@ -27,6 +27,7 @@ class YourEventController extends Controller
                  $categories = Category::all();
       
         return view('yourEvent.yourEvent', compact(['events','categories']));
+     
     }
 
     /**
