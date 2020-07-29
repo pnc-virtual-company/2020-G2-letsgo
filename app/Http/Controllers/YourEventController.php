@@ -24,14 +24,7 @@ class YourEventController extends Controller
     {
         $events = Event::where('owner_id', Auth::id())->get(); 
         $categories = Category::all();
-        $data_event = [];
-        foreach ($events as $event) {
-            $data_event[] = [
-                'event_id' => $event->id,
-                'member' => Join::all()->where('event_id',$event->id)->where('user_id')->count()
-            ];
-        }
-        return view('yourEvent.yourEvent', compact(['events','categories','data_event']));
+        return view('yourEvent.yourEvent', compact(['events','categories']));
     }
 
     /**

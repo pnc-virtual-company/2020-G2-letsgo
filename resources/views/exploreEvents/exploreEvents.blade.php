@@ -26,7 +26,7 @@
                         <div class="form-check " style="margin-left:30px">
                             <input type="checkbox" class="form-check-input">
                             <label class="form-check-label" for="">Event you join only</label>
-                          </div>
+                        </div>
                         {{--======end checkbox  ==========--}}
                     </div>   
                 </div> 

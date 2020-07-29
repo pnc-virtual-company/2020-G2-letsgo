@@ -41,21 +41,25 @@
                         <td>{{$events->title}}</td>
                         <td>{{$events->category->category}}</td>
                         <td>{{$events->startDate}}</td>
+                        <td >
+                        <a href="#!" class="deleteEvent" data-id="{{$events->id}}" data-toggle="modal" data-target="#deleteEvent"><i class="far fa-trash-alt text-dark" style="font-size:16px;"  id="deletes" ></i></a>
+                        </td>
                     </tr>
                     @endforeach
-                  
               </table>
-              
             </div>
           </div>
       </div>
-      
-      <script type="text/javaScript">
+      {{--====== Modal form of delete event ========--}}
+            @include('manage.deleteEvent');
+      {{--====== end Modal form of delete event ========--}}
+
+      <script>
         $(document).ready(function(){
           $("#search").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $(".event").filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
           });
         });

@@ -36,11 +36,6 @@
                         <br>
                         <strong class="h5">{{$event->title}}</strong>
                         <br>
-                        @foreach ($data_event as $members)
-                            @if ($members['event_id'] == $event->id)
-                                <p>{{$members['member']}} members going</p>
-                            @endif
-                         @endforeach
                     </div>
                     <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
                         @if($event->picture)
