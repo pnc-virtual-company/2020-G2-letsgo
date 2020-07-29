@@ -51,7 +51,7 @@
           </div>
       </div>
       {{--====== Modal form of delete event ========--}}
-            @include('manage.deleteEvent');
+            @include('manage.events.deleteEvent');
       {{--====== end Modal form of delete event ========--}}
 
       <script>
