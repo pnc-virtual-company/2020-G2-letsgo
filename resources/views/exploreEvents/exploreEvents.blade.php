@@ -27,7 +27,7 @@
                             <input type="checkbox" class="form-check-input">
                             <label class="form-check-label" for="">Event you join only</label>
                           </div>
-                          {{--======end checkbox  ==========--}}
+                        {{--======end checkbox  ==========--}}
                     </div>   
                 </div> 
                 {{-- find city --}}
