@@ -23,6 +23,7 @@ Auth::routes(['verify' => true]);
 
 
 Route::resource('/exploreEvents', 'ExploreEventsController');
+Route::post('/join/{id}', 'ExploreEventsController@join')->name("join");
 
 Route::resource('/yourEvent', 'YourEventController');
 Route::put('yourEvent/update/{id}','YourEventController@update');

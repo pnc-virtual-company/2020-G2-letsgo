@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
-use App\Join;
 use App\User;
-
+use Auth;
+use App\Join;
 class ExploreEventsController extends Controller
 {
     public function __construct()
@@ -20,7 +20,7 @@ class ExploreEventsController extends Controller
      */
     public function index()
     {
-        $exploreEvents = Event::all();
+        $exploreEvents = Event::all()->groupBy("startDate");
         return view('exploreEvents.exploreEvents',compact('exploreEvents'));
     }
 
@@ -54,6 +54,16 @@ class ExploreEventsController extends Controller
     public function show($id)
     {
         //
+    }
+    public function join($id)
+    {
+        $event = Event::find($id);
+        $user = Auth::id();
+        $join = new Join;
+        $join->user_id = $user;
+        $join->event_id = $event->id;
+        $join->save();
+        return back();
     }
 
     /**

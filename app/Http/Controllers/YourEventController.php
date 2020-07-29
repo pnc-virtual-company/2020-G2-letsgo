@@ -7,7 +7,7 @@ use Auth;
 use App\Event;
 use App\Category;
 use App\User;
-use App\Join;
+use DB;
 class YourEventController extends Controller
 {
 
@@ -22,9 +22,12 @@ class YourEventController extends Controller
      */
     public function index()
     {
-        $events = Event::where('owner_id', Auth::id())->get(); 
+        $events = Event::all()->groupBy('startDate');
+      
         $categories = Category::all();
+      
         return view('yourEvent.yourEvent', compact(['events','categories']));
+     
     }
 
     /**

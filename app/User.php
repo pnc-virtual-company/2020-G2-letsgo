@@ -6,7 +6,6 @@ use App\Join;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
 class User extends Authenticatable implements MustVerifyEmail
 // implements MustVerifyEmail
 {
@@ -40,7 +39,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     public function events(){
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class,'owner_id');
     }
 
     public function joins(){
