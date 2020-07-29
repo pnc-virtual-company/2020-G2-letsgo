@@ -24,8 +24,7 @@
           <div class="row">
             <div class="col-md-8" style="margin:0 auto">
               <div class="card">
-              <table class="table table-hover  table-borderless  " id="myTable" >
-             
+              <table class="table table-hover  table-borderless " id="myTable">
                   <tr>
                       <th>Organizer</th>
                       <th>City</th>
