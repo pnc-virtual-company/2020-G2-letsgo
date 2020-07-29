@@ -68,3 +68,11 @@ body{
 .card-event {
     border-radius: 20px;
 }
+
+#deletes {
+    display: none;
+}
+
+.event:hover #deletes  {
+    display: inline;
+}

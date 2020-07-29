@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Event;
 use App\Category;
+use App\Event;
 
 class EventController extends Controller
 {
@@ -93,8 +93,10 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    { 
+        $event = Event::find($id);
+        $event->delete();
+        return back();
     }
 
 
