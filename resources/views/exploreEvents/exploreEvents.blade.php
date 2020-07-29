@@ -50,6 +50,7 @@
             </div>    
         </div><br><br>
         {{--================== view all explore event ================================--}}
+        
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-9">
@@ -106,20 +107,27 @@
                         <div class="row">
                             {{-- // --}}
       
-                            <div class="col-6">
+                            <div class="col-4">
                                 <form action="{{route('join', $exploreEvent->id)}}" method="post">
                                    @csrf
                                     <button class="btn btn-sm btn btn-success mt-4 float-right" >
-                                       <i class="fa fa-check-circle" ></i>
+                                       <i class="fa fa-check-circle"></i>
                                         <b>Join</b> 
                                    </button>
                                    </form>
                                </div>
-                               <div class="col-6">
+                               <div class="col-4">
                                    <a href="#" class="btn btn-sm btn btn-danger mt-4 ">
                                        <i class="fa fa-times-circle"></i>
                                        <b>Quit</b>
                                    </a>
+                               </div>
+                               <div class="col-4">
+                                    <button class="btn btn-sm btn btn-success mt-4 float-right" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}" >
+                                            <i class="fa fa-eye"></i>
+                                             <b>view</b> 
+                                        </button>
+                                  
                                </div>
                              
                         </div>
@@ -129,14 +137,17 @@
              </div>
              <br>   
              @endif   
+        {{-- modal of view detail explore event --}}
+        @include('exploreEvents.viewDetail')
+        {{-- end modal of view detail explore event --}}
          @endforeach
          @endforeach
 
             </div>
-            <div class="col-sm-12 col-md-1 col-lg-2"></div>
         </div>
         {{--==================end view all explore event ==============================--}}
     </div>
+    
     <script type="text/javaScript">
     // for search
         $(document).ready(function(){
@@ -149,8 +160,6 @@
           // end search
          
         });
-      </script>
+    </script>
 
-     
-    
 @endsection
