@@ -40,6 +40,7 @@
                             <div class="form-group" >
                                 <input name="city" class="form-control autoSuggestion" list="result" placeholder="City" required>
                                 <datalist id="result">
+                                {{-- <option value="{{Auth::user()->city}}" selected>{{Auth::user()->city}}</option> --}}
                                 </datalist>
                             </div>
                         </div>
