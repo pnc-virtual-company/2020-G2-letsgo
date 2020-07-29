@@ -34,7 +34,10 @@ Route::put('/changePasswords', 'userProfileController@changePassword')->name('ch
 
 Route::group(['prefix' => 'manage'],function(){
     //event
-    Route::resource('event','EventController');
+    Route::get('/event/index','EventController@index')->name('event.index');
+    Route::delete('/event/destroy/{id}','EventController@destroy')->name('event.destroy');
+    
+    
     //category
     Route::get('/category/index','CategoryController@index')->name('category.index');
     Route::delete('/category/destroy/{id}','CategoryController@destroy');
