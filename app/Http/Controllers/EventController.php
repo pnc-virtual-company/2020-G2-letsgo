@@ -21,7 +21,8 @@ class EventController extends Controller
     {
         $this->authorize('view', Event::class);
         $event = Event::all();
-        return view('manage.event.viewEvents',compact('event'));
+        return view('manage.events.viewEvents',compact('event'));
+        
     }
    
 
