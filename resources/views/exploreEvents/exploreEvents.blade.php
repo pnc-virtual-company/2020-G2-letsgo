@@ -47,15 +47,14 @@
                 </div>
                  {{--end find city --}}
                 </div>
-            </div>
-           
+            </div>    
         </div><br><br>
-
         {{--================== view all explore event ================================--}}
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-9">
              @foreach ($exploreEvents as $exploreEvent)
+             @if (Auth::id() != $exploreEvent->owner_id)
              <div class="card p-2 card-event" id="exploreEvent">
                  <div class="row" >
                     <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
@@ -84,15 +83,14 @@
                     </div> 
                  </div>
              </div>
-             <br>      
+             <br>   
+             @endif   
          @endforeach
             </div>
             <div class="col-sm-12 col-md-1 col-lg-2"></div>
         </div>
-
         {{--==================end view all explore event ==============================--}}
     </div>
-  
     <script type="text/javaScript">
         $(document).ready(function(){
           $("#search").on("keyup", function() {
