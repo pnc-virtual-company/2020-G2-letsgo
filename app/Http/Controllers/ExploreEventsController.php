@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\Join;
+use App\User;
+
 class ExploreEventsController extends Controller
 {
     public function __construct()
@@ -19,7 +22,6 @@ class ExploreEventsController extends Controller
     {
         $exploreEvents = Event::all();
         return view('exploreEvents.exploreEvents',compact('exploreEvents'));
-       
     }
 
     /**

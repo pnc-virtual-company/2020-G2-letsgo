@@ -22,7 +22,8 @@ class CreateJoinsTable extends Migration
             $table->unsignedBigInteger('event_id')->nullable();
             $table->foreign('event_id')
                     ->references('id')
-                    ->on('events');
+                    ->on('events')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

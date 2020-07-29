@@ -7,6 +7,7 @@ use Auth;
 use App\Event;
 use App\Category;
 use App\User;
+use App\Join;
 class YourEventController extends Controller
 {
 
@@ -21,10 +22,16 @@ class YourEventController extends Controller
      */
     public function index()
     {
-        $events = Event::where('owner_id', Auth::id())->get();   
+        $events = Event::where('owner_id', Auth::id())->get(); 
         $categories = Category::all();
-        $user = User::all();
-        return view('yourEvent.yourEvent', compact(['events','categories','user']));
+        $data_event = [];
+        foreach ($events as $event) {
+            $data_event[] = [
+                'event_id' => $event->id,
+                'member' => Join::all()->where('event_id',$event->id)->where('user_id')->count()
+            ];
+        }
+        return view('yourEvent.yourEvent', compact(['events','categories','data_event']));
     }
 
     /**

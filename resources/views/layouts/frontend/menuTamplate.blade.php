@@ -18,7 +18,7 @@
  
 </head>
 <body>
-       <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
+       <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5 fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{route('exploreEvents.index')}}">
             <img style="width: 70px;height: 70px;"  src="{{asset('asset/logo/logo.png')}}"/>
@@ -98,6 +98,7 @@
             </div>
         </div>
     </nav>
+    <br><br><br><br>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3"></div>

@@ -67,7 +67,6 @@
                          <br>
                          <strong class="h5">{{$exploreEvent->title}}</strong>
                          <br>
-                         <p>5 members going</p>
                      </div>
 
                      <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
