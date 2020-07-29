@@ -12,6 +12,8 @@ class CreateJoinsTable extends Migration
      * @return void
      */
     public function up()
+
+    
     {
         Schema::create('joins', function (Blueprint $table) {
             $table->id();

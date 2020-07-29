@@ -10,7 +10,6 @@
             <div class="col-sm-12 col-md-10 col-lg-9">
                 <h5>Find your event !</h5><br>
                 <div class="row">
-                     
                 <div class="col-6">
                     <div class="row">
                         {{-- Search form --}}
@@ -67,14 +66,13 @@
                          <strong class="h5">{{$exploreEvent->title}}</strong>
                          <br>
                          {{-- test counter member --}}
-                         
                             {{-- user join only event --}}
                             @foreach ($exploreEvent->joins as $user)
                                 @if ($user->user_id == Auth::id())
                                     <p class="join"><a style="display: none" class="only-own-event">{{$user->user_id}}</a></p>
                                 @endif
                             @endforeach
-                            {{-- end user join only event --}}
+                            {{-- end user join only --}}
 
                      </div>
                      <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
@@ -111,7 +109,6 @@
 
         $("#checkbox").on("click", function() {
             var value = event_check().toUpperCase();
-            console.log(value);
             var data = document.getElementsByClassName('card-event');
             var a, txtValue;
             for (i = 0; i < data.length; i++) {
