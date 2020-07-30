@@ -171,7 +171,7 @@
                         {{-- -------- Show user city-------------- --}}
 
                         <div class="form-group">
-                            <input class="form-control" list="result" id="autoSuggestion" placeholder="Country name here .." value="{{Auth::user()->city}}"  name="city"/>
+                            <input name="city" value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="city" required>
                             <datalist id="result">
                             </datalist>
                         </div>
