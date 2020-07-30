@@ -81,7 +81,7 @@
                     <div class="col-8 col-sm-6 col-md-5 col-lg-4">
                          <b>{{$exploreEvent->category->category}}</b>
                          <br> 
-                         <strong class="h5">{{$exploreEvent->title}}</strong>
+                         <strong class="h5 ">{{$exploreEvent->title}}</strong>
                          <br>
                          {{--  counter member --}}
                          @if ($exploreEvent->joins->count("user_id")> 1)

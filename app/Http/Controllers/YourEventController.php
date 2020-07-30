@@ -25,7 +25,7 @@ class YourEventController extends Controller
         $events = Event::all()->groupBy('startDate');
       
                  $categories = Category::all();
-      
+
         return view('yourEvent.yourEvent', compact(['events','categories']));
      
     }
