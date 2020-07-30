@@ -3,7 +3,7 @@
 @section('body')
 
     <div class="container mt-5">
-        
+    
         <div class="row">
             
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
@@ -91,10 +91,7 @@
                           {{$exploreEvent->joins->count("user_id")}}
                           member going.
                           @endif
-                          
-
-                        
-                     </div>
+                      </div>
                       
                      <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
                             {{-- get profile from user insert --}}
@@ -105,7 +102,7 @@
                      <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                         <div class="row">
                             {{-- // --}}
-      
+                         
                             <div class="col-6">
                                 <form action="{{route('join', $exploreEvent->id)}}" method="post">
                                    @csrf

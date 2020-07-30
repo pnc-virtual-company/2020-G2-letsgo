@@ -21,7 +21,9 @@ class ExploreEventsController extends Controller
     public function index()
     {
         $exploreEvents = Event::all()->groupBy("startDate");
-        return view('exploreEvents.exploreEvents',compact('exploreEvents'));
+        $user = User::all();
+        $joins= Join::all();
+        return view('exploreEvents.exploreEvents',compact('exploreEvents', 'user', 'joins'));
        
     }
 
