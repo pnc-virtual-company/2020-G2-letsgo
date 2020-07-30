@@ -49,6 +49,7 @@
             </div>    
         </div><br><br>
         {{--================== view all explore event ================================--}}
+        
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-9">
@@ -56,101 +57,79 @@
                 @foreach ($data as $item => $exploreEvents)
                     @foreach ($exploreEvents as $exploreEvent)
                         @if (Auth::id() != $exploreEvent->owner_id)
+                              <div class="card-event">
+                                    {{-- get data to group by --}}
+                                <h6>
+                                    <?php
+                                        $startDate =(new DateTime($item));
+                                        echo date_format($startDate, "l, F j");
+                                    ?>  
+                                </h6>
+                                {{-- end group by --}}
 
-                            {{-- get data to group by --}}
-                            <h6>
-                                <?php
-                                    $startDate =(new DateTime($item));
-                                    echo date_format($startDate, "l, F j");
-                                ?>  
-                            </h6>
-                            {{-- end group by --}}
+                                <div class="card p-2" id="exploreEvent" style="border-radius: 20px">
+                                    <div class="row" >
 
-                            <div class="card p-2 card-event" id="exploreEvent">
-                                <div class="row" >
+                                        <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
 
-                                    <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
-
-                                        {{-- get current time and convert to AM or PM --}}
-                                        <?php
-                                        $startTime = $exploreEvent['startTime'];
-                                        echo $newDateTime = date(' h:i A', strtotime($startTime));
-                                        ?>
-                                        {{-- end current time --}}
-
-                                    </div>
-
-                                    <div class="col-8 col-sm-6 col-md-5 col-lg-4">
-
-                                        <b>{{$exploreEvent->category->category}}</b>
-                                        <br> 
-                                        <strong class="h5">{{$exploreEvent->title}}</strong>
-                                        <br>
-
-                                        {{-- user join only event --}}
-                                            @foreach ($exploreEvent->joins as $user)
-                                                @if ($user->user_id == Auth::id())
-                                                    <p class="join"><a style="display: none" class="only-own-event">{{$user->user_id}}</a></p>
-                                                @endif
-                                            @endforeach
-                                        {{-- end user join only --}}
-
-                                        {{--  counter member --}}
-                                            @if ($exploreEvent->joins->count("user_id")> 1)
-                                                {{$exploreEvent->joins->count("user_id")}} members going.
-                                            @else
-                                                {{$exploreEvent->joins->count("user_id")}} member going.
-                                            @endif   
-                                        {{-- end count members --}}
-
-                                    </div>
-                                    
-                                    <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
-                                            {{-- get image of event --}}
-                                        <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
-                                    </div>
-                                
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-                                        <div class="row">
-
-                                        {{-- button hear --}}
-                                            
-                                            {{-- button join evnet --}}
-                                            <div class="col-6">
-                                                <form action="{{route('join', $exploreEvent->id)}}" method="post">
-                                                @csrf
-                                                    <button class="btn btn-sm btn btn-success mt-4 float-right" >
-                                                    <i class="fa fa-check-circle" ></i>
-                                                        <b>Join</b> 
-                                                </button>
-                                                </form>
-                                            </div>
-                                            {{-- end join --}}
-
-                                            {{-- leave event --}}
-                                            <div class="col-6">
-                                                <a href="#" class="btn btn-sm btn btn-danger mt-4 ">
-                                                    <i class="fa fa-times-circle"></i>
-                                                    <b>Quit</b>
-                                                </a>
-                                            </div>
-                                            {{-- end leave --}}
-                                            
-                                            {{-- end button --}}
+                                            {{-- get current time and convert to AM or PM --}}
+                                            <?php
+                                            $startTime = $exploreEvent['startTime'];
+                                            echo $newDateTime = date(' h:i A', strtotime($startTime));
+                                            ?>
+                                            {{-- end current time --}}
 
                                         </div>
-                                    </div> 
+
+                                        <div class="col-8 col-sm-6 col-md-5 col-lg-4">
+
+                                            <b>{{$exploreEvent->category->category}}</b>
+                                            <br> 
+                                            <strong class="h5">{{$exploreEvent->title}}</strong>
+                                            <br>
+
+                                            {{-- user join only event --}}
+                                                @foreach ($exploreEvent->joins as $user)
+                                                    @if ($user->user_id == Auth::id())
+                                                        <p style="display: none"><a class="only-event-user-join">{{Auth::id()}}</a></p>
+                                                    @else 
+                                                        <p style="display: none"><a class="only-event-user-join">N</a></p>
+                                                    @endif
+                                                @endforeach
+                                            {{-- end user join only --}}
+
+                                            {{--  counter member --}}
+                                                @if ($exploreEvent->joins->count("user_id")> 1)
+                                                    {{$exploreEvent->joins->count("user_id")}} members going.
+                                                @else
+                                                    {{$exploreEvent->joins->count("user_id")}} member going.
+                                                @endif   
+                                            {{-- end count members --}}
+
+                                        </div>
+                                        
+                                        <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
+                                                {{-- get image of event --}}
+                                            <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
+                                        </div>
+                                    
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+                                            <div class="row">
+                                               
+                                            </div>
+                                        </div> 
+                                    </div>
                                 </div>
-                            </div>
+                              </div>
                             <br>   
                         @endif   
                     @endforeach
                 @endforeach
             </div>
-            <div class="col-sm-12 col-md-1 col-lg-2"></div>
         </div>
         {{--==================end view all explore event ==============================--}}
     </div>
+    
     <script type="text/javaScript">
     // for search
         $(document).ready(function(){
@@ -164,35 +143,23 @@
 
         // click on checkbox
         $("#checkbox").on("click", function() {
-
-            // get value return from function
             var value = event_check().toUpperCase();
-
-            // get element of card 
             var data = document.getElementsByClassName('card-event');
             var a, txtValue;
-
-            // loop array of card
-            for (i = 0; i < data.length; i++) {
-
-                // get element by tag a
-                a = data[i].getElementsByTagName("a")[0];
-
-                // get value from tag a
-                txtValue = a.textContent || a.innerText;
-
-                // condition
+            for (let i = 0; i < data.length; i++) {
+                a = data[i].getElementsByClassName('only-event-user-join')[0];
+                txtValue = txtValue = a.innerText || a.textContent;
                 if (txtValue.toUpperCase().indexOf(value) > -1) {
                     data[i].style.display = "";
-                    } else {
+                  } else {
                     data[i].style.display = "none";
-                }
-
-            }        
+                  }
+            }
+            
         });
     });
     
-    // 1 call function by voice
+    // voice
     // No @ paramenter
     // return value of checkbox
     function event_check(){
@@ -220,6 +187,4 @@
                
       </script>
 
-     
-    
 @endsection

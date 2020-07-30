@@ -7,6 +7,8 @@ use App\Event;
 use App\User;
 use Auth;
 use App\Join;
+use Ramsey\Uuid\Type\Integer;
+
 class ExploreEventsController extends Controller
 {
     public function __construct()
@@ -20,8 +22,11 @@ class ExploreEventsController extends Controller
      */
     public function index()
     {
+        
         $exploreEvents = Event::all()->groupBy("startDate");
-        return view('exploreEvents.exploreEvents',compact('exploreEvents'));
+        $joins = Join::all();
+        
+        return view('exploreEvents.exploreEvents',compact(['exploreEvents','joins']));
     }
 
     /**

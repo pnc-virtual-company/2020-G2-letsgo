@@ -69,18 +69,6 @@ class EventPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Event  $event
-     * @return mixed
-     */
-    public function delete_event(User $user)
-    {
-        return $user->role==1;
-    }
-
-    /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
