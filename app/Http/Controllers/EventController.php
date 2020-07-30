@@ -21,7 +21,9 @@ class EventController extends Controller
     {
         $this->authorize('view', Event::class);
         $event = Event::all();
-        return view('manage.events.viewEvents',compact('event'));
+        $user = User::all();
+        $joins= Join::all();
+        return view('manage.events.viewEvents',compact('event', 'joins', 'users'));
         
     }
 

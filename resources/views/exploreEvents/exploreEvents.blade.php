@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-8">
                             <div class="form-group" >
-                                <input name="city" class="form-control autoSuggestion" list="result" placeholder="City" required>
+                                <input name="city" class="form-control autoSuggestion" list="result" placeholder="City" id="city" required>
                                 <datalist id="result">
                                 </datalist>
                             </div>
@@ -50,6 +50,7 @@
             </div>    
         </div><br><br>
         {{--================== view all explore event ================================--}}
+        
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-9">
@@ -91,7 +92,11 @@
                           {{$exploreEvent->joins->count("user_id")}}
                           member going.
                           @endif
-                      </div>
+                          
+                          <br>
+                          <strong hidden class="h5">{{$exploreEvent->city}}</strong>
+                        
+                     </div>
                       
                      <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
                             {{-- get profile from user insert --}}
@@ -102,21 +107,27 @@
                      <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                         <div class="row">
                             {{-- // --}}
-                         
-                            <div class="col-6">
+                            <div class="col-4">
                                 <form action="{{route('join', $exploreEvent->id)}}" method="post">
                                    @csrf
                                     <button class="btn btn-sm btn btn-success mt-4 float-right" >
-                                       <i class="fa fa-check-circle" ></i>
+                                       <i class="fa fa-check-circle"></i>
                                         <b>Join</b> 
                                    </button>
                                    </form>
                                </div>
-                               <div class="col-6">
-                                   <a href="#" class="btn btn-sm btn btn-danger mt-4 ">
-                                       <i class="fa fa-times-circle"></i>
-                                       <b>Quit</b>
-                                   </a>
+                               <div class="col-4" >
+                                <button class="btn btn-sm btn btn-danger mt-4 float-right" onclick="document.getElementById('quit').submit()">
+                                    <i class="fa fa-times-circle"></i>
+                                     <b>Quit</b> 
+                                </button>
+                               </div>
+                               <div class="col-4">
+                               <button class="btn btn-sm btn btn-success mt-4 float-right" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}" >
+                                            <i class="fa fa-eye"></i>
+                                             <b>view</b> 
+                                        </button>
+                                  
                                </div>
                              
                         </div>
@@ -126,18 +137,45 @@
              </div>
              <br>   
              @endif   
+        {{-- modal of view detail explore event --}}
+        @include('exploreEvents.viewDetail')
+        {{-- end modal of view detail explore event --}}
          @endforeach
          @endforeach
+         {{-- /////////////////////////////// --}}
 
+         @foreach ($joins as $item)
+         @if (Auth::id() == $item->user_id)
+                    <form action="{{route('quit', $item->id)}}"  id="quit" method="post">
+                        @csrf
+                        @method("delete")
+                        
+                    </form>
+                    @endif
+                    @endforeach
             </div>
-            <div class="col-sm-12 col-md-1 col-lg-2"></div>
         </div>
         {{--==================end view all explore event ==============================--}}
     </div>
+    
     <script type="text/javaScript">
     // for search
         $(document).ready(function(){
+
+
+            // Filter explore event
           $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".card").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+            // End Filter explore event
+
+
+
+        //   Not far from
+        $("#city").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $(".card").filter(function() {
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -146,8 +184,12 @@
           // end search
          
         });
-      </script>
 
-     
-    
+        function remove(el) {
+  var element = el;
+  element.remove();
+}
+      
+    </script>
+
 @endsection

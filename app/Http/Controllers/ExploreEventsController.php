@@ -60,6 +60,7 @@ class ExploreEventsController extends Controller
     }
     public function join($id)
     {
+
         $event = Event::find($id);
         $user = Auth::id();
        
@@ -67,6 +68,12 @@ class ExploreEventsController extends Controller
         $join->user_id = $user;
         $join->event_id = $event->id;
         $join->save();
+        return back();
+    }
+
+    public function quit($id){       
+        $join = Join::find($id);
+        $join->delete();
         return back();
     }
 
