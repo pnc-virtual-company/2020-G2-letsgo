@@ -38,9 +38,8 @@
                         </div>
                         <div class="col-8">
                             <div class="form-group" >
-                                <input name="city" class="form-control autoSuggestion" list="result" placeholder="City" required>
+                                <input name="city" class="form-control autoSuggestion" list="result" placeholder="City" id="city" required>
                                 <datalist id="result">
-                                {{-- <option value="{{Auth::user()->city}}" selected>{{Auth::user()->city}}</option> --}}
                                 </datalist>
                             </div>
                         </div>
@@ -60,14 +59,18 @@
                  <div class="row" >
                     <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
                         {{$exploreEvent->startTime}}
-                    </div>
+                    </div >
 
                     <div class="col-8 col-sm-6 col-md-5 col-lg-4">
                          <b>{{$exploreEvent->category->category}}</b>
                          <br>
-                         <strong class="h5">{{$exploreEvent->title}}</strong>
+                         <div class="title">
+                             <strong class="h5">{{$exploreEvent->title}}</strong>
+                         </div>
                          <br>
                          <p>5 members going</p>
+                         <br>
+                         <strong hidden class="h5">{{$exploreEvent->city}}</strong>
                      </div>
 
                      <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
@@ -94,12 +97,29 @@
     </div>
     <script type="text/javaScript">
         $(document).ready(function(){
+
+
+            // Filter explore event
           $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".title").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+            // End Filter explore event
+
+
+
+        //   Not far from
+        $("#city").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $(".card").filter(function() {
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
           });
+            // End not far from
+
         });
+
       </script>
 @endsection
