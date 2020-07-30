@@ -117,6 +117,7 @@
                                    </form>
                                </div>
                                <div class="col-4" >
+                                
                                 <button class="btn btn-sm btn btn-danger mt-4 float-right" onclick="document.getElementById('quit').submit()">
                                     <i class="fa fa-times-circle"></i>
                                      <b>Quit</b> 
@@ -146,7 +147,8 @@
 
          @foreach ($joins as $item)
          @if (Auth::id() == $item->user_id)
-                    <form action="{{route('quit', $item->id)}}"  id="quit" method="post">
+                   
+                    <form action="{{route('quit', $item->id)}}" id="quit" method="post">
                         @csrf
                         @method("delete")
                         
@@ -172,8 +174,6 @@
           });
             // End Filter explore event
 
-
-
         //   Not far from
         // $("#city").on("keyup", function() {
         //     var value = $(this).val().toLowerCase();
@@ -185,11 +185,6 @@
          
         });
 
-        function remove(el) {
-  var element = el;
-  element.remove();
-}
-      
     </script>
 
 @endsection
