@@ -38,8 +38,8 @@
                         </div>
                         <div class="col-8">
                             <div class="form-group" >
-                                <input name="city" class="form-control autoSuggestion" list="result" placeholder="City" required>
-                                <datalist id="result">
+                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="city" required>
+                                <datalist id="result"> 
                                 </datalist>
                             </div>
                         </div>
@@ -93,7 +93,8 @@
                           member going.
                           @endif
                           
-
+                          <br>
+                          {{-- <strong hidden class="h5">{{$exploreEvent->city}}</strong> --}}
                         
                      </div>
                       
@@ -151,12 +152,26 @@
     <script type="text/javaScript">
     // for search
         $(document).ready(function(){
+
+
+            // Filter explore event
           $("#search").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $(".card").filter(function() {
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
           });
+            // End Filter explore event
+
+
+
+        //   Not far from
+        // $("#city").on("keyup", function() {
+        //     var value = $(this).val().toLowerCase();
+        //     $(".card").filter(function() {
+        //       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        //     });
+        //   });
           // end search
          
         });
