@@ -1,6 +1,6 @@
          
               <!-- The Modal to show detail of explore event-->
-              <div class="modal fade" id="viewDetail{{$exploreEvent->id}}" style="background-color:lightblue;">
+              <div class="modal fade" id="viewDetail{{$exploreEvent->id}}">
                     <div class="modal-dialog" id="dialog" role="dialog">
                       <div class="modal-content">
                   
@@ -20,7 +20,7 @@
                                     <?php   
                                     $startDate =(new DateTime($item));
                                     echo date_format($startDate, "l, F j");
-                                    ?>
+                                    ?>​-
                                      <?php
                                      $startTime = $exploreEvent['startTime'];
                                       echo $newDateTime = date(' h:i A', strtotime($startTime));

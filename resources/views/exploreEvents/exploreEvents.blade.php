@@ -69,7 +69,7 @@
                 </h6>
              <div class="card p-2 card-event" id="exploreEvent">
                  <div class="row" >
-                    <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
+                    <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
                          {{-- get current time and convert to AM or PM --}}
                          <?php
                          $startTime = $exploreEvent['startTime'];
@@ -78,7 +78,7 @@
                           {{--  --}}
                     </div>
 
-                    <div class="col-8 col-sm-6 col-md-5 col-lg-4">
+                    <div class="col-8 col-sm-6 col-md-5 col-lg-4" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
                          <b>{{$exploreEvent->category->category}}</b>
                          <br> 
                          <strong class="h5">{{$exploreEvent->title}}</strong>
@@ -89,6 +89,8 @@
                           members going.
                           @else
 
+
+
                           {{$exploreEvent->joins->count("user_id")}}
                           member going.
                           @endif
@@ -98,7 +100,7 @@
                         
                      </div>
                       
-                     <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
+                     <div class="col-4 col-sm-3 col-md-4 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
                             {{-- get profile from user insert --}}
                           <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
                      </div>
@@ -107,30 +109,24 @@
                      <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                         <div class="row">
                             {{-- // --}}
-                            <div class="col-4">
+      
+                            <div class="col-6">
                                 <form action="{{route('join', $exploreEvent->id)}}" method="post">
                                    @csrf
-                                    <button class="btn btn-sm btn btn-success mt-4 float-right" >
+                                    <button class="btn btn-sm btn btn-success mt-4 float-right" id="join" >
                                        <i class="fa fa-check-circle"></i>
                                         <b>Join</b> 
                                    </button>
                                    </form>
                                </div>
-                               <div class="col-4" >
+                               <div class="col-6" >
                                 
-                                <button class="btn btn-sm btn btn-danger mt-4 float-right" onclick="document.getElementById('quit').submit()">
+                                <button class="btn btn-sm btn btn-danger mt-4 " onclick="document.getElementById('quit').submit()">
                                     <i class="fa fa-times-circle"></i>
                                      <b>Quit</b> 
                                 </button>
                                </div>
-                               <div class="col-4">
-                               <button class="btn btn-sm btn btn-success mt-4 float-right" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}" >
-                                            <i class="fa fa-eye"></i>
-                                             <b>view</b> 
-                                        </button>
-                                  
-                               </div>
-                             
+                            
                         </div>
                         {{--  --}}
                     </div> 
@@ -143,11 +139,10 @@
         {{-- end modal of view detail explore event --}}
          @endforeach
          @endforeach
-         {{-- /////////////////////////////// --}}
 
-         @foreach ($joins as $item)
-         @if (Auth::id() == $item->user_id)
-                   
+            {{-- foreach to data of user who join event --}}
+            @foreach ($joins as $item)
+            @if (Auth::id() == $item->user_id)
                     <form action="{{route('quit', $item->id)}}" id="quit" method="post">
                         @csrf
                         @method("delete")
@@ -155,6 +150,7 @@
                     </form>
                     @endif
                     @endforeach
+                    {{-- end foreach of geting use who join event--}}
             </div>
         </div>
         {{--==================end view all explore event ==============================--}}
@@ -172,19 +168,12 @@
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
           });
-            // End Filter explore event
-
-        //   Not far from
-        // $("#city").on("keyup", function() {
-        //     var value = $(this).val().toLowerCase();
-        //     $(".card").filter(function() {
-        //       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        //     });
-        //   });
-          // end search
-         
         });
-
+        /////
+        $("#join").one("submit", function () {
+            $("#join").hide();
+        })
+ });
     </script>
 
 @endsection
