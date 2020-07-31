@@ -3,7 +3,7 @@
 @section('body')
 
     <div class="container mt-5">
-        
+    
         <div class="row">
             
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
@@ -113,40 +113,52 @@
                          </div>
                        
                    
-                         <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-                            <div class="row">
-                                {{-- // --}}
-          
-                                <div class="col-6">
-                                    <form action="{{route('join', $exploreEvent->id)}}" method="post">
-                                       @csrf
-                                        <button class="btn btn-sm btn btn-success mt-4 float-right" >
-                                           <i class="fa fa-check-circle"></i>
-                                            <b>Join</b> 
-                                       </button>
-                                       </form>
-                                   </div>
-                                   <div class="col-6">
-                                       <a href="#" class="btn btn-sm btn btn-danger mt-4 ">
-                                           <i class="fa fa-times-circle"></i>
-                                           <b>Quit</b>
-                                       </a>
-                                   </div>
-                                  
-                            </div>
-                            {{--  --}}
-                        </div> 
-                     </div>
-                    </div>
-                    <br>   
-                </div>
-                @endif   
+               
+                     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+                        <div class="row">
+                            {{-- // --}}
+      
+                            <div class="col-6">
+                                <form action="{{route('join', $exploreEvent->id)}}" method="post">
+                                   @csrf
+                                    <button class="btn btn-sm btn btn-success mt-4 float-right" id="join" >
+                                       <i class="fa fa-check-circle"></i>
+                                        <b>Join</b> 
+                                   </button>
+                                   </form>
+                               </div>
+                               <div class="col-6" >
+                                
+                                <button class="btn btn-sm btn btn-danger mt-4 " onclick="document.getElementById('quit').submit()">
+                                    <i class="fa fa-times-circle"></i>
+                                     <b>Quit</b> 
+                                </button>
+                               </div>
+                            
+                        </div>
+                        {{--  --}}
+                    </div> 
+                 </div>
+             </div>
+             <br>   
+             @endif   
         {{-- modal of view detail explore event --}}
         @include('exploreEvents.viewDetail')
         {{-- end modal of view detail explore event --}}
          @endforeach
          @endforeach
 
+            {{-- foreach to data of user who join event --}}
+            @foreach ($joins as $item)
+            @if (Auth::id() == $item->user_id)
+                    <form action="{{route('quit', $item->id)}}" id="quit" method="post">
+                        @csrf
+                        @method("delete")
+                        
+                    </form>
+                    @endif
+                    @endforeach
+                    {{-- end foreach of geting use who join event--}}
             </div>
         </div>
         {{--==================end view all explore event ==============================--}}

@@ -57,6 +57,15 @@
                         <br>
                         <strong class="h5">{{$event->title}}</strong>
                         <br>
+                         {{--  counter member --}}
+                         @if ($event->joins->count("user_id")> 1)
+                          {{$event->joins->count("user_id")}}
+                          members going.
+                          @else
+
+                          {{$event->joins->count("user_id")}}
+                          member going.
+                          @endif
                     </div>
                     <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
                         @if($event->picture)
