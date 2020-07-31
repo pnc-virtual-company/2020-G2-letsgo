@@ -172,7 +172,7 @@
             // Filter explore event
           $("#search").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $(".card").filter(function() {
+            $(".card-event").filter(function() {
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
           });
