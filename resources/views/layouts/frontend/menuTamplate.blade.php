@@ -18,7 +18,7 @@
  
 </head>
 <body>
-       <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5">
+       <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5 fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{route('exploreEvents.index')}}">
             <img style="width: 70px;height: 70px;"  src="{{asset('asset/logo/logo.png')}}"/>
@@ -98,6 +98,7 @@
             </div>
         </div>
     </nav>
+    <br><br><br><br>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3"></div>
@@ -107,6 +108,18 @@
                 @if(session()->has('success'))
                 <div class="alert alert-success" id="success-alert">
                     {{ session()->get('success') }}
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                </div>
+                @endif
+                @if(session()->has('fail'))
+                <div class="alert alert-danger" id="success-alert">
+                    {{ session()->get('fail') }}
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                </div>
+                @endif
+                @if(session()->has('confirm'))
+                <div class="alert alert-danger" id="success-alert">
+                    {{ session()->get('confirm') }}
                     <button type="button" class="close" data-dismiss="alert">x</button>
                 </div>
                 @endif

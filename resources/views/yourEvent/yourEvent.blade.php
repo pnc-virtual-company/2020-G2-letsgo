@@ -53,7 +53,7 @@
                          {{--  --}}
                     </div>
                     <div class="col-8 col-sm-6 col-md-5 col-lg-4">
-                        <b>{{$event->category->category}}</b>
+                        <b class="text-info">{{$event->category->category}}</b>
                         <br>
                         <strong class="h5">{{$event->title}}</strong>
                         <br>

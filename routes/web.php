@@ -39,13 +39,11 @@ Route::group(['prefix' => 'manage'],function(){
     Route::get('/event/index','EventController@index')->name('event.index');
     Route::delete('/event/destroy/{id}','EventController@destroy')->name('event.destroy');
     
-    
     //category
     Route::get('/category/index','CategoryController@index')->name('category.index');
     Route::delete('/category/destroy/{id}','CategoryController@destroy');
     Route::put('/category/update/{id}','CategoryController@update');
     Route::post('/category/store/','CategoryController@store')->name('category.store');
-    Route::get('/search','CategoryController@search')->name('category.search');
     Route::get('/existCategory','CategoryController@existCategory')->name('category.existCategory');
 
 });

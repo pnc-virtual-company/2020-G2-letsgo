@@ -26,17 +26,17 @@
                                       echo $newDateTime = date(' h:i A', strtotime($startTime));
                                       ?>        
 
-                                    <a class="btn btn-sm mt-4 float-right delete" style="background: rgb(182, 182, 182)" href="#!"><b><i class="fa fa-check-circle"></i> Join</b></a>
-                              </div>
+                                <a class="btn btn-sm mt-4 float-right delete" style="background: rgb(182, 182, 182)" href="#!"><b><i class="fa fa-check-circle"></i> Join</b></a>
                           </div>
-                        </div>
-                        <!-- Modal footer -->
-                            <div class="modal-footer"> 
-                                <div class="container ml-5">
-                                    {{$exploreEvent->description}}
-                                </div>
-                            </div> 
-        
+                      </div>
+                    </div>
+                    <!-- Modal footer -->
+                        <div class="modal-footer"> 
+                            <div class="container ml-5">
+                                {{$exploreEvent->description}}
                             </div>
+                        </div> 
+    
                         </div>
                     </div>
+                </div>

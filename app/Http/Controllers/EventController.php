@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Event;
+use App\Join;
 
 class EventController extends Controller
 {
@@ -21,16 +22,10 @@ class EventController extends Controller
     {
         $this->authorize('view', Event::class);
         $event = Event::all();
-        $user = User::all();
         $joins= Join::all();
-        return view('manage.events.viewEvents',compact('event', 'joins', 'users'));
+        return view('manage.events.viewEvents',compact('event', 'joins'));
         
     }
-
-    // explore events
-   
-
-    // your events
    
 
     /**
@@ -96,6 +91,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     { 
+        $this->authorize('delete_event', Event::class);
         $event = Event::find($id);
         $event->delete();
         return back();
