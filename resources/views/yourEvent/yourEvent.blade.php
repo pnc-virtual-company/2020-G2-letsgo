@@ -53,11 +53,10 @@
                          {{--  --}}
                     </div>
                     <div class="col-8 col-sm-6 col-md-5 col-lg-4">
-                        <b>{{$event->category->category}}</b>
+                        <b class="text-info">{{$event->category->category}}</b>
                         <br>
                         <strong class="h5">{{$event->title}}</strong>
                         <br>
-                        <p>5 members going</p>
                     </div>
                     <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
                         @if($event->picture)

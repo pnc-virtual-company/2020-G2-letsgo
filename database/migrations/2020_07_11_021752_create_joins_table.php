@@ -12,6 +12,8 @@ class CreateJoinsTable extends Migration
      * @return void
      */
     public function up()
+
+    
     {
         Schema::create('joins', function (Blueprint $table) {
             $table->id();
@@ -22,7 +24,8 @@ class CreateJoinsTable extends Migration
             $table->unsignedBigInteger('event_id')->nullable();
             $table->foreign('event_id')
                     ->references('id')
-                    ->on('events');
+                    ->on('events')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

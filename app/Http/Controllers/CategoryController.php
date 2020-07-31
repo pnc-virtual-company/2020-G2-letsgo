@@ -20,7 +20,8 @@ class CategoryController extends Controller
     public function index()
     {
         $this->authorize('view', Category::class);
-        return view('manage.category.viewCategory');
+        $categories = Category::all();
+        return view('manage.category.viewCategory',compact('categories'));
     }
 
     /**
@@ -106,15 +107,6 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->delete();
         return back();
-    }
-
-    public function search(Request $request){
-        $this->authorize('view', Category::class); 
-        $dataSearch = $request->get('query');
-        if($request->ajax()){
-            $query = DB::table('categories')->where('category', 'LIKE', '%' . $dataSearch . '%')->get();
-            return $query;
-        }
     }
 
     public function existCategory(Request $request){

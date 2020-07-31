@@ -22,12 +22,10 @@ class YourEventController extends Controller
      */
     public function index()
     {
-        $events = Event::all()->groupBy('startDate');
-      
-                 $categories = Category::all();
-
-        return view('yourEvent.yourEvent', compact(['events','categories']));
      
+        $events = Event::all()->groupBy('startDate');
+        $categories = Category::all();
+        return view('yourEvent.yourEvent', compact(['events','categories']));
     }
 
     /**

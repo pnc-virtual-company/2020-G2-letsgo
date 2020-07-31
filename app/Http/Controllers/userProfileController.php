@@ -126,10 +126,10 @@ class userProfileController extends Controller
                     $user->save();
                     return redirect()->back() ->with('success', 'Updated Successfully!'); 
                  }else{
-                    return redirect()->back() ->with('alert', 'Updated Not Successfully!'); 
+                    return redirect()->back() ->with('confirm', 'New password and confirm password is not correct!'); 
                  }
              }else{
-                  return redirect()->back() ->with('alert', 'Updated Not Successfully!!. Your old password incorrect');
+                  return redirect()->back() ->with('fail', 'Updated Not Successfully!!. Your old password incorrect');
              }
     }
             

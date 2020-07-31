@@ -39,7 +39,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     public function events(){
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class,'owner_id');
     }
 
     public function joins(){

@@ -24,11 +24,6 @@ class EventController extends Controller
         return view('manage.events.viewEvents',compact('event'));
         
     }
-
-    // explore events
-   
-
-    // your events
    
 
     /**
@@ -94,6 +89,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     { 
+        $this->authorize('delete_event', Event::class);
         $event = Event::find($id);
         $event->delete();
         return back();

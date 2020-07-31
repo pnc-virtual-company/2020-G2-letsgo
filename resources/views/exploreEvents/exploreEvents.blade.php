@@ -24,7 +24,7 @@
 
                         {{--====== checkbox  ==========--}}
                         <div class="form-check " style="margin-left:30px">
-                            <input type="checkbox" class="form-check-input">
+                            <input type="checkbox" id="checkbox" value="{{Auth::id()}}" class="form-check-input">
                             <label class="form-check-label" for="">Event you join only</label>
                           </div>
                           {{--======end checkbox  ==========--}}
@@ -56,88 +56,91 @@
             <div class="col-sm-12 col-md-10 col-lg-9">
                 <?php $data = $exploreEvents;?>
                 @foreach ($data as $item => $exploreEvents)
-               
-             @foreach ($exploreEvents as $exploreEvent)
-             @if (Auth::id() != $exploreEvent->owner_id)
-             <h6>
-                {{-- get data to group by --}}
-                <?php
-               
-                    $startDate =(new DateTime($item));
-                    echo date_format($startDate, "l, F j");
-                ?>  
-                </h6>
-             <div class="card p-2 card-event" id="exploreEvent">
-                 <div class="row" >
-                    <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime">
-                         {{-- get current time and convert to AM or PM --}}
-                         <?php
-                         $startTime = $exploreEvent['startTime'];
-                          echo $newDateTime = date(' h:i A', strtotime($startTime));
-                          ?>
-                          {{--  --}}
-                    </div>
-
-                    <div class="col-8 col-sm-6 col-md-5 col-lg-4">
-                         <b>{{$exploreEvent->category->category}}</b>
-                         <br> 
-                         <strong class="h5 ">{{$exploreEvent->title}}</strong>
-                         <br>
-                         {{--  counter member --}}
-                         @if ($exploreEvent->joins->count("user_id")> 1)
-                          {{$exploreEvent->joins->count("user_id")}}
-                          members going.
-                          @else
-
-                          {{$exploreEvent->joins->count("user_id")}}
-                          member going.
-                          @endif
-                          
-                          <br>
-                          {{-- <strong hidden class="h5">{{$exploreEvent->city}}</strong> --}}
-                        
-                     </div>
-                      
-                     <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
-                            {{-- get profile from user insert --}}
-                          <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
-                     </div>
-                   
-               
-                     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-                        <div class="row">
-                            {{-- // --}}
-      
-                            <div class="col-4">
-                                <form action="{{route('join', $exploreEvent->id)}}" method="post">
-                                   @csrf
-                                    <button class="btn btn-sm btn btn-success mt-4 float-right" >
-                                       <i class="fa fa-check-circle"></i>
-                                        <b>Join</b> 
-                                   </button>
-                                   </form>
-                               </div>
-                               <div class="col-4">
-                                   <a href="#" class="btn btn-sm btn btn-danger mt-4 ">
-                                       <i class="fa fa-times-circle"></i>
-                                       <b>Quit</b>
-                                   </a>
-                               </div>
-                               <div class="col-4">
-                                    <button class="btn btn-sm btn btn-success mt-4 float-right" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}" >
-                                            <i class="fa fa-eye"></i>
-                                             <b>view</b> 
-                                        </button>
-                                  
-                               </div>
-                             
+                @foreach ($exploreEvents as $exploreEvent)
+                @if (Auth::id() != $exploreEvent->owner_id)
+                <div class="card-event">
+                    <h6>
+                        {{-- get data to group by --}}
+                        <?php
+                    
+                            $startDate =(new DateTime($item));
+                            echo date_format($startDate, "l, F j");
+                        ?>  
+                        </h6>
+                    <div class="card p-2 card-event" id="exploreEvent">
+                     <div class="row" >
+                        <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
+                             {{-- get current time and convert to AM or PM --}}
+                             <?php
+                             $startTime = $exploreEvent['startTime'];
+                              echo $newDateTime = date(' h:i A', strtotime($startTime));
+                              ?>
+                              {{--  --}}
                         </div>
-                        {{--  --}}
-                    </div> 
-                 </div>
-             </div>
-             <br>   
-             @endif   
+    
+                        <div class="col-8 col-sm-6 col-md-5 col-lg-4" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
+                             <b>{{$exploreEvent->category->category}}</b>
+                             <br> 
+                             <strong class="h5">{{$exploreEvent->title}}</strong>
+                             <br>
+                             {{-- user join only event --}}
+                                @foreach ($exploreEvent->joins as $user)
+                                @if ($user->user_id == Auth::id())
+                                    <p style="display: none"><a class="only-event-user-join">{{Auth::id()}}</a></p>
+                                @else 
+                                    <p style="display: none"><a class="only-event-user-join">N</a></p>
+                                @endif
+                                @endforeach
+                            {{-- end user join only --}}
+                             {{--  counter member --}}
+                             @if ($exploreEvent->joins->count("user_id")> 1)
+                              {{$exploreEvent->joins->count("user_id")}}
+                              members going.
+                              @else
+    
+                              {{$exploreEvent->joins->count("user_id")}}
+                              member going.
+                              @endif
+                              
+                              <br>
+                              {{-- <strong hidden class="h5">{{$exploreEvent->city}}</strong> --}}
+                            
+                         </div>
+                          
+                         <div class="col-4 col-sm-3 col-md-4 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
+                                {{-- get profile from user insert --}}
+                              <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
+                         </div>
+                       
+                   
+                         <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+                            <div class="row">
+                                {{-- // --}}
+          
+                                <div class="col-6">
+                                    <form action="{{route('join', $exploreEvent->id)}}" method="post">
+                                       @csrf
+                                        <button class="btn btn-sm btn btn-success mt-4 float-right" >
+                                           <i class="fa fa-check-circle"></i>
+                                            <b>Join</b> 
+                                       </button>
+                                       </form>
+                                   </div>
+                                   <div class="col-6">
+                                       <a href="#" class="btn btn-sm btn btn-danger mt-4 ">
+                                           <i class="fa fa-times-circle"></i>
+                                           <b>Quit</b>
+                                       </a>
+                                   </div>
+                                  
+                            </div>
+                            {{--  --}}
+                        </div> 
+                     </div>
+                    </div>
+                    <br>   
+                </div>
+                @endif   
         {{-- modal of view detail explore event --}}
         @include('exploreEvents.viewDetail')
         {{-- end modal of view detail explore event --}}
@@ -162,19 +165,50 @@
             });
           });
             // End Filter explore event
-
-
-
-        //   Not far from
-        // $("#city").on("keyup", function() {
-        //     var value = $(this).val().toLowerCase();
-        //     $(".card").filter(function() {
-        //       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        //     });
-        //   });
-          // end search
-         
+           // click on checkbox
+        $("#checkbox").on("click", function() {
+            var value = event_check().toUpperCase();
+            var data = document.getElementsByClassName('card-event');
+            var a, txtValue;
+            for (let i = 0; i < data.length; i++) {
+                a = data[i].getElementsByClassName('only-event-user-join')[0];
+                txtValue = txtValue = a.innerText || a.textContent;
+                if (txtValue.toUpperCase().indexOf(value) > -1) {
+                    data[i].style.display = "";
+                  } else {
+                    data[i].style.display = "none";
+                  }
+            }
+        });     
         });
+        // voice
+    // No @ paramenter
+    // return value of checkbox
+    function event_check(){
+            
+            // get element from chechbox
+            var checkBox = document.getElementById('checkbox');
+
+            // if checkbox had check
+            if (checkBox.checked === true)
+            {
+                // get value from checkbox
+                var value = document.getElementById('checkbox').value;
+                return value;
+            }
+
+            // if checkbox had not check
+            else
+            {
+                // null value 
+                var value = "";
+                return value;
+            }      
+    }
+    // end click
+
     </script>
 
 @endsection
+
+
