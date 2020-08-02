@@ -55,9 +55,12 @@
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-9">
                 <?php $data = $exploreEvents;?>
+                <?php               
+                    $date = date('Y-m-d');
+                 ?>
                 @foreach ($data as $item => $exploreEvents)
                 @foreach ($exploreEvents as $exploreEvent)
-                @if (Auth::id() != $exploreEvent->owner_id)
+                @if (Auth::id() != $exploreEvent->owner_id && $exploreEvent->endDate >= $date)
                 <div class="card-event">
                     <h6>
                         {{-- get data to group by --}}
@@ -82,6 +85,7 @@
                              <b>{{$exploreEvent->category->category}}</b>
                              <br> 
                              <strong class="h5">{{$exploreEvent->title}}</strong>
+                             {{-- <strong class="h5" >{{$exploreEvent->endDate}}</strong> --}}
                              <br>
                              {{-- user join only event --}}
                                 @foreach ($exploreEvent->joins as $user)
