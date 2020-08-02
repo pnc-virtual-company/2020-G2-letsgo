@@ -25,6 +25,8 @@ Auth::routes();
 Route::resource('/exploreEvents', 'ExploreEventsController');
 Route::post('/join/{id}', 'ExploreEventsController@join')->name("join");
 Route::delete('/quit/{id}', 'ExploreEventsController@quit')->name("quit");
+Route::get('/onlyEventJoin', 'ExploreEventsController@onlyEventJoin')->name("onlyEventJoin");
+
 
 Route::resource('/yourEvent', 'YourEventController');
 Route::put('yourEvent/update/{id}','YourEventController@update');

@@ -123,7 +123,7 @@ class YourEventController extends Controller
             'title' => 'required',
             'startDate' => 'required|date|date_format:Y-m-d',
             'startTime' => 'required',
-            'endDate' => 'required|date|date_format:Y-m-d',
+            'endDate' => 'required',
             'endTime' => 'required',
             'description' => 'required',
             'city' => 'required',

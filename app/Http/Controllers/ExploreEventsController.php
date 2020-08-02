@@ -21,33 +21,20 @@ class ExploreEventsController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $request->get('value');
-        if($request->ajax()){
-            $events = Event::all();
-            if($data ==null){
-                $value[] = Event::all();
-                return $value;
-            }else {
-                $joins = Join::where('user_id',$data)->get();
-                if(!$joins->isEmpty()){
-                    foreach ($joins as $join) {
-                    $value[] = Event::where('id',$join->event_id)->get();
-                    }
-                    return $value;
-                }else {
-                    return $joins;
-                }
-            }
-        }
-        $exploreEvents = Event::all();
-        $members=[];
-            foreach ($exploreEvents as $exploreEvent) {
-                $members[] = ['id' => $exploreEvent->id,'members' => $exploreEvent->joins->count('user_id')];
-        }
-        $event_join_only = Join::where('user_id',Auth::user())->get();
-        return view('exploreEvents.exploreEvents',compact(['members','event_join_only']));
+        $exploreEvents = Event::all()->groupBy("startDate");
+        $joins= Join::all();
+        $joinEvent = Join::where('user_id',Auth::id())->get();
+        return view('exploreEvents.exploreEvents',compact('exploreEvents', 'joins','joinEvent'));
     }
 
+
+    public function onlyEventJoin()
+    {
+        $exploreEvents = Event::all()->groupBy("startDate");
+        $joins= Join::all();
+        $joinEvent = Join::where('user_id',Auth::id())->get();
+        return view('exploreEvents.onlyEventJoin',compact('exploreEvents', 'joins','joinEvent'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -91,7 +78,7 @@ class ExploreEventsController extends Controller
         return back();
     }
 
-    public function quit($id){       
+    public function quit($id){     
         $join = Join::find($id);
         $join->delete();
         return back();
