@@ -49,7 +49,7 @@
                                                         
                 {{-- -------- Show user city-------------- --}}     
                 <div class="form-group">
-                    <input class="form-control autoSuggestion" list="result" id="city" placeholder="Country name here .."  name="city"/ required>
+                    <input class="form-control autoSuggestion" list="result" id="cities" placeholder="Country name here .."  name="city" required>
                     <datalist id="result">
                     </datalist>
                 </div>
@@ -129,7 +129,7 @@ $(document).on('click','.edit-event', function(e) {
 
         var id = $(this).data('id');
         var title = $(this).data('title');
-        var city = $(this).data('city');
+        var cities = $(this).data('cities');
         var description = $(this).data('description');
         var startdate = $(this).data('startdate');
         var starttime = $(this).data('starttime');
@@ -150,7 +150,7 @@ $(document).on('click','.edit-event', function(e) {
 
         $('#title').val(title);
         $('#description-edit').val(description);
-        $('#city').val(city);
+        $('#cities').val(cities);
         $('#start-date').val(startdate);
         $('#end-date').val(enddate);
         $('#startTime').val(starttime);

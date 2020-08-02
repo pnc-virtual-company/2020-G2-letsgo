@@ -7,27 +7,45 @@ use App\Event;
 use App\User;
 use Auth;
 use App\Join;
-use Ramsey\Uuid\Type\Integer;
-
+use DB;
 class ExploreEventsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth']);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
-        $exploreEvents = Event::all()->groupBy("startDate");
-        $user = User::all();
-        $joins= Join::all();
-        return view('exploreEvents.exploreEvents',compact('exploreEvents', 'user', 'joins'));
-       
+        $data = $request->get('value');
+        if($request->ajax()){
+            $events = Event::all();
+            if($data ==null){
+                $value[] = Event::all();
+                return $value;
+            }else {
+                $joins = Join::where('user_id',$data)->get();
+                if(!$joins->isEmpty()){
+                    foreach ($joins as $join) {
+                    $value[] = Event::where('id',$join->event_id)->get();
+                    }
+                    return $value;
+                }else {
+                    return $joins;
+                }
+            }
+        }
+        $exploreEvents = Event::all();
+        $members=[];
+            foreach ($exploreEvents as $exploreEvent) {
+                $members[] = ['id' => $exploreEvent->id,'members' => $exploreEvent->joins->count('user_id')];
+        }
+        $event_join_only = Join::where('user_id',Auth::user())->get();
+        return view('exploreEvents.exploreEvents',compact(['members','event_join_only']));
     }
 
     /**
