@@ -6,7 +6,7 @@ use App\Join;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 // implements MustVerifyEmail
 {
     use Notifiable;
@@ -37,6 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    // protected $with = ['joins'];
 
     public function events(){
         return $this->hasMany(Event::class,'owner_id');

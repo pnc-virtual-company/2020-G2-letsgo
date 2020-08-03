@@ -50,14 +50,13 @@ class YourEventController extends Controller
         $request -> validate([
             'category' => 'required',
             'title' => 'required',
-            'startDate' => 'required|date|date_format:Y-m-d|after:yesterday',
+            'startDate' => 'required|date|date_format:Y-m-d',
             'startTime' => 'required',
-            'endDate' => 'required|date|date_format:Y-m-d|after:yesterday',
+            'endDate' => 'required|date|date_format:Y-m-d',
             'endTime' => 'required',
             'description' => 'required',
             'city' => 'required',
         ]);
-
         $user = Auth::id();
         $yourevent = new Event;
         $yourevent->cate_id = $request->get('category');
@@ -116,14 +115,15 @@ class YourEventController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($id);
         $yourevent = Event::find($id);
         $this->authorize('update',$yourevent);
         request()->validate([
             'category' => 'required',
             'title' => 'required',
-            'startDate' => 'required|date|date_format:Y-m-d|after:yesterday',
+            'startDate' => 'required|date|date_format:Y-m-d',
             'startTime' => 'required',
-            'endDate' => 'required|date|date_format:Y-m-d|after:yesterday',
+            'endDate' => 'required',
             'endTime' => 'required',
             'description' => 'required',
             'city' => 'required',

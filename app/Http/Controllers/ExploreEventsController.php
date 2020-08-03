@@ -7,8 +7,7 @@ use App\Event;
 use App\User;
 use Auth;
 use App\Join;
-use Ramsey\Uuid\Type\Integer;
-
+use DB;
 class ExploreEventsController extends Controller
 {
     public function __construct()
@@ -20,16 +19,22 @@ class ExploreEventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
         $exploreEvents = Event::all()->groupBy("startDate");
-        $user = User::all();
         $joins= Join::all();
-        return view('exploreEvents.exploreEvents',compact('exploreEvents', 'user', 'joins'));
-       
+        $joinEvent = Join::where('user_id',Auth::id())->get();
+        return view('exploreEvents.exploreEvents',compact('exploreEvents', 'joins','joinEvent'));
     }
 
+
+    public function onlyEventJoin()
+    {
+        $exploreEvents = Event::all()->groupBy("startDate");
+        $joins= Join::all();
+        $joinEvent = Join::where('user_id',Auth::id())->get();
+        return view('exploreEvents.onlyEventJoin',compact('exploreEvents', 'joins','joinEvent'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -73,7 +78,7 @@ class ExploreEventsController extends Controller
         return back();
     }
 
-    public function quit($id){       
+    public function quit($id){     
         $join = Join::find($id);
         $join->delete();
         return back();
