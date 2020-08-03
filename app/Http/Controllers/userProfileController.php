@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Validator;
 
 class userProfileController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth','verified']);
-    // }
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
     /**
      * Display a listing of the resource.
      *
