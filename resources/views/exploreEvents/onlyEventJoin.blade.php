@@ -177,7 +177,6 @@
             // check only user event
             $("#checkbox").on('click', function () {
                 var data = event_check();
-                console.log(data)
                 if (data == 1) {
                     $('#ifCheck').submit();
                 }

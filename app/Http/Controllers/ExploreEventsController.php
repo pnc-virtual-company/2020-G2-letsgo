@@ -21,9 +21,15 @@ class ExploreEventsController extends Controller
      */
     public function index(Request $request)
     {
+
         $exploreEvents = Event::all()->groupBy("startDate");
         $joins= Join::all();
         $joinEvent = Join::where('user_id',Auth::id())->get();
+
+        $user = User::find(Auth::id());
+        $user -> check = 0;
+        $user->save();
+
         return view('exploreEvents.exploreEvents',compact('exploreEvents', 'joins','joinEvent'));
     }
 
@@ -33,6 +39,11 @@ class ExploreEventsController extends Controller
         $exploreEvents = Event::all()->groupBy("startDate");
         $joins= Join::all();
         $joinEvent = Join::where('user_id',Auth::id())->get();
+
+        $user = User::find(Auth::id());
+        $user -> check = 1;
+        $user->save();
+
         return view('exploreEvents.onlyEventJoin',compact('exploreEvents', 'joins','joinEvent'));
     }
 
