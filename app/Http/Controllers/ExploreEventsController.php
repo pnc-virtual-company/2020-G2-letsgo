@@ -35,6 +35,13 @@ class ExploreEventsController extends Controller
         $joinEvent = Join::where('user_id',Auth::id())->get();
         return view('exploreEvents.onlyEventJoin',compact('exploreEvents', 'joins','joinEvent'));
     }
+
+    // view explore event by carlendar//
+    public function viewByCarlendar()
+    {
+        return view('exploreEvents.viewByCarlendar');
+    }
+    //end view explore event by carlendar//
     /**
      * Show the form for creating a new resource.
      *
