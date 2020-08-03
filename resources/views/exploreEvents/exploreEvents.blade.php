@@ -144,6 +144,8 @@
                         </div>
                         <br>   
                         @endif  
+                            {{-- detail popup of explore event --}}
+                        @include('exploreEvents.viewDetail')
                     @endforeach
                 @endforeach
                 </div>
