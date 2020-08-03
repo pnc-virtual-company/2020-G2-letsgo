@@ -1,5 +1,4 @@
 @extends('layouts.frontend.menuTamplate')
-
 @section('body')
 
     <div class="container mt-5">
@@ -61,11 +60,10 @@
                 <div class="card-event">
                     <h6>
                         {{-- get data to group by --}}
-                        <?php
-                    
-                            $startDate =(new DateTime($item));
-                            echo date_format($startDate, "l, F j");
-                        ?>  
+                       <?php
+                            $startDate = new DateTime($item);
+                            echo date_format($startDate, 'l F, j')
+                       ?>
                         </h6>
                     <div class="card p-2 card-event" id="exploreEvent">
                      <div class="row" >
@@ -116,25 +114,42 @@
                
                      <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                         <div class="row">
-                            {{-- // --}}
-      
-                            <div class="col-6">
-                                <form action="{{route('join', $exploreEvent->id)}}" method="post">
-                                   @csrf
-                                    <button class="btn btn-sm btn btn-success mt-4 float-right" id="join" >
-                                       <i class="fa fa-check-circle"></i>
-                                        <b>Join</b> 
-                                   </button>
-                                   </form>
+                             
+                            <div class="col-6" >
+                              
+                                    @foreach ($exploreEvent->joins as $item)
+                                      
+                                        <form action="{{route('quit', $item->id)}}"  method="post">
+                                            @csrf
+                                            @method("delete")
+                                            <button class="btn btn-sm btn btn-danger mt-4 ">
+                                            <i class="fa fa-times-circle"></i>
+                                            <b>Quit</b> 
+                                        </button>
+                                        </form>
+                                    @endforeach
                                </div>
-                               <div class="col-6" >
-                                
-                                <button class="btn btn-sm btn btn-danger mt-4 " onclick="document.getElementById('quit').submit()">
-                                    <i class="fa fa-times-circle"></i>
-                                     <b>Quit</b> 
-                                </button>
-                               </div>
-                            
+                                <div class="col-6">
+                                 
+                                      <form action="{{route('join', $exploreEvent->id)}}"  method="post">
+                                        @csrf
+                                            <button class="btn btn-sm btn btn-success mt-4 float-right" id="join" >
+                                            <i class="fa fa-check-circle"></i>
+                                                <b>Join</b> 
+                                        </button>
+                                        </form>
+                                    
+                                    </div>
+
+                                    <div id="myDiv" class="answer_list">
+                                        <input type="text" name="custom_url" value="qwe" id="custom_url" placeholder="Custom Slug" />
+                                        <label for="custom_url">Optional</label>
+                                      </div>
+                                      <div>
+                                        <input type="button" value="hide" id="hide" name="answer" />
+                                        <input type="button" value="show" id="show" name="answer" />
+                                        <input type="button" value="toggle" id="toggle" name="answer" />
+                                      </div>
                         </div>
                         {{--  --}}
                     </div> 
@@ -147,18 +162,10 @@
         {{-- end modal of view detail explore event --}}
          @endforeach
          @endforeach
-
-            {{-- foreach to data of user who join event --}}
-            @foreach ($joins as $item)
-            @if (Auth::id() == $item->user_id)
-                    <form action="{{route('quit', $item->id)}}" id="quit" method="post">
-                        @csrf
-                        @method("delete")
-                        
-                    </form>
-                    @endif
-                    @endforeach
-                    {{-- end foreach of geting use who join event--}}
+ {{-- foreach to data of user who join event --}}
+ 
+         {{-- end foreach of geting use who join event--}}
+          
             </div>
         </div>
         {{--==================end view all explore event ==============================--}}
@@ -166,57 +173,66 @@
     
     <script type="text/javaScript">
     // for search
-        $(document).ready(function(){
-
-
-            // Filter explore event
-          $("#search").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $(".card-event").filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-          });
-            // End Filter explore event
-           // click on checkbox
-        $("#checkbox").on("click", function() {
-            var value = event_check().toUpperCase();
-            var data = document.getElementsByClassName('card-event');
-            var a, txtValue;
-            for (let i = 0; i < data.length; i++) {
-                a = data[i].getElementsByClassName('only-event-user-join')[0];
-                txtValue = txtValue = a.innerText || a.textContent;
-                if (txtValue.toUpperCase().indexOf(value) > -1) {
-                    data[i].style.display = "";
-                  } else {
-                    data[i].style.display = "none";
-                  }
-            }
-        });     
-        });
-        // voice
-    // No @ paramenter
-    // return value of checkbox
-    function event_check(){
+    $('#hide').click(function() {
+  $('#myDiv').hide();
+})
+$('#show').click(function() {
+  $('#myDiv').show();
+})
+$('#toggle').click(function() {
+  $('#myDiv').toggle('slow');
+})
+        
+    //         // Filter explore event
+    //       $("#search").on("keyup", function() {
+    //         var value = $(this).val().toLowerCase();
+    //         $(".card-event").filter(function() {
+    //           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    //         });
+    //       });
+    //         // End Filter explore event
+    //        // click on checkbox
+    //     $("#checkbox").on("click", function() {
+    //         var value = event_check().toUpperCase();
+    //         var data = document.getElementsByClassName('card-event');
+    //         var a, txtValue;
+    //         for (let i = 0; i < data.length; i++) {
+    //             a = data[i].getElementsByClassName('only-event-user-join')[0];
+    //             txtValue = txtValue = a.innerText || a.textContent;
+    //             if (txtValue.toUpperCase().indexOf(value) > -1) {
+    //                 data[i].style.display = "";
+    //               } else {
+    //                 data[i].style.display = "none";
+    //               }
+    //         }
+    //     });     
+    //     });
+      
+    //     // voice
+    // // No @ paramenter
+    // // return value of checkbox
+    // function event_check(){
             
-            // get element from chechbox
-            var checkBox = document.getElementById('checkbox');
+    //         // get element from chechbox
+    //         var checkBox = document.getElementById('checkbox');
 
-            // if checkbox had check
-            if (checkBox.checked === true)
-            {
-                // get value from checkbox
-                var value = document.getElementById('checkbox').value;
-                return value;
-            }
+    //         // if checkbox had check
+    //         if (checkBox.checked === true)
+    //         {
+    //             // get value from checkbox
+    //             var value = document.getElementById('checkbox').value;
+    //             return value;
+    //         }
 
-            // if checkbox had not check
-            else
-            {
-                // null value 
-                var value = "";
-                return value;
-            }      
-    }
+    //         // if checkbox had not check
+    //         else
+    //         {
+    //             // null value 
+    //             var value = "";
+    //             return value;
+            
+      
+        });
     // end click
 
     </script>

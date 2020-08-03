@@ -17,10 +17,8 @@
                                     <i class="material-icons">people_outline</i> <br>
                                     <i class="material-icons">person_outline</i> Organized by: {{$exploreEvent->user->firstname}} <br>
                                     <i class="material-icons">access_time</i> 
-                                    <?php   
-                                    $startDate =(new DateTime($item));
-                                    echo date_format($startDate, "l, F j");
-                                    ?>​-
+                                   
+                                    {{-- detail start time --}}
                                      <?php
                                      $startTime = $exploreEvent['startTime'];
                                       echo $newDateTime = date(' h:i A', strtotime($startTime));
