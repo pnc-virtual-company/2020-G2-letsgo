@@ -1,7 +1,11 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
     <div class="container mt-5">
     
         <div class="row">
@@ -53,8 +57,8 @@
             <div class="row">
                 <div class="col-8"></div>
                 <div class="col-4">
-                    <a href="{{route('exploreEvents.index')}}" class="btn btn-default " >CARDS</a>|
-                    <a href="{{route('viewByCarlendar')}}" class="btn btn-default ">CARLENDAR</a>
+                    <a href="{{route('exploreEvents.index')}}" class="btn btn-default text-secondary " ><b>CARDS</b></a>|
+                    <a href="{{route('viewByCarlendar')}}" class="btn btn-default "><b>CARLENDAR</b></a>
                 </div>
             </div>
         {{-- end view by card or carlendar --}}
@@ -63,12 +67,66 @@
         
         <div class="row mt-5">
            <div class="col-12">
-            <h3 class="text-center text-danger">View Explore Event By Carlendar</h3>
+            <div class="response"></div>
+            <div id="calendar"></div>
            </div>
         </div>
         {{--==================end view all explore event by carlendar ==============================--}}
-    
+       
+            
     </div>
-
+    
+    
+    
+    <div class="container">
+    <div class="response"></div>
+    <div id='calendar'></div>
+    </div>
+    
+    <script>
+    $('#calendar').fullCalendar({
+    header: {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'month,agendaWeek,agendaDay'
+    },
+    defaultDate: Date(),
+    navLinks: true,
+    eventLimit: true,
+    events: [{
+    title: 'Front-End Conference',
+    start: '2020-07-22',
+    end: '2020-07-22'
+    },
+    {
+    title: 'Hair stylist with Mike',
+    start: '2020-11-20',
+    allDay: true
+    },
+    {
+    title: 'Car mechanic',
+    start: '2020-11-14T09:00:00',
+    end: '2020-11-14T11:00:00'
+    },
+    {
+    title: 'Dinner with Mike',
+    start: '2020-11-21T19:00:00',
+    end: '2020-11-21T22:00:00'
+    },
+    {
+    title: 'Chillout',
+    start: '2020-11-15',
+    allDay: true
+    },
+    {
+    title: 'Vacation',
+    start: '2020-11-23',
+    end: '2020-11-29'
+    },
+    ]
+    });
+    </script>
 @endsection
+
+
 

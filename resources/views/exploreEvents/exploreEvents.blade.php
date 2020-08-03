@@ -52,8 +52,8 @@
             <div class="row">
                 <div class="col-8"></div>
                 <div class="col-4">
-                    <a href="{{route('exploreEvents.index')}}" class="btn btn-default " >CARDS</a>|
-                    <a href="{{route('viewByCarlendar')}}" class="btn btn-default ">CARLENDAR</a>
+                    <a href="{{route('exploreEvents.index')}}" class="btn btn-default " ><b>CARDS</b></a>|
+                    <a href="{{route('viewByCarlendar')}}" class="btn btn-default text-secondary"><b>CARLENDAR</b></a>
                 </div>
             </div>
         {{-- end view by card or carlendar --}}
