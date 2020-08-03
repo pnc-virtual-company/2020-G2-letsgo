@@ -20,15 +20,20 @@
                             {{-- </form> --}}
                             {{-- end search form --}}
 
-                            {{--====== checkbox  ==========--}}
-                            <div class="form-check " style="margin-left:30px">
-                                <input type="checkbox" id="checkbox" value="{{Auth::id()}}" class="form-check-input">
-                                <label class="form-check-label" for="">Event you join only</label>
-                            </div>
-                            {{--======end checkbox  ==========--}}
-                        </div>   
-                    </div> 
-                
+                        {{--====== checkbox  ==========--}}
+                        <div class="form-check " style="margin-left:30px">
+                            @if (Auth::user()->check != 1)
+                                <input type="checkbox" id="checkbox" name="checkbox[]" value="{{Auth::user()->check}}" class="form-check-input"> 
+                            @endif
+                            <label class="form-check-label" for="checkbox">Event you join only</label>
+                        </div>
+                        <form id="ifNotCheck" action="{{route('ifnotcheck',1)}}" method="post">
+                            @csrf
+                            @method('put')
+                        </form>
+                        {{--======end checkbox  ==========--}}
+                    </div>   
+                </div> 
                 {{-- find city --}}
                     <div class="col-6">  
                         <div class="row">
@@ -173,6 +178,14 @@
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
+
+            // check only user event
+            $("#checkbox").on('click', function () {
+                var data = event_check();
+                if (data == 0) {
+                    $('#ifNotCheck').submit();
+                }
+            });
         });    
     
         // ------------------- importand ---------------------//
@@ -192,7 +205,7 @@
                     }
                 });
                 if (arrayEvent[i] === undefined){
-                    arrayEvent.push('had join');
+                    arrayEvent.push('!join');
                     join_button_display[i].innerHTML = `
                     <button class="btn btn-sm btn btn-success mt-4 float-right join-button">
                         <i class="fa fa-check-circle"></i>
@@ -200,26 +213,27 @@
                     </button>
                     `;
                 }
-            }            
+            }
         }
+
         // -----------------------end---------------------------
 
-    // return value of checkbox
-    function event_check(){
-            var checkBox = document.getElementById('checkbox');
-            if (checkBox.checked === true)
-            {
-                var value = document.getElementById('checkbox').value;
-                return value;
-            }
-            else
-            {
-                var value = "";
-                return value;
-            }      
-    }
-    // end click
 
+        // return value of checkbox
+        function event_check(){
+                var checkBox = document.getElementById('checkbox');
+                if (checkBox.checked === true)
+                {
+                    var value = document.getElementById('checkbox').value;
+                    return value;
+                }
+                else
+                {
+                    var value = document.getElementById('checkbox').value;
+                    return value;
+                }      
+        }
+        // end click
     </script>
 
 @endsection

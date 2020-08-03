@@ -36,6 +36,21 @@ class ExploreEventsController extends Controller
         return view('exploreEvents.onlyEventJoin',compact('exploreEvents', 'joins','joinEvent'));
     }
 
+
+    public function ifCheck($data)
+    {
+        $user = User::find(Auth::id());
+        $user -> check = $data;
+        $user->save();
+        return redirect('exploreEvents');
+    }
+    public function ifnotcheck($data)
+    {
+        $user = User::find(Auth::id());
+        $user -> check = $data;
+        $user->save();
+        return redirect('onlyEventJoin');
+    }
     // view explore event by carlendar//
     public function viewByCarlendar()
     {

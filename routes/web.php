@@ -27,6 +27,8 @@ Route::get('/carlendar', 'ExploreEventsController@viewByCarlendar')->name('viewB
 Route::post('/join/{id}', 'ExploreEventsController@join')->name("join");
 Route::delete('/quit/{id}', 'ExploreEventsController@quit')->name("quit");
 Route::get('/onlyEventJoin', 'ExploreEventsController@onlyEventJoin')->name("onlyEventJoin");
+Route::put('/ifCheck/{data}', 'ExploreEventsController@ifCheck')->name("ifCheck");
+Route::put('/ifnotcheck/{data}', 'ExploreEventsController@ifnotcheck')->name("ifnotcheck");
 
 
 Route::resource('/yourEvent', 'YourEventController');
