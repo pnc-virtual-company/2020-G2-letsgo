@@ -12,7 +12,8 @@ class Event extends Model
         'category','title','startDate','endDate','startTime', 'endTime', 'picture','description',
     ];
 
-    
+    protected $with = ['category','user'];
+
     public function category(){
         return $this->belongsTo(Category::class,'cate_id');
     }
