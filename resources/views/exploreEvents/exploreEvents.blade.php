@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-8">
                             <div class="form-group" >
-                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="city" required>
+                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchcity" required>
                                 <datalist id="result"> 
                                 </datalist>
                             </div>
@@ -57,8 +57,11 @@
                 <?php $data = $exploreEvents;?>
                 @foreach ($data as $item => $exploreEvents)
                 @foreach ($exploreEvents as $exploreEvent)
-                @if (Auth::id() != $exploreEvent->owner_id)
-                <div class="card-event">
+                
+                {{-- @if ( (Auth::user()->city == $exploreEvent->city)) --}}
+                @if ( (Auth::id() != $exploreEvent->owner_id))
+                
+                <div class="card-event event-city">
                     <h6>
                         {{-- get data to group by --}}
                         <?php
@@ -67,6 +70,8 @@
                             echo date_format($startDate, "l, F j");
                         ?>  
                         </h6>
+                        <br>
+                        <strong hidden class="h5">{{$exploreEvent->city}}</strong>
                     <div class="card p-2 card-event" id="exploreEvent">
                      <div class="row" >
                         <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
@@ -102,8 +107,7 @@
                               member going.
                               @endif
                               
-                              <br>
-                              {{-- <strong hidden class="h5">{{$exploreEvent->city}}</strong> --}}
+                            
                             
                          </div>
                           
@@ -128,7 +132,6 @@
                                    </form>
                                </div>
                                <div class="col-6" >
-                                
                                 <button class="btn btn-sm btn btn-danger mt-4 " onclick="document.getElementById('quit').submit()">
                                     <i class="fa fa-times-circle"></i>
                                      <b>Quit</b> 
@@ -141,7 +144,8 @@
                  </div>
              </div>
              <br>   
-             @endif   
+             @endif  
+             {{-- @endif     --}}
         {{-- modal of view detail explore event --}}
         @include('exploreEvents.viewDetail')
         {{-- end modal of view detail explore event --}}
@@ -158,6 +162,7 @@
                     </form>
                     @endif
                     @endforeach
+                    
                     {{-- end foreach of geting use who join event--}}
             </div>
         </div>
@@ -177,6 +182,20 @@
             });
           });
             // End Filter explore event
+           //City not far from
+           $("#serchcity").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".event-city").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+
+
+
+
+
+
+
            // click on checkbox
         $("#checkbox").on("click", function() {
             var value = event_check().toUpperCase();
@@ -200,7 +219,6 @@
             
             // get element from chechbox
             var checkBox = document.getElementById('checkbox');
-
             // if checkbox had check
             if (checkBox.checked === true)
             {
@@ -208,7 +226,6 @@
                 var value = document.getElementById('checkbox').value;
                 return value;
             }
-
             // if checkbox had not check
             else
             {

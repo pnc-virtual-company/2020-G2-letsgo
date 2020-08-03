@@ -11,10 +11,10 @@ use Ramsey\Uuid\Type\Integer;
 
 class ExploreEventsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth','verified']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth','verified']);
+    // }
     /**
      * Display a listing of the resource.
      *

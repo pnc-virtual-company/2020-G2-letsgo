@@ -49,7 +49,7 @@
                                                         
                 {{-- -------- Show user city-------------- --}}     
                 <div class="form-group">
-                    <input class="form-control autoSuggestion" list="result" id="city" placeholder="Country name here .."  name="city"/ required>
+                    <input class="form-control autoSuggestion" list="result" id="city" placeholder="Country name here .."  name="city" required>
                     <datalist id="result">
                     </datalist>
                 </div>
