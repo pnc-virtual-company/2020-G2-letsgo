@@ -9,47 +9,47 @@
             <div class="col-sm-12 col-md-10 col-lg-9">
                 <h5>Find your event !</h5><br>
                 <div class="row">
-                     
-                <div class="col-6">
-                    <div class="row">
-                        {{-- Search form --}}
-                        {{-- <form action="" method="post"> --}}
-                        <div class="input-icons col-md-12" style="margin: 0 auto"> 
-                        <span class="material-icons">search</span> 
-                        <input class="form-control" id="search"  type="text" autocomplete="off" placeholder="Search"> 
-                        </div> <br><br><br>
-                        {{-- </form> --}}
-                        {{-- end search form --}}
+                    <div class="col-6">
+                        <div class="row">
+                            {{-- Search form --}}
+                            {{-- <form action="" method="post"> --}}
+                            <div class="input-icons col-md-12" style="margin: 0 auto"> 
+                            <span class="material-icons">search</span> 
+                            <input class="form-control" id="search"  type="text" autocomplete="off" placeholder="Search"> 
+                            </div> <br><br><br>
+                            {{-- </form> --}}
+                            {{-- end search form --}}
 
-                        {{--====== checkbox  ==========--}}
-                        <div class="form-check " style="margin-left:30px">
-                            <input type="checkbox" id="checkbox" value="{{Auth::id()}}" class="form-check-input">
-                            <label class="form-check-label" for="">Event you join only</label>
-                          </div>
-                          {{--======end checkbox  ==========--}}
-                    </div>   
-                </div> 
+                            {{--====== checkbox  ==========--}}
+                            <div class="form-check " style="margin-left:30px">
+                                <input type="checkbox" id="checkbox" value="{{Auth::id()}}" class="form-check-input">
+                                <label class="form-check-label" for="">Event you join only</label>
+                            </div>
+                            {{--======end checkbox  ==========--}}
+                        </div>   
+                    </div> 
+                
                 {{-- find city --}}
-                <div class="col-6">  
-                    <div class="row">
-                        <div class="col-4"   >
-                            <p >Not to far from </p>
-                        </div>
-                        <div class="col-8">
-                            <div class="form-group" >
-                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" required>
-                                <datalist id="result"> 
-                                </datalist>
+                    <div class="col-6">  
+                        <div class="row">
+                            <div class="col-4"   >
+                                <p >Not to far from </p>
+                            </div>
+                            <div class="col-8">
+                                <div class="form-group" >
+                                    <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" required>
+                                    <datalist id="result"> 
+                                    </datalist>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                  {{--end find city --}}
                 </div>
             </div>    
-        </div><br><br>
+        </div><br>
         {{--================== view all explore event ================================--}}
-        
+
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-9">

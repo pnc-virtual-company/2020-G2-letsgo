@@ -4,27 +4,6 @@
     <div class="modal-dialog" id="dialog" role="dialog">
         <div class="modal-content">
                   
-<<<<<<< HEAD
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                          <div class="row">
-                              <div class="col-4 mt-3">
-                                    <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 150px; height:150px" id="img">
-                              </div>
-                              <div class="col-8">
-                                    {{$exploreEvent->category->category}}
-                                    <h4><b>{{$exploreEvent->title}}</b></h4>
-                                    <i class="material-icons">place</i> {{$exploreEvent->city}} <br>
-                                    <i class="material-icons">people_outline</i> <br>
-                                    <i class="material-icons">person_outline</i> Organized by: {{$exploreEvent->user->firstname}} <br>
-                                    <i class="material-icons">access_time</i> 
-                                   
-                                    {{-- detail start time --}}
-                                     <?php
-                                     $startTime = $exploreEvent['startTime'];
-                                      echo $newDateTime = date(' h:i A', strtotime($startTime));
-                                      ?>        
-=======
         <!-- Modal body -->
         <div class="modal-body">
             <div class="row">
@@ -55,7 +34,6 @@
                             $startTime = $exploreEvent['startTime'];
                                 echo $newDateTime = date(' h:i A', strtotime($startTime));
                         ?>        
->>>>>>> 6627fb3a0aaa34d9316618529566f48978f3ae7f
 
                     <div class="float-right" style="display: flex;margin-right:40px">
                         @foreach ($exploreEvent->joins as $join)
