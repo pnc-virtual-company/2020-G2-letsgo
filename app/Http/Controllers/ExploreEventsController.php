@@ -51,6 +51,12 @@ class ExploreEventsController extends Controller
         $user->save();
         return redirect('onlyEventJoin');
     }
+    // view explore event by carlendar//
+    public function viewByCarlendar()
+    {
+        return view('exploreEvents.viewByCarlendar');
+    }
+    //end view explore event by carlendar//
     /**
      * Show the form for creating a new resource.
      *

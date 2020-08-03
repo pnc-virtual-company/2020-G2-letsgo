@@ -55,7 +55,16 @@
                 </div>
             </div>    
         </div><br><br>
-        {{--================== view all explore event ================================--}}
+         {{-- view by card or carlendar --}}
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <a href="{{route('exploreEvents.index')}}" class="btn btn-default " >CARDS</a>|
+                    <a href="{{route('viewByCarlendar')}}" class="btn btn-default ">CARLENDAR</a>
+                </div>
+            </div>
+        {{-- end view by card or carlendar --}}
+        {{--================== view all explore event by card ================================--}}
         
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
@@ -151,12 +160,14 @@
                         </div>
                         <br>   
                         @endif  
+                            {{-- detail popup of explore event --}}
+                        @include('exploreEvents.viewDetail')
                     @endforeach
                 @endforeach
                 </div>
         </div>
-        {{--==================end view all explore event ==============================--}}
     </div>
+    {{--==================end view all explore event by card ==============================--}}
     
     <script type="text/javaScript">
     // for search
