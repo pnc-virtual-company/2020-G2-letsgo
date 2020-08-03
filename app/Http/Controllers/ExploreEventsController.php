@@ -35,6 +35,22 @@ class ExploreEventsController extends Controller
         $joinEvent = Join::where('user_id',Auth::id())->get();
         return view('exploreEvents.onlyEventJoin',compact('exploreEvents', 'joins','joinEvent'));
     }
+
+
+    public function ifCheck($data)
+    {
+        $user = User::find(Auth::id());
+        $user -> check = $data;
+        $user->save();
+        return redirect('exploreEvents');
+    }
+    public function ifnotcheck($data)
+    {
+        $user = User::find(Auth::id());
+        $user -> check = $data;
+        $user->save();
+        return redirect('onlyEventJoin');
+    }
     /**
      * Show the form for creating a new resource.
      *
