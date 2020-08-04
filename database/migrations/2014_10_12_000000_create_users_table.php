@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('birth')->nullable();
             $table->string('picture')->nullable();
             $table->integer('role')->default(0);
+            $table->boolean('check')->default(0);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -36,7 +37,7 @@ class CreateUsersTable extends Migration
                 'sex'=> 'Male',
                 'birth'=> null,
                 'picture'=> 'user.png',
-                'email' => 'lyzasouy@gmail.com',
+                'email' => 'sreyrotoun@gmail.com',
                 'role' =>1,
                 'password' => bcrypt('password'),
                 'remember_token' => Str::random(10)

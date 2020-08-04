@@ -1,5 +1,4 @@
 @extends('layouts.frontend.menuTamplate')
-
 @section('body')
 
     <div class="container mt-5">
@@ -10,24 +9,29 @@
             <div class="col-sm-12 col-md-10 col-lg-9">
                 <h5>Find your event !</h5><br>
                 <div class="row">
-                     
-                <div class="col-6">
-                    <div class="row">
-                        {{-- Search form --}}
-                        {{-- <form action="" method="post"> --}}
-                        <div class="input-icons col-md-12" style="margin: 0 auto"> 
-                        <span class="material-icons">search</span> 
-                        <input class="form-control" id="search"  type="text" autocomplete="off" placeholder="Search"> 
-                        </div> <br><br><br>
-                        {{-- </form> --}}
-                        {{-- end search form --}}
+                    <div class="col-6">
+                        <div class="row">
+                            {{-- Search form --}}
+                            {{-- <form action="" method="post"> --}}
+                            <div class="input-icons col-md-12" style="margin: 0 auto"> 
+                            <span class="material-icons">search</span> 
+                            <input class="form-control" id="search"  type="text" autocomplete="off" placeholder="Search"> 
+                            </div> <br><br><br>
+                            {{-- </form> --}}
+                            {{-- end search form --}}
 
                         {{--====== checkbox  ==========--}}
                         <div class="form-check " style="margin-left:30px">
-                            <input type="checkbox" id="checkbox" value="{{Auth::id()}}" class="form-check-input">
-                            <label class="form-check-label" for="">Event you join only</label>
-                          </div>
-                          {{--======end checkbox  ==========--}}
+                            @if (Auth::user()->check != 1)
+                                <input type="checkbox" id="checkbox" name="checkbox[]" value="{{Auth::user()->check}}" class="form-check-input"> 
+                            @endif
+                            <label class="form-check-label" for="checkbox">Event you join only</label>
+                        </div>
+                        <form id="ifNotCheck" action="{{route('ifnotcheck',1)}}" method="post">
+                            @csrf
+                            @method('put')
+                        </form>
+                        {{--======end checkbox  ==========--}}
                     </div>   
                 </div> 
                 {{-- find city --}}
@@ -44,12 +48,20 @@
                             </div>
                         </div>
                     </div>
-                </div>
                  {{--end find city --}}
                 </div>
             </div>    
         </div><br><br>
-        {{--================== view all explore event ================================--}}
+         {{-- view by card or carlendar --}}
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <a href="{{route('exploreEvents.index')}}" class="btn btn-default " ><b>CARDS</b></a>|
+                    <a href="{{route('viewByCarlendar')}}" class="btn btn-default text-secondary"><b>CARLENDAR</b></a>
+                </div>
+            </div>
+        {{-- end view by card or carlendar --}}
+        {{--================== view all explore event by card ================================--}}
         
         <div class="row">
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
@@ -156,8 +168,8 @@
                 @endforeach
             @endforeach
         </div>
-        {{--==================end view all explore event ==============================--}}
     </div>
+    {{--==================end view all explore event by card ==============================--}}
     
     <script type="text/javaScript">
     // for search
@@ -180,12 +192,18 @@
                 $("#serchCity").on("keyup", function() {
 
                     var value = $(this).val().toLowerCase();
-                    // value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}
-                    console.log(value)
                     $(".event-city").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
+
+            // check only user event
+            $("#checkbox").on('click', function () {
+                var data = event_check();
+                if (data == 0) {
+                    $('#ifNotCheck').submit();
+                }
+            });
         });    
                 //   End city not far from
 
@@ -207,7 +225,7 @@
                     }
                 });
                 if (arrayEvent[i] === undefined){
-                    arrayEvent.push('had join');
+                    arrayEvent.push('!join');
                     join_button_display[i].innerHTML = `
                     <button class="btn btn-sm btn btn-success mt-4 float-right join-button">
                         <i class="fa fa-check-circle"></i>
@@ -215,26 +233,28 @@
                     </button>
                     `;
                 }
-            }            
+            }
         }
+
         // -----------------------end---------------------------
 
-    // return value of checkbox
-    function event_check(){
-            var checkBox = document.getElementById('checkbox');
-            if (checkBox.checked === true)
-            {
-                var value = document.getElementById('checkbox').value;
-                return value;
-            }
-            else
-            {
-                var value = "";
-                return value;
-            }      
-    }
-    // end click
 
+        // return value of checkbox
+        function event_check(){
+                var checkBox = document.getElementById('checkbox');
+                if (checkBox.checked === true)
+                {
+                    var value = document.getElementById('checkbox').value;
+                    console.log(value);
+                    return value;
+                }
+                else
+                {
+                    var value = document.getElementById('checkbox').value;
+                    return value;
+                }      
+        }
+        // end click
     </script>
 
 @endsection
