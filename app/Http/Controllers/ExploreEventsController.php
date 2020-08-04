@@ -150,4 +150,6 @@ class ExploreEventsController extends Controller
     {
         //
     }
+
+   
 }
