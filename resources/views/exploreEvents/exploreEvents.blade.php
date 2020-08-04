@@ -35,6 +35,7 @@
                     </div>   
                 </div> 
                 {{-- find city --}}
+
                     <div class="col-6">  
                         <div class="row">
                             <div class="col-4"   >
@@ -42,13 +43,14 @@
                             </div>
                             <div class="col-8">
                                 <div class="form-group" >
-                                    <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" required>
-                                    <datalist id="result"> 
+                                    <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
+                                <datalist id="result"> 
                                     </datalist>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                  {{--end find city --}}
                 </div>
             </div>    
@@ -73,8 +75,9 @@
                  ?>
                 @foreach ($data as $item => $exploreEvents)
                     @foreach ($exploreEvents as $exploreEvent)
-                        @if (Auth::id() != $exploreEvent->owner_id && $exploreEvent->endDate >= $date)
-                        <div class="card-event">
+                        @if (Auth::id() != $exploreEvent->owner_id && $exploreEvent->endDate >= $date )
+                        {{-- @if (Auth::user()->city == $exploreEvent->city) --}}
+                        <div class="card-event event-city">
                             <h6>
                                 {{-- get data to group by --}}
                                 <?php
@@ -83,6 +86,8 @@
                                     echo date_format($startDate, "l, F j");
                                 ?>  
                             </h6>
+                            <strong class="h5" hidden>{{$exploreEvent->city}}</strong>
+
                             <div class="card p-2 card-event" id="exploreEvent">
                                 <div class="row" >
                                     <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
@@ -157,12 +162,14 @@
                             </div>
                         </div>
                         <br>   
-                        @endif  
-                            {{-- detail popup of explore event --}}
-                        @include('exploreEvents.viewDetail')
-                    @endforeach
+                    </div>
+                        {{-- @endif --}}
+                    
+                    @endif  
+                        {{-- detail popup of explore event --}}
+                    @include('exploreEvents.viewDetail')
                 @endforeach
-                </div>
+            @endforeach
         </div>
     </div>
     {{--==================end view all explore event by card ==============================--}}
@@ -178,6 +185,22 @@
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
+            //  End filter explore event
+
+            //    List the city not far from
+                var value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}.toLowerCase()
+                $(".event-city").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                $("#serchCity").on("keyup", function() {
+
+                    var value = $(this).val().toLowerCase();
+                    // value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}
+                    console.log(value)
+                    $(".event-city").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
 
             // check only user event
             $("#checkbox").on('click', function () {
@@ -187,6 +210,8 @@
                 }
             });
         });    
+                //   End city not far from
+
     
         // ------------------- importand ---------------------//
         joinButton()
