@@ -38,11 +38,7 @@
                         </div>
                         <div class="col-8">
                             <div class="form-group" >
-<<<<<<< HEAD
-                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchcity" required>
-=======
-                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" required>
->>>>>>> 6627fb3a0aaa34d9316618529566f48978f3ae7f
+                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
                                 <datalist id="result"> 
                                 </datalist>
                             </div>
@@ -63,101 +59,20 @@
                     $date = date('Y-m-d');
                  ?>
                 @foreach ($data as $item => $exploreEvents)
-<<<<<<< HEAD
-                @foreach ($exploreEvents as $exploreEvent)
-                
-                {{-- @if ( (Auth::user()->city == $exploreEvent->city)) --}}
-                @if ( (Auth::id() != $exploreEvent->owner_id))
-                
-                <div class="card-event event-city">
-                    <h6>
-                        {{-- get data to group by --}}
-                        <?php
-                    
-                            $startDate =(new DateTime($item));
-                            echo date_format($startDate, "l, F j");
-                        ?>  
-                        </h6>
-                        <br>
-                        <strong hidden class="h5">{{$exploreEvent->city}}</strong>
-                    <div class="card p-2 card-event" id="exploreEvent">
-                     <div class="row" >
-                        <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
-                             {{-- get current time and convert to AM or PM --}}
-                             <?php
-                             $startTime = $exploreEvent['startTime'];
-                              echo $newDateTime = date(' h:i A', strtotime($startTime));
-                              ?>
-                              {{--  --}}
-                        </div>
-    
-                        <div class="col-8 col-sm-6 col-md-5 col-lg-4" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
-                             <b>{{$exploreEvent->category->category}}</b>
-                             <br> 
-                             <strong class="h5">{{$exploreEvent->title}}</strong>
-                             <br>
-                             {{-- user join only event --}}
-                                @foreach ($exploreEvent->joins as $user)
-                                @if ($user->user_id == Auth::id())
-                                    <p style="display: none"><a class="only-event-user-join">{{Auth::id()}}</a></p>
-                                @else 
-                                    <p style="display: none"><a class="only-event-user-join">N</a></p>
-                                @endif
-                                @endforeach
-                            {{-- end user join only --}}
-                             {{--  counter member --}}
-                             @if ($exploreEvent->joins->count("user_id")> 1)
-                              {{$exploreEvent->joins->count("user_id")}}
-                              members going.
-                              @else
-    
-                              {{$exploreEvent->joins->count("user_id")}}
-                              member going.
-                              @endif
-                              
-                            
-                            
-                         </div>
-                          
-                         <div class="col-4 col-sm-3 col-md-4 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
-                                {{-- get profile from user insert --}}
-                              <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
-                         </div>
-                       
-                   
-               
-                     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-                        <div class="row">
-                            {{-- // --}}
-      
-                            <div class="col-6">
-                                <form action="{{route('join', $exploreEvent->id)}}" method="post">
-                                   @csrf
-                                    <button class="btn btn-sm btn btn-success mt-4 float-right" id="join" >
-                                       <i class="fa fa-check-circle"></i>
-                                        <b>Join</b> 
-                                   </button>
-                                   </form>
-                               </div>
-                               <div class="col-6" >
-                                <button class="btn btn-sm btn btn-danger mt-4 " onclick="document.getElementById('quit').submit()">
-                                    <i class="fa fa-times-circle"></i>
-                                     <b>Quit</b> 
-                                </button>
-                               </div>
-=======
                     @foreach ($exploreEvents as $exploreEvent)
-                        @if (Auth::id() != $exploreEvent->owner_id && $exploreEvent->endDate >= $date)
-                        <div class="card-event">
+                        @if (Auth::id() != $exploreEvent->owner_id && $exploreEvent->endDate >= $date )
+                        {{-- @if (Auth::user()->city == $exploreEvent->city) --}}
+                        <div class="card-event event-city">
                             <h6>
                                 {{-- get data to group by --}}
                                 <?php
->>>>>>> 6627fb3a0aaa34d9316618529566f48978f3ae7f
                             
                                     $startDate =(new DateTime($item));
                                     echo date_format($startDate, "l, F j");
                                 ?>  
                             </h6>
+                            <strong class="h5" hidden>{{$exploreEvent->city}}</strong>
+
                             <div class="card p-2 card-event" id="exploreEvent">
                                 <div class="row" >
                                     <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
@@ -232,12 +147,14 @@
                             </div>
                         </div>
                         <br>   
-                        @endif  
-                            {{-- detail popup of explore event --}}
-                        @include('exploreEvents.viewDetail')
-                    @endforeach
+                    </div>
+                        {{-- @endif --}}
+                    
+                    @endif  
+                        {{-- detail popup of explore event --}}
+                    @include('exploreEvents.viewDetail')
                 @endforeach
-                </div>
+            @endforeach
         </div>
         {{--==================end view all explore event ==============================--}}
     </div>
@@ -253,7 +170,25 @@
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
+            //  End filter explore event
+
+            //    List the city not far from
+                var value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}.toLowerCase()
+                $(".event-city").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                $("#serchCity").on("keyup", function() {
+
+                    var value = $(this).val().toLowerCase();
+                    // value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}
+                    console.log(value)
+                    $(".event-city").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
         });    
+                //   End city not far from
+
     
         // ------------------- importand ---------------------//
         joinButton()
