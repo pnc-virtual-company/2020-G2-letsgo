@@ -35,19 +35,22 @@
                     </div>   
                 </div> 
                 {{-- find city --}}
-                <div class="col-6">  
-                    <div class="row">
-                        <div class="col-4"   >
-                            <p >Not to far from </p>
-                        </div>
-                        <div class="col-8">
-                            <div class="form-group" >
-                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
+
+                    <div class="col-6">  
+                        <div class="row">
+                            <div class="col-4"   >
+                                <p >Not to far from </p>
+                            </div>
+                            <div class="col-8">
+                                <div class="form-group" >
+                                    <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
                                 <datalist id="result"> 
-                                </datalist>
+                                    </datalist>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                  {{--end find city --}}
                 </div>
             </div>    
@@ -192,6 +195,8 @@
                 $("#serchCity").on("keyup", function() {
 
                     var value = $(this).val().toLowerCase();
+                    // value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}
+                    console.log(value)
                     $(".event-city").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
