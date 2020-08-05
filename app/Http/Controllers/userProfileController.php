@@ -5,17 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
-use Image;
-use DB;
-use File;
-use Crypt;
-use Input;
 use Illuminate\Support\Facades\Hash;
-use Storage;
-use Illuminate\Support\Facades\Validator;
-
-
-
+use Intervention\Image\ImageManagerStatic as Image;
 class userProfileController extends Controller
 {
     public function __construct()
@@ -92,13 +83,18 @@ class userProfileController extends Controller
         $user->birth = $request->get('birth');
         $user->city = $request->get('city');  
         $user->sex = $request->get('sex');
-        if($request->picture != null){ 
-            request()->validate([
-                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-            $imageName = time().'.'.request()->picture->getClientOriginalExtension();
-            request()->picture->move(public_path('asset/userImage/'), $imageName);
-            $user->picture = $imageName;
+        if($request->hasFile('picture')) {
+
+            if(\File::exists(public_path("asset/eventimage/{$user->picture}"))){
+                \File::delete(public_path("asset/eventimage/{$user->picture}"));
+            }
+
+            $image = $request->file('picture');            
+            $filename = time().'.'.request()->picture->getClientOriginalExtension();
+            $image_resize = Image::make($image->getRealPath());  
+            $image_resize->resize(100, 100);        
+            $user-> picture=   $filename;
+            $image_resize->save(public_path('asset/userImage/' .$filename));
         }
         $user->save();
         return back();

@@ -22,10 +22,10 @@
  
 </head>
 <body>
-       <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm h5 fixed-top">
+       <nav class="navbar p-0 navbar-expand-md navbar-light bg-white shadow-sm h5 fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{route('exploreEvents.index')}}">
-            <img style="width: 70px;height: 70px;"  src="{{asset('asset/logo/logo.png')}}"/>
+            <img style="width: 60px;height: 60px;"  src="{{asset('asset/logo/logo.png')}}"/>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -102,7 +102,7 @@
             </div>
         </div>
     </nav>
-    <br><br><br><br>
+    <br><br><br>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3"></div>
@@ -145,7 +145,7 @@
                 @method("PUT")
                
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-12 col-sm-8">
                         {{-- -------- Show user First Name-------------- --}}
                         <div class="form-group">
                         <input type="text" name="firstname" value="{{Auth::user()->firstname}}"  class="form-control">
@@ -194,16 +194,16 @@
                         </div>
                         {{-- ----------end city-------------- --}}
                     </div>
-                    <div class="col-4">
-
-                        @if(Auth::user()->picture)
-                                {{-- get profile from user insert --}}
+                    <div class="col-12 col-sm-4">
+                        <div class="row" style="display: flex; justify-content:center; align-items:center">
+                            @if(Auth::user()->picture)
+                            {{-- get profile from user insert --}}
                             <img src="{{asset('asset/userImage/'.Auth::user()->picture)}}" style="border-radius:50%" width="120px" height="120px"  id="img_aupload">
-                        @else
-                                {{-- default profile --}}
-                            <img src="asset/userImage/user.png" style="border-radius:50%" width="120px" height="120px"  id="img_aupload"/>
-                        @endif
-                        
+                            @else
+                                    {{-- default profile --}}
+                                <img src="asset/userImage/user.png" style="border-radius:50%" width="120px" height="120px"  id="img_aupload"/>
+                            @endif
+                        </div>
                         <div class="row justify-content-center">
                             {{-- button add profile --}}
                             <input id="file" style="display:none;" type="file" name="picture">

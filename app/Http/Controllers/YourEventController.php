@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Event;
 use App\Category;
-use App\User;
-use DB;
+use Intervention\Image\ImageManagerStatic as Image;
 class YourEventController extends Controller
 {
 
@@ -68,16 +67,15 @@ class YourEventController extends Controller
         $yourevent->description = $request->get('description');
         $yourevent->city = $request->get('city');
         $yourevent->owner_id =   $user;
-        if($request->picture != null){ 
-            request()->validate([
-                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                ]);
-                $imageName = time().'.'.request()->picture->getClientOriginalExtension();
-                request()->picture->move(public_path('asset/eventimage/'), $imageName);
-                $yourevent->picture = $imageName;
-                
+        if($request->hasFile('picture')) {
+            $image = $request->file('picture');            
+            $filename = time().'.'.request()->picture->getClientOriginalExtension();
+            $image_resize = Image::make($image->getRealPath());  
+            $image_resize->resize(100, 100);        
+            $yourevent-> picture=   $filename;
+            $image_resize->save(public_path('asset/eventimage/' .$filename));
         }else {
-            $yourevent->picture = "event.png";
+            $yourevent-> picture=   'event.png';
         }
         $yourevent->save();
         return back();
@@ -136,17 +134,21 @@ class YourEventController extends Controller
         $yourevent->endTime = $request->get('endTime');
         $yourevent->description = $request->get('description');
         $yourevent->city = $request->get('city');
-        if($request->picture != null){ 
+
+        if($request->hasFile('picture')) {
+
             if(\File::exists(public_path("asset/eventimage/{$yourevent->picture}"))){
                 \File::delete(public_path("asset/eventimage/{$yourevent->picture}"));
             }
-            request()->validate([
-                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-            $imageName = time().'.'.request()->picture->getClientOriginalExtension();
-            request()->picture->move(public_path('asset/eventimage/'), $imageName);
-            $yourevent->picture = $imageName;  
+
+            $image = $request->file('picture');            
+            $filename = time().'.'.request()->picture->getClientOriginalExtension();
+            $image_resize = Image::make($image->getRealPath());  
+            $image_resize->resize(100, 100);        
+            $yourevent-> picture=   $filename;
+            $image_resize->save(public_path('asset/eventimage/' .$filename));
         }
+
         $yourevent -> save();
         return back();
     }
@@ -161,8 +163,10 @@ class YourEventController extends Controller
     {
         $yourevent = Event::find($id);
         $this->authorize('update',$yourevent);
-        if(\File::exists(public_path("asset/eventimage/{$yourevent->picture}"))){
-            \File::delete(public_path("asset/eventimage/{$yourevent->picture}"));
+        if ($yourevent->picture != 'event.png') {
+            if(\File::exists(public_path("asset/eventimage/{$yourevent->picture}"))){
+                \File::delete(public_path("asset/eventimage/{$yourevent->picture}"));
+            }
         }
         $yourevent->delete();
         return back();

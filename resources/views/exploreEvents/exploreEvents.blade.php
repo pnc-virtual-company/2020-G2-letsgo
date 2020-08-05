@@ -1,68 +1,56 @@
 @extends('layouts.frontend.menuTamplate')
 @section('body')
-
-    <div class="container mt-5">
-    
+    <div class="container">
         <div class="row">
-            
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-9">
                 <h5>Find your event !</h5><br>
                 <div class="row">
-                    <div class="col-6">
-                        <div class="row">
-                            {{-- Search form --}}
-                            {{-- <form action="" method="post"> --}}
-                            <div class="input-icons col-md-12" style="margin: 0 auto"> 
+                    <div class="col-12 col-md-12 col-lg-5 mb-2">
+                        <div class="input-icons col-md-12" style="margin: 0 auto"> 
                             <span class="material-icons">search</span> 
                             <input class="form-control" id="search"  type="text" autocomplete="off" placeholder="Search"> 
-                            </div> <br><br><br>
-                            {{-- </form> --}}
-                            {{-- end search form --}}
-
-                        {{--====== checkbox  ==========--}}
-                        <div class="form-check " style="margin-left:30px">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-7">
+                        <div class="row" style="margin: 0 auto">
+                            <div class="col-12 col-md-12 col-lg-5 mt-2">
+                                <small>NON TOO FAR FROM</small>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-7">
+                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
+                                <datalist id="result"> </datalist>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+        {{-- view by card or carlendar --}}
+        <div class="row mt-3">
+            <div class="col-sm-12 col-md-1 col-lg-1"></div>
+            <div class="col-sm-12 col-md-10 col-lg-9">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-check">
                             @if (Auth::user()->check != 1)
                                 <input type="checkbox" id="checkbox" name="checkbox[]" value="{{Auth::user()->check}}" class="form-check-input"> 
                             @endif
-                            <label class="form-check-label" for="checkbox">Event you join only</label>
+                            <label class="form-check-label" for="checkbox"><strong>Event you join only</strong></label>
                         </div>
                         <form id="ifNotCheck" action="{{route('ifnotcheck',1)}}" method="post">
                             @csrf
                             @method('put')
                         </form>
-                        {{--======end checkbox  ==========--}}
-                    </div>   
-                </div> 
-                {{-- find city --}}
-
-                    <div class="col-6">  
-                        <div class="row">
-                            <div class="col-4"   >
-                                <p >Not to far from </p>
-                            </div>
-                            <div class="col-8">
-                                <div class="form-group" >
-                                    <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
-                                <datalist id="result"> 
-                                    </datalist>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
-                 {{--end find city --}}
-                </div>
-            </div>    
-        </div><br><br>
-         {{-- view by card or carlendar --}}
-            <div class="row">
-                <div class="col-8"></div>
-                <div class="col-4">
-                    <a href="{{route('exploreEvents.index')}}" class="btn btn-default " ><b>CARDS</b></a>|
-                    <a href="{{route('viewByCarlendar')}}" class="btn btn-default text-secondary"><b>CARLENDAR</b></a>
+                    <div class="col-12 col-md-6 text-right">
+                        <a href="{{route('exploreEvents.index')}}" class="btn btn-default" ><b>CARDS</b></a>
+                        |
+                        <a href="{{route('viewByCarlendar')}}" class="btn btn-default text-secondary"><b>CARLENDAR</b></a>
+                    </div>
                 </div>
             </div>
+        </div>
         {{-- end view by card or carlendar --}}
         {{--================== view all explore event by card ================================--}}
         
@@ -99,7 +87,7 @@
                                         {{--  --}}
                                     </div>
                 
-                                    <div class="col-8 col-sm-6 col-md-5 col-lg-4" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
+                                    <div class="col-9 col-sm-6 col-md-6 col-lg-4" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
                                         <b>{{$exploreEvent->category->category}}</b>
                                         <br> 
                                         <strong class="h5">{{$exploreEvent->title}}</strong>
@@ -129,9 +117,9 @@
                                         
                                     </div>
                                     
-                                    <div class="col-4 col-sm-3 col-md-4 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
+                                    <div class="col-3 col-sm-3 col-md-3 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
                                             {{-- get profile from user insert --}}
-                                        <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
+                                        <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100%; border-radius: 10px" class="mx-auto d-block" id="img">
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                                     <div class="row" style="display: flex; justify-content:center; align-items:center">
@@ -167,7 +155,7 @@
                     
                     @endif  
                         {{-- detail popup of explore event --}}
-                    @include('exploreEvents.viewDetail')
+                        @include('exploreEvents.viewDetail')
                 @endforeach
             @endforeach
         </div>
@@ -175,7 +163,7 @@
     {{--==================end view all explore event by card ==============================--}}
     
     <script type="text/javaScript">
-    // for search
+
         $(document).ready(function(){
 
             // Filter explore event
@@ -191,11 +179,10 @@
                 var value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}.toLowerCase()
                 $(".event-city").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                $("#serchCity").on("keyup", function() {
+                });
 
+                $("#serchCity").on("keyup", function() {
                     var value = $(this).val().toLowerCase();
-                    // value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}
                     console.log(value)
                     $(".event-city").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -203,15 +190,13 @@
                 });
 
             // check only user event
-            $("#checkbox").on('click', function () {
-                var data = event_check();
-                if (data == 0) {
-                    $('#ifNotCheck').submit();
-                }
-            });
+                $("#checkbox").on('click', function () {
+                    var data = event_check();
+                    if (data == 0) {
+                        $('#ifNotCheck').submit();
+                    }
+                });
         });    
-                //   End city not far from
-
     
         // ------------------- importand ---------------------//
         joinButton()
@@ -241,9 +226,6 @@
             }
         }
 
-        // -----------------------end---------------------------
-
-
         // return value of checkbox
         function event_check(){
                 var checkBox = document.getElementById('checkbox');
@@ -259,7 +241,7 @@
                     return value;
                 }      
         }
-        // end click
+
     </script>
 
 @endsection

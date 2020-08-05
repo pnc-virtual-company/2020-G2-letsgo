@@ -49,7 +49,7 @@
                                 ?>
                                 {{--  --}}
                             </div>
-                            <div class="col-8 col-sm-6 col-md-5 col-lg-4">
+                            <div class="col-9 col-sm-6 col-md-6 col-lg-4">
                                 <b class="text-info">{{$event->category->category}}</b>
                                 <br>
                                 <strong class="h5">{{$event->title}}</strong>
@@ -64,13 +64,13 @@
                                 member going.
                                 @endif
                             </div>
-                            <div class="col-4 col-sm-3 col-md-4 col-lg-2">   
+                            <div class="col-3 col-sm-3 col-md-3 col-lg-2">   
                                 @if($event->picture)
                                         {{-- get profile from user insert --}}
-                                    <img src="{{asset('asset/eventimage/'.$event->picture)}}" style="width: 100px; height:100px" id="img">
+                                    <img src="{{asset('asset/eventimage/'.$event->picture)}}" style="width: 100%" class="mx-auto d-block" id="img">
                                 @else
                                         {{-- default profile --}}
-                                    <img src="asset/eventimage/event.png" style="width: 100px; height:100px" id="img"/>
+                                    <img src="asset/eventimage/event.png" style="width: 100%" class="mx-auto d-block" id="img"/>
                                 @endif
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-4">
