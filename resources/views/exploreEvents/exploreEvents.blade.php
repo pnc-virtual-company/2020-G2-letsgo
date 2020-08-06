@@ -64,7 +64,7 @@
                 @foreach ($data as $item => $exploreEvents)
                     @foreach ($exploreEvents as $exploreEvent)
                         @if (Auth::id() != $exploreEvent->owner_id && $exploreEvent->endDate >= $date )
-                        {{-- @if (Auth::user()->city == $exploreEvent->city) --}}
+
                         <div class="card-event event-city">
                             <h6>
                                 {{-- get data to group by --}}
@@ -183,7 +183,7 @@
 
                 $("#serchCity").on("keyup", function() {
                     var value = $(this).val().toLowerCase();
-                    console.log(value)
+                    // console.log(value)
                     $(".event-city").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
