@@ -57,7 +57,10 @@
         {{-- <div class="row mt-3"> --}}
             {{-- <div class="col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-9"> --}}
-                <div id="calendar" style="padding: 5px"></div>
+                <div id="calendar" style="padding: 5px">
+                  
+                </div>
+             
             {{-- </div>
         </div> --}}
     </div>
@@ -78,7 +81,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-              var calendarEl = document.getElementById('calendar'); 
+              var calendarEl = document.getElementById('calendar');
+              var event = {!! json_encode($data, JSON_HEX_TAG) !!} ;
               var calendar = new FullCalendar.Calendar(calendarEl, {
                 dayMinWidth:50,
                 headerToolbar: {
@@ -97,6 +101,3 @@
             });
     </script>
 @endsection
-
-
-
