@@ -63,7 +63,6 @@
     </div>
 
     <script>
-        var event = {!! json_encode($data, JSON_HEX_TAG) !!}
         function formatDate(date) {
                 var d = new Date(date),
                     month = '' + (d.getMonth() + 1),
