@@ -63,7 +63,7 @@ class ExploreEventsController extends Controller
         return redirect('onlyEventJoin');
     }
     // view explore event by carlendar//
-    public function viewByCarlendar()
+    public function viewByCarlendar(Request $request)
     {
         return view('exploreEvents.viewByCarlendar');
     }
