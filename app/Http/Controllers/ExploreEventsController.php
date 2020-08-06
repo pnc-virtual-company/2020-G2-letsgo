@@ -63,9 +63,19 @@ class ExploreEventsController extends Controller
         return redirect('onlyEventJoin');
     }
     // view explore event by carlendar//
-    public function viewByCarlendar()
+    public function viewByCarlendar(Request $request)
     {
-        return view('exploreEvents.viewByCarlendar');
+            $data = [];
+            $events = Event::all();
+            foreach ($events as $event) {
+                $data[] = [
+                    'title' => $event->title,
+                    'start' => $event->startDate.'T'.$event->startTime,
+                    'end' => $event->endDate.'T'.$event->endTime
+                ];
+            }
+
+        return view('exploreEvents.viewByCarlendar',compact('data'));
     }
     //end view explore event by carlendar//
     /**

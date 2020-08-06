@@ -15,9 +15,11 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="{{asset('asset/css/main.css')}}">
   <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
   <script src="{{ asset('asset/js/awaresome.js') }}"></script>
   <script src="{{ asset('asset/js/readCityList.js') }}"></script>
+  <script src="{{ asset('asset/js/main.js') }}"></script>
  
  
 </head>
