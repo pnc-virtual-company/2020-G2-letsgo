@@ -65,7 +65,21 @@ class ExploreEventsController extends Controller
     // view explore event by carlendar//
     public function viewByCarlendar(Request $request)
     {
-        return view('exploreEvents.viewByCarlendar');
+        $user = Auth::id();
+        $events = Event::all();
+        $data = [];
+        $date = date('Y-m-d');
+        foreach($events as $event){
+            if(Auth::id() != $event->owner_id && $event->endDate >= $date){
+          $data[] = [
+            'title' => $event->title,
+            'start' => $event->startDate.'T'.$event->startTime,
+            'end' => $event->endDate.'T'.$event->endTime
+          ];
+        }
+        }
+      
+        return view('exploreEvents.viewByCarlendar', compact('data'));
     }
     //end view explore event by carlendar//
     /**
