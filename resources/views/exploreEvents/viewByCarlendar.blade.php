@@ -54,17 +54,8 @@
         </div>
         <br>
         {{--================== view all explore event by carlendar ================================--}}
-        {{-- <div class="row mt-3"> --}}
-            {{-- <div class="col-sm-12 col-md-1 col-lg-1"></div>
-            <div class="col-sm-12 col-md-10 col-lg-9"> --}}
-                <div id="calendar" style="padding: 5px">
-                  
-                </div>
-             
-            {{-- </div>
-        </div> --}}
-    </div>
-
+                <div id="calendar" class="calendar" style="padding: 5px"></div>
+              </div>
     <script>
         function formatDate(date) {
                 var d = new Date(date),
@@ -96,8 +87,15 @@
                 editable: true,
                 dayMaxEvents: true, // allow "more" link when too many events
                 events:event
+                
               });
               calendar.render();
             });
-    </script>
+             // List the city not far from
+             var value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}.toLowerCase();
+             $("#calendar").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+                console.log(value);
+     </script>
 @endsection
