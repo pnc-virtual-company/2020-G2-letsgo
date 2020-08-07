@@ -5,10 +5,10 @@
 <div class="container">
         <br>
         <div class="row">
-            <div class="col-sm-12 col-md-1 col-lg-1"></div>
-               <div class="col-sm-12 col-md-10 col-lg-9">
+            <div class=" col-sm-12 col-md-1 col-lg-1"></div>
+            <div class="col-sm-12 col-md-10 col-lg-9">
                    <div class="form-group">
-                       <div class=" row">
+                       <div class="row">
                        <div class="col-12" style="margin:0 auto">
                          <a class="h5">Your events</a>
                         {{-- --------------Create New Event---------------- --}}
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                  </div>
-               </div>
+            </div>
            <div class="col-sm-12 col-md-1 col-lg-2"></div>
         </div>
        <div class="row">
@@ -108,8 +108,7 @@
            </div>
            <div class="col-sm-12 col-md-1 col-lg-2"></div>
        </div>
-
-    </div>
+</div>
 {{-- delete --}}
 @include('yourEvent.deleteEvent')
 {{-- modal edit --}}
