@@ -46,9 +46,9 @@
                         </form>
                     </div>
                     <div class="col-12 col-md-6 text-right">
-                        <a href="{{route('exploreEvents.index')}}" class="btn btn-default" ><b>CARDS</b></a>
+                        <a href="{{route('onlyEventJoin')}}" class="btn btn-default" ><b>CARDS</b></a>
                         |
-                        <a href="{{route('viewByCarlendar')}}" class="btn btn-default text-secondary"><b>CARLENDAR</b></a>
+                        <a href="{{route('onlyEventUserOnCalendar')}}" class="btn btn-default text-secondary"><b>CARLENDAR</b></a>
                     </div>
                 </div>
             </div>
@@ -92,35 +92,21 @@
                                             <b>{{$exploreEvent->category->category}}</b>
                                             <br> 
                                             <strong class="h5">{{$exploreEvent->title}}</strong>
-                                            {{-- <strong class="h5" >{{$exploreEvent->endDate}}</strong> --}}
                                             <br>
-                                            {{-- user join only event --}}
-                                                @foreach ($exploreEvent->joins as $user)
-                                                @if ($user->user_id == Auth::id())
-                                                    <p style="display: none"><a class="only-event-user-join">{{Auth::id()}}</a></p>
-                                                @else 
-                                                    <p style="display: none"><a class="only-event-user-join">N</a></p>
-                                                @endif
-                                                @endforeach
-                                            {{-- end user join only --}}
+                                            
                                             {{--  counter member --}}
                                             @if ($exploreEvent->joins->count("user_id")> 1)
-                                            {{$exploreEvent->joins->count("user_id")}}
-                                            members going.
+                                                {{$exploreEvent->joins->count("user_id")}} members going.
                                             @else
-                    
-                                            {{$exploreEvent->joins->count("user_id")}}
-                                            member going.
+                                                {{$exploreEvent->joins->count("user_id")}} member going.
                                             @endif
                                             
-                                            <br>
-                                            {{-- <strong hidden class="h5">{{$exploreEvent->city}}</strong> --}}
-                                            
+                                            <br>                                            
                                         </div>
                                         
                                         <div class="col-4 col-sm-3 col-md-4 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
                                                 {{-- get profile from user insert --}}
-                                            <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
+                                            <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100%; border-radius: 10px" class="mx-auto d-block" id="img">
                                         </div>
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                                         <div class="row" style="display: flex; justify-content:center; align-items:center">
