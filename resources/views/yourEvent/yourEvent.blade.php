@@ -108,12 +108,12 @@
            </div>
            <div class="col-sm-12 col-md-1 col-lg-2"></div>
        </div>
+       {{-- delete --}}
+       @include('yourEvent.deleteEvent')
+       {{-- modal edit --}}
+       @include('yourEvent.editYourEvent')
+       {{--end modal edit --}} 
 </div>
-{{-- delete --}}
-@include('yourEvent.deleteEvent')
-{{-- modal edit --}}
-@include('yourEvent.editYourEvent')
-{{--end modal edit --}}
 
 @endsection
 
