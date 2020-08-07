@@ -99,5 +99,9 @@
               });
               calendar.render();
             });
+            var value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}.toLowerCase()
+                $("#calendar").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
     </script>
 @endsection

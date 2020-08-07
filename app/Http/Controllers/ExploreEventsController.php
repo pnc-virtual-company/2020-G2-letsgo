@@ -78,7 +78,6 @@ class ExploreEventsController extends Controller
           ];
         }
         }
-      
         return view('exploreEvents.viewByCarlendar', compact('data'));
     }
     //end view explore event by carlendar//
@@ -165,5 +164,5 @@ class ExploreEventsController extends Controller
         //
     }
 
-   
 }
+
