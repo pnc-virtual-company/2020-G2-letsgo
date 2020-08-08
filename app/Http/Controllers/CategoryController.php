@@ -54,7 +54,7 @@ class CategoryController extends Controller
     {
         $this->authorize('update', Category::class);
         $request -> validate([
-            'category' => 'required|',
+            'category' => 'required|unique:categories,category',
         ]);
         
         $category = Category::find($id);
@@ -78,6 +78,15 @@ class CategoryController extends Controller
     }
 
     public function existCategory(Request $request){
+        $this->authorize('view', Category::class); 
+        $existData = $request->get('value');
+        if($request->ajax()){
+            $value = DB::table('categories')->where('category', $existData)->get();
+            return $value;
+        }
+    }
+
+    public function updateExistCategory(Request $request){
         $this->authorize('view', Category::class); 
         $existData = $request->get('value');
         if($request->ajax()){

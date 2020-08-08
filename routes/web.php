@@ -55,6 +55,7 @@ Route::group(['prefix' => 'manage'],function(){
     Route::put('/category/update/{id}','CategoryController@update');
     Route::post('/category/store/','CategoryController@store')->name('category.store');
     Route::get('/existCategory','CategoryController@existCategory')->name('category.existCategory');
+    Route::get('/updateExistCategory','CategoryController@updateExistCategory')->name('updateExistCategory');
 
 });
 
