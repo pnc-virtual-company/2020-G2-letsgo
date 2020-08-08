@@ -56,12 +56,9 @@
                                 <br>
                                 {{--  counter member --}}
                                 @if ($event->joins->count("user_id")> 1)
-                                {{$event->joins->count("user_id")}}
-                                members going.
+                                    {{$event->joins->count("user_id")}} members going.
                                 @else
-
-                                {{$event->joins->count("user_id")}}
-                                member going.
+                                    {{$event->joins->count("user_id")}} member going.
                                 @endif
                             </div>
                             <div class="col-3 col-sm-3 col-md-3 col-lg-2">   

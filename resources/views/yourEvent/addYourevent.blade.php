@@ -49,6 +49,7 @@
                         {{-- ----------end-------------- --}}
   
                         {{-- -------- Show end date and end time-------------- --}}
+                        <small class="validate text-danger"></small>
                         <div class="form-row">
                             <div class="form-group col-6">
                               <input type='text' name="endDate" placeholder="End date"  class="form-control dpicker" id="endDate" autocomplete="off" required>
@@ -163,6 +164,21 @@ $("#endDate").datepicker({
     dateFormat: 'yy-mm-dd',
     onClose: function (selectedDate) {
         $("#beginDate").datepicker("option", "maxDate", selectedDate);
+    }
+});
+function getValue(end, start) {
+    return Math.floor((Date.parse(end) - Date.parse(start)) / 86400000);
+}
+
+$('#endDate').on('change', function(){
+    var start = $('#beginDate').val();
+    var end = $('#endDate').val();
+    var result = getValue(end, start);
+    if (result < 0) {
+        $('.validate').html('The end date must be before the start date or the same date');
+        end = $('#endDate').val('');
+    } else {
+        $('.validate').html('');
     }
 });
   </script>

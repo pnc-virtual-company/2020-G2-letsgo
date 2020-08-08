@@ -29,27 +29,28 @@
                         {{-- -------- Show start date-------------- --}}
                         <div class="form-row">
                             <div class="form-group col-6">
-                                <input type="text" name="startDate" placeholder="Start date"  class="form-control dpicker startdate" id="start-date" autocomplete="off">
+                                <input type="text" name="startDate" readonly placeholder="Start date"​required  class="form-control dpicker startdate" id="start-date" autocomplete="off">
                             </div>
                             <div class="form-group col-6">
-                                <input type="time" name="startTime"  placeholder="At"  class="form-control" id="startTime">
+                                <input type="time" name="startTime" placeholder="At" required class="form-control" id="startTime">
                             </div>
                         </div>
                         {{-- ----------end-------------- --}}
                         {{-- -------- Show end date-------------- --}}
+                        <small class="validate text-danger"></small>
                         <div class="form-row">
                             <div class="form-group col-6">
-                                <input type='text' name="endDate" placeholder="End date"  class="form-control enddate dpicker" id="end-date" autocomplete="off" required>
+                                <input type='text' name="endDate" readonly placeholder="End date" class="form-control enddate dpicker" id="end-date" autocomplete="off" required>
                             </div>
                             <div class="form-group col-6">
-                                <input type="time" name="endTime" placeholder="At" id="endTime"  class="form-control" required>
+                                <input type="time" name="endTime" placeholder="At" id="endTime"​​​​​​​ required​​​  class="form-control" required>
                             </div>
                         </div>
                         {{-- ----------end-------------- --}}
                                                                 
                         {{-- -------- Show user city-------------- --}}     
                         <div class="form-group">
-                            <input class="form-control autoSuggestion" list="result" id="cities" placeholder="Country name here .."  name="city" required>
+                            <input class="form-control autoSuggestion" ​   required list="result" id="cities"​​​​​​​​​​​​​​ ​placeholder="Country name here .."  name="city" required>
                             <datalist id="result">
                             </datalist>
                         </div>
@@ -82,8 +83,10 @@
         </div>
     </div>
 {{-------------- Form of edit your event ----------}}
+
+
 <script type="text/javaScript">
-    $(".startdate").datepicker({
+$(".startdate").datepicker({
     minDate: 0,
     changeMonth: true,
     changeYear: true,
@@ -93,7 +96,7 @@
             $(".enddate").datepicker("option", "minDate", selectedDate);
             var date = $.datepicker.parseDate(instance.settings.dateFormat, selectedDate, instance.settings);
             date.setMonth(date.getMonth() + 3);
-           var minDate2 = new Date(selectedDate);
+            var minDate2 = new Date(selectedDate);
             minDate2.setDate(minDate2.getDate());
             
             $(".enddate").datepicker("option", "minDate", minDate2);
@@ -101,7 +104,6 @@
         }
     }
 });
-
 $(".enddate").datepicker({
     minDate: 0,
     changeMonth: true,
@@ -111,6 +113,23 @@ $(".enddate").datepicker({
         $(".startdate").datepicker("option", "maxDate", selectedDate);
     }
 });
+
+function getValue(end, start) {
+    return Math.floor((Date.parse(end) - Date.parse(start)) / 86400000);
+}
+
+$('.enddate').on('change', function(){
+    var start = $('.startdate').val();
+    var end = $('.enddate').val();
+    var result = getValue(end, start);
+    if (result < 0) {
+        $('.validate').html('The end date must be before the start date or the same date');
+        end = $('.enddate').val('');
+    } else {
+        $('.validate').html('');
+    }
+});
+
 
 function readURL(input) {
             if (input.files && input.files[0]) {

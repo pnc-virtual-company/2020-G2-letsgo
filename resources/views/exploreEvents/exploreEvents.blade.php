@@ -222,7 +222,6 @@
                 if (checkBox.checked === true)
                 {
                     var value = document.getElementById('checkbox').value;
-                    console.log(value);
                     return value;
                 }
                 else
