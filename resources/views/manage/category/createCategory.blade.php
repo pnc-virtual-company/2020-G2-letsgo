@@ -16,7 +16,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-            <button type="submit" class="btn text-warning">CREATE</button>
+            <button type="submit" class="btn text-warning" id="disable-button-create">CREATE</button>
         </form>
         {{-- end form create --}}
       </div>
@@ -40,6 +40,7 @@
         {
           if(inputdata !=''){
             $('#alertmessage').html('This category is already exist.');
+            $("#disable-button-create").attr("disabled", true);
           }else{
             $('#alertmessage').html('');
           }
