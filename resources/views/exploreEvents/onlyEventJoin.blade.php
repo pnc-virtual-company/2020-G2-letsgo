@@ -1,54 +1,59 @@
 @extends('layouts.frontend.menuTamplate')
 
 @section('body')
-
-    <div class="container mt-5">
-    
+    <div class="container">
         <div class="row">
-            
             <div class="col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-9">
                 <h5>Find your event !</h5><br>
                 <div class="row">
-                     
-                <div class="col-6">
-                    <div class="row">
-                        {{-- Search form --}}
-                        {{-- <form action="" method="post"> --}}
+                    <div class="col-12 col-md-12 col-lg-5 mb-2">
                         <div class="input-icons col-md-12" style="margin: 0 auto"> 
-                        <span class="material-icons">search</span> 
-                        <input class="form-control" id="search"  type="text" autocomplete="off" placeholder="Search"> 
-                        </div> <br><br><br>
-                        {{-- </form> --}}
-                        {{-- end search form --}}
-
-                        {{--====== checkbox  ==========--}}
-                        <div class="form-check " style="margin-left:30px">
-                            <input type="checkbox" id="checkbox" value="{{Auth::id()}}" class="form-check-input">
-                            <label class="form-check-label" for="">Event you join only</label>
-                          </div>
-                          {{--======end checkbox  ==========--}}
-                    </div>   
-                </div> 
-                {{-- find city --}}
-                <div class="col-6">  
-                    <div class="row">
-                        <div class="col-4"   >
-                            <p >Not to far from </p>
+                            <span class="material-icons">search</span> 
+                            <input class="form-control" id="search"  type="text" autocomplete="off" placeholder="Search"> 
                         </div>
-                        <div class="col-8">
-                            <div class="form-group" >
-                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" required>
-                                <datalist id="result"> 
-                                </datalist>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-7">
+                        <div class="row" style="margin: 0 auto">
+                            <div class="col-12 col-md-12 col-lg-5 mt-2">
+                                <small>NON TOO FAR FROM</small>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-7">
+                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
+                                <datalist id="result"> </datalist>
                             </div>
                         </div>
                     </div>
                 </div>
-                 {{--end find city --}}
-                </div>
             </div>    
-        </div><br><br>
+        </div>
+        
+        {{-- view by card or carlendar --}}
+        <div class="row mt-3">
+            <div class="col-sm-12 col-md-1 col-lg-1"></div>
+            <div class="col-sm-12 col-md-10 col-lg-9">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-check">
+                            @if (Auth::user()->check == 1)
+                                <input type="checkbox" id="checkbox" name="checkbox[]" checked value="{{Auth::user()->check}}" class="form-check-input">  
+                            @endif
+                            <label class="form-check-label" for="checkbox"><strong>Event you join only</strong></label>
+                        </div>
+                        <form id="ifCheck" action="{{route('ifCheck',0)}}" method="post">
+                            @csrf
+                            @method('put')
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-6 text-right">
+                        <a href="{{route('onlyEventJoin')}}" class="btn btn-default" ><b>CARDS</b></a>
+                        |
+                        <a href="{{route('onlyEventUserOnCalendar')}}" class="btn btn-default text-secondary"><b>CARLENDAR</b></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- end view by card or carlendar --}}
         {{--================== view all explore event ================================--}}
         
         <div class="row">
@@ -87,35 +92,21 @@
                                             <b>{{$exploreEvent->category->category}}</b>
                                             <br> 
                                             <strong class="h5">{{$exploreEvent->title}}</strong>
-                                            {{-- <strong class="h5" >{{$exploreEvent->endDate}}</strong> --}}
                                             <br>
-                                            {{-- user join only event --}}
-                                                @foreach ($exploreEvent->joins as $user)
-                                                @if ($user->user_id == Auth::id())
-                                                    <p style="display: none"><a class="only-event-user-join">{{Auth::id()}}</a></p>
-                                                @else 
-                                                    <p style="display: none"><a class="only-event-user-join">N</a></p>
-                                                @endif
-                                                @endforeach
-                                            {{-- end user join only --}}
+                                            
                                             {{--  counter member --}}
                                             @if ($exploreEvent->joins->count("user_id")> 1)
-                                            {{$exploreEvent->joins->count("user_id")}}
-                                            members going.
+                                                {{$exploreEvent->joins->count("user_id")}} members going.
                                             @else
-                    
-                                            {{$exploreEvent->joins->count("user_id")}}
-                                            member going.
+                                                {{$exploreEvent->joins->count("user_id")}} member going.
                                             @endif
                                             
-                                            <br>
-                                            {{-- <strong hidden class="h5">{{$exploreEvent->city}}</strong> --}}
-                                            
+                                            <br>                                            
                                         </div>
                                         
                                         <div class="col-4 col-sm-3 col-md-4 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
                                                 {{-- get profile from user insert --}}
-                                            <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100px; height:100px" id="img">
+                                            <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100%; border-radius: 10px" class="mx-auto d-block" id="img">
                                         </div>
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                                         <div class="row" style="display: flex; justify-content:center; align-items:center">
@@ -149,6 +140,8 @@
                             @endif
                         @endforeach 
                         @endif  
+                        {{-- detail popup of explore event --}}
+                        @include('exploreEvents.viewDetail')
                     @endforeach
                 @endforeach
                 </div>
@@ -167,6 +160,15 @@
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
+            
+            // check only user event
+            $("#checkbox").on('click', function () {
+                var data = event_check();
+                if (data == 1) {
+                    $('#ifCheck').submit();
+                }
+            });
+            
         });    
     
         // ------------------- importand ---------------------//
@@ -197,7 +199,6 @@
             }            
         }
         // -----------------------end---------------------------
-
     // return value of checkbox
     function event_check(){
             var checkBox = document.getElementById('checkbox');
@@ -208,7 +209,7 @@
             }
             else
             {
-                var value = "";
+                var value = document.getElementById('checkbox').value;
                 return value;
             }      
     }

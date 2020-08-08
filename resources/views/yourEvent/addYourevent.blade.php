@@ -8,7 +8,7 @@
               <form action="{{route('yourEvent.store')}}" method="post" enctype="multipart/form-data" >
                 @csrf   
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-12 col-sm-9">
                         <div class="row">
                           <div class="col-9">
                             <h5>Create an event</h5>
@@ -70,18 +70,14 @@
                         {{-- Description --}}
                         <div class="form-group">
                             <label for="comment">Description</label>
-                            <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
+                            <textarea class="form-control" maxlength="250" minlength="50" rows="3" id="description" name="description" required></textarea>
                         </div>
                         {{-- end --}}
                     </div>
-                    <div class="col-4" style="margin-top: 32px">
-                            @if(Auth::user()->picture)
-                                    {{-- get profile from user insert --}}
-                                <img src="{{asset('asset/eventimage/'.Auth::user()->picture)}}" width="120px" height="120px" id="img">
-                            @else
-                                    {{-- default profile --}}
-                                <img src="asset/eventimage/user.png" width="120px" height="120px" id="img"/>
-                            @endif
+                    <div class="col-12 col-sm-3" style="margin-top: 32px">
+                          <div class="row justify-content-center">
+                              <img src="asset/eventimage/event.png" width="120px" height="120px" style="border-radius: 10px" id="img"/>
+                          </div>
                           <div class="row justify-content-center">
                             {{-- button add profile --}}
                             <label for="add" class="btn"><i class="fa fa-plus text-dark"></i></label>
@@ -93,7 +89,7 @@
                 </div>
                 <button type="submit"  class="btn btn-default float-right text-warning" >SUBMIT</button>
                 <button type="button" data-dismiss="modal" class="btn btn-default  float-right">DISCARD</button>
-          </form>
+              </form>
             </div>
           </div>
       </div>    

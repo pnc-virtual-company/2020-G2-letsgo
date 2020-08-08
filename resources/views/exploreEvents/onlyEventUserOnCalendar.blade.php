@@ -34,20 +34,20 @@
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="form-check">
-                            @if (Auth::user()->check != 1)
-                                <input type="checkbox" id="checkbox" name="checkbox[]" value="{{Auth::user()->check}}" class="form-check-input"> 
+                            @if (Auth::user()->check == 1)
+                                <input type="checkbox" id="checkbox" checked name="checkbox[]" value="{{Auth::user()->check}}" class="form-check-input"> 
                             @endif
                             <label class="form-check-label" for="checkbox"><strong>Event you join only</strong></label>
                         </div>
-                        <form id="ifcheckOnCalendar" action="{{route('ifcheckOnCalendar',1)}}" method="post">
+                        <form id="ifNocheckOnCalendar" action="{{route('ifNocheckOnCalendar',0)}}" method="post">
                             @csrf
                             @method('put')
                         </form>
                     </div>
                     <div class="col-12 col-md-6 text-right">
-                        <a href="{{route('exploreEvents.index')}}" class="btn btn-default" ><b>CARDS</b></a>
+                        <a href="{{route('onlyEventJoin')}}" class="btn btn-default" ><b>CARDS</b></a>
                         |
-                        <a href="{{route('viewByCarlendar')}}" class="btn btn-default text-secondary"><b>CARLENDAR</b></a>
+                        <a href="{{route('onlyEventUserOnCalendar')}}" class="btn btn-default text-secondary"><b>CARLENDAR</b></a>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                   right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
                 initialDate: formatDate(Date()),
-                initialView: 'timeGridWeek',
+                initialView: 'dayGridMonth',
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 dayMaxEvents: true, // allow "more" link when too many events
@@ -91,14 +91,15 @@
               });
               calendar.render();
             });
-                // check only user event
-                $("#checkbox").on('click', function () {
+        
+        // check only user event
+         $("#checkbox").on('click', function () {
                     var data = event_check();
-                    if (data == 0) {
-                        $('#ifcheckOnCalendar').submit();
+                    if (data == 1) {
+                        $('#ifNocheckOnCalendar').submit();
                     }
-                });
-             // return value of checkbox
+        });
+        // return value of checkbox
         function event_check(){
                 var checkBox = document.getElementById('checkbox');
                 if (checkBox.checked === true)
@@ -112,6 +113,5 @@
                     return value;
                 }      
         }
-
     </script>
 @endsection

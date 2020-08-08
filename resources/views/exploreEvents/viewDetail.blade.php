@@ -7,12 +7,12 @@
         <!-- Modal body -->
         <div class="modal-body">
             <div class="row">
-                <div class="col-4 mt-3">
-                    <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 150px; height:150px" id="img">
+                <div class="col-3 col-sm-3 mt-3">
+                    <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100%; border-radius: 10px" class="mx-auto d-block" id="img">
                 </div>
-                <div class="col-8">
+                <div class="col-9 col-sm-9">
                     {{$exploreEvent->category->category}}
-                    <h4><b>{{$exploreEvent->title}}</b></h4>
+                    <h5><b>{{$exploreEvent->title}}</b></h5>
                     <i class="material-icons">place</i> {{$exploreEvent->city}} <br>
                     <i class="material-icons">people_outline</i>
                     {{--  counter member --}}
@@ -60,17 +60,16 @@
                     </div>
                 </div>
             </div>
-                </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer"> 
-                        <div class="container ml-5">
-                        {{$exploreEvent->description}}
-                    </div>
-                </div> 
-    
-            </div>
         </div>
-                    
+        <!-- Modal footer -->
+        <div class="modal-footer"> 
+                    <textarea name="" disabled class="form-control" id="" rows="4">
+                        {{$exploreEvent->description}}
+                    </textarea>
+            
+            </div> 
+        </div>
+    </div>           
 </div>
         <script type="text/javaScript">
             // ------------------- importand ---------------------//

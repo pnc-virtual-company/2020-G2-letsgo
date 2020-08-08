@@ -3,80 +3,82 @@
     <div class="modal fade" id="editYourEvent" role="dialog">
         <div class="modal-dialog">                           
         <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Your Events</h4>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Your Events</h4>
+                </div>
+                <form id="form-edit-event"  method="POST" autocomplete="off" enctype="multipart/form-data" >
+                    @csrf
+                    @method('PUT')                             
+                    <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12​​​​​​​ col-sm-9" >
+                        {{-- -------- Show category-------------- --}}
+                        <div class="form-group">
+                            <select name="category" id="category"  class="form-control cateogry-option" required>
+                            
+                            </select>
+                        </div>
+                        {{-- --------end Show category-------------- --}}
+                        {{-- -------- Show event Name-------------- --}}
+                                                                
+                        <div class="form-group">
+                            <input type="text" name="title" id="title"  placeholder="Title" class="form-control" required>
+                        </div>
+                        {{-- -------- end Show event Name-------------- --}}
+                        {{-- -------- Show start date-------------- --}}
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <input type="text" name="startDate" placeholder="Start date"  class="form-control dpicker startdate" id="start-date" autocomplete="off">
+                            </div>
+                            <div class="form-group col-6">
+                                <input type="time" name="startTime"  placeholder="At"  class="form-control" id="startTime">
+                            </div>
+                        </div>
+                        {{-- ----------end-------------- --}}
+                        {{-- -------- Show end date-------------- --}}
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <input type='text' name="endDate" placeholder="End date"  class="form-control enddate dpicker" id="end-date" autocomplete="off" required>
+                            </div>
+                            <div class="form-group col-6">
+                                <input type="time" name="endTime" placeholder="At" id="endTime"  class="form-control" required>
+                            </div>
+                        </div>
+                        {{-- ----------end-------------- --}}
+                                                                
+                        {{-- -------- Show user city-------------- --}}     
+                        <div class="form-group">
+                            <input class="form-control autoSuggestion" list="result" id="cities" placeholder="Country name here .."  name="city" required>
+                            <datalist id="result">
+                            </datalist>
+                        </div>
+                        {{-- ----------end city-------------- --}}
+                        {{-- Description --}}
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" id="description-edit" name="description" required></textarea>
+                        </div>
+                        {{-- end --}}
+                        </div>
+                        <div class="col-12 col-sm-3 justify-content-center">                                       
+                            {{-- edit picture from event  --}}
+                            <div class="row justify-content-center">
+                                <img src="" id="image" height="120px"  onchange="readURL(this)">
+                            </div>
+                            <div class="row justify-content-center">
+                                <label for="picture" ><i class="fa fa-pencil-alt text-dark"></i></label>
+                                <input type='file' id="picture" name="picture" style="display: none"  onchange="readURL(this);" />
+                            {{-- edit picture from event  --}} 
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
+                            <button type="submit" class="btn text-warning" >UPDATE</button>
+                        </div>                 
+                </form>
             </div>
-            <form id="form-edit-event"  method="POST" autocomplete="off" enctype="multipart/form-data" >
-            @csrf
-            @method('PUT')                             
-            <div class="modal-body">
-            <div class="row">
-                <div class="col-8">
-                {{-- -------- Show category-------------- --}}
-                <div class="form-group">
-                    <select name="category" id="category"  class="form-control cateogry-option" required>
-                    
-                    </select>
-                </div>
-                {{-- --------end Show category-------------- --}}
-                {{-- -------- Show event Name-------------- --}}
-                                                        
-                <div class="form-group">
-                    <input type="text" name="title" id="title"  placeholder="Title" class="form-control" required>
-                </div>
-                {{-- -------- end Show event Name-------------- --}}
-                {{-- -------- Show start date-------------- --}}
-                <div class="form-row">
-                    <div class="form-group col-6">
-                        <input type="text" name="startDate" placeholder="Start date"  class="form-control dpicker startdate" id="start-date" autocomplete="off">
-                    </div>
-                    <div class="form-group col-6">
-                        <input type="time" name="startTime"  placeholder="At"  class="form-control" id="startTime">
-                    </div>
-                </div>
-                {{-- ----------end-------------- --}}
-                {{-- -------- Show end date-------------- --}}
-                <div class="form-row">
-                    <div class="form-group col-6">
-                        <input type='text' name="endDate" placeholder="End date"  class="form-control enddate dpicker" id="end-date" autocomplete="off" required>
-                    </div>
-                    <div class="form-group col-6">
-                        <input type="time" name="endTime" placeholder="At" id="endTime"  class="form-control" required>
-                    </div>
-                </div>
-                {{-- ----------end-------------- --}}
-                                                        
-                {{-- -------- Show user city-------------- --}}     
-                <div class="form-group">
-                    <input class="form-control autoSuggestion" list="result" id="cities" placeholder="Country name here .."  name="city" required>
-                    <datalist id="result">
-                    </datalist>
-                </div>
-                {{-- ----------end city-------------- --}}
-                {{-- Description --}}
-                <div class="form-group">
-                     <textarea class="form-control" rows="3" id="description-edit" name="description" required></textarea>
-                </div>
-                {{-- end --}}
-                </div>
-                <div class="col-4">                                       
-                 {{-- edit picture from event  --}}
-                    <img src="" width="120px" id="image" height="120px"  onchange="readURL(this)">
-                    <div class="row justify-content-center">
-                        <label for="picture" ><i class="fa fa-pencil-alt text-dark"></i></label>
-                        <input type='file' id="picture" name="picture" style="display: none"  onchange="readURL(this);" />
-                    {{-- edit picture from event  --}} 
-                </div>
-                </div>
-                </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-                    <button type="submit" class="btn text-warning" >UPDATE</button>
-                </div>                 
-            </form>
-        </div>
         </div>
     </div>
 {{-------------- Form of edit your event ----------}}
