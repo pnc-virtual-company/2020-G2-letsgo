@@ -12,8 +12,9 @@
             <div class="form-group">
                 <label for="category">Category</label>
                 <input type="text" class="form-control" id="value-edit" name="category">
+                <span id="update-message-error" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-default text-warning float-right" >UPDATE</button>
+            <button type="submit" class="btn btn-default text-warning float-right" id="disable-button-update" >UPDATE</button>
             <button type="button" class="btn btn-default float-right" data-dismiss="modal" >DISCARD</button>
         </form>
         </div>
@@ -28,4 +29,32 @@
     $('#value-edit').val(category);
     $('#editFormCategory').attr("action", "{{ url('/manage/category/update') }}" + "/" + id);
     })
+
+
+   
+    $(document).on('keyup','#value-edit', function(){
+      var value = $(this).val();
+      existCategory(value);
+    });
+    existCategory();
+     function existCategory(value){
+      $.ajax({
+        url:"{{route('updateExistCategory')}}",
+        method:'get',
+        data:{value:value},
+        dataType:'json',
+        success:function(data)
+        {
+          if(data !=''){
+            $('#update-message-error').html('This category is already exist.');
+            $("#disable-button-update").attr("disabled", true);
+          }else{
+
+            $('#update-message-error').html('');
+          } 
+        }
+      });
+    }
+
+
   </script>
