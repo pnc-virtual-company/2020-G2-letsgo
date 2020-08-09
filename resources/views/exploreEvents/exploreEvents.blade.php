@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-12 col-md-12 col-lg-7">
                                 <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
-                                <datalist id="result"> </datalist>
+                                <datalist id="result"></datalist>
                             </div>
                         </div>
                     </div>
@@ -87,21 +87,12 @@
                                         {{--  --}}
                                     </div>
                 
-                                    <div class="col-9 col-sm-6 col-md-6 col-lg-4" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
+                                    <div class="col-8 col-sm-6 col-md-6 col-lg-4" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
                                         <b>{{$exploreEvent->category->category}}</b>
                                         <br> 
                                         <strong class="h5">{{$exploreEvent->title}}</strong>
-                                        {{-- <strong class="h5" >{{$exploreEvent->endDate}}</strong> --}}
                                         <br>
-                                        {{-- user join only event --}}
-                                            @foreach ($exploreEvent->joins as $user)
-                                            @if ($user->user_id == Auth::id())
-                                                <p style="display: none"><a class="only-event-user-join">{{Auth::id()}}</a></p>
-                                            @else 
-                                                <p style="display: none"><a class="only-event-user-join">N</a></p>
-                                            @endif
-                                            @endforeach
-                                        {{-- end user join only --}}
+                                        
                                         {{--  counter member --}}
                                         @if ($exploreEvent->joins->count("user_id")> 1)
                                         {{$exploreEvent->joins->count("user_id")}}
@@ -113,11 +104,10 @@
                                         @endif
                                         
                                         <br>
-                                        {{-- <strong hidden class="h5">{{$exploreEvent->city}}</strong> --}}
                                         
                                     </div>
                                     
-                                    <div class="col-3 col-sm-3 col-md-3 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
+                                    <div class="col-4 col-sm-3 col-md-3 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
                                             {{-- get profile from user insert --}}
                                         <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100%; border-radius: 10px" class="mx-auto d-block" id="img">
                                     </div>
