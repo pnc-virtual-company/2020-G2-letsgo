@@ -20,8 +20,6 @@
   <script src="{{ asset('asset/js/awaresome.js') }}"></script>
   <script src="{{ asset('asset/js/readCityList.js') }}"></script>
   <script src="{{ asset('asset/js/main.js') }}"></script>
- 
- 
 </head>
 <body>
        <nav class="navbar p-0 navbar-expand-md navbar-light bg-white shadow-sm h5 fixed-top">

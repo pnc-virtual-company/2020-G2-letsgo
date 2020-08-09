@@ -83,7 +83,7 @@
                   right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
                 initialDate: formatDate(Date()),
-                initialView: 'timeGridWeek',
+                initialView: 'dayGridMonth',
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 dayMaxEvents: true, // allow "more" link when too many events
