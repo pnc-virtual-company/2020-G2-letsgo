@@ -152,3 +152,4 @@ class ExploreEventsController extends Controller
     }
    
 }
+
