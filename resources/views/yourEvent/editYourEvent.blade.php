@@ -57,7 +57,7 @@
                         {{-- ----------end city-------------- --}}
                         {{-- Description --}}
                         <div class="form-group">
-                            <textarea class="form-control" rows="3" id="description-edit" name="description" required></textarea>
+                            <textarea class="form-control" maxlength="250" minlength="50" rows="3" id="description-edit" name="description" required></textarea>
                         </div>
                         {{-- end --}}
                         </div>

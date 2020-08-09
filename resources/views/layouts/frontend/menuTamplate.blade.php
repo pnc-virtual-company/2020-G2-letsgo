@@ -148,12 +148,12 @@
                     <div class="col-12 col-sm-8">
                         {{-- -------- Show user First Name-------------- --}}
                         <div class="form-group">
-                        <input type="text" name="firstname" value="{{Auth::user()->firstname}}"  class="form-control">
+                        <input type="text" name="firstname" value="{{Auth::user()->firstname}}"  class="form-control" required>
                         </div>
                         {{-- -------- Show user Last Name-------------- --}}
                         
                         <div class="form-group">
-                            <input type="text" name="lastname" value="{{Auth::user()->lastname}}"  class="form-control">
+                            <input type="text" name="lastname" value="{{Auth::user()->lastname}}"  class="form-control" required>
                         </div>
 
                          {{-- -------- Show user Gender-------------- --}}
@@ -173,7 +173,7 @@
 
                         {{-- -------- Show user Birth-------------- --}}
                         <div class="form-group">
-                            <input type="date" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control">
+                            <input type="date" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control" required>
                         </div>
                         {{-- ----------end-------------- --}}
 
@@ -181,7 +181,7 @@
                         {{-- -------- Show user Email-------------- --}}
 
                         <div class="form-group">
-                            <input type="text" name="email" value="{{Auth::user()->email}}"  class="form-control">
+                            <input type="text" name="email" value="{{Auth::user()->email}}"  class="form-control" required>
                         </div>
                         {{-- ----------end-------------- --}}
                         
