@@ -43,7 +43,7 @@ class YourEventController extends Controller
             'startTime' => 'required',
             'endDate' => 'required|date|date_format:Y-m-d',
             'endTime' => 'required',
-            'description' => 'required',
+            'description' => 'required|min:50|max:250',
             'city' => 'required',
         ]);
         $user = Auth::id();

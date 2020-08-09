@@ -71,7 +71,7 @@
                         {{-- Description --}}
                         <div class="form-group">
                             <label for="comment">Description</label>
-                            <textarea class="form-control" maxlength="250" minlength="50" rows="3" id="description" name="description" required></textarea>
+                            <textarea class="form-control" maxlength="250" minlength="50" rows="3" id="description" name="description" required ></textarea>
                         </div>
                         {{-- end --}}
                     </div>
