@@ -23,16 +23,16 @@ class userProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = User::find($id);
         $request -> validate([
             'firstname' => 'required',
             'lastname' => 'required',
             'sex' => 'required',
             'lastname' => 'required',
             'birth' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users,email,'.$user->id,
             'city' => 'required',
         ]);
-        $user = User::find($id);
         $user->firstname = $request->get('firstname');
         $user->lastname = $request->get('lastname');
         $user->email = $request->get('email');

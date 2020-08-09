@@ -64,7 +64,7 @@
                             <div class="col-3 col-sm-3 col-md-3 col-lg-2">   
                                 @if($event->picture)
                                         {{-- get profile from user insert --}}
-                                    <img src="{{asset('asset/eventimage/'.$event->picture)}}" style="width: 100%" class="mx-auto d-block" id="img">
+                                    <img src="{{asset('asset/eventimage/'.$event->picture)}}" style="width: 100%; border-radius: 10px" class="mx-auto d-block" id="img">
                                 @else
                                         {{-- default profile --}}
                                     <img src="asset/eventimage/event.png" style="width: 100%" class="mx-auto d-block" id="img"/>
