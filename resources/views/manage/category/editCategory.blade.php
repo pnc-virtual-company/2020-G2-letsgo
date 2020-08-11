@@ -45,12 +45,13 @@
         dataType:'json',
         success:function(data)
         {
+          var disableBtnUpdate = document.getElementById('disable-button-update');
           if(data !=''){
             $('#update-message-error').html('This category is already exist.');
-            $("#disable-button-update").attr("disabled", true);
+            disableBtnUpdate.disabled = true;
           }else{
-
             $('#update-message-error').html('');
+            disableBtnUpdate.disabled = false;
           } 
         }
       });
