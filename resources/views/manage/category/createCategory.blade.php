@@ -38,11 +38,13 @@
         dataType:'json',
         success:function(inputdata)
         {
+          var disableBtnCreate = document.getElementById('disable-button-create');
           if(inputdata !=''){
             $('#alertmessage').html('This category is already exist.');
-            $("#disable-button-create").attr("disabled", true);
+           disableBtnCreate.disabled = true;
           }else{
             $('#alertmessage').html('');
+            disableBtnCreate.disabled = false;
           }
         }
       });
