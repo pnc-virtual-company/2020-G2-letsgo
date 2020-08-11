@@ -38,7 +38,7 @@ class YourEventController extends Controller
     {
         $request -> validate([
             'category' => 'required',
-            'title' => 'required|min:3|max:250',
+            'title' => 'required|min:3|max:45',
             'startDate' => 'required|date|date_format:Y-m-d',
             'startTime' => 'required',
             'endDate' => 'required|date|date_format:Y-m-d',
@@ -85,7 +85,7 @@ class YourEventController extends Controller
         $this->authorize('update',$yourevent);
         request()->validate([
             'category' => 'required',
-            'title' => 'required|min:3|max:250',
+            'title' => 'required|min:3|max:45',
             'startDate' => 'required|date|date_format:Y-m-d',
             'startTime' => 'required',
             'endDate' => 'required',

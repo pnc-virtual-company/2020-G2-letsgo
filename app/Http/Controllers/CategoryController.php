@@ -35,7 +35,7 @@ class CategoryController extends Controller
         $this->authorize('create', Category::class);
         $category = new Category;
         $request -> validate([
-            'category' => 'required|unique:categories,category',
+            'category' => 'required|min:3|max:45|unique:categories,category',
         ]);
         $category->category = $request->get('category');
         $category->save();
@@ -54,7 +54,7 @@ class CategoryController extends Controller
     {
         $this->authorize('update', Category::class);
         $request -> validate([
-            'category' => 'required|unique:categories,category',
+            'category' => 'required|min:3|max:45|unique:categories,category',
         ]);
         
         $category = Category::find($id);

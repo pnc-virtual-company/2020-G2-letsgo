@@ -25,13 +25,12 @@ class userProfileController extends Controller
     {
         $user = User::find($id);
         $request -> validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'sex' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|min:1|max:45',
+            'lastname' => 'required|min:1|max:45',
+            'sex' => 'required|min:1|max:45',
             'birth' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
-            'city' => 'required',
+            'city' => 'required|min:1|max:45',
         ]);
         $user->firstname = $request->get('firstname');
         $user->lastname = $request->get('lastname');
@@ -62,9 +61,9 @@ class userProfileController extends Controller
 
     public function changePassword(Request $request){
         request()->validate([
-            'old-password' => 'required|min:8',
-            'new-password' => 'required|min:8',
-            'password-confirmation' => 'required|min:8',
+            'old-password' => 'required|min:8|max:32',
+            'new-password' => 'required|min:8|max:32',
+            'password-confirmation' => 'required|min:8|max:32',
         ]);
             $old_password = $request->get('old-password');
             $value = Auth::user()->password;

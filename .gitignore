@@ -1,7 +1,8 @@
 /node_modules
 /public/hot
 /public/storagez
-
+# /public/asset/eventimage
+# /public/asset/userImage
 /storage/*.key
 /vendor
 .env
