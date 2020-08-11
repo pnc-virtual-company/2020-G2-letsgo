@@ -40,7 +40,7 @@
                             {{-- -----------start date and start time-------- --}}
                             <div class="form-group col-6">
                               {{-- <input type="date" name="startDate" placeholder="Staet date" class="form-control"> --}}
-                              <input type="text" name="startDate" placeholder="Start date" class="form-control dpicker" id="beginDate" autocomplete="off" required>
+                              <input type="text" name="startDate" readonly placeholder="Start date" class="form-control dpicker" id="beginDate" autocomplete="off" required>
                             </div>
                             <div class="form-group col-6">
                               <input type="time" name="startTime" placeholder="At"  class="form-control" autocomplete="off" required>
@@ -52,7 +52,7 @@
                         <small class="validate text-danger"></small>
                         <div class="form-row">
                             <div class="form-group col-6">
-                              <input type='text' name="endDate" placeholder="End date"  class="form-control dpicker" id="endDate" autocomplete="off" required>
+                              <input type='text' name="endDate" readonly placeholder="End date"  class="form-control dpicker" id="endDate" autocomplete="off" required>
                             </div>
                             <div class="form-group col-6">
                               <input type="time" name="endTime" placeholder="At"  class="form-control" autocomplete="off" required>
@@ -181,4 +181,5 @@ $('#endDate').on('change', function(){
         $('.validate').html('');
     }
 });
+
   </script>
