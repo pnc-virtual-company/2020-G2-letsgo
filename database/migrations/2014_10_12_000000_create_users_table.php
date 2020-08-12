@@ -37,7 +37,7 @@ class CreateUsersTable extends Migration
                 'sex'=> 'Male',
                 'birth'=> null,
                 'picture'=> 'user.png',
-                'email' => 'sreyrotoun@gmail.com',
+                'email' => 'piseth.mok@passerellesnumeriques.org',
                 'role' =>1,
                 'password' => bcrypt('password'),
                 'remember_token' => Str::random(10)
