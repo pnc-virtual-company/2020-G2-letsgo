@@ -43,7 +43,7 @@
                               <input type="text" name="startDate" readonly placeholder="Start date" class="form-control startdate" id="beginDate" autocomplete="off" required>
                             </div>
                             <div class="form-group col-6">
-                              <input type="time" name="startTime-start-time" id="add-start-time" placeholder="At"  class="form-control" autocomplete="off" required>
+                              <input type="time" name="startTime" id="add-start-time" placeholder="At"  class="form-control" autocomplete="off" required>
                             </div>
                         </div>
                         {{-- ----------end-------------- --}}
