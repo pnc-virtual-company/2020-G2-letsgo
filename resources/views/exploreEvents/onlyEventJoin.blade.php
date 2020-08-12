@@ -10,7 +10,7 @@
                     <div class="col-12 col-md-12 col-lg-5 mb-2">
                         <div class="input-icons col-md-12" style="margin: 0 auto"> 
                             <span class="material-icons">search</span> 
-                            <input class="form-control" id="search"  type="text" autocomplete="off" placeholder="Search"> 
+                            <input class="form-control searchOnlyEventJoin" id="search"  type="text" autocomplete="off" placeholder="Search"> 
                         </div>
                     </div>
                     <div class="col-12 col-md-12 col-lg-7">
@@ -19,7 +19,7 @@
                                 <p>Not far from city</p>
                             </div>
                             <div class="col-12 col-md-12 col-lg-7">
-                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
+                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="searchCity" required>
                                 <datalist id="result"> </datalist>
                             </div>
                         </div>
@@ -68,71 +68,74 @@
                         @if (Auth::id() != $exploreEvent->owner_id && $exploreEvent->endDate >= $date)
                         @foreach ($joinEvent as $joins)
                             @if ($joins->user_id == Auth::id() && $joins->event_id == $exploreEvent->id)
-                            <div class="card-event-join-only">
+                            <div class="card-event">
                                 <h6>
                                     {{-- get data to group by --}}
+                                </h6>
+                                <div class="card-event" id="exploreEvent">
                                     <?php
                                 
                                         $startDate =(new DateTime($item));
                                         echo date_format($startDate, "l, F j");
                                     ?>  
-                                </h6>
-                                <div class="card p-2 card-event" id="exploreEvent">
-                                    <div class="row" >
-                                        <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
-                                            {{-- get current time and convert to AM or PM --}}
-                                            <?php
-                                            $startTime = $exploreEvent['startTime'];
-                                            echo $newDateTime = date(' h:i A', strtotime($startTime));
-                                            ?>
-                                            {{--  --}}
-                                        </div>
-                    
-                                        <div class="col-8 col-sm-6 col-md-5 col-lg-4" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
-                                            <b>{{$exploreEvent->category->category}}</b>
-                                            <br> 
-                                            <strong class="h5">{{$exploreEvent->title}}</strong>
-                                            <br>
+                                    <div class="card p-2 " style="border-radius: 20px">
+                                        <div class="row" >
+                                            <div class="col-12 col-sm-2 col-md-3 col-lg-2 startTime" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
+                                                {{-- get current time and convert to AM or PM --}}
+                                                <?php
+                                                $startTime = $exploreEvent['startTime'];
+                                                echo $newDateTime = date(' h:i A', strtotime($startTime));
+                                                ?>
+                                                {{--  --}}
+                                            </div>
+                        
+                                            <div class="col-8 col-sm-6 col-md-5 col-lg-4" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">
+                                                <b>{{$exploreEvent->category->category}}</b>
+                                                <br> 
+                                                <strong class="h5">{{$exploreEvent->title}}</strong>
+                                                <p style="display: none">{{$exploreEvent->city}}</p>
+                                                <br>
+                                                
+                                                {{--  counter member --}}
+                                                @if ($exploreEvent->joins->count("user_id")> 1)
+                                                    {{$exploreEvent->joins->count("user_id")}} members going.
+                                                @else
+                                                    {{$exploreEvent->joins->count("user_id")}} member going.
+                                                @endif
+                                                
+                                                <br>                                            
+                                            </div>
                                             
-                                            {{--  counter member --}}
-                                            @if ($exploreEvent->joins->count("user_id")> 1)
-                                                {{$exploreEvent->joins->count("user_id")}} members going.
-                                            @else
-                                                {{$exploreEvent->joins->count("user_id")}} member going.
-                                            @endif
-                                            
-                                            <br>                                            
-                                        </div>
-                                        
-                                        <div class="col-4 col-sm-3 col-md-4 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
-                                                {{-- get profile from user insert --}}
-                                            <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100%; border-radius: 10px" class="mx-auto d-block" id="img">
-                                        </div>
-                                        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-                                        <div class="row" style="display: flex; justify-content:center; align-items:center">
-                                                @foreach ($exploreEvent->joins as $join)
-                                                    @if ($exploreEvent->id == $join->event_id && $join->user_id == Auth::id())
-                                                        <form action="{{route('quit', $join->id)}}" method="post">
-                                                            @csrf
-                                                            @method("delete")
-                                                            <button type="submit" class="btn btn-sm btn btn-danger mt-4 quit-nutton">
-                                                                <i class="fa fa-times-circle"></i>
-                                                                <b>Quit</b> 
-                                                            </button>
-                                                        </form>
-                                                    @endif
-                                                @endforeach
-                                                {{-- important don't chnage anythink --}}
-                                                <form action="{{route('join', $exploreEvent->id)}}" method="post">
-                                                    @csrf
-                                                    <div class="join_button">
-                                                        <input type="hidden" class="event_id" value="{{$exploreEvent->id}}">
-                                                    </div>
-                                                    <div class="join_button_display" >
-                                                    </div>
-                                                </form>
-                                                {{-- end --}}
-                                        </div>
+                                            <div class="col-4 col-sm-3 col-md-4 col-lg-2" data-toggle="modal" data-target="#viewDetail{{$exploreEvent->id}}">   
+                                                    {{-- get profile from user insert --}}
+                                                <img src="{{asset('asset/eventimage/'.$exploreEvent->picture)}}" style="width: 100%; border-radius: 10px" class="mx-auto d-block" id="img">
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+                                            <div class="row" style="display: flex; justify-content:center; align-items:center">
+                                                    @foreach ($exploreEvent->joins as $join)
+                                                        @if ($exploreEvent->id == $join->event_id && $join->user_id == Auth::id())
+                                                            <form action="{{route('quit', $join->id)}}" method="post">
+                                                                @csrf
+                                                                @method("delete")
+                                                                <button type="submit" class="btn btn-sm btn btn-danger mt-4 quit-nutton">
+                                                                    <i class="fa fa-times-circle"></i>
+                                                                    <b>Quit</b> 
+                                                                </button>
+                                                            </form>
+                                                        @endif
+                                                    @endforeach
+                                                    {{-- important don't chnage anythink --}}
+                                                    <form action="{{route('join', $exploreEvent->id)}}" method="post">
+                                                        @csrf
+                                                        <div class="join_button">
+                                                            <input type="hidden" class="event_id" value="{{$exploreEvent->id}}">
+                                                        </div>
+                                                        <div class="join_button_display" >
+                                                        </div>
+                                                    </form>
+                                                    {{-- end --}}
+                                            </div>
+                                        </div>    
                                     </div> 
                                 </div>
                             </div>
@@ -153,24 +156,23 @@
     // for search
         $(document).ready(function(){
 
-            // user city
-            // var value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}.toLowerCase()
-            //     $(".card-event-join-only").filter(function() {
-            //        $(this).text().toLowerCase().indexOf(value) > -1
-            //         console.log(value);
-            //     });  
+            // // user city
+                var data_value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}.toLowerCase()
+                $(".card-event").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(data_value) > -1)
+                }); 
 
-            //     $("#serchCity").on("keyup", function() {
-            //         var value = $(this).val().toLowerCase();
-            //         $(".card-event-join-only").filter(function() {
-            //         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            //         });
-            //     });
+                $("#searchCity").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $(".card-event").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
 
             // end 
 
             // Filter explore event
-                $("#search").on("keyup", function() {
+                $("#search,#searchCity").on("keyup", function() {
                     var value = $(this).val().toLowerCase();
                     $(".card-event").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)

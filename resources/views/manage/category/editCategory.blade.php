@@ -23,15 +23,13 @@
 </div>
   <script type="text/javascript">
     $(document).on('click', '.edit', function(e) {
-    e.preventDefault();
-    var id = $(this).data('id');
-    var category = $(this).data('category');
-    $('#value-edit').val(category);
-    $('#editFormCategory').attr("action", "{{ url('/manage/category/update') }}" + "/" + id);
+      e.preventDefault();
+      var id = $(this).data('id');
+      var category = $(this).data('category');
+      $('#value-edit').val(category);
+      $('#editFormCategory').attr("action", "{{ url('/manage/category/update') }}" + "/" + id);
     })
 
-
-   
     $(document).on('keyup','#value-edit', function(){
       var value = $(this).val();
       existCategory(value);
