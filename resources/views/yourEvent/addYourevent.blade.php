@@ -40,22 +40,23 @@
                             {{-- -----------start date and start time-------- --}}
                             <div class="form-group col-6">
                               {{-- <input type="date" name="startDate" placeholder="Staet date" class="form-control"> --}}
-                              <input type="text" name="startDate" readonly placeholder="Start date" class="form-control dpicker" id="beginDate" autocomplete="off" required>
+                              <input type="text" name="startDate" readonly placeholder="Start date" class="form-control startdate" id="beginDate" autocomplete="off" required>
                             </div>
                             <div class="form-group col-6">
-                              <input type="time" name="startTime" placeholder="At"  class="form-control" autocomplete="off" required>
+                              <input type="time" name="startTime-start-time" id="add-start-time" placeholder="At"  class="form-control" autocomplete="off" required>
                             </div>
                         </div>
                         {{-- ----------end-------------- --}}
   
                         {{-- -------- Show end date and end time-------------- --}}
-                        <small class="validate text-danger"></small>
+                        <small class="text-danger" id="add-validate"></small>
+                        <small class="add-time-validate text-danger" style="margin-left: 132px"></small>
                         <div class="form-row">
                             <div class="form-group col-6">
-                              <input type='text' name="endDate" readonly placeholder="End date"  class="form-control dpicker" id="endDate" autocomplete="off" required>
+                              <input type='text' name="endDate" readonly placeholder="End date"  class="form-control enddate" id="endDate" autocomplete="off" required>
                             </div>
                             <div class="form-group col-6">
-                              <input type="time" name="endTime" placeholder="At"  class="form-control" autocomplete="off" required>
+                              <input type="time" name="endTime" id="add-end-time" placeholder="At"  class="form-control" autocomplete="off" required>
                             </div>
                         </div>
                         {{-- ----------end-------------- --}}
@@ -77,12 +78,12 @@
                     </div>
                     <div class="col-12 col-sm-3" style="margin-top: 32px">
                           <div class="row justify-content-center">
-                              <img src="asset/eventimage/event.png" width="120px" height="120px" style="border-radius: 10px" id="img"/>
+                              <img src="asset/eventimage/event.png" width="120px" height="120px" onchange="readURLs(this)"  style="border-radius: 10px" id="img"/>
                           </div>
                           <div class="row justify-content-center">
                             {{-- button add profile --}}
                             <label for="add" class="btn"><i class="fa fa-plus text-dark"></i></label>
-                            <input id="add" style="display:none;" type="file" name="picture">
+                            <input id="add" style="display:none;" type="file" onchange="readURLs(this)" name="picture">
                                 {{-- end button --}}
                             <span id="mgs" class="text-danger"></span>
                           </div>
@@ -99,44 +100,20 @@
 
 {{--use javascript to add profile  --}}
 <script type="text/javaScript">
-    $('#add').on('change',function(ev){
-      
-      var filedata=this.files[0];
-      var imgtype=filedata.type;
-   
-      var match=['image/png','image/jpg','image/jpeg','image/gif'];
-   
-      if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3])||(imgtype==match[4]))){
-          $('#mgs').html('<p style="color:red">Plz select a valid type image..only png jpg jpeg gif allowed</p>');
-   
-      }else{
-   
-        $('#mgs').empty();
-   
-      var reader=new FileReader();
-   
-      reader.onload=function(ev){
-        $('#img').attr('src',ev.target.result).css('width','120px').css('height','120px');
-      }
-      reader.readAsDataURL(this.files[0]);
-  
-          var postData=new FormData();
-          postData.append('add',this.files[0]);
-        var url="{{url('eventimage.store')}}";
-        $.ajax({
-        headers:{'X-CSRF-Token':$('meta[name=csrf_token]').attr('content')},
-        async:true,
-        type:"post",
-        contentType:false,
-        url:url,
-        data:postData,
-        processData:false,
-        success:function(){
-          console.log("success");
-        }
-          });
-      }
-    });
+// display image at the moment
+    function readURLs(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img')
+                        .attr('src', e.target.result)
+                        .width(120)
+                        .height(120);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+  }
 
 
     $("#beginDate").datepicker({
@@ -166,20 +143,55 @@ $("#endDate").datepicker({
         $("#beginDate").datepicker("option", "maxDate", selectedDate);
     }
 });
+
 function getValue(end, start) {
     return Math.floor((Date.parse(end) - Date.parse(start)) / 86400000);
 }
 
-$('#endDate').on('change', function(){
-    var start = $('#beginDate').val();
-    var end = $('#endDate').val();
-    var result = getValue(end, start);
+function getValueBeginDate() {
+    return $('#beginDate').val();
+}
+function getValueEndDate() {
+    return $('#endDate').val();
+}
+function starttime() {
+    return $('#add-start-time').val();
+}
+function endTime() {
+    return $('#add-end-time').val();
+}
+
+$('#beginDate,#endDate').on('change', function(){
+  var result = getValue(getValueEndDate(), getValueBeginDate());
     if (result < 0) {
-        $('.validate').html('The end date must be before the start date or the same date');
+        $('#add-validate').html('End date must before the start date or the same date');
         end = $('#endDate').val('');
     } else {
-        $('.validate').html('');
+        $('#add-validate').html('');
     }
 });
 
+// display error if user selete end date before start date
+$('#add-start-time,#add-end-time,#beginDate,#endDate').on('change', function(){
+  var result = getValue(getValueEndDate(), getValueBeginDate());
+  var time = caculateTime(starttime(), endTime());
+  if (result == 0) {
+      if (time < 0) {
+        $('.add-time-validate').html('End time must before the start time');
+        endtime = $('#add-end-time').val('');
+      }else {
+        $('.add-time-validate').html('');
+      }
+    }
+});
+
+// caculate time
+function caculateTime(start, end) {
+    start = start.split(":");
+    end = end.split(":");
+    var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+    var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+    var diff = endDate.getTime() - startDate.getTime();
+    return diff;
+}
   </script>
