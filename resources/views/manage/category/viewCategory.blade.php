@@ -37,7 +37,7 @@
                 data-id="{{$category->id}}" 
                 data-toggle="modal" 
                 data-target="#deleteCategory"> 
-                <i class="far fa-trash-alt text-dark" style="font-size:16px;" id="show"></i>
+                <i class="far fa-trash-alt text-danger" style="font-size:16px;" id="show"></i>
               </a>
               <a 
                 href="#!" 
@@ -47,7 +47,7 @@
                 data-id="{{$category->id}}"
                 data-category = "{{$category->category}}"
                 data-target="#editCategory">
-                <i class="fas fa-pencil-alt text-dark" style="font-size:16px;" id="show"></i>
+                <i class="fas fa-pencil-alt text-primary" style="font-size:16px;" id="show"></i>
                 </a>
               </span>
             </a>

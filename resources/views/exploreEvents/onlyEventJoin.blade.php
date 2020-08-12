@@ -68,7 +68,7 @@
                         @if (Auth::id() != $exploreEvent->owner_id && $exploreEvent->endDate >= $date)
                         @foreach ($joinEvent as $joins)
                             @if ($joins->user_id == Auth::id() && $joins->event_id == $exploreEvent->id)
-                            <div class="card-event">
+                            <div class="card-event-join-only">
                                 <h6>
                                     {{-- get data to group by --}}
                                     <?php
@@ -152,6 +152,22 @@
     <script type="text/javaScript">
     // for search
         $(document).ready(function(){
+
+            // user city
+            // var value = {!! json_encode(Auth::user()->city, JSON_HEX_TAG) !!}.toLowerCase()
+            //     $(".card-event-join-only").filter(function() {
+            //        $(this).text().toLowerCase().indexOf(value) > -1
+            //         console.log(value);
+            //     });  
+
+            //     $("#serchCity").on("keyup", function() {
+            //         var value = $(this).val().toLowerCase();
+            //         $(".card-event-join-only").filter(function() {
+            //         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            //         });
+            //     });
+
+            // end 
 
             // Filter explore event
                 $("#search").on("keyup", function() {

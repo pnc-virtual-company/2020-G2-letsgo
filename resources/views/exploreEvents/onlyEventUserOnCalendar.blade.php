@@ -74,7 +74,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
               var calendarEl = document.getElementById('calendar');
-              var event = {!! json_encode($data, JSON_HEX_TAG) !!} ;
+              var event = {!! json_encode($data, JSON_HEX_TAG) !!};
               var calendar = new FullCalendar.Calendar(calendarEl, {
                 dayMinWidth:50,
                 headerToolbar: {

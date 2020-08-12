@@ -62,7 +62,7 @@
                         
                         {{-- -------- Show event city-------------- --}}
                         <div class="form-group">
-                            <input name="city" class="form-control autoSuggestion" list="result" placeholder="City" required>
+                            <input name="city" class="form-control autoSuggestion" list="result" placeholder="Country..." required>
                             <datalist id="result">
                             </datalist>
                         </div>

@@ -32,6 +32,7 @@
                         <th>Title</th>
                         <th>Category</th>
                         <th>Start date</th>
+                        <th>Action</th>
   
                     </tr>
                     <br>
@@ -44,7 +45,7 @@
                           <td>{{$events->category->category}}</td>
                           <td>{{$events->startDate}}</td>
                           <td >
-                          <a href="#!" class="deleteEvent" data-id="{{$events->id}}" data-toggle="modal" data-target="#deleteEvent"><i class="far fa-trash-alt text-dark" style="font-size:16px;"  id="deletes" ></i></a>
+                          <a href="#!" class="deleteEvent" data-id="{{$events->id}}" data-toggle="modal" data-target="#deleteEvent"><i class="far fa-trash-alt text-danger" style="font-size:16px;" ></i></a>
                           </td>
                       </tr>
                       @endforeach

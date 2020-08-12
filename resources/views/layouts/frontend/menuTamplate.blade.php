@@ -171,7 +171,7 @@
 
                         {{-- -------- Show user Birth-------------- --}}
                         <div class="form-group">
-                            <input type="date" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control" required>
+                            <input type="date" name="birth" placeholder="date of birth" value="{{Auth::user()->birth}}"  class="form-control" >
                         </div>
                         {{-- ----------end-------------- --}}
 
@@ -186,7 +186,7 @@
                         {{-- -------- Show user city-------------- --}}
 
                         <div class="form-group">
-                            <input name="city" value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="city" required>
+                            <input name="city" value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="Country..." id="city" required>
                             <datalist id="result">
                             </datalist>
                         </div>

@@ -28,7 +28,6 @@ class userProfileController extends Controller
             'firstname' => 'required|min:1|max:45',
             'lastname' => 'required|min:1|max:45',
             'sex' => 'required|min:1|max:45',
-            'birth' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
             'city' => 'required|min:1|max:45',
         ]);

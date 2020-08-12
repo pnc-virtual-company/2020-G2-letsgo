@@ -15,10 +15,10 @@
                     <div class="col-12 col-md-12 col-lg-7">
                         <div class="row" style="margin: 0 auto">
                             <div class="col-12 col-md-12 col-lg-5 mt-2">
-                                <small>NON TOO FAR FROM</small>
+                                <small>NOT TOO FAR FROM</small>
                             </div>
                             <div class="col-12 col-md-12 col-lg-7">
-                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
+                                <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="Country..." id="serchCity" required>
                                 <datalist id="result"></datalist>
                             </div>
                         </div>
