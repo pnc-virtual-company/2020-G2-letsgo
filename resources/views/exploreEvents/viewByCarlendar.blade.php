@@ -16,7 +16,7 @@
                     <div class="col-12 col-md-12 col-lg-7">
                         <div class="row" style="margin: 0 auto">
                             <div class="col-12 col-md-12 col-lg-5 mt-2">
-                                <small>NON TOO FAR FROM</small>
+                                <p>Not far from city</p>
                             </div>
                             <div class="col-12 col-md-12 col-lg-7">
                                 <input name="city"  value="{{Auth::user()->city}}" class="form-control autoSuggestion" list="result" placeholder="City" id="serchCity" required>
