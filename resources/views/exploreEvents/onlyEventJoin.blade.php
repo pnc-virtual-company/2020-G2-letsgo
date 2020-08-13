@@ -94,6 +94,7 @@
                                                 <br> 
                                                 <strong class="h5">{{$exploreEvent->title}}</strong>
                                                 <p style="display: none">{{$exploreEvent->city}}</p>
+                                                <p style="display: none">{{$exploreEvent->description}}</p>
                                                 <br>
                                                 
                                                 {{--  counter member --}}

@@ -91,6 +91,7 @@
                                         <b>{{$exploreEvent->category->category}}</b>
                                         <br> 
                                         <strong class="h5">{{$exploreEvent->title}}</strong>
+                                        <strong hidden>{{$exploreEvent->description}}</strong>
                                         <br>
                                         
                                         {{--  counter member --}}
