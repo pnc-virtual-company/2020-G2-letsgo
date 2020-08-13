@@ -247,7 +247,7 @@
                     {{-- Old password --}}
                    <label for="">Old Pasword</label>
                    <div class="form-group">      
-                    <input id="old-password" placeholder="Password" type="password" class="form-control" name="old-password" required >
+                    <input id="old-password" minlength="8" maxlength="32" placeholder="Password" type="password" class="form-control" name="old-password" required >
                         
                     </div>
                     {{--End Old password --}}
@@ -255,14 +255,14 @@
                    {{-- New password --}}
                    <label for="">New Pasword</label>
                    <div class="form-group">      
-                   <input id="new-password"  type="password" class="form-control " name="new-password" placeholder="new password" required  >
+                   <input id="new-password" minlength="8" maxlength="32"  type="password" class="form-control " name="new-password" placeholder="new password" required  >
                     </div>
                     {{--End New password --}}
                    
                    {{-- Confirm password --}}
                    <label for="">Confirm Pasword</label>
                    <div class="form-group">
-                    <input id="password-confirm"  type="password" class="form-control " placeholder="confirm password"  name="password-confirmation" required >
+                    <input id="password-confirm"  minlength="8" maxlength="32" type="password" class="form-control " placeholder="confirm password"  name="password-confirmation" required >
                     <span id="msg-error" class="text-danger"></span>
                     </div>
                     {{--End Confirm password --}}
