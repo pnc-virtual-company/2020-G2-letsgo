@@ -75,6 +75,7 @@
                             <textarea class="form-control" maxlength="200" minlength="50" rows="3" id="description" name="description" required></textarea>
                         </div>
                         {{-- end --}}
+                        <strong id="show_add_image" class="text-danger"></strong>
                     </div>
                     <div class="col-12 col-sm-3" style="margin-top: 32px">
                           <div class="row justify-content-center">
@@ -89,8 +90,8 @@
                           </div>
                     </div>
                 </div>
-                <button type="submit"  class="btn btn-default float-right text-warning" >SUBMIT</button>
-                <button type="button" data-dismiss="modal" class="btn btn-default  float-right">DISCARD</button>
+                <button type="submit" id="button_add"  class="btn btn-default float-right text-warning" >SUBMIT</button>
+                <button type="button"  data-dismiss="modal" class="btn btn-default  float-right">DISCARD</button>
               </form>
             </div>
           </div>
@@ -104,14 +105,25 @@
     function readURLs(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#img')
-                        .attr('src', e.target.result)
-                        .width(120)
-                        .height(120);
-                };
-                reader.readAsDataURL(input.files[0]);
+                var filedata=input.files[0];
+                var imgtype=filedata.type;
+                var button_add = document.getElementById('button_add');
+                var match=['image/png','image/jpg','image/jpeg','image/gif'];
+                if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3]))){
+                    $('#show_add_image').html('Please select a valid type image!')
+                    button_add.disabled = true;
+                }else{
+                        $('#show_add_image').html('')
+                        button_add.disabled = false;
+                        reader.onload = function (e) {
+                        $('#img')
+                              .attr('src', e.target.result)
+                              .width(120)
+                              .height(120);
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                }
+                
             }
   }
 

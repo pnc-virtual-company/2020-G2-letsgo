@@ -90,7 +90,7 @@ class YourEventController extends Controller
             'startTime' => 'required',
             'endDate' => 'required',
             'endTime' => 'required',
-            'description' => 'required |min:50|max:250',
+            'description' => 'required|min:50|max:250',
             'city' => 'required',
         ]);
         $yourevent->title = $request->get('title');

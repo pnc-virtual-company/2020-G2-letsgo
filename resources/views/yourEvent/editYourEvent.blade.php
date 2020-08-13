@@ -61,6 +61,7 @@
                             <textarea class="form-control" maxlength="250" minlength="50" rows="3" id="description-edit" name="description" required></textarea>
                         </div>
                         {{-- end --}}
+                        <strong id="show_image" class="text-danger"></strong>                        
                         </div>
                         <div class="col-12 col-sm-3 justify-content-center">                                       
                             {{-- edit picture from event  --}}
@@ -70,14 +71,14 @@
                             <div class="row justify-content-center">
                                 <label for="picture" ><i class="fa fa-pencil-alt text-dark"></i></label>
                                 <input type='file' id="picture" name="picture" style="display: none"  onchange="readURL(this);" />
-                            {{-- edit picture from event  --}} 
+                                <br>
                             </div>
                         </div>
                         </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">DISCARD</button>
-                            <button type="submit" class="btn text-warning" >UPDATE</button>
+                            <button type="submit" id="update" class="btn text-warning" >UPDATE</button>
                         </div>                 
                 </form>
             </div>
@@ -91,14 +92,24 @@
 function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#image')
-                        .attr('src', e.target.result)
-                        .width(120)
-                        .height(120);
-                };
-                reader.readAsDataURL(input.files[0]);
+                var filedata=input.files[0];
+                var imgtype=filedata.type;
+                var update = document.getElementById('update');
+                var match=['image/png','image/jpg','image/jpeg','image/gif'];
+                if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3]))){
+                    $('#show_image').html('Please select a valid type image!')
+                    update.disabled = true;
+                }else{
+                    $('#show_image').html('')
+                        update.disabled = false;
+                        reader.onload = function (e) {
+                        $('#image')
+                                .attr('src', e.target.result)
+                                .width(120)
+                                .height(120);
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                }
             }
 }
 

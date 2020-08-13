@@ -214,7 +214,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-default text-warning float-right">UPDATE</button>
+                <button type="submit" id="user_profile" class="btn btn-default text-warning float-right">UPDATE</button>
                 <button type="button" class="btn btn-default float-right" data-dismiss="modal">DISCARD</button>
             </form>
             {{-- ---------------------End Form---------------------- --}}
@@ -288,15 +288,18 @@
         
         var filedata=this.files[0];
         var imgtype=filedata.type;
+        var update = document.getElementById('user_profile');
      
         var match=['image/png','image/jpg','image/jpeg','image/gif'];
      
         if(!((imgtype==match[0])||(imgtype==match[1])||(imgtype==match[2])||(imgtype==match[3]))){
-            $('#msg_img_error').html('<p style="color:red">Plz select a valid type image..only png jpg jpeg gif allowed</p>');
+            $('#msg_img_error').html('<p style="color:red">Please select a valid type image.</p>');
+            update.disabled = true
     
         }else{
      
-          $('#msg_img_error').empty();
+            update.disabled = false
+            $('#msg_img_error').empty();
      
         var reader=new FileReader();
     
